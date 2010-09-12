@@ -5,6 +5,8 @@ This is *NOT* [Shoes](http://shoes.heroku.com/), but looks alike. So, named **Gr
 
 ![snapshot-sample1.png](http://github.com/ashbb/green_shoes/raw/master/snapshot-sample1.png)
 
+Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html).
+
 Just for fun. :-D
 
 ashbb
