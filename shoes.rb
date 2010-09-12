@@ -1,0 +1,6 @@
+require 'cairo'
+require 'pango'
+require 'gtk2'
+require_relative 'shoes/basic'
+require_relative 'shoes/app'
+require_relative 'shoes/anim'
