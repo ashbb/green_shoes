@@ -4,7 +4,12 @@ xspeed, yspeed = 10, 6
 xdir, ydir = 1, 1
 
 Shoes.app width: 300, height: 300 do
+  a = nil
   p = para 'Hello', ' World!', top: 30
+  button('pause'){a.pause}
+  button('stop'){a.stop}
+  button('move'){p.move 200, 30}
+  button('remove'){p.remove}
   img = image 'static/gshoes-icon.png'
 
   x, y = 150, 150
@@ -23,9 +28,4 @@ Shoes.app width: 300, height: 300 do
     end
     pause = n
   end
-
-  button('pause'){a.pause}
-  button('stop', left: 50){a.stop}
-  button('move', left: 100){p.move 200, 30}
-  button('remove', left: 150){p.remove}
 end

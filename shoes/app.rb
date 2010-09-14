@@ -1,31 +1,44 @@
 module Shoes
   class << self
-    attr_accessor :canvas
+    attr_accessor :canvas, :cslot
+    attr_reader :contents
   end
 
   def self.app args={}, &blk
     args[:width] ||= 600
     args[:height] ||= 500
     args[:title] ||= 'green shoes'
+    @cslot = self
+    @contents = []
+    Flow.new basic_attributes
+
     win = Gtk::Window.new
     win.icon = Gdk::Pixbuf.new 'static/gshoes-icon.png'
     win.title = args[:title]
     win.set_default_size args[:width], args[:height]
     win.signal_connect("destroy"){Gtk.main_quit}
 
-    @canvas = Gtk::Fixed.new
+    @canvas = Gtk::Layout.new
     win.add @canvas
 
     instance_eval &blk
-
+    contents_alignment @contents
+    
     win.show_all
     Gtk.main
   end
 
+  def self.stack args={}, &blk
+    Stack.new basic_attributes(args), &blk
+  end
+
+  def self.flow args={}, &blk
+    Flow.new basic_attributes(args), &blk
+  end
+  
   def self.para *msg
-    args = msg.pop if msg.last.class == Hash
-    args[:left] ||= 0
-    args[:top] ||= 0
+    args = msg.last.class == Hash ? msg.pop : {}
+    args = basic_attributes args
     msg = msg.join
     da = Gtk::DrawingArea.new
     da.set_size_request 8*msg.length, 18
@@ -38,33 +51,27 @@ module Shoes
     end
     @canvas.put da, args[:left], args[:top]
     da.show_now
-    Para.new da
+    args[:real] = da
+    Para.new args
   end
 
   def self.image name, args={}
-    args[:left] ||= 0
-    args[:top] ||= 0
-    da = Gtk::DrawingArea.new
-    da.set_size_request 150, 150
-    da.signal_connect "expose-event" do |widget, event|
-      context = widget.window.create_cairo_context
-      pixbuf = Gdk::Pixbuf.new name
-      context.set_source_pixbuf pixbuf, 0, 0
-      context.paint
-    end
-    @canvas.put da, args[:left], args[:top]
-    da.show_now
-    Image.new da
+    args = basic_attributes args
+    img = Gtk::Image.new name
+    @canvas.put img, args[:left], args[:top]
+    img.show_now
+    args[:real] = img
+    Image.new args
   end
 
   def self.button name, args={}, &blk
-    args[:left] ||= 0
-    args[:top] ||= 0
+    args = basic_attributes args
     b = Gtk::Button.new name
-    b.signal_connect "clicked", &blk
+    b.signal_connect "clicked", &blk if blk
     @canvas.put b, args[:left], args[:top]
     b.show_now
-    Button.new b
+    args[:real], args[:text] = b, name
+    Button.new args
   end
 
   def self.animate n=10, &blk

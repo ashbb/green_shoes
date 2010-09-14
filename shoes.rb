@@ -1,6 +1,8 @@
 require 'cairo'
 require 'pango'
 require 'gtk2'
+require_relative 'shoes/helper_methods'
 require_relative 'shoes/basic'
 require_relative 'shoes/app'
 require_relative 'shoes/anim'
+require_relative 'shoes/slot'

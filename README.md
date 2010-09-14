@@ -3,7 +3,11 @@ Green Shoes
 
 This is *NOT* [Shoes](http://shoes.heroku.com/), but looks alike. So, named **Green Shoes**. This is written in Ruby. ;-)
 
+Fantastic logo icon was created by [Zachary Scott](http://github.com/zacharyscott). Thanks!
+
 ![snapshot-sample1.png](http://github.com/ashbb/green_shoes/raw/master/snapshot-sample1.png)
+
+![snapshot-sample2.png](http://github.com/ashbb/green_shoes/raw/master/snapshot-sample2.png)
 
 Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html).
 
