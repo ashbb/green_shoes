@@ -1,6 +1,6 @@
 module Shoes
-  def self.basic_attributes args={}
-    default = {left: 0, top: 0, width: 0, height: 0}
+  def self.basic_attributes args={}, default={}
+    default = {left: 0, top: 0, width: 0, height: 0}.merge default
     default.merge args
   end
   

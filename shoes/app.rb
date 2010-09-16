@@ -80,4 +80,27 @@ module Shoes
     GLib::Timeout.add(n){blk[i = a.pause? ? i : i+1]; a.continue?}
     a
   end
+
+  def self.oval l, t, w, h=w, args={}
+    args[:left], args[:top], args[:width], args[:height] = l, t, w, h
+    args = basic_attributes args, {stroke: black, strokewidth: 1, fill: black}
+
+    surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
+    context = Cairo::Context.new surface
+    context.arc w/2, h/2, w/2-1, 0, 2*Math::PI
+    context.set_source_rgb *args[:fill]
+    context.fill
+
+    context.set_source_rgb *args[:stroke]
+    args[:strokewidth].times do |i|
+      context.arc w/2, h/2, w/2 - i - 1, 0, 2*Math::PI
+      context.stroke
+    end
+    surface.write_to_png 'green_shoes_temporary_file'
+    img = Gtk::Image.new 'green_shoes_temporary_file'
+    @canvas.put img, l, t
+    img.show_now
+    args[:real] = img
+    Shape.new args
+  end
 end

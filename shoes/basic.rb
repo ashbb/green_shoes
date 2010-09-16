@@ -27,4 +27,5 @@ module Shoes
   class Image < Basic; end
   class Button < Basic; end
   class Para < Basic; end
+  class Shape < Basic; end
 end
