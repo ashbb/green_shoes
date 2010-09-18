@@ -8,14 +8,21 @@ Fantastic logo icon was created by [Zachary Scott](http://github.com/zacharyscot
 sample 1
 --------
 
-![snapshot-sample1.png](http://github.com/ashbb/green_shoes/raw/master/snapshot-sample1.png)
+![sample1.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample1.png)
 
 Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html).
 
 sample 2
 --------
 
-![snapshot-sample2.png](http://github.com/ashbb/green_shoes/raw/master/snapshot-sample2.png)
+![sample2.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample2.png)
+
+sample 3
+--------
+
+![sample3.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample3.png)
+
+As like as the last sample of [_why's tutorial](http://github.com/ashbb/shoes_tutorial_walkthrough).
 
 
 Just for fun. :-D
@@ -25,6 +32,6 @@ ashbb
 Note
 ----
 
-- Next goal is implementing flow and stack.
+- Next goal is implementing to control mouse events.
 - [Install Ruby/GTK2 and rcairo for Linux](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).

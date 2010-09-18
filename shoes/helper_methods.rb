@@ -1,6 +1,6 @@
 module Shoes
-  def self.basic_attributes args={}, default={}
-    default = {left: 0, top: 0, width: 0, height: 0}.merge default
+  def self.basic_attributes args={}
+    default = {left: 0, top: 0, width: 0, height: 0}
     default.merge args
   end
   
@@ -24,6 +24,11 @@ module Shoes
       ele.height = ele.contents.collect(&:height).max
       ele.width = ele.contents.collect(&:width).inject(&:+)
     end
+  end
+
+  def self.create_tmp_png surface
+    surface.write_to_png TMP_PNG_FILE
+    Gtk::Image.new TMP_PNG_FILE
   end
 
   # The followings are dummy methods for module Shoes.

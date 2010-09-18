@@ -1,4 +1,4 @@
-require './shoes'
+require '../shoes'
 
 xspeed, yspeed = 10, 6
 xdir, ydir = 1, 1
@@ -10,7 +10,7 @@ Shoes.app width: 300, height: 300 do
   button('stop'){a.stop}
   button('move'){p.move 200, 30}
   button('remove'){p.remove}
-  img = image 'static/gshoes-icon.png'
+  img = image '../static/gshoes-icon.png'
 
   x, y = 150, 150
   size = [128, 128]
