@@ -24,6 +24,15 @@ sample 3
 
 As like as the last sample of [_why's tutorial](http://github.com/ashbb/shoes_tutorial_walkthrough).
 
+sample 4
+--------
+
+![sample4.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample4.png)
+
+edit_line with block is nice to display realtime change.     
+Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html).
+
+-----------------
 
 Just for fun. :-D
 

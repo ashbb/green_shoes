@@ -24,13 +24,13 @@ module Shoes
     win.set_default_size args[:width], args[:height]
     win.signal_connect "destroy" do
       Gtk.main_quit
-      File.delete TMP_PNG_FILE
+      File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
     end
 
     @canvas = Gtk::Layout.new
     win.add @canvas
 
-    background white
+    #background white
 
     instance_eval &blk
     contents_alignment @contents
@@ -52,7 +52,9 @@ module Shoes
     args = basic_attributes args
     msg = msg.join
     da = Gtk::DrawingArea.new
-    da.set_size_request 8*msg.length, 18
+    args[:width] = 20*msg.length if args[:width].zero?
+    args[:height] = 18 if args[:height].zero?
+    da.set_size_request args[:width], args[:height]
     da.signal_connect "expose-event" do |widget, event|
       context = widget.window.create_cairo_context
       layout = context.create_pango_layout
@@ -83,6 +85,19 @@ module Shoes
     b.show_now
     args[:real], args[:text] = b, name
     Button.new args
+  end
+
+  def self.edit_line args={}
+    args = basic_attributes args
+    el = Gtk::Entry.new
+    el.text = args[:text]
+    el.signal_connect "changed" do
+      yield el
+    end
+    @canvas.put el, args[:left], args[:top]
+    el.show_now
+    args[:real] = el
+    EditLine.new args
   end
 
   def self.animate n=10, &blk

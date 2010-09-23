@@ -17,6 +17,7 @@ module Shoes
 
     def move x, y
       Shoes.canvas.move real, x, y
+      self.left, self.top = x, y
     end
 
     def remove
@@ -26,6 +27,20 @@ module Shoes
 
   class Image < Basic; end
   class Button < Basic; end
-  class Para < Basic; end
   class Shape < Basic; end
+
+  class Para < Basic
+    def text= s
+      real.set_size_request 0, 0
+      real.hide
+      self.real = nil
+      self.real = Shoes.para(s, left: left, top: top).real
+    end
+  end
+
+  class EditLine < Basic
+    def text
+      real.text
+    end
+  end
 end
