@@ -1,4 +1,4 @@
-module Shoes
+class Shoes
   class Anim
     def stop
       @stop = true

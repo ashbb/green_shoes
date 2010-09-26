@@ -1,4 +1,7 @@
-module Shoes
+class Shoes
+  include Types
+  @apps = []
+
   def self.app args={}, &blk
     args[:width] ||= 600
     args[:height] ||= 500
@@ -41,9 +44,12 @@ module Shoes
     win.show_all
     @apps.pop
     Gtk.main if @apps.empty?
+    app
   end
 
   class App
+    include Types
+
     def initialize args={}
       args.each do |k, v|
         instance_variable_set "@#{k}", v

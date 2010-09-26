@@ -1,10 +1,15 @@
 require 'tmpdir'
 require 'pathname'
 
+Types = module Shoes; self end
+
 module Shoes
   DIR = Pathname.new(__FILE__).realpath.dirname.to_s
   TMP_PNG_FILE = File.join(Dir.tmpdir, '__green_shoes_temporary_file__')
-  @apps = []
+end
+
+class Object
+  remove_const :Shoes
 end
 
 require 'cairo'

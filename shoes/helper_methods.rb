@@ -1,4 +1,4 @@
-module Shoes
+class Shoes
   class App
     def basic_attributes args={}
       default = {left: 0, top: 0, width: 0, height: 0}

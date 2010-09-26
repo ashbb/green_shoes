@@ -1,4 +1,4 @@
-module Shoes
+class Shoes
   class Basic
     def initialize args
       args.each do |k, v|
