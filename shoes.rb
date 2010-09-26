@@ -4,6 +4,7 @@ require 'pathname'
 module Shoes
   DIR = Pathname.new(__FILE__).realpath.dirname.to_s
   TMP_PNG_FILE = File.join(Dir.tmpdir, '__green_shoes_temporary_file__')
+  @apps = []
 end
 
 require 'cairo'

@@ -1,9 +1,16 @@
 module Shoes
-  def self.basic_attributes args={}
-    default = {left: 0, top: 0, width: 0, height: 0}
-    default.merge args
+  class App
+    def basic_attributes args={}
+      default = {left: 0, top: 0, width: 0, height: 0}
+      default.merge args
+    end
+
+    def create_tmp_png surface
+      surface.write_to_png TMP_PNG_FILE
+      Gtk::Image.new TMP_PNG_FILE
+    end
   end
-  
+
   def self.contents_alignment contents
     contents.each do |ele|
       if ele.is_a? Slot
@@ -25,14 +32,4 @@ module Shoes
       ele.width = ele.contents.collect(&:width).inject(&:+)
     end
   end
-
-  def self.create_tmp_png surface
-    surface.write_to_png TMP_PNG_FILE
-    Gtk::Image.new TMP_PNG_FILE
-  end
-
-  # The followings are dummy methods for module Shoes.
-  def self.append ele; end
-  def self.left_end; 0 end
-  def self.top_end; 0 end
 end

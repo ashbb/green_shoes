@@ -142,7 +142,7 @@ module Shoes
     [:yellowgreen, 154, 205, 50],
   ]
 
-  class << self; self end.class_eval do
+  App.class_eval do
     colors.each{|color| define_method(color[0]){[color[1]/255.0, color[2]/255.0, color[3]/255.0]}}
   end
 end

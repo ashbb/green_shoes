@@ -11,13 +11,13 @@ module Shoes
       end
 
       @left_end, @top_end = @left, @top
-      @parent = Shoes.cslot
-      Shoes.cslot = self
+      @parent = @app.cslot
+      @app.cslot = self
       @contents = []
       @parent.contents << self
       if block_given?
         yield
-        Shoes.cslot = @parent
+        @app.cslot = @parent
       end
     end
 

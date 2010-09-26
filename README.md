@@ -32,6 +32,13 @@ sample 4
 edit_line with block is nice to display realtime change.     
 Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html).
 
+sample 5
+--------
+
+![sample5.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample5.png)
+
+Launch multi Green Shoes Apps.
+
 -----------------
 
 Just for fun. :-D
