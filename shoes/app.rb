@@ -19,6 +19,9 @@ class Shoes
     win.title = args[:title]
     win.set_default_size args[:width], args[:height]
 
+    style = win.style
+    style.set_bg Gtk::STATE_NORMAL, 65535, 65535, 65535
+
     class << self; self end.class_eval do
       define_method(:width){win.size[0]}
       define_method(:height){win.size[1]}
@@ -34,8 +37,7 @@ class Shoes
 
     app.canvas = Gtk::Layout.new
     win.add app.canvas
-
-    #background white
+    app.canvas.style = style
 
     app.instance_eval &blk if blk
 
@@ -78,6 +80,8 @@ class Shoes
       args = basic_attributes args
       msg = msg.join
       da = Gtk::DrawingArea.new
+      da.style = @canvas.style
+
       args[:width] = 20*msg.length if args[:width].zero?
       args[:height] = 18 if args[:height].zero?
       da.set_size_request args[:width], args[:height]
