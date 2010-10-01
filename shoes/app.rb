@@ -120,10 +120,10 @@ class Shoes
     def edit_line args={}
       args = basic_attributes args
       el = Gtk::Entry.new
-      el.text = args[:text]
+      el.text = args[:text].to_s
       el.signal_connect "changed" do
         yield el
-      end
+      end if block_given?
       @canvas.put el, args[:left], args[:top]
       el.show_now
       args[:real], args[:app] = el, self
