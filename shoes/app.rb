@@ -1,54 +1,4 @@
 class Shoes
-  include Types
-  @apps = []
-
-  def self.app args={}, &blk
-    args[:width] ||= 600
-    args[:height] ||= 500
-    args[:title] ||= 'green shoes'
-    args[:left] ||= 0
-    args[:top] ||= 0
-
-    app = App.new args
-    @apps.push app
-
-    Flow.new app.basic_attributes(app: app)
-
-    win = Gtk::Window.new
-    win.icon = Gdk::Pixbuf.new File.join(DIR, 'static/gshoes-icon.png')
-    win.title = args[:title]
-    win.set_default_size args[:width], args[:height]
-
-    style = win.style
-    style.set_bg Gtk::STATE_NORMAL, 65535, 65535, 65535
-
-    class << self; self end.class_eval do
-      define_method(:width){win.size[0]}
-      define_method(:height){win.size[1]}
-    end
-
-    win.signal_connect("delete-event") do
-      false
-    end
-    win.signal_connect "destroy" do
-      Gtk.main_quit
-      File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
-    end if @apps.size == 1
-
-    app.canvas = Gtk::Layout.new
-    win.add app.canvas
-    app.canvas.style = style
-
-    app.instance_eval &blk if blk
-
-    contents_alignment app.contents
-    
-    win.show_all
-    @apps.pop
-    Gtk.main if @apps.empty?
-    app
-  end
-
   class App
     include Types
 
@@ -67,12 +17,12 @@ class Shoes
 
     def stack args={}, &blk
       args[:app] = self
-      Stack.new basic_attributes(args), &blk
+      Stack.new slot_attributes(args), &blk
     end
 
     def flow args={}, &blk
       args[:app] = self
-      Flow.new basic_attributes(args), &blk
+      Flow.new slot_attributes(args), &blk
     end
 
     def para *msg
@@ -175,20 +125,20 @@ class Shoes
       eval "def #{name} #{name}=nil; #{name} ? @#{name}=#{name} : @#{name} end"
     end
 
-    def background pat
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, width, height
+    def background pat, args={}
+      args[:width] ||= 1
+      args[:height] ||= 1
+      args = basic_attributes args
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
       context = Cairo::Context.new surface
-      context.rectangle 0, 0, Shoes.width, Shoes.height
+      context.rectangle 0, 0, args[:width], args[:height]
       context.set_source_rgba *(pat)
       context.fill
       img = create_tmp_png surface
       @canvas.put img, 0, 0
       img.show_now
+      args[:real], args[:app] = img, self
+      Background.new args
     end
-
-    # The followings are dummy methods
-    def append ele; end
-    def left_end; 0 end
-    def top_end; 0 end
   end
 end

@@ -39,15 +39,27 @@ sample 5
 
 Launch multi Green Shoes Apps.
 
+sample 6
+--------
+
+Added module Types. Now Green Shoes can use both module Shoes and class Shoes as like as (Red) Shoes.
+
+sample 7-9
+----------
+
+![sample8.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample8.png)
+
+Online demo is [sample 7](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) and [sample9]((http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html)).
+
 -----------------
 
-Just for fun. :-D
+For fun. :-D
 
 ashbb
 
 Note
 ----
 
-- Next goal is implementing to control mouse events.
+- Next goal is improving Background and Para.
 - [Install Ruby/GTK2 and rcairo for Linux](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).

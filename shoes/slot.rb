@@ -1,16 +1,15 @@
 class Shoes
   class Slot
     def initialize args={}
+      @initials = args
       args.each do |k, v|
         instance_variable_set "@#{k}", v
       end
       
       Slot.class_eval do
         attr_accessor *args.keys
-        attr_accessor :parent, :contents, :left_end, :top_end
       end
 
-      @left_end, @top_end = @left, @top
       @parent = @app.cslot
       @app.cslot = self
       @contents = []
@@ -21,23 +20,28 @@ class Shoes
       end
     end
 
-    def append ele
-      ele.left, ele.top = left_end, top_end
-      ele.move ele.left, ele.top
+    attr_accessor :contents
+    attr_reader :parent, :initials
+
+    def move2 x, y
+      @left, @top = x, y
+    end
+
+    def positioning x, y, max
+      @width = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
+      if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
+        move2 x, max.top
+        @height = Shoes.contents_alignment self
+        max = self if max.height < @height
+      else
+        move2 parent.left, max.top + max.height
+        @height = Shoes.contents_alignment self
+        max = self
+      end
+      max
     end
   end
 
-  class Stack < Slot
-    def append ele
-      super if ele.is_a? Basic
-      self.top_end += ele.height
-    end
-  end
-
-  class Flow < Slot
-    def append ele
-      super if ele.is_a? Basic
-      self.left_end += ele.width
-    end
-  end
+  class Stack < Slot; end
+  class Flow < Slot; end
 end
