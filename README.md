@@ -49,7 +49,7 @@ sample 7-9
 
 ![sample8.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample8.png)
 
-Online demo is [sample 7](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) and [sample9]((http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html)).
+Online demo is [sample 7](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) and [sample 9](http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html).
 
 -----------------
 
