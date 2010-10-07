@@ -33,7 +33,7 @@ class Shoes
   
   def self.call_back_procs app
     init_contents app.cslot.contents
-    app.cslot.width, app.cslot.height = Shoes.width, Shoes.height
+    app.cslot.width, app.cslot.height = app.width, app.height
     contents_alignment app.cslot
   end
 

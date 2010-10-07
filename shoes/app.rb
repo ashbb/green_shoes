@@ -7,7 +7,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
       App.class_eval do
-        attr_accessor *args.keys
+        attr_accessor *(args.keys - [:width, :height])
       end
       @contents, @canvas = [], nil
       @cslot = (@app ||= self)

@@ -22,7 +22,7 @@ class Shoes
     style = win.style
     style.set_bg Gtk::STATE_NORMAL, 65535, 65535, 65535
 
-    class << self; self end.class_eval do
+    class << app; self end.class_eval do
       define_method(:width){win.size[0]}
       define_method(:height){win.size[1]}
     end
