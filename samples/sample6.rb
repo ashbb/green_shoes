@@ -1,4 +1,4 @@
-require '../shoes'
+require '../lib/green_shoes'
 
 Shoes.app do
   stack do

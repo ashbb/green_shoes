@@ -1,4 +1,5 @@
-require '../shoes'
+require '../lib/green_shoes'
+
 Shoes.app do
   20.times{|i| button "hello%02d" % i}
 end

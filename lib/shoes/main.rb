@@ -15,7 +15,7 @@ class Shoes
     Flow.new app.slot_attributes(app: app, left: 0, top: 0)
 
     win = Gtk::Window.new
-    win.icon = Gdk::Pixbuf.new File.join(DIR, 'static/gshoes-icon.png')
+    win.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
     win.title = args[:title]
     win.set_default_size args[:width], args[:height]
 

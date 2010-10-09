@@ -1,4 +1,4 @@
-require '../shoes'
+require '../lib/green_shoes'
 
 Shoes.app title: 'Green Shoes New Logo Icon!', width: 300, height: 420 do
   stack do
