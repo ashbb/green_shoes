@@ -12,18 +12,24 @@ class Shoes
         attr_accessor *args.keys
       end
 
-      @width, @height = @real.size_request
+      (@width, @height = @real.size_request) if @real
     end
 
     attr_reader :parent
 
     def move x, y
       @app.cslot.contents -= [self]
-      move2 x, y
+      @app.canvas.move @real, x, y
+      move3 x, y
     end
 
     def move2 x, y
-      @app.canvas.move @real, x, y
+      remove
+      @app.canvas.put @real, x, y
+      move3 x, y
+    end
+
+    def move3 x, y
       @left, @top = x, y
     end
 
@@ -33,10 +39,10 @@ class Shoes
 
     def positioning x, y, max
       if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
-        move2 x, max.top
+        move3 x, max.top
         max = self if max.height < @height
       else
-        move2 parent.left, max.top + max.height
+        move3 parent.left, max.top + max.height
         max = self
       end
       max
@@ -45,7 +51,17 @@ class Shoes
 
   class Image < Basic; end
   class Button < Basic; end
-  class Background < Basic; end
+
+  class Background < Basic
+    def move2 x, y
+      remove if @real
+      @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
+      bg = @app.background(@pattern, left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true)
+      @real = bg.real
+      @width, @height = 0, 0
+    end
+  end
+
   class Shape < Basic
     def initialize args
       super
@@ -55,9 +71,7 @@ class Shoes
 
   class Para < Basic
     def text= s
-      @real.set_size_request 0, 0
-      @real.hide
-      @real = nil
+      remove
       @real = @app.para(s, left: left, top: top, nocontrol: true).real
     end
   end
@@ -65,6 +79,11 @@ class Shoes
   class EditLine < Basic
     def text
       @real.text
+    end
+
+    def move2 x, y
+      @app.canvas.move @real, x, y
+      move3 x, y
     end
   end
 end

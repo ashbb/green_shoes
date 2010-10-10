@@ -30,11 +30,19 @@ class Shoes
     end
     slot_height
   end
+
+  def self.repaint_all slot
+    slot.contents.each do |ele|
+      ele.is_a?(Basic) ? ele.move2(ele.left, ele.top) : repaint_all(ele)
+    end
+  end
   
   def self.call_back_procs app
     init_contents app.cslot.contents
     app.cslot.width, app.cslot.height = app.width, app.height
     contents_alignment app.cslot
+    repaint_all app.cslot
+    true
   end
 
   def self.init_contents contents

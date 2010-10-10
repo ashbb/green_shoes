@@ -8,26 +8,26 @@ Fantastic logo icon was created by [Zachary Scott](http://github.com/zacharyscot
 sample 1
 --------
 
-![sample1.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample1.png)
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample1.png)
 
 Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html).
 
 sample 2
 --------
 
-![sample2.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample2.png)
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample2.png)
 
 sample 3
 --------
 
-![sample3.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample3.png)
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample3.png)
 
 As like as the last sample of [_why's tutorial](http://github.com/ashbb/shoes_tutorial_walkthrough).
 
 sample 4
 --------
 
-![sample4.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample4.png)
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample4.png)
 
 edit_line with block is nice to display realtime change.     
 Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html).
@@ -47,9 +47,16 @@ Added module Types. Now Green Shoes can use both module Shoes and class Shoes as
 sample 7-9
 ----------
 
-![sample8.png](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample8.png)
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample8.png)
 
 Online demo is [sample 7](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) and [sample 9](http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html).
+
+sample 10
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample10.png)
+
+First shot of background feature implementation.
 
 -----------------
 

@@ -126,18 +126,26 @@ class Shoes
     end
 
     def background pat, args={}
-      args[:width] ||= 1
-      args[:height] ||= 1
+      args[:pattern] = pat
+      args[:width] ||= 0
+      args[:height] ||= 0
       args = basic_attributes args
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
-      context = Cairo::Context.new surface
-      context.rectangle 0, 0, args[:width], args[:height]
-      context.set_source_rgba *(pat)
-      context.fill
-      img = create_tmp_png surface
-      @canvas.put img, 0, 0
-      img.show_now
-      args[:real], args[:app] = img, self
+
+      if args[:create_real] and !args[:height].zero?
+        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+        context = Cairo::Context.new surface
+        context.rectangle 0, 0, args[:width], args[:height]
+        context.set_source_rgba *(pat)
+        context.fill
+        img = create_tmp_png surface
+        @canvas.put img, args[:left], args[:top]
+        img.show_now
+        args[:real] = img
+      else
+        args[:real] = false
+      end
+
+      args[:app] = self
       Background.new args
     end
   end
