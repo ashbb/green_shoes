@@ -56,7 +56,7 @@ sample 10
 
 [snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample10.png)
 
-First shot of background feature implementation.
+First shot of background feature implementation. Para got a transparent background.
 
 -----------------
 

@@ -28,23 +28,21 @@ class Shoes
     def para *msg
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
-      msg = msg.join
-      da = Gtk::DrawingArea.new
-      da.style = @canvas.style
-
-      args[:width] = 20*msg.length if args[:width].zero?
+      msg = msg.join + ' ' * 5
+      args[:width] = 10*msg.length if args[:width].zero?
       args[:height] = 18 if args[:height].zero?
-      da.set_size_request args[:width], args[:height]
-      da.signal_connect "expose-event" do |widget, event|
-        context = widget.window.create_cairo_context
-        layout = context.create_pango_layout
-        layout.text = msg
-        context.show_pango_layout layout
-        context.show_page
-      end
-      @canvas.put da, args[:left], args[:top]
-      da.show_now
-      args[:real], args[:app] = da, self
+
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      context = Cairo::Context.new surface
+      layout = context.create_pango_layout
+      layout.text = msg
+      context.show_pango_layout layout
+      context.show_page
+
+      img = create_tmp_png surface
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      args[:real], args[:app] = img, self
       Para.new args
     end
 
