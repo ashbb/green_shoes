@@ -27,13 +27,20 @@ class Shoes
       define_method(:height){win.size[1]}
     end
 
+    win.set_events Gdk::Event::BUTTON_PRESS_MASK
+
     win.signal_connect("delete-event") do
       false
     end
+
     win.signal_connect "destroy" do
       Gtk.main_quit
       File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
     end if @apps.size == 1
+
+    win.signal_connect("button_press_event") do
+      mouse_click_control app
+    end
 
     app.canvas = Gtk::Layout.new
     win.add app.canvas

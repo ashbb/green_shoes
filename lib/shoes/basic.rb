@@ -13,9 +13,10 @@ class Shoes
       end
 
       (@width, @height = @real.size_request) if @real
+      @proc = nil
     end
 
-    attr_reader :parent
+    attr_reader :parent, :proc
 
     def move x, y
       @app.cslot.contents -= [self]
@@ -46,6 +47,11 @@ class Shoes
         max = self
       end
       max
+    end
+
+    def click &blk
+      @proc = blk
+      @app.mccs << self
     end
   end
 
