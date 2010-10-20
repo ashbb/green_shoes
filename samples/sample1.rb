@@ -11,6 +11,7 @@ Shoes.app width: 300, height: 300 do
   button('move'){p.move 200, 30}
   button('remove'){p.remove}
   img = image '../static/gshoes-icon.png'
+  img.click{alert "You're soooo quick!"}
 
   x, y = 150, 150
   size = [128, 128]

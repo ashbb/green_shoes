@@ -9,11 +9,11 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height])
       end
-      @contents, @canvas, @mccs = [], nil, []
+      @contents, @canvas, @mccs, @win = [], nil, [], nil
       @cslot = (@app ||= self)
     end
 
-    attr_accessor :cslot, :contents, :canvas, :app, :mccs
+    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :win
 
     def stack args={}, &blk
       args[:app] = self

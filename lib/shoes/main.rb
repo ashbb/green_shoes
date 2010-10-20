@@ -45,6 +45,7 @@ class Shoes
     app.canvas = Gtk::Layout.new
     win.add app.canvas
     app.canvas.style = style
+    app.win = win
 
     app.instance_eval &blk if blk
 
