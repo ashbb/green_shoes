@@ -42,6 +42,7 @@ class Shoes
     app.cslot.width, app.cslot.height = app.width, app.height
     contents_alignment app.cslot
     repaint_all app.cslot
+    set_cursor_type app
     true
   end
 
@@ -59,5 +60,17 @@ class Shoes
       mouse_x, mouse_y = e.real.pointer
       e.proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
     end
+  end
+  
+  def self.set_cursor_type app
+    app.mccs.each do |e|
+      e.real.window.cursor = ARROW if e.real.window
+      (e.real.window.cursor = HAND; break) if mouse_on? e
+    end
+  end
+  
+  def self.mouse_on? e
+    mouse_x, mouse_y = e.real.pointer
+    (0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y)
   end
 end
