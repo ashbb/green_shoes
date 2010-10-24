@@ -58,6 +58,13 @@ sample 10
 
 First shot of background feature implementation. Para got a transparent background.
 
+sample 11
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample11.png)
+
+Online demo is [sample 11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html). This is [the same snippet](http://shoes.heroku.com/manual/Events.html#motion{|left,top|...}) on Shoes manual.
+
 -----------------
 
 For fun. :-D
