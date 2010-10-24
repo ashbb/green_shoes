@@ -42,6 +42,10 @@ class Shoes
       mouse_click_control app
     end
 
+    win.signal_connect("motion_notify_event") do
+      mouse_motion_control app
+    end
+
     app.canvas = Gtk::Layout.new
     win.add app.canvas
     app.canvas.style = style
@@ -49,7 +53,15 @@ class Shoes
 
     app.instance_eval &blk if blk
 
-    Gtk.timeout_add(100){call_back_procs app}
+    Gtk.timeout_add 100 do
+      if size_allocated? app
+        call_back_procs app
+        app.width_pre, app.height_pre = app.width, app.height
+      end
+      set_cursor_type app
+      true
+    end
+
     call_back_procs app
     
     win.show_all

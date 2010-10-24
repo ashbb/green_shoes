@@ -36,13 +36,22 @@ class Shoes
       ele.is_a?(Basic) ? ele.move2(ele.left, ele.top) : repaint_all(ele)
     end
   end
+
+  def self.repaint_all_by_order app
+    app.order.each do |e|
+      if e.real and !e.is_a?(Background)
+        app.canvas.remove e.real
+        app.canvas.put e.real, e.left, e.top
+      end
+    end
+  end
   
   def self.call_back_procs app
     init_contents app.cslot.contents
     app.cslot.width, app.cslot.height = app.width, app.height
     contents_alignment app.cslot
     repaint_all app.cslot
-    set_cursor_type app
+    repaint_all_by_order app
     true
   end
 
@@ -61,6 +70,12 @@ class Shoes
       e.proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
     end
   end
+
+  def self.mouse_motion_control app
+    app.mmcs.each do |blk|
+      blk[*app.win.pointer]
+    end
+  end
   
   def self.set_cursor_type app
     app.mccs.each do |e|
@@ -72,5 +87,9 @@ class Shoes
   def self.mouse_on? e
     mouse_x, mouse_y = e.real.pointer
     (0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y)
+  end
+
+  def self.size_allocated? app
+    not (app.width_pre == app.width and app.height_pre == app.height)
   end
 end

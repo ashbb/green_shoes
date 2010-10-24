@@ -5,6 +5,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
 
+      @app.order << self
       (@app.cslot.contents << self) unless @nocontrol
       @parent = @app.cslot
       
@@ -36,6 +37,10 @@ class Shoes
 
     def remove
       @app.canvas.remove @real
+    end
+
+    def clear
+      @real.clear
     end
 
     def positioning x, y, max

@@ -9,7 +9,7 @@ Shoes.app width: 300, height: 300 do
   button('pause'){a.pause}
   button('stop'){a.stop}
   button('move'){p.move 200, 30}
-  button('remove'){p.remove}
+  button('remove'){p.clear}
   img = image '../static/gshoes-icon.png'
   img.click{alert "You're soooo quick!"}
 

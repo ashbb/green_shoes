@@ -9,11 +9,12 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height])
       end
-      @contents, @canvas, @mccs, @win = [], nil, [], nil
+      @contents, @canvas, @mccs, @mmcs, @win, @order = [], nil, [], [], nil, []
       @cslot = (@app ||= self)
+      @width_pre, @height_pre = @width, @height
     end
 
-    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :win
+    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :mmcs, :win, :width_pre, :height_pre, :order
 
     def stack args={}, &blk
       args[:app] = self
@@ -83,6 +84,11 @@ class Shoes
       a = Anim.new
       GLib::Timeout.add(n){blk[i = a.pause? ? i : i+1]; a.continue?}
       a
+    end
+
+    def motion &blk
+      @win.set_events Gdk::Event::POINTER_MOTION_MASK
+      @mmcs << blk
     end
 
     def oval *attrs
