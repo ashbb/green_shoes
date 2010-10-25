@@ -82,7 +82,7 @@ class Shoes
 
   class Para < Basic
     def text= s
-      remove
+      clear
       @real = @app.para(s, left: left, top: top, nocontrol: true).real
     end
   end
