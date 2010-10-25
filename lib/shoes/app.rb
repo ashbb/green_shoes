@@ -121,6 +121,36 @@ class Shoes
       Shape.new args
     end
 
+    def rect *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      case attrs.length
+        when 0, 1
+        when 2; args[:left], args[:top] = attrs
+        when 3; args[:left], args[:top], args[:width] = attrs
+        else args[:left], args[:top], args[:width], args[:height] = attrs
+      end
+      args[:curve] ||= 0
+      args[:height] = args[:width] unless args[:height]
+      args = basic_attributes args
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      context = Cairo::Context.new surface
+      
+      context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
+      context.set_source_rgba *(args[:stroke] or stroke or black)
+      context.fill
+      
+      sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      context.rounded_rectangle sw, sw, args[:width]-sw*2, args[:height]-sw*2, args[:curve]
+      context.set_source_rgba *(args[:fill] or fill or black)
+      context.fill
+      
+      img = create_tmp_png surface
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      args[:real], args[:app] = img, self
+      Shape.new args
+    end
+
     def rgb r, g, b, l=1.0
       (r < 1 and g < 1 and b < 1) ? [r, g, b, l] : [r/255.0, g/255.0, b/255.0, l]
     end
