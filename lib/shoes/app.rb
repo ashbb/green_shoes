@@ -133,12 +133,13 @@ class Shoes
       args[:pattern] = pat
       args[:width] ||= 0
       args[:height] ||= 0
+      args[:curve] ||= 0
       args = basic_attributes args
 
       if args[:create_real] and !args[:height].zero?
         surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
         context = Cairo::Context.new surface
-        context.rectangle 0, 0, args[:width], args[:height]
+        context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
         context.set_source_rgba *(pat)
         context.fill
         img = create_tmp_png surface

@@ -67,7 +67,7 @@ class Shoes
     def move2 x, y
       remove if @real
       @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
-      bg = @app.background(@pattern, left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true)
+      bg = @app.background(@pattern, left: @left, top: @top, width: @width, height: @height, curve: @curve, create_real: true, nocontrol: true)
       @real = bg.real
       @width, @height = 0, 0
     end
