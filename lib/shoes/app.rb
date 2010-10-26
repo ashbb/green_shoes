@@ -44,6 +44,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
+      args[:nocontrol] = true unless (args[:left].zero? and args[:top].zero?)
       Para.new args
     end
 
