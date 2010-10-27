@@ -83,7 +83,11 @@ class Shoes
     def animate n=10, &blk
       n, i = 1000 / n, 0
       a = Anim.new
-      GLib::Timeout.add(n){blk[i = a.pause? ? i : i+1]; a.continue?}
+      GLib::Timeout.add n do
+        blk[i = a.pause? ? i : i+1]
+        Shoes.repaint_all_by_order self
+        a.continue?
+      end
       a
     end
 
@@ -119,7 +123,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      Oval.new args
     end
 
     def rect *attrs
@@ -149,7 +153,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      Rect.new args
     end
 
     def rgb r, g, b, l=1.0

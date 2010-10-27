@@ -5,7 +5,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
 
-      @app.order << self
+      (@app.order << self) unless @noorder
       (@app.cslot.contents << self) unless @nocontrol
       @parent = @app.cslot
       
@@ -15,9 +15,11 @@ class Shoes
 
       (@width, @height = @real.size_request) if @real
       @proc = nil
+      [:app, :real].each{|k| args.delete k}
+      @args = args
     end
 
-    attr_reader :parent, :proc
+    attr_reader :parent, :proc, :args
 
     def move x, y
       @app.cslot.contents -= [self]
@@ -58,6 +60,12 @@ class Shoes
       @proc = blk
       @app.mccs << self
     end
+    
+    def style args
+      clear
+      @args[:nocontrol] = @args[:noorder] = true
+      @real =  eval "@app.#{self.class.to_s.downcase[7..-1]}(#{@args.merge args }).real"
+    end
   end
 
   class Image < Basic; end
@@ -79,6 +87,9 @@ class Shoes
     @app.cslot.contents -= [self]
     end
   end
+
+  class Rect < Shape; end
+  class Oval < Shape; end
 
   class Para < Basic
     def text= s

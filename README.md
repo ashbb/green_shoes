@@ -74,6 +74,6 @@ ashbb
 Note
 ----
 
-- Next goal is improving Background and Para.
+- Next goal is [sample 60](http://shoes-tutorial-note.heroku.com/html/00535_Scope__local_variable_and_instance_variable.html) on Shoes Tutorial Note.
 - [Install Ruby/GTK2 and rcairo for Linux](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).
