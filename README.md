@@ -65,6 +65,20 @@ sample 11
 
 Online demo is [sample 11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html). This is [the same snippet](http://shoes.heroku.com/manual/Events.html#motion{|left,top|...}) on Shoes manual.
 
+sample 12
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample12.png)
+
+Online demo is [sample 12](http://www.rin-shun.com/shoes/green-shoes-sample12.swf.html). First attempt for useful style method.
+
+sample 13
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample13.png)
+
+Online demo is [sample 13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html). This is [the same as sample60](http://shoes-tutorial-note.heroku.com/html/00535_Scope__local_variable_and_instance_variable.html) on Shoes Tutorial Note.
+
 -----------------
 
 For fun. :-D
@@ -74,6 +88,5 @@ ashbb
 Note
 ----
 
-- Next goal is [sample 60](http://shoes-tutorial-note.heroku.com/html/00535_Scope__local_variable_and_instance_variable.html) on Shoes Tutorial Note.
 - [Install Ruby/GTK2 and rcairo for Linux](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).

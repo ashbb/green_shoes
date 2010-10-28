@@ -67,7 +67,14 @@ class Shoes
   def self.mouse_click_control app
     app.mccs.each do |e|
       mouse_x, mouse_y = e.real.pointer
-      e.proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
+      e.click_proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
+    end
+  end
+  
+  def self.mouse_release_control app
+    app.mrcs.each do |e|
+      mouse_x, mouse_y = e.real.pointer
+      e.release_proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
     end
   end
 

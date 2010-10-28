@@ -9,12 +9,12 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height])
       end
-      @contents, @canvas, @mccs, @mmcs, @win, @order = [], nil, [], [], nil, []
+      @contents, @canvas, @mccs, @mrcs, @mmcs, @win, @order = [], nil, [], [], [], nil, []
       @cslot = (@app ||= self)
       @width_pre, @height_pre = @width, @height
     end
 
-    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :mmcs, :win, :width_pre, :height_pre, :order
+    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :win, :width_pre, :height_pre, :order
 
     def stack args={}, &blk
       args[:app] = self
@@ -92,7 +92,6 @@ class Shoes
     end
 
     def motion &blk
-      @win.set_events Gdk::Event::POINTER_MOTION_MASK
       @mmcs << blk
     end
 

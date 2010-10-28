@@ -27,7 +27,7 @@ class Shoes
       define_method(:height){win.size[1]}
     end
 
-    win.set_events Gdk::Event::BUTTON_PRESS_MASK
+    win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK
 
     win.signal_connect("delete-event") do
       false
@@ -40,6 +40,10 @@ class Shoes
 
     win.signal_connect("button_press_event") do
       mouse_click_control app
+    end
+    
+    win.signal_connect("button_release_event") do
+      mouse_release_control app
     end
 
     win.signal_connect("motion_notify_event") do

@@ -19,7 +19,7 @@ class Shoes
       @args = args
     end
 
-    attr_reader :parent, :proc, :args
+    attr_reader :parent, :click_proc, :release_proc, :args
 
     def move x, y
       @app.cslot.contents -= [self]
@@ -57,8 +57,13 @@ class Shoes
     end
 
     def click &blk
-      @proc = blk
+      @click_proc = blk
       @app.mccs << self
+    end
+    
+    def release &blk
+      @release_proc = blk
+      @app.mrcs << self
     end
     
     def style args
