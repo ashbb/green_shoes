@@ -42,6 +42,7 @@ class Shoes
     end
 
     def clear
+      @app.mccs.delete(self); @app.mrcs.delete(self); @app.mmcs.delete(self)
       @real.clear
     end
 
@@ -86,16 +87,10 @@ class Shoes
     end
   end
 
-  class Shape < Basic
-    def initialize args
-      super
-    @app.cslot.contents -= [self]
-    end
-  end
-
+  class Shape < Basic; end
   class Rect < Shape; end
   class Oval < Shape; end
-
+  
   class Para < Basic
     def text= s
       clear

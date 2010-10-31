@@ -12,7 +12,7 @@ class Shoes
     app = App.new args
     @apps.push app
 
-    Flow.new app.slot_attributes(app: app, left: 0, top: 0)
+    app.top_slot = Flow.new app.slot_attributes(app: app, left: 0, top: 0)
 
     win = Gtk::Window.new
     win.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')

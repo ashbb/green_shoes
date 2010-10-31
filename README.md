@@ -79,14 +79,20 @@ sample 13
 
 Online demo is [sample 13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html). This is [the same as sample60](http://shoes-tutorial-note.heroku.com/html/00535_Scope__local_variable_and_instance_variable.html) on Shoes Tutorial Note.
 
------------------
+sample 14
+----------
 
-For fun. :-D
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample14.png)
 
-ashbb
+Online demo is [sample 14](http://www.rin-shun.com/shoes/green-shoes-sample14.swf.html). This is *flowers.rb* from [shoes/shoes-contrib](http://github.com/shoes/shoes-contrib). Edited a little bit for Green Shoes. It works, but very slow. Need more improvement.
+
 
 Note
 ----
 
 - [Install Ruby/GTK2 and rcairo for Linux](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](http://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).
+
+For fun. :-D
+
+ashbb

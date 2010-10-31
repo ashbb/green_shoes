@@ -23,6 +23,7 @@ class Shoes
     slot_height = 0
 
     slot.contents.each do |ele|
+      next if ele.is_a? Shape
       tmp = max
       max = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height
@@ -33,6 +34,7 @@ class Shoes
 
   def self.repaint_all slot
     slot.contents.each do |ele|
+      next if ele.is_a? Shape
       ele.is_a?(Basic) ? ele.move2(ele.left, ele.top) : repaint_all(ele)
     end
   end

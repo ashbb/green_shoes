@@ -11,10 +11,11 @@ class Shoes
       end
       @contents, @canvas, @mccs, @mrcs, @mmcs, @win, @order = [], nil, [], [], [], nil, []
       @cslot = (@app ||= self)
+      @top_slot = nil
       @width_pre, @height_pre = @width, @height
     end
 
-    attr_accessor :cslot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :win, :width_pre, :height_pre, :order
+    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :win, :width_pre, :height_pre, :order
 
     def stack args={}, &blk
       args[:app] = self
@@ -24,6 +25,10 @@ class Shoes
     def flow args={}, &blk
       args[:app] = self
       Flow.new slot_attributes(args), &blk
+    end
+
+    def clear &blk
+      @top_slot.clear &blk
     end
 
     def para *msg
@@ -161,6 +166,10 @@ class Shoes
 
     %w[fill stroke strokewidth].each do |name|
       eval "def #{name} #{name}=nil; #{name} ? @#{name}=#{name} : @#{name} end"
+    end
+
+    def nostroke
+      strokewidth 0
     end
 
     def background pat, args={}

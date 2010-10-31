@@ -13,7 +13,7 @@ class Shoes
       @parent = @app.cslot
       @app.cslot = self
       @contents = []
-      @parent.contents << self
+      (@parent.contents << self) unless @nocontrol
       if block_given?
         yield
         @app.cslot = @parent
@@ -42,6 +42,19 @@ class Shoes
       end
       max.height = @height = @initials[:height] unless @initials[:height].zero?
       max
+    end
+    
+    def clear &blk
+      @contents.each &:clear
+      if blk
+        args = {}
+        initials.keys.each{|k| args[k] = instance_variable_get "@#{k}"}
+	args[:nocontrol] = true
+        tmp = self.is_a?(Stack) ? Stack.new(@app.slot_attributes(args), &blk) : Flow.new(@app.slot_attributes(args), &blk)
+        self.contents = tmp.contents
+        Shoes.call_back_procs @app
+        Shoes.set_cursor_type @app
+      end
     end
   end
 
