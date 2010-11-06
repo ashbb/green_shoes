@@ -113,7 +113,13 @@ class Shoes
     end
   end
   
+  class Banner < TextBlock; end
+  class Title < TextBlock; end
+  class Subtitle < TextBlock; end
+  class Tagline < TextBlock; end
+  class Caption < TextBlock; end
   class Para < TextBlock; end
+  class Inscription < TextBlock; end
 
   class EditLine < Basic
     def text

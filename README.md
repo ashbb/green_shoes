@@ -93,6 +93,12 @@ sample 15
 
 Online demo is [sample 15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html). Para is synchronized with slot size and re-layouted immediately.
 
+sample 16-17
+-------------
+
+snapshots:[sample 16](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample16.png), [sample 17](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample17.png)
+
+Implemented the following methods: `banner, title, subtitle, tagline, caption, para, inscription, code, del, em, ins, strong, sub, sup`. And added new methods `bg` and `fg` for convenience to use Pango magic.
 
 Note
 ----

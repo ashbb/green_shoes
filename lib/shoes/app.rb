@@ -7,7 +7,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
       App.class_eval do
-        attr_accessor *(args.keys - [:width, :height])
+        attr_accessor *(args.keys - [:width, :height, :title])
       end
       @contents, @canvas, @mccs, @mrcs, @mmcs, @win, @order = [], nil, [], [], [], nil, []
       @cslot = (@app ||= self)
@@ -31,7 +31,8 @@ class Shoes
       @top_slot.clear &blk
     end
 
-    def textblock klass, font_size, line_height, *msg
+    def textblock klass, font_size, *msg
+      line_height =  font_size * 2
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
       args[:markup] = msg.join
@@ -51,6 +52,7 @@ class Shoes
         layout = context.create_pango_layout
         layout.width = args[:width] * Pango::SCALE
         layout.wrap = Pango::WRAP_WORD
+        layout.spacing = 5  * Pango::SCALE
         layout.text = text
         fd = Pango::FontDescription.new
         fd.size = font_size * Pango::SCALE
@@ -71,9 +73,13 @@ class Shoes
       klass.new args
     end
 
-    def para *msg
-      textblock Para, 12, 18, *msg
-    end
+    def banner *msg; textblock Banner, 48, *msg; end
+    def title *msg; textblock Title, 34, *msg; end
+    def subtitle *msg; textblock Subtitle, 26, *msg; end
+    def tagline *msg; textblock Tagline, 18, *msg; end
+    def caption *msg; textblock Caption, 14, *msg; end
+    def para *msg; textblock Para, 12, *msg; end
+    def inscription *msg; textblock Para, 10, *msg; end
 
     def image name, args={}
       args = basic_attributes args
