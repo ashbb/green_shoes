@@ -31,26 +31,48 @@ class Shoes
       @top_slot.clear &blk
     end
 
-    def para *msg
+    def textblock klass, font_size, line_height, *msg
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
-      msg = msg.join + ' ' * 5
-      args[:width] = 10*msg.length if args[:width].zero?
-      args[:height] = 18 if args[:height].zero?
+      args[:markup] = msg.join
+      attr_list, text = Pango.parse_markup args[:markup]
+      args[:size] ||= font_size
 
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
-      context = Cairo::Context.new surface
-      layout = context.create_pango_layout
-      layout.text = msg
-      context.show_pango_layout layout
-      context.show_page
+      if !(args[:left].zero? and args[:top].zero?) and (args[:width].zero? or args[:height].zero?)
+        args[:nocontrol], args[:width], args[:height] = true, self.width, self.height
+        layout_control = false
+      else
+        layout_control = true
+      end
+      
+      if args[:create_real] or !layout_control
+        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+        context = Cairo::Context.new surface
+        layout = context.create_pango_layout
+        layout.width = args[:width] * Pango::SCALE
+        layout.wrap = Pango::WRAP_WORD
+        layout.text = text
+        fd = Pango::FontDescription.new
+        fd.size = font_size * Pango::SCALE
+        layout.font_description = fd
+        layout.attributes = attr_list
+        context.show_pango_layout layout
+        context.show_page
+        args[:height] = layout.line_count * line_height
+        img = create_tmp_png surface
+        @canvas.put img, args[:left], args[:top]
+        img.show_now
+        args[:real], args[:noorder] = img, layout_control
+      else
+        args[:real] = false
+      end
+      
+      args[:app] = self
+      klass.new args
+    end
 
-      img = create_tmp_png surface
-      @canvas.put img, args[:left], args[:top]
-      img.show_now
-      args[:real], args[:app] = img, self
-      args[:nocontrol] = true unless (args[:left].zero? and args[:top].zero?)
-      Para.new args
+    def para *msg
+      textblock Para, 12, 18, *msg
     end
 
     def image name, args={}

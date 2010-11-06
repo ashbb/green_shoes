@@ -86,6 +86,13 @@ sample 14
 
 Online demo is [sample 14](http://www.rin-shun.com/shoes/green-shoes-sample14.swf.html). This is *flowers.rb* from [shoes/shoes-contrib](http://github.com/shoes/shoes-contrib). Edited a little bit for Green Shoes. It works, but very slow. Need more improvement.
 
+sample 15
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample15.png)
+
+Online demo is [sample 15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html). Para is synchronized with slot size and re-layouted immediately.
+
 
 Note
 ----

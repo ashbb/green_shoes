@@ -13,7 +13,7 @@ class Shoes
         attr_accessor *args.keys
       end
 
-      (@width, @height = @real.size_request) if @real
+      (@width, @height = @real.size_request) if @real and !self.is_a?(TextBlock)
       @proc = nil
       [:app, :real].each{|k| args.delete k}
       @args = args
@@ -91,12 +91,29 @@ class Shoes
   class Rect < Shape; end
   class Oval < Shape; end
   
-  class Para < Basic
+  class TextBlock < Basic
     def text= s
-      clear
-      @real = @app.para(s, left: left, top: top, nocontrol: true).real
+      clear if @real
+      @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left
+      @height = 20 if @height.zero?
+      m = self.class.to_s.downcase[7..-1]
+      args = [s, @args.merge({left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true})]
+      tb = @app.send(m, *args)
+      @real, @height = tb.real, tb.height
+    end
+    
+    def positioning x, y, max
+      self.text = @args[:markup]
+      super
+    end
+    
+    def move2 x, y
+      self.text = @args[:markup]
+      super
     end
   end
+  
+  class Para < TextBlock; end
 
   class EditLine < Basic
     def text
