@@ -54,7 +54,7 @@ class Shoes
         layout.wrap = Pango::WRAP_WORD
         layout.spacing = 5  * Pango::SCALE
         layout.text = text
-        fd = Pango::FontDescription.new
+        fd = Pango::FontDescription.new 'Arial'
         fd.size = font_size * Pango::SCALE
         layout.font_description = fd
         layout.attributes = attr_list

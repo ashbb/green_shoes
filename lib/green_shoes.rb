@@ -11,6 +11,7 @@ module Shoes
   TMP_PNG_FILE = File.join(Dir.tmpdir, '__green_shoes_temporary_file__')
   HAND = Gdk::Cursor.new(Gdk::Cursor::HAND1)
   ARROW = Gdk::Cursor.new(Gdk::Cursor::ARROW)
+  FONTS = Gtk::Invisible.new.pango_context.families.map(&:name).sort
 end
 
 class Object
