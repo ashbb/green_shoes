@@ -40,6 +40,7 @@ class Shoes
 
     win.signal_connect("button_press_event") do
       mouse_click_control app
+      mouse_link_control app
     end
     
     win.signal_connect("button_release_event") do

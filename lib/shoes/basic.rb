@@ -92,6 +92,11 @@ class Shoes
   class Oval < Shape; end
   
   class TextBlock < Basic
+    def initialize args
+      super
+      @app.mlcs << self  unless @real
+    end
+    
     def text= s
       clear if @real
       @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left

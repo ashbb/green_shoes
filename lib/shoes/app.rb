@@ -9,13 +9,13 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height, :title])
       end
-      @contents, @canvas, @mccs, @mrcs, @mmcs, @win, @order = [], nil, [], [], [], nil, []
+      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @win, @order = [], nil, [], [], [], [], nil, []
       @cslot = (@app ||= self)
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
     end
 
-    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :win, :width_pre, :height_pre, :order
+    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :mlcs, :win, :width_pre, :height_pre, :order
 
     def stack args={}, &blk
       args[:app] = self
@@ -35,9 +35,11 @@ class Shoes
       line_height =  font_size * 2
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
-      args[:markup] = msg.join
+      args[:markup] = msg.map(&:to_s).join
       attr_list, text = Pango.parse_markup args[:markup]
       args[:size] ||= font_size
+      
+      args[:links] = make_link_index(msg) unless args[:links]
 
       if !(args[:left].zero? and args[:top].zero?) and (args[:width].zero? or args[:height].zero?)
         args[:nocontrol], args[:width], args[:height] = true, self.width, self.height
@@ -60,6 +62,9 @@ class Shoes
         layout.attributes = attr_list
         context.show_pango_layout layout
         context.show_page
+        
+        make_link_pos args[:links], layout, line_height
+        
         args[:height] = layout.line_count * line_height
         img = create_tmp_png surface
         @canvas.put img, args[:left], args[:top]

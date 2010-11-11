@@ -14,6 +14,25 @@ class Shoes
       surface.write_to_png TMP_PNG_FILE
       Gtk::Image.new TMP_PNG_FILE
     end
+    
+    def make_link_index msg
+      start, links = 0, []
+      msg.each do |e|
+        str = /<.*>(.*)<.*>/.match(e.to_s)
+        len = str ? str.captures.first.length : e.to_s.length
+        (links << e; e.index = [start, start + len - 1]) if e.is_a? Link
+        start += len
+      end
+      links
+    end
+    
+    def make_link_pos links, layout, line_height
+      links.each do |e|
+        e.pos = [layout.index_to_pos(e.index[0]).x / Pango::SCALE, layout.index_to_pos(e.index[0]).y / Pango::SCALE]
+        e.pos << (layout.index_to_pos(e.index[1]).x / Pango::SCALE + line_height / 2) << (layout.index_to_pos(e.index[1]).y / Pango::SCALE)
+        e.pos << line_height
+      end
+    end
   end
 
   def self.contents_alignment slot
@@ -85,17 +104,41 @@ class Shoes
       blk[*app.win.pointer]
     end
   end
+
+  def self.mouse_link_control app
+    app.mlcs.each do |tb|
+      link_proc = mouse_on_link tb, app
+      link_proc.call if link_proc
+    end
+  end
   
   def self.set_cursor_type app
     app.mccs.each do |e|
       e.real.window.cursor = ARROW if e.real.window
-      (e.real.window.cursor = HAND; break) if mouse_on? e
+      (e.real.window.cursor = HAND; return) if mouse_on? e
+    end
+    app.mlcs.each do |e|
+      e.real.window.cursor = ARROW if e.real.window
+      (e.real.window.cursor = HAND; return) if mouse_on_link e, app
     end
   end
   
   def self.mouse_on? e
     mouse_x, mouse_y = e.real.pointer
     (0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y)
+  end
+
+  def self.mouse_on_link tb, app
+    mouse_x, mouse_y = app.win.pointer
+    mouse_x -= tb.left
+    mouse_y -= tb.top
+    tb.links.each do |e|
+      return e.link_proc if ((0..tb.width).include?(mouse_x) and (e.pos[1]..(e.pos[3]+e.pos[4])).include?(mouse_y) \
+        and !((0..e.pos[0]).include?(mouse_x) and (e.pos[1]..(e.pos[1]+e.pos[4])).include?(mouse_y)) \
+        and !((e.pos[2]..tb.width).include?(mouse_x) and (e.pos[3]..(e.pos[3]+e.pos[4])).include?(mouse_y)) \
+      )
+    end
+    return false
   end
 
   def self.size_allocated? app

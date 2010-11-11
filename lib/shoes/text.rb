@@ -12,5 +12,26 @@ class Shoes
         "<span #{tag}='##{rgb}'>#{str}</span>"
       end
     end
+
+    def link str, &blk
+      Link.new @app, "#{LINK_DEFAULT}#{str}</span>", &blk
+    end
   end
+
+  class Text
+    def initialize str
+      @to_s = str
+    end
+    attr_reader :to_s
+  end
+
+  class Link < Text
+    def initialize app, str, &blk
+      @link_proc, @pos, @index = blk, nil, nil
+      super str
+    end
+    attr_reader :link_proc
+    attr_accessor :pos, :index
+  end
+  
 end
