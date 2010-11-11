@@ -100,6 +100,13 @@ snapshots:[sample 16](http://github.com/ashbb/green_shoes/raw/master/snapshots/s
 
 Implemented the following methods: `banner, title, subtitle, tagline, caption, para, inscription, code, del, em, ins, strong, sub, sup`. And added new methods `bg` and `fg` for convenience to use Pango magic.
 
+sample 18
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample18.png)
+
+Online demo is [sample 18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html). First attempt for *link* method. LinkHover style doesn't change so far.
+
 Note
 ----
 
