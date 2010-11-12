@@ -1,6 +1,6 @@
 require "../lib/green_shoes"
 
-Shoes.app do
+Shoes.app width: 700, height: 600 do
   title "Shoes is a ", link("tiny"){alert "Cool!"}, " graphics toolkit. "
 
   flow width: 0.4 do
@@ -10,9 +10,14 @@ Shoes.app do
 
   flow width: 0.6 do
     tagline "It's simple and straightforward. ", 
-      link("Shoes was born to be easy! "){alert "Yay!"}, 
+      link("Shoes "){alert "Yay!"}, 
+      "was born to be easy! ", 
+      link("Shoes "){alert "Yay!"}, 
+      "was born to be easy! ", 
+      link("Shoes "){alert "Yay!"}, 
+      "was born to be easy! ", 
       "Really, it was made for absolute beginners. "
   end
 
-  subtitle link("There's really nothing to it. "){alert "Have fun!"}
+  subtitle link(strong em("There's ", fg(bg("really ", "really ", yellow), red), "nothing to it. ")){alert "Have fun!"}
 end

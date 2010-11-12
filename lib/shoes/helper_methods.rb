@@ -18,8 +18,7 @@ class Shoes
     def make_link_index msg
       start, links = 0, []
       msg.each do |e|
-        str = /<.*>(.*)<.*>/.match(e.to_s)
-        len = str ? str.captures.first.length : e.to_s.length
+        len = e.to_s.gsub(/<\/.*?>/, '').gsub(/<.*?>/, '').length
         (links << e; e.index = [start, start + len - 1]) if e.is_a? Link
         start += len
       end
@@ -107,7 +106,7 @@ class Shoes
 
   def self.mouse_link_control app
     app.mlcs.each do |tb|
-      link_proc = mouse_on_link tb, app
+      link_proc,  = mouse_on_link(tb, app)
       link_proc.call if link_proc
     end
   end
@@ -117,9 +116,25 @@ class Shoes
       e.real.window.cursor = ARROW if e.real.window
       (e.real.window.cursor = HAND; return) if mouse_on? e
     end
-    app.mlcs.each do |e|
-      e.real.window.cursor = ARROW if e.real.window
-      (e.real.window.cursor = HAND; return) if mouse_on_link e, app
+    
+    app.mlcs.each do |tb|
+      tb.real.window.cursor = ARROW if tb.real.window
+      if ret = mouse_on_link(tb, app)
+        tb.real.window.cursor = HAND
+        unless tb.links[ret[1]].link_hover
+          markup = tb.args[:markup].gsub(LINKHOVER_DEFAULT, LINK_DEFAULT)
+          links = markup.mindex  LINK_DEFAULT
+          n = links[ret[1]]
+          tb.text = markup[0...n] + markup[n..-1].sub(LINK_DEFAULT, LINKHOVER_DEFAULT)
+          tb.links.each{|e| e.link_hover = false}
+          tb.links[ret[1]].link_hover = true
+        end
+        return
+      end
+      if tb.links.map(&:link_hover).include? true
+        tb.text = tb.args[:markup].gsub(LINKHOVER_DEFAULT, LINK_DEFAULT)
+        tb.links.each{|e| e.link_hover = false}
+      end
     end
   end
   
@@ -132,8 +147,8 @@ class Shoes
     mouse_x, mouse_y = app.win.pointer
     mouse_x -= tb.left
     mouse_y -= tb.top
-    tb.links.each do |e|
-      return e.link_proc if ((0..tb.width).include?(mouse_x) and (e.pos[1]..(e.pos[3]+e.pos[4])).include?(mouse_y) \
+    tb.links.each_with_index do |e, n|
+      return [e.link_proc, n] if ((0..tb.width).include?(mouse_x) and (e.pos[1]..(e.pos[3]+e.pos[4])).include?(mouse_y) \
         and !((0..e.pos[0]).include?(mouse_x) and (e.pos[1]..(e.pos[1]+e.pos[4])).include?(mouse_y)) \
         and !((e.pos[2]..tb.width).include?(mouse_x) and (e.pos[3]..(e.pos[3]+e.pos[4])).include?(mouse_y)) \
       )

@@ -19,3 +19,15 @@ class Object
     dialog.destroy
   end
 end
+
+class String
+  def mindex str
+    n, links = 0, []
+    loop do
+      break unless n= self.index(str, n)
+      links << n
+      n += 1
+    end
+    links
+  end
+end
