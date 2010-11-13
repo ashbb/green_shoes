@@ -13,9 +13,11 @@ class Shoes
       @cslot = (@app ||= self)
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
+      @mouse_button, @mouse_pos = 0, [0, 0]
     end
 
     attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :mlcs, :win, :width_pre, :height_pre, :order
+    attr_writer :mouse_button, :mouse_pos
 
     def stack args={}, &blk
       args[:app] = self
@@ -38,6 +40,7 @@ class Shoes
       args[:markup] = msg.map(&:to_s).join
       attr_list, text = Pango.parse_markup args[:markup]
       args[:size] ||= font_size
+      args[:align] ||= 'left'
       
       args[:links] = make_link_index(msg) unless args[:links]
 
@@ -56,6 +59,7 @@ class Shoes
         layout.wrap = Pango::WRAP_WORD
         layout.spacing = 5  * Pango::SCALE
         layout.text = text
+        layout.alignment = eval "Pango::ALIGN_#{args[:align].upcase}"
         fd = Pango::FontDescription.new 'sans'
         fd.size = font_size * Pango::SCALE
         layout.font_description = fd
@@ -131,6 +135,10 @@ class Shoes
 
     def motion &blk
       @mmcs << blk
+    end
+
+    def mouse
+      [@mouse_button, @mouse_pos[0], @mouse_pos[1]]
     end
 
     def oval *attrs

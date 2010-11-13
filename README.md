@@ -107,6 +107,13 @@ sample 18
 
 Online demo is [sample 18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html). Implemented *link* method. Now Link text block will be changed between Link style and LinkHover style and used with all text fragments.
 
+sample 19
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample19.png)
+
+Online demo is [sample 19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html). Pong in Green Shoes! Almost the same code as (Red) Shoes [sample58](http://shoes-tutorial-note.heroku.com/html/00704_Assignment_4_Pong_in_Shoes.html).
+
 Note
 ----
 

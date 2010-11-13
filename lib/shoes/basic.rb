@@ -106,7 +106,9 @@ class Shoes
       tb = @app.send(m, *args)
       @real, @height = tb.real, tb.height
     end
-    
+
+    alias :replace :text=
+
     def positioning x, y, max
       self.text = @args[:markup]
       super

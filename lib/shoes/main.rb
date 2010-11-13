@@ -38,16 +38,21 @@ class Shoes
       File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
     end if @apps.size == 1
 
-    win.signal_connect("button_press_event") do
+    win.signal_connect("button_press_event") do |w, e|
+      app.mouse_button = e.button
+      app.mouse_pos = app.win.pointer
       mouse_click_control app
       mouse_link_control app
     end
     
     win.signal_connect("button_release_event") do
+      app.mouse_button = 0
+      app.mouse_pos = app.win.pointer
       mouse_release_control app
     end
 
     win.signal_connect("motion_notify_event") do
+      app.mouse_pos = app.win.pointer
       mouse_motion_control app
     end
 
