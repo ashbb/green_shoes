@@ -114,6 +114,13 @@ sample 19
 
 Online demo is [sample 19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html). Pong in Green Shoes! Almost the same code as (Red) Shoes [sample58](http://shoes-tutorial-note.heroku.com/html/00704_Assignment_4_Pong_in_Shoes.html).
 
+sample 20
+----------
+
+[snapshot](http://github.com/ashbb/green_shoes/raw/master/snapshots/sample20.png)
+
+Online demo is [sample 20](http://www.rin-shun.com/shoes/green-shoes-sample20.swf.html). Potacho in Green Shoes! Code is a little bit changed from (Red) Shoes [gallery5](http://shoes-tutorial-note.heroku.com/html/01110_Fancy_Gallery_1-5.html).
+
 Note
 ----
 

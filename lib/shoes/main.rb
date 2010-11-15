@@ -68,6 +68,7 @@ class Shoes
         call_back_procs app
         app.width_pre, app.height_pre = app.width, app.height
       end
+      show_hide_control app
       set_cursor_type app
       true
     end

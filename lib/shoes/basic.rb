@@ -17,18 +17,21 @@ class Shoes
       @proc = nil
       [:app, :real].each{|k| args.delete k}
       @args = args
+      @hided, @shows = false, true
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :args
+    attr_reader :parent, :click_proc, :release_proc, :args, :shows
+    attr_accessor :hided
 
     def move x, y
       @app.cslot.contents -= [self]
       @app.canvas.move @real, x, y
       move3 x, y
+      self
     end
 
     def move2 x, y
-      remove
+      remove unless @hided
       @app.canvas.put @real, x, y
       move3 x, y
     end
@@ -38,7 +41,28 @@ class Shoes
     end
 
     def remove
-      @app.canvas.remove @real
+      @app.canvas.remove @real unless @hided
+    end
+
+    def hide
+      @app.shcs.delete self
+      @app.shcs << self
+      @shows = false
+      self
+    end
+
+    def show
+      @app.shcs.delete self
+      @app.shcs << self
+      @shows = true
+      self
+    end
+
+    def toggle
+      @app.shcs.delete self
+      @app.shcs << self
+      @shows = !@shows
+      self
     end
 
     def clear
@@ -79,7 +103,8 @@ class Shoes
 
   class Background < Basic
     def move2 x, y
-      remove if @real
+      return if @hided
+      clear if @real
       @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
       bg = @app.background(@pattern, left: @left, top: @top, width: @width, height: @height, curve: @curve, create_real: true, nocontrol: true)
       @real = bg.real

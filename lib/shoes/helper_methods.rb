@@ -59,7 +59,7 @@ class Shoes
 
   def self.repaint_all_by_order app
     app.order.each do |e|
-      if e.real and !e.is_a?(Background)
+      if e.real and !e.is_a?(Background) and !e.hided
         app.canvas.remove e.real
         app.canvas.put e.real, e.left, e.top
       end
@@ -86,15 +86,13 @@ class Shoes
 
   def self.mouse_click_control app
     app.mccs.each do |e|
-      mouse_x, mouse_y = e.real.pointer
-      e.click_proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
+      e.click_proc.call if mouse_on? e
     end
   end
   
   def self.mouse_release_control app
     app.mrcs.each do |e|
-      mouse_x, mouse_y = e.real.pointer
-      e.release_proc.call if ((0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y))
+      e.release_proc.call if mouse_on? e
     end
   end
 
@@ -158,5 +156,19 @@ class Shoes
 
   def self.size_allocated? app
     not (app.width_pre == app.width and app.height_pre == app.height)
+  end
+
+  def self.show_hide_control app
+    app.shcs.each do |e|
+      case
+        when(!e.shows and !e.hided)
+          e.remove
+          e.hided = true
+        when(e.shows and e.hided)
+          e.hided = false
+          e.is_a?(Background) ? e.move2(e.left, e.top) : app.canvas.put(e.real, e.left, e.top)
+        else
+      end
+    end
   end
 end
