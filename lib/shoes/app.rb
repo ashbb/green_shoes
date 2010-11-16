@@ -113,8 +113,10 @@ class Shoes
       args = basic_attributes args
       el = Gtk::Entry.new
       el.text = args[:text].to_s
+      el.width_chars = args[:width] / 6
       el.signal_connect "changed" do
         yield el
+        el.set_focus self
       end if block_given?
       @canvas.put el, args[:left], args[:top]
       el.show_now
