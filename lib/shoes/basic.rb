@@ -101,16 +101,20 @@ class Shoes
   class Image < Basic; end
   class Button < Basic; end
 
-  class Background < Basic
+  class Pattern < Basic
     def move2 x, y
       return if @hided
       clear if @real
       @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
-      bg = @app.background(@pattern, left: @left, top: @top, width: @width, height: @height, curve: @curve, create_real: true, nocontrol: true)
-      @real = bg.real
+      m = self.class.to_s.downcase[7..-1]
+      args = [@pattern, {left: @left, top: @top, width: @width, height: @height, curve: @curve, strokewidth: @strokewidth, create_real: true, nocontrol: true}]
+      pt = @app.send(m, *args)
+      @real = pt.real
       @width, @height = 0, 0
     end
   end
+  class Background < Pattern; end
+  class Border < Pattern; end
 
   class Shape < Basic; end
   class Rect < Shape; end

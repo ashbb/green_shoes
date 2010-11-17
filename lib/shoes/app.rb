@@ -14,6 +14,7 @@ class Shoes
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
       @mouse_button, @mouse_pos = 0, [0, 0]
+      @fill, @stroke = black, black
     end
 
     attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :mlcs, :shcs, :win, :width_pre, :height_pre, :order
@@ -111,6 +112,7 @@ class Shoes
 
     def edit_line args={}
       args = basic_attributes args
+      args[:width] = 200 if args[:width].zero?
       el = Gtk::Entry.new
       el.text = args[:text].to_s
       el.width_chars = args[:width] / 6
@@ -153,16 +155,21 @@ class Shoes
       end
       args = basic_attributes args
       args[:width].zero? ? (args[:width] = args[:radius] * 2) : (args[:radius] = args[:width]/2.0)
-      args[:height] = args[:width] if args[:height].zero? 
+      args[:height] = args[:width] if args[:height].zero?
+      args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
       context = Cairo::Context.new surface
       context.scale(1,  args[:height]/args[:width].to_f)
-      context.arc args[:radius], args[:radius], args[:radius], 0, 2*Math::PI
-      context.set_source_rgba *(args[:fill] or fill or black)
-      context.fill
-
-      context.set_source_rgba *(args[:stroke] or stroke or black)
-      context.set_line_width args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      
+      if args[:fill] or fill 
+        context.arc args[:radius], args[:radius], args[:radius], 0, 2*Math::PI
+        context.set_source_rgba *(args[:fill] or fill)
+        context.fill
+      end
+      
+      context.set_source_rgba *(args[:stroke] or stroke)
+      context.set_line_width args[:strokewidth]
       context.arc args[:radius], args[:radius], args[:radius]-args[:strokewidth]/2.0, 0, 2*Math::PI
       context.stroke
 
@@ -183,18 +190,22 @@ class Shoes
       end
       args[:curve] ||= 0
       args[:height] = args[:width] unless args[:height]
+      sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      
       args = basic_attributes args
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
       context = Cairo::Context.new surface
       
-      context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
-      context.set_source_rgba *(args[:stroke] or stroke or black)
-      context.fill
+      if args[:fill] or fill
+        context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
+        context.set_source_rgba *(args[:fill] or fill)
+        context.fill
+      end
       
-      sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
-      context.rounded_rectangle sw, sw, args[:width]-sw*2, args[:height]-sw*2, args[:curve]
-      context.set_source_rgba *(args[:fill] or fill or black)
-      context.fill
+      context.set_source_rgba *(args[:stroke] or stroke)
+      context.set_line_width sw
+      context.rounded_rectangle sw/2.0, sw/2.0, args[:width]-sw, args[:height]-sw, args[:curve]
+      context.stroke
       
       img = create_tmp_png surface
       @canvas.put img, args[:left], args[:top]
@@ -213,6 +224,10 @@ class Shoes
 
     def nostroke
       strokewidth 0
+    end
+    
+    def nofill
+      @fill = false
     end
 
     def background pat, args={}
@@ -238,6 +253,34 @@ class Shoes
 
       args[:app] = self
       Background.new args
+    end
+    
+    def border pat, args={}
+      args[:pattern] = pat
+      args[:width] ||= 0
+      args[:height] ||= 0
+      args[:curve] ||= 0
+      args = basic_attributes args
+      sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+
+      if args[:create_real] and !args[:height].zero?
+        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+        context = Cairo::Context.new surface
+        context.set_source_rgba *(pat)
+        context.set_line_width sw
+        context.rounded_rectangle sw/2.0, sw/2.0, args[:width]-sw, args[:height]-sw, args[:curve]
+        context.stroke
+        
+        img = create_tmp_png surface
+        @canvas.put img, args[:left], args[:top]
+        img.show_now
+        args[:real] = img
+      else
+        args[:real] = false
+      end
+
+      args[:app] = self
+      Border.new args
     end
   end
 end

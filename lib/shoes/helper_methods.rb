@@ -59,7 +59,7 @@ class Shoes
 
   def self.repaint_all_by_order app
     app.order.each do |e|
-      if e.real and !e.is_a?(Background) and !e.hided
+      if e.real and !e.is_a?(Pattern) and !e.hided
         app.canvas.remove e.real
         app.canvas.put e.real, e.left, e.top
       end
@@ -166,7 +166,7 @@ class Shoes
           e.hided = true
         when(e.shows and e.hided)
           e.hided = false
-          e.is_a?(Background) ? e.move2(e.left, e.top) : app.canvas.put(e.real, e.left, e.top)
+          e.is_a?(Pattern) ? e.move2(e.left, e.top) : app.canvas.put(e.real, e.left, e.top)
         else
       end
     end
