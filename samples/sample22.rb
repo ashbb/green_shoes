@@ -6,7 +6,7 @@ Shoes.app do
   border deeppink..forestgreen, curve: 30
   nostroke
   fill crimson..cyan
-  oval 100, 100, 100, 100, stroke: chartreuse..firebrick, angle: 45
+  oval 100, 100, 100, 100, angle: 45
   nofill
   strokewidth 50
   rect 200, 200, 300, 200, stroke: darkblue..ivory, angle: 90
