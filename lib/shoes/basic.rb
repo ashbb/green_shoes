@@ -107,7 +107,8 @@ class Shoes
       clear if @real
       @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
       m = self.class.to_s.downcase[7..-1]
-      args = [@pattern, {left: @left, top: @top, width: @width, height: @height, curve: @curve, strokewidth: @strokewidth, create_real: true, nocontrol: true}]
+      args = eval "{#{@args.keys.map{|k| "#{k}: @#{k}"}.join(', ')}}"
+      args = [@pattern, args.merge({create_real: true, nocontrol: true})]
       pt = @app.send(m, *args)
       @real = pt.real
       @width, @height = 0, 0

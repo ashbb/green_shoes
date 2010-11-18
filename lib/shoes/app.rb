@@ -9,7 +9,8 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height, :title])
       end
-      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @win, @order = [], nil, [], [], [], [], [], nil, []
+      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @win, @order = 
+        [], nil, [], [], [], [], [], nil, []
       @cslot = (@app ||= self)
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
@@ -17,7 +18,8 @@ class Shoes
       @fill, @stroke = black, black
     end
 
-    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, :mlcs, :shcs, :win, :width_pre, :height_pre, :order
+    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
+      :mlcs, :shcs, :win, :width_pre, :height_pre, :order
     attr_writer :mouse_button, :mouse_pos
 
     def stack args={}, &blk
@@ -162,13 +164,16 @@ class Shoes
       context = Cairo::Context.new surface
       context.scale(1,  args[:height]/args[:width].to_f)
       
-      if args[:fill] or fill 
+      if pat = (args[:fill] or fill)
+        gp = gradient pat, args[:width], args[:height], args[:angle]
+        context.set_source gp
         context.arc args[:radius], args[:radius], args[:radius], 0, 2*Math::PI
-        context.set_source_rgba *(args[:fill] or fill)
         context.fill
       end
       
-      context.set_source_rgba *(args[:stroke] or stroke)
+      pat = (args[:stroke] or stroke)
+      gp = gradient pat, args[:width], args[:height], args[:angle]
+      context.set_source gp
       context.set_line_width args[:strokewidth]
       context.arc args[:radius], args[:radius], args[:radius]-args[:strokewidth]/2.0, 0, 2*Math::PI
       context.stroke
@@ -188,7 +193,6 @@ class Shoes
         when 3; args[:left], args[:top], args[:width] = attrs
         else args[:left], args[:top], args[:width], args[:height] = attrs
       end
-      args[:curve] ||= 0
       args[:height] = args[:width] unless args[:height]
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
       
@@ -196,13 +200,16 @@ class Shoes
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
       context = Cairo::Context.new surface
       
-      if args[:fill] or fill
+      if pat = (args[:fill] or fill)
+        gp = gradient pat, args[:width], args[:height], args[:angle]
+        context.set_source gp
         context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
-        context.set_source_rgba *(args[:fill] or fill)
         context.fill
       end
       
-      context.set_source_rgba *(args[:stroke] or stroke)
+      pat = (args[:stroke] or stroke)
+      gp = gradient pat, args[:width], args[:height], args[:angle]
+      context.set_source gp
       context.set_line_width sw
       context.rounded_rectangle sw/2.0, sw/2.0, args[:width]-sw, args[:height]-sw, args[:curve]
       context.stroke
@@ -229,19 +236,31 @@ class Shoes
     def nofill
       @fill = false
     end
+    
+    def gradient pat, w, h, angle=0
+      color = case pat
+        when Range; [pat.first, pat.last]
+        when Array; [pat, pat]
+        else
+          [black, black]
+      end
+      dx, dy = w*angle/180.0, h*angle/180.0
+      lp = Cairo::LinearPattern.new w*0.5-dx, dy, w*0.5+dx, h-dy
+      lp.add_color_stop_rgba 0, *color[0]
+      lp.add_color_stop_rgba 1, *color[1]
+      lp
+    end
 
     def background pat, args={}
       args[:pattern] = pat
-      args[:width] ||= 0
-      args[:height] ||= 0
-      args[:curve] ||= 0
       args = basic_attributes args
 
       if args[:create_real] and !args[:height].zero?
         surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
         context = Cairo::Context.new surface
         context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
-        context.set_source_rgba *(pat)
+        gp = gradient pat, args[:width], args[:height], args[:angle]
+        context.set_source gp
         context.fill
         img = create_tmp_png surface
         @canvas.put img, args[:left], args[:top]
@@ -257,16 +276,14 @@ class Shoes
     
     def border pat, args={}
       args[:pattern] = pat
-      args[:width] ||= 0
-      args[:height] ||= 0
-      args[:curve] ||= 0
       args = basic_attributes args
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
 
       if args[:create_real] and !args[:height].zero?
         surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
         context = Cairo::Context.new surface
-        context.set_source_rgba *(pat)
+        gp = gradient pat, args[:width], args[:height], args[:angle]
+        context.set_source gp
         context.set_line_width sw
         context.rounded_rectangle sw/2.0, sw/2.0, args[:width]-sw, args[:height]-sw, args[:curve]
         context.stroke
