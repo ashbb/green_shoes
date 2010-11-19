@@ -241,6 +241,9 @@ class Shoes
       color = case pat
         when Range; [pat.first, pat.last]
         when Array; [pat, pat]
+        when String
+          sp = Cairo::SurfacePattern.new Cairo::ImageSurface.from_png(pat)
+          return sp.set_extend(Cairo::Extend::REPEAT)
         else
           [black, black]
       end
