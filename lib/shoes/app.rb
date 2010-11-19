@@ -182,7 +182,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Oval.new args
+      Shape.new args
     end
 
     def rect *attrs
@@ -218,7 +218,62 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Rect.new args
+      Shape.new args
+    end
+
+    def line *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      case attrs.length
+        when 0, 1, 2
+        when 3; sx, sy, ex = attrs; ey = ex
+        else sx, sy, ex, ey = attrs
+      end
+      sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      hsw = sw*0.5
+      args[:width], args[:height] = (sx - ex).abs, (sy - ey).abs
+      
+      args = basic_attributes args
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width]+sw, args[:height]+sw
+      context = Cairo::Context.new surface
+      
+      pat = (args[:stroke] or stroke)
+      gp = gradient pat, args[:width], args[:height], args[:angle]
+      context.set_source gp
+      context.set_line_width args[:strokewidth]
+      
+      if ((sx - ex) < 0 and (sy - ey) < 0) or ((sx - ex) > 0 and (sy - ey) > 0)
+        context.move_to hsw, hsw
+        context.line_to args[:width]+hsw, args[:height]+hsw
+        args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
+        args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
+      elsif ((sx - ex) < 0 and (sy - ey) > 0) or ((sx - ex) > 0 and (sy - ey) < 0)
+        context.move_to hsw, args[:height] + hsw
+        context.line_to args[:width]+hsw, hsw
+        args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
+        args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
+      elsif !(sx - ex).zero? and (sy - ey).zero?
+        context.move_to 0, hsw
+        context.line_to args[:width], hsw
+        args[:left] = (sx - ex) < 0 ? sx : ex
+        args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
+      elsif (sx - ex).zero? and !(sy - ey).zero?
+        context.move_to hsw, 0
+        context.line_to hsw, args[:height]
+        args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
+        args[:top] = (sy - ey) < 0 ? sy : ey
+      else
+        context.move_to 0, 0
+        context.line_to 0, 0
+        args[:left] = sw
+        args[:top] = sy
+      end
+      
+      context.stroke
+      img = create_tmp_png surface
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      args[:real], args[:app] = img, self
+      Shape.new args
     end
 
     def rgb r, g, b, l=1.0
