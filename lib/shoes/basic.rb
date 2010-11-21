@@ -118,6 +118,8 @@ class Shoes
   class Border < Pattern; end
 
   class Shape < Basic; end
+  class Rect < Shape; end
+  class Oval < Shape; end
   
   class TextBlock < Basic
     def initialize args

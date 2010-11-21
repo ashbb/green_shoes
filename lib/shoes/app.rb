@@ -182,7 +182,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      Oval.new args
     end
 
     def rect *attrs
@@ -218,7 +218,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      Rect.new args
     end
 
     def line *attrs
