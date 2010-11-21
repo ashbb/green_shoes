@@ -53,7 +53,7 @@ class Shoes
   def self.repaint_all slot
     slot.contents.each do |ele|
       next if ele.is_a? Shape
-      ele.is_a?(Basic) ? ele.move2(ele.left, ele.top) : repaint_all(ele)
+      ele.is_a?(Basic) ? ele.move2(ele.left + ele.margin_left, ele.top + ele.margin_top) : repaint_all(ele)
     end
   end
 

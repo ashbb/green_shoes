@@ -14,13 +14,24 @@ class Shoes
       end
 
       (@width, @height = @real.size_request) if @real and !self.is_a?(TextBlock)
+
+      @margin ||= [0, 0, 0, 0]
+      @margin = [@margin, @margin, @margin, @margin] if @margin.is_a? Integer
+      margin_left, margin_top, margin_right, margin_bottom = @margin
+      @margin_left ||= margin_left
+      @margin_top ||= margin_top
+      @margin_right ||= margin_right
+      @margin_bottom ||= margin_bottom
+      @width += (@margin_left + @margin_right)
+      @height += (@margin_top + @margin_bottom)
+
       @proc = nil
       [:app, :real].each{|k| args.delete k}
       @args = args
       @hided, @shows = false, true
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :args, :shows
+    attr_reader :parent, :click_proc, :release_proc, :args, :shows, :margin_left, :margin_top, :margin_right, :margin_bottom
     attr_accessor :hided
 
     def move x, y
