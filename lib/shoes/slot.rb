@@ -10,6 +10,7 @@ class Shoes
         attr_accessor *args.keys
       end
 
+      @masked = false
       @parent = @app.cslot
       @app.cslot = self
       @contents = []
@@ -22,7 +23,7 @@ class Shoes
       end
     end
 
-    attr_accessor :contents
+    attr_accessor :contents, :masked
     attr_reader :parent, :initials
 
     def move3 x, y

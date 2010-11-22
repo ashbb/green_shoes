@@ -6,7 +6,8 @@ class Shoes
       end
 
       (@app.order << self) unless @noorder
-      (@app.cslot.contents << self) unless @nocontrol
+      (@app.cslot.contents << self) unless @nocontrol or @app.cmask
+      (@app.cmask.contents << self) if @app.cmask
       @parent = @app.cslot
       
       Basic.class_eval do

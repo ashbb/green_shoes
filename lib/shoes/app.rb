@@ -9,17 +9,18 @@ class Shoes
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height, :title])
       end
-      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @win, @order = 
-        [], nil, [], [], [], [], [], nil, []
+      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @mcs, @win, @order = 
+        [], nil, [], [], [], [], [], [], nil, []
       @cslot = (@app ||= self)
+      @cmask = nil
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
     end
 
-    attr_accessor :cslot, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
-      :mlcs, :shcs, :win, :width_pre, :height_pre, :order
+    attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
+      :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
     attr_writer :mouse_button, :mouse_pos
 
     def stack args={}, &blk
@@ -30,6 +31,10 @@ class Shoes
     def flow args={}, &blk
       args[:app] = self
       Flow.new slot_attributes(args), &blk
+    end
+
+    def mask &blk
+      @mcs << Mask.new(self, &blk)
     end
 
     def clear &blk

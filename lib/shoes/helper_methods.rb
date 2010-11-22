@@ -41,7 +41,10 @@ class Shoes
     slot_height = 0
 
     slot.contents.each do |ele|
-      next if ele.is_a? Shape
+      if ele.is_a? Shape
+        ele.hide if slot.masked
+        next
+      end
       tmp = max
       max = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height
@@ -51,6 +54,7 @@ class Shoes
   end
 
   def self.repaint_all slot
+    return if slot.masked
     slot.contents.each do |ele|
       next if ele.is_a? Shape
       ele.is_a?(Basic) ? ele.move2(ele.left + ele.margin_left, ele.top + ele.margin_top) : repaint_all(ele)
@@ -72,6 +76,7 @@ class Shoes
     contents_alignment app.cslot
     repaint_all app.cslot
     repaint_all_by_order app
+    mask_control app
     true
   end
 
@@ -169,6 +174,43 @@ class Shoes
           e.is_a?(Pattern) ? e.move2(e.left, e.top) : app.canvas.put(e.real, e.left, e.top)
         else
       end
+    end
+  end
+
+  def self.mask_control app
+    app.mcs.each do |m|
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, m.parent.width, m.parent.height
+      context = Cairo::Context.new surface
+      context.push_group do
+        m.parent.contents.each do |ele|
+          x, y = ele.left - m.parent.left, ele.top - m.parent.top
+          context.translate x, y
+          context.set_source_pixbuf ele.real.pixbuf
+          context.paint
+          context.translate -x, -y
+        end
+      end
+
+      sf = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, m.parent.width, m.parent.height
+      ct = Cairo::Context.new surface
+      pat = ct.push_group nil, false do
+        m.contents.each do |ele|
+          if ele.is_a? TextBlock
+            ele.height = m.parent.height
+            ele.move2 ele.left + ele.margin_left, ele.top + ele.margin_top
+	  end
+          x, y = ele.left - m.parent.left, ele.top - m.parent.top
+          ct.translate x, y
+          ct.set_source_pixbuf ele.real.pixbuf
+          ct.paint
+          ct.translate -x, -y
+        end
+      end
+
+      context.mask pat
+      img = app.create_tmp_png surface
+      app.canvas.put img, 0, 0
+      img.show_now
     end
   end
 end
