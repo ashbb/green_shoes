@@ -197,7 +197,7 @@ class Shoes
         m.contents.each do |ele|
           if ele.is_a? TextBlock
             ele.height = m.parent.height
-            ele.move2 ele.left + ele.margin_left, ele.top + ele.margin_top
+            ele.text = ele.args[:markup]
 	  end
           x, y = ele.left - m.parent.left, ele.top - m.parent.top
           ct.translate x, y
