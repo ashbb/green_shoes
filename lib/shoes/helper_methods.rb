@@ -179,7 +179,10 @@ class Shoes
 
   def self.mask_control app
     app.mcs.each do |m|
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, m.parent.width, m.parent.height
+      w, h = m.parent.width, m.parent.height
+      w = app.width if w.zero?
+      h = app.height if h.zero?
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
       context.push_group do
         m.parent.contents.each do |ele|
@@ -191,14 +194,14 @@ class Shoes
         end
       end
 
-      sf = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, m.parent.width, m.parent.height
+      sf = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       ct = Cairo::Context.new surface
       pat = ct.push_group nil, false do
         m.contents.each do |ele|
           if ele.is_a? TextBlock
-            ele.height = m.parent.height
+            ele.height = h
             ele.text = ele.args[:markup]
-	  end
+          end
           x, y = ele.left - m.parent.left, ele.top - m.parent.top
           ct.translate x, y
           ct.set_source_pixbuf ele.real.pixbuf
