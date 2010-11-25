@@ -121,6 +121,7 @@ class Shoes
     end
     
     app.mlcs.each do |tb|
+      tb.text = tb.text unless tb.real
       tb.real.window.cursor = ARROW if tb.real.window
       if ret = mouse_on_link(tb, app)
         tb.real.window.cursor = HAND

@@ -138,6 +138,10 @@ class Shoes
       super
       @app.mlcs << self  unless @real
     end
+
+    def text
+      @args[:markup]
+    end
     
     def text= s
       clear if @real

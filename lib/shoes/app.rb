@@ -138,7 +138,7 @@ class Shoes
       a = Anim.new
       GLib::Timeout.add n do
         blk[i = a.pause? ? i : i+1]
-        Shoes.call_back_procs self
+        Shoes.repaint_all_by_order self
         a.continue?
       end
       a
@@ -151,7 +151,7 @@ class Shoes
     def timer n=1, &blk
       GLib::Timeout.add 1000*n do
         blk.call
-        Shoes.call_back_procs self
+        Shoes.repaint_all_by_order self
         false
       end
     end
