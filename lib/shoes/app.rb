@@ -160,6 +160,13 @@ class Shoes
       @mmcs << blk
     end
 
+    def keypress &blk
+      win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::KEY_PRESS_MASK
+      win.signal_connect("key_press_event") do |w, e|
+        blk[Gdk::Keyval.to_name(e.keyval)]
+      end
+    end
+
     def mouse
       [@mouse_button, @mouse_pos[0], @mouse_pos[1]]
     end
