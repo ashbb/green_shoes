@@ -184,4 +184,10 @@ class Shoes
       move3 x, y
     end
   end
+  
+  class ListBox < Basic
+    def text
+      @items[@real.active]
+    end
+  end
 end

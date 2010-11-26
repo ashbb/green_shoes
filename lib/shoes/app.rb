@@ -132,6 +132,22 @@ class Shoes
       args[:real], args[:app] = el, self
       EditLine.new args
     end
+    
+    def list_box args={}, &blk
+      args = basic_attributes args
+      args[:width] = 200 if args[:width].zero?
+      cb = Gtk::ComboBox.new
+      args[:items] ||= []
+      args[:items].each{|item| cb.append_text item.to_s}
+      cb.active = args[:items].index(args[:choose]) if args[:choose]
+      cb.signal_connect("changed") do
+        blk.call args[:items][cb.active]
+      end if blk
+      @canvas.put cb, args[:left], args[:top]
+      cb.show_now
+      args[:real], args[:app] = cb, self
+      ListBox.new args
+    end
 
     def animate n=10, &blk
       n, i = 1000 / n, 0
