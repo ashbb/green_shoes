@@ -107,6 +107,10 @@ class Shoes
       Image.new args
     end
 
+    def imagesize name
+      Gtk::Image.new(name).size_request
+    end
+
     def button name, args={}, &blk
       args = basic_attributes args
       b = Gtk::Button.new name
