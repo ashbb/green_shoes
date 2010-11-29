@@ -100,11 +100,13 @@ class Shoes
 
     def image name, args={}
       args = basic_attributes args
-      w, h = imagesize(name)
-      args[:width] = w if args[:width].zero?
-      args[:height] = w if args[:height].zero?
       img = Gtk::Image.new name
-      img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
+      unless args[:width].zero? and args[:height].zero?
+        w, h = imagesize(name)
+        args[:width] = w if args[:width].zero?
+        args[:height] = w if args[:height].zero?
+        img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
+      end
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
