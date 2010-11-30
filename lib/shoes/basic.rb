@@ -43,8 +43,10 @@ class Shoes
     end
 
     def move2 x, y
-      remove unless @hided
-      @app.canvas.put @real, x, y
+      unless @hided
+        remove
+        @app.canvas.put @real, x, y
+      end
       move3 x, y
     end
 
