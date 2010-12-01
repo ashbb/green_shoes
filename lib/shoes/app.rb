@@ -325,6 +325,37 @@ class Shoes
       args[:real], args[:app] = img, self
       Shape.new args
     end
+    
+    def shape args={}, &blk
+      args[:width] ||= 300
+      args[:height] ||= 300
+      args = basic_attributes args
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      context = Cairo::Context.new surface
+      args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      context.set_line_width args[:strokewidth]
+      
+      mk_path = proc do |pat|
+        gp = gradient pat, args[:width], args[:height], args[:angle]
+        context.set_source gp
+        context.move_to 0, 0
+        context.instance_eval &blk
+      end
+      
+      if pat = (args[:fill] or fill)
+        mk_path.call pat
+        context.fill
+      end
+      
+      mk_path.call (args[:stroke] or stroke)
+      context.stroke
+      
+      img = create_tmp_png surface
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      args[:real], args[:app] = img, self
+      Shape.new args
+    end
 
     def rgb r, g, b, l=1.0
       (r < 1 and g < 1 and b < 1) ? [r, g, b, l] : [r/255.0, g/255.0, b/255.0, l]
