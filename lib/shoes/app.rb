@@ -341,7 +341,7 @@ class Shoes
         context.move_to 0, 0
         context.instance_eval &blk
       end
-      
+
       if pat = (args[:fill] or fill)
         mk_path.call pat
         context.fill
@@ -355,6 +355,22 @@ class Shoes
       img.show_now
       args[:real], args[:app] = img, self
       Shape.new args
+    end
+    
+    def star *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      x, y, points, outer, inner = attrs
+      points ||= 10; outer ||= 100.0; inner ||= 50.0
+      args = args.merge({left: x, top: y, points: points, outer: outer, inner: inner, width: outer*2.0, height: outer*2.0})
+      x = y = outer
+      shape args do
+        move_to x, y + outer
+        (1..points*2).each do |i|
+          angle =  i * Math::PI / points
+          r = (i % 2 == 0) ? outer : inner
+          line_to x + r * Math.sin(angle), y + r * Math.cos(angle)
+        end
+      end
     end
 
     def rgb r, g, b, l=1.0
