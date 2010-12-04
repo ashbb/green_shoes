@@ -275,9 +275,10 @@ class Shoes
       args = attrs.last.class == Hash ? attrs.pop : {}
       case attrs.length
         when 0, 1, 2
-        when 3; sx, sy, ex = attrs; ey = ex
-        else sx, sy, ex, ey = attrs
+        when 3; args[:sx], args[:sy], args[:ex] = attrs; args[:ey] = args[:ex]
+        else args[:sx], args[:sy], args[:ex], args[:ey] = attrs
       end
+      sx, sy, ex, ey = args[:sx], args[:sy], args[:ex], args[:ey]
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
       hsw = sw*0.5
       args[:width], args[:height] = (sx - ex).abs, (sy - ey).abs
@@ -323,10 +324,11 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      Line.new args
     end
     
-    def shape args={}, &blk
+    def shapebase klass, args
+      blk = args[:block]
       args[:width] ||= 300
       args[:height] ||= 300
       args = basic_attributes args
@@ -354,16 +356,26 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Shape.new args
+      klass.new args
+    end
+
+    def shape args, &blk
+      args[:block] = blk
+      shapebase Shape, args
     end
     
     def star *attrs
       args = attrs.last.class == Hash ? attrs.pop : {}
-      x, y, points, outer, inner = attrs
-      points ||= 10; outer ||= 100.0; inner ||= 50.0
-      args = args.merge({left: x, top: y, points: points, outer: outer, inner: inner, width: outer*2.0, height: outer*2.0})
-      x = y = outer
-      shape args do
+      case attrs.length
+        when 2; args[:left], args[:top] = attrs
+        when 5; args[:left], args[:top], args[:points], args[:outer], args[:inner] = attrs
+        else
+      end
+      args[:points] ||= 10; args[:outer] ||= 100.0; args[:inner] ||= 50.0
+      args[:width] = args[:height] = args[:outer]*2.0
+      x = y = outer = args[:outer]
+      points, inner = args[:points], args[:inner]
+      args[:block] = proc do
         move_to x, y + outer
         (1..points*2).each do |i|
           angle =  i * Math::PI / points
@@ -371,6 +383,7 @@ class Shoes
           line_to x + r * Math.sin(angle), y + r * Math.cos(angle)
         end
       end
+      shapebase Star, args
     end
 
     def rgb r, g, b, l=1.0

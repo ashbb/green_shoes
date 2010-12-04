@@ -41,7 +41,7 @@ class Shoes
     slot_height = 0
 
     slot.contents.each do |ele|
-      if ele.is_a? Shape
+      if ele.is_a? ShapeBase
         ele.hide if slot.masked
         next
       end
@@ -56,7 +56,7 @@ class Shoes
   def self.repaint_all slot
     return if slot.masked
     slot.contents.each do |ele|
-      next if ele.is_a? Shape
+      next if ele.is_a? ShapeBase
       ele.is_a?(Basic) ? ele.move2(ele.left + ele.margin_left, ele.top + ele.margin_top) : repaint_all(ele)
     end
   end

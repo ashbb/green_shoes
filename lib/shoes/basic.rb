@@ -108,7 +108,10 @@ class Shoes
     def style args
       clear
       @args[:nocontrol] = @args[:noorder] = true
-      @real =  eval "@app.#{self.class.to_s.downcase[7..-1]}(#{@args.merge args }).real"
+      m = self.class.to_s.downcase[7..-1]
+      args = @args.merge args
+      blk = args[:block]
+      @real = @app.send(m, args, &blk).real
     end
   end
 
@@ -131,9 +134,12 @@ class Shoes
   class Background < Pattern; end
   class Border < Pattern; end
 
-  class Shape < Basic; end
-  class Rect < Shape; end
-  class Oval < Shape; end
+  class ShapeBase < Basic; end
+  class Shape < ShapeBase; end
+  class Rect < ShapeBase; end
+  class Oval < ShapeBase; end
+  class Line < ShapeBase; end
+  class Star < ShapeBase; end
   
   class TextBlock < Basic
     def initialize args
