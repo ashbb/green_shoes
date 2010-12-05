@@ -1,5 +1,6 @@
 class Shoes
   class Slot
+    include Mod
     def initialize args={}
       @initials = args
       args.each do |k, v|
@@ -9,6 +10,8 @@ class Shoes
       Slot.class_eval do
         attr_accessor *args.keys
       end
+
+      set_margin
 
       @masked = false
       @parent = @app.cslot
@@ -32,12 +35,13 @@ class Shoes
 
     def positioning x, y, max
       @width = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
+      @width -= (margin_left + margin_right)
       if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
-        move3 x, max.top
+        move3 x + parent.margin_left, max.top + parent.margin_top
         @height = Shoes.contents_alignment self
         max = self if max.height < @height
       else
-        move3 parent.left, max.top + max.height
+        move3 parent.left + parent.margin_left, max.top + max.height + parent.margin_top
         @height = Shoes.contents_alignment self
         max = self
       end

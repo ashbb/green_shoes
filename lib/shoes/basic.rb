@@ -1,5 +1,6 @@
 class Shoes
   class Basic
+    include Mod
     def initialize args
       args.each do |k, v|
         instance_variable_set "@#{k}", v
@@ -16,13 +17,7 @@ class Shoes
 
       (@width, @height = @real.size_request) if @real and !self.is_a?(TextBlock)
 
-      @margin ||= [0, 0, 0, 0]
-      @margin = [@margin, @margin, @margin, @margin] if @margin.is_a? Integer
-      margin_left, margin_top, margin_right, margin_bottom = @margin
-      @margin_left ||= margin_left
-      @margin_top ||= margin_top
-      @margin_right ||= margin_right
-      @margin_bottom ||= margin_bottom
+      set_margin
       @width += (@margin_left + @margin_right)
       @height += (@margin_top + @margin_bottom)
 
@@ -32,7 +27,7 @@ class Shoes
       @hided, @shows = false, true
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :args, :shows, :margin_left, :margin_top, :margin_right, :margin_bottom
+    attr_reader :parent, :click_proc, :release_proc, :args, :shows
     attr_accessor :hided
 
     def move x, y
@@ -86,10 +81,10 @@ class Shoes
 
     def positioning x, y, max
       if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
-        move3 x, max.top
+        move3 x + parent.margin_left, max.top + parent.margin_top
         max = self if max.height < @height
       else
-        move3 parent.left, max.top + max.height
+        move3 parent.left + parent.margin_left, max.top + max.height + parent.margin_top
         max = self
       end
       max

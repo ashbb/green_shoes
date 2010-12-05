@@ -1,4 +1,18 @@
 class Shoes
+  module Mod
+    def set_margin
+      @margin ||= [0, 0, 0, 0]
+      @margin = [@margin, @margin, @margin, @margin] if @margin.is_a? Integer
+      margin_left, margin_top, margin_right, margin_bottom = @margin
+      @margin_left ||= margin_left
+      @margin_top ||= margin_top
+      @margin_right ||= margin_right
+      @margin_bottom ||= margin_bottom
+    end
+
+    attr_reader :margin_left, :margin_top, :margin_right, :margin_bottom
+  end
+
   class App
     def basic_attributes args={}
       default = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
