@@ -42,13 +42,13 @@ class Shoes
     end
 
     def textblock klass, font_size, *msg
-      line_height =  font_size * 2
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
       args[:markup] = msg.map(&:to_s).join
       attr_list, text = Pango.parse_markup args[:markup]
       args[:size] ||= font_size
       args[:align] ||= 'left'
+      line_height =  args[:size] * 2
       
       args[:links] = make_link_index(msg) unless args[:links]
 
@@ -69,7 +69,7 @@ class Shoes
         layout.text = text
         layout.alignment = eval "Pango::ALIGN_#{args[:align].upcase}"
         fd = Pango::FontDescription.new 'sans'
-        fd.size = font_size * Pango::SCALE
+        fd.size = args[:size] * Pango::SCALE
         layout.font_description = fd
         layout.attributes = attr_list
         context.show_pango_layout layout
