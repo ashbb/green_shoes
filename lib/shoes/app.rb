@@ -1,28 +1,35 @@
 class Shoes
   class App
     include Types
+    include Mod2
 
     def initialize args={}
       args.each do |k, v|
         instance_variable_set "@#{k}", v
       end
+      
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height, :title])
       end
-      @contents, @canvas, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @mcs, @win, @order = 
-        [], nil, [], [], [], [], [], [], nil, []
+      
+      init_app_vars
+      @canvas, @win = nil, nil
       @cslot = (@app ||= self)
-      @cmask = nil
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
-      @mouse_button, @mouse_pos = 0, [0, 0]
-      @fill, @stroke = black, black
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
     attr_writer :mouse_button, :mouse_pos
 
+    def visit url
+      clear do
+        init_app_vars
+        $urls[url].call self
+      end
+    end
+    
     def stack args={}, &blk
       args[:app] = self
       Stack.new slot_attributes(args), &blk

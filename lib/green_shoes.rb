@@ -31,6 +31,7 @@ require_relative 'shoes/slot'
 require_relative 'shoes/text'
 require_relative 'shoes/mask'
 require_relative 'shoes/widget'
+require_relative 'shoes/url'
 
 autoload :ChipMunk, File.join(Shoes::DIR, 'ext/chipmunk')
 autoload :Bloops, File.join(Shoes::DIR, 'ext/bloops')

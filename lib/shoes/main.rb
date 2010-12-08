@@ -1,6 +1,7 @@
 class Shoes
   include Types
   @apps = []
+  $urls = {}
 
   def self.app args={}, &blk
     args[:width] ||= 600
@@ -61,7 +62,7 @@ class Shoes
     app.canvas.style = style
     app.win = win
 
-    app.instance_eval &blk if blk
+    blk ? app.instance_eval(&blk) : app.instance_eval(&$urls['/'])
 
     Gtk.timeout_add 100 do
       if size_allocated? app

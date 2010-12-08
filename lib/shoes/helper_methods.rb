@@ -12,6 +12,16 @@ class Shoes
 
     attr_reader :margin_left, :margin_top, :margin_right, :margin_bottom
   end
+  
+  module Mod2
+    def init_app_vars
+      @contents, @mccs, @mrcs, @mmcs, @mlcs, @shcs, @mcs, @order = 
+        [], [], [], [], [], [], [], []
+      @cmask = nil
+      @mouse_button, @mouse_pos = 0, [0, 0]
+      @fill, @stroke = black, black
+    end
+  end
 
   class App
     def basic_attributes args={}
