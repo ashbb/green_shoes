@@ -24,9 +24,8 @@ class Shoes
     attr_writer :mouse_button, :mouse_pos
 
     def visit url
-      clear do
-        init_app_vars
-        $urls[url].call self
+      $urls.each do |k, v|
+        clear{init_app_vars; v.call self, $1} if k =~ url
       end
     end
     

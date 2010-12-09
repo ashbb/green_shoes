@@ -62,7 +62,7 @@ class Shoes
     app.canvas.style = style
     app.win = win
 
-    blk ? app.instance_eval(&blk) : app.instance_eval(&$urls['/'])
+    blk ? app.instance_eval(&blk) : app.instance_eval(&$urls[/^#{'/'}$/])
 
     Gtk.timeout_add 100 do
       if size_allocated? app
