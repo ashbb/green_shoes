@@ -187,6 +187,17 @@ class Shoes
       move3 x, y
     end
   end
+
+  class EditBox < Basic
+    def text
+      @textview.buffer.text
+    end
+
+    def move2 x, y
+      @app.canvas.move @real, x, y
+      move3 x, y
+    end
+  end
   
   class ListBox < Basic
     def text

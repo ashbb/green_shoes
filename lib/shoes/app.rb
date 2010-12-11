@@ -148,6 +148,29 @@ class Shoes
       args[:real], args[:app] = el, self
       EditLine.new args
     end
+
+    def edit_box args={}
+      args = basic_attributes args
+      args[:width] = 200 if args[:width].zero?
+      args[:height] = 200 if args[:height].zero?
+      tv = Gtk::TextView.new
+      tv.wrap_mode = Gtk::TextTag::WRAP_WORD
+
+      eb = Gtk::ScrolledWindow.new
+      eb.set_size_request args[:width], args[:height]
+      eb.set_policy Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC
+      eb.set_shadow_type Gtk::SHADOW_IN
+      eb.add tv
+
+      tv.buffer.signal_connect "changed" do
+        yield tv.buffer
+      end if block_given?
+
+      @canvas.put eb, args[:left], args[:top]
+      eb.show_now
+      args[:real], args[:app], args[:textview] = eb, self, tv
+      EditBox.new args
+    end
     
     def list_box args={}, &blk
       args = basic_attributes args
