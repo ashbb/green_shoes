@@ -35,5 +35,6 @@ class Shoes
     attr_reader :link_proc
     attr_accessor :pos, :index, :link_hover
   end
-  
+
+  class LinkHover < Text; end
 end

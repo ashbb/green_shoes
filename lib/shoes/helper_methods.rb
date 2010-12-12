@@ -150,17 +150,17 @@ class Shoes
       if ret = mouse_on_link(tb, app)
         tb.real.window.cursor = HAND
         unless tb.links[ret[1]].link_hover
-          markup = tb.args[:markup].gsub(LINKHOVER_DEFAULT, LINK_DEFAULT)
-          links = markup.mindex  LINK_DEFAULT
+          markup = tb.args[:markup].gsub(app.linkhover_style, app.link_style)
+          links = markup.mindex  app.link_style
           n = links[ret[1]]
-          tb.text = markup[0...n] + markup[n..-1].sub(LINK_DEFAULT, LINKHOVER_DEFAULT)
+          tb.text = markup[0...n] + markup[n..-1].sub(app.link_style, app.linkhover_style)
           tb.links.each{|e| e.link_hover = false}
           tb.links[ret[1]].link_hover = true
         end
         return
       end
       if tb.links.map(&:link_hover).include? true
-        tb.text = tb.args[:markup].gsub(LINKHOVER_DEFAULT, LINK_DEFAULT)
+        tb.text = tb.args[:markup].gsub(app.linkhover_style, app.link_style)
         tb.links.each{|e| e.link_hover = false}
       end
     end

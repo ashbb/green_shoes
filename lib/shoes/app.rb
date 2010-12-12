@@ -17,11 +17,13 @@ class Shoes
       @cslot = (@app ||= self)
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
+      @link_style, @linkhover_style = LINK_DEFAULT, LINKHOVER_DEFAULT
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
     attr_writer :mouse_button, :mouse_pos
+    attr_reader :link_style, :linkhover_style
 
     def visit url
       $urls.each do |k, v|
@@ -45,6 +47,22 @@ class Shoes
 
     def clear &blk
       @top_slot.clear &blk
+    end
+
+    def style klass, args={}
+      if klass == Shoes::Link
+          @link_style = LINK_DEFAULT
+          @link_style.sub!('single', 'none') if args[:underline] == false
+          @link_style.sub!("foreground='#06E'", "foreground='#{args[:stroke]}'") if args[:stroke]
+          @link_style.sub!('>', " background='#{args[:fill]}'>") if args[:fill]
+          @link_style.sub!('normal', "#{args[:weight]}") if args[:weight]
+      elsif klass == Shoes::LinkHover
+          @linkhover_style = LINKHOVER_DEFAULT
+          @linkhover_style.sub!('single', 'none') if args[:underline] == false
+          @linkhover_style.sub!("foreground='#039'", "foreground='#{args[:stroke]}'") if args[:stroke]
+          @linkhover_style.sub!('>', " background='#{args[:fill]}'>") if args[:fill]
+          @linkhover_style.sub!('normal', "#{args[:weight]}") if args[:weight]
+      end
     end
 
     def textblock klass, font_size, *msg

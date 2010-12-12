@@ -12,8 +12,8 @@ module Shoes
   HAND = Gdk::Cursor.new(Gdk::Cursor::HAND1)
   ARROW = Gdk::Cursor.new(Gdk::Cursor::ARROW)
   FONTS = Gtk::Invisible.new.pango_context.families.map(&:name).sort
-  LINK_DEFAULT = "<span underline='single' underline_color='#06E' foreground='#06E'>"
-  LINKHOVER_DEFAULT = "<span underline='single' underline_color='#039' foreground='#039'>"
+  LINK_DEFAULT = "<span underline='single' underline_color='#06E' foreground='#06E' weight='normal'>"
+  LINKHOVER_DEFAULT = "<span underline='single' underline_color='#039' foreground='#039' weight='normal'>"
 end
 
 class Object
