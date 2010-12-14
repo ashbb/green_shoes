@@ -69,6 +69,10 @@ class Shoes
         ele.hide if slot.masked
         next
       end
+      if slot.masked and ele.is_a? Image
+        ele.hide
+        next
+      end
       tmp = max
       max = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height

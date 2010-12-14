@@ -42,7 +42,7 @@ class Shoes
     end
 
     def mask &blk
-      @mcs << Mask.new(self, &blk)
+      Mask.new(self, &blk).tap{|m| @mcs << m}
     end
 
     def clear &blk
