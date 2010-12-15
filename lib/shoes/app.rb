@@ -18,6 +18,7 @@ class Shoes
       @top_slot = nil
       @width_pre, @height_pre = @width, @height
       @link_style, @linkhover_style = LINK_DEFAULT, LINKHOVER_DEFAULT
+      @context_angle = @pixbuf_rotate = 0
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
@@ -292,15 +293,30 @@ class Shoes
       end
       args[:height] = args[:width] unless args[:height]
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
-      
+
+      @context_angle2 = Math::PI/2 - @context_angle
+      m = args[:height] * Math.sin(@context_angle)
+      w = args[:width] * Math.sin(@context_angle2) + m
+      h = args[:width] * Math.sin(@context_angle) + args[:height] * Math.sin(@context_angle2)
+      mx, my = m * Math.sin(@context_angle2), m * Math.sin(@context_angle)
+      if @pixbuf_rotate.even?
+        args[:left] += (args[:width] - w)/2.0
+        args[:top] -= (h - args[:height])/2.0
+      else
+        args[:left] -= (h - args[:width])/2.0
+        args[:top] += (args[:height] - w)/2.0
+      end
+
       args = basic_attributes args
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
+
+      context.rotate @context_angle
       
       if pat = (args[:fill] or fill)
         gp = gradient pat, args[:width], args[:height], args[:angle]
         context.set_source gp
-        context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]
+        context.rounded_rectangle mx, -my, args[:width], args[:height], args[:curve]
         context.fill
       end
       
@@ -308,10 +324,11 @@ class Shoes
       gp = gradient pat, args[:width], args[:height], args[:angle]
       context.set_source gp
       context.set_line_width sw
-      context.rounded_rectangle sw/2.0, sw/2.0, args[:width]-sw, args[:height]-sw, args[:curve]
+      context.rounded_rectangle sw/2.0+mx, sw/2.0-my, args[:width]-sw, args[:height]-sw, args[:curve]
       context.stroke
       
       img = create_tmp_png surface
+      img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
@@ -431,6 +448,12 @@ class Shoes
         end
       end
       shapebase Star, args
+    end
+
+    def rotate angle
+      @pixbuf_rotate, angle = angle.divmod(90)
+      @pixbuf_rotate %= 4
+      @context_angle = Math::PI * angle / 180
     end
 
     def rgb r, g, b, l=1.0
