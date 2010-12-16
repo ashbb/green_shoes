@@ -21,6 +21,22 @@ class Shoes
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
     end
+
+    def set_rotate_angle args
+      @context_angle2 = Math::PI/2 - @context_angle
+      m = args[:height] * Math.sin(@context_angle)
+      w = args[:width] * Math.sin(@context_angle2) + m
+      h = args[:width] * Math.sin(@context_angle) + args[:height] * Math.sin(@context_angle2)
+      mx, my = m * Math.sin(@context_angle2), m * Math.sin(@context_angle)
+      if @pixbuf_rotate.even?
+        args[:left] += (args[:width] - w)/2.0
+        args[:top] -= (h - args[:height])/2.0
+      else
+        args[:left] -= (h - args[:width])/2.0
+        args[:top] += (args[:height] - w)/2.0
+      end
+      return w, h, mx, my
+    end
   end
 
   class App

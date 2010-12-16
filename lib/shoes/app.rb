@@ -257,15 +257,19 @@ class Shoes
       args[:width].zero? ? (args[:width] = args[:radius] * 2) : (args[:radius] = args[:width]/2.0)
       args[:height] = args[:width] if args[:height].zero?
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+
+      w, h, mx, my = set_rotate_angle(args)
+      my *= args[:width]/args[:height].to_f
       
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
+      context.rotate @context_angle
       context.scale(1,  args[:height]/args[:width].to_f)
       
       if pat = (args[:fill] or fill)
         gp = gradient pat, args[:width], args[:height], args[:angle]
         context.set_source gp
-        context.arc args[:radius], args[:radius], args[:radius], 0, 2*Math::PI
+        context.arc args[:radius]+mx, args[:radius]-my, args[:radius], 0, 2*Math::PI
         context.fill
       end
       
@@ -273,10 +277,11 @@ class Shoes
       gp = gradient pat, args[:width], args[:height], args[:angle]
       context.set_source gp
       context.set_line_width args[:strokewidth]
-      context.arc args[:radius], args[:radius], args[:radius]-args[:strokewidth]/2.0, 0, 2*Math::PI
+      context.arc args[:radius]+mx, args[:radius]-my, args[:radius]-args[:strokewidth]/2.0, 0, 2*Math::PI
       context.stroke
 
       img = create_tmp_png surface
+      img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
@@ -294,18 +299,7 @@ class Shoes
       args[:height] = args[:width] unless args[:height]
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
 
-      @context_angle2 = Math::PI/2 - @context_angle
-      m = args[:height] * Math.sin(@context_angle)
-      w = args[:width] * Math.sin(@context_angle2) + m
-      h = args[:width] * Math.sin(@context_angle) + args[:height] * Math.sin(@context_angle2)
-      mx, my = m * Math.sin(@context_angle2), m * Math.sin(@context_angle)
-      if @pixbuf_rotate.even?
-        args[:left] += (args[:width] - w)/2.0
-        args[:top] -= (h - args[:height])/2.0
-      else
-        args[:left] -= (h - args[:width])/2.0
-        args[:top] += (args[:height] - w)/2.0
-      end
+      w, h, mx, my = set_rotate_angle(args)
 
       args = basic_attributes args
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
@@ -395,17 +389,22 @@ class Shoes
       blk = args[:block]
       args[:width] ||= 300
       args[:height] ||= 300
+
+      w, h, mx, my = set_rotate_angle(args)
+
       args = basic_attributes args
-      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
       context.set_line_width args[:strokewidth]
+
+      context.rotate @context_angle
       
       mk_path = proc do |pat|
         gp = gradient pat, args[:width], args[:height], args[:angle]
         context.set_source gp
         context.move_to 0, 0
-        context.instance_eval &blk
+        klass == Shoes::Star ? context.instance_eval{blk[self, mx, -my]} : context.instance_eval(&blk)
       end
 
       if pat = (args[:fill] or fill)
@@ -417,6 +416,7 @@ class Shoes
       context.stroke
       
       img = create_tmp_png surface
+      img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
@@ -439,12 +439,14 @@ class Shoes
       args[:width] = args[:height] = args[:outer]*2.0
       x = y = outer = args[:outer]
       points, inner = args[:points], args[:inner]
-      args[:block] = proc do
-        move_to x, y + outer
+
+      args[:block] = proc do |s, mx, my|
+        x += mx; y += my
+        s.move_to x, y + outer
         (1..points*2).each do |i|
           angle =  i * Math::PI / points
           r = (i % 2 == 0) ? outer : inner
-          line_to x + r * Math.sin(angle), y + r * Math.cos(angle)
+          s.line_to x + r * Math.sin(angle), y + r * Math.cos(angle)
         end
       end
       shapebase Star, args
