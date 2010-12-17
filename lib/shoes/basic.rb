@@ -148,7 +148,7 @@ class Shoes
     end
 
     def text
-      @args[:markup]
+      @args[:markup].gsub(/\<.*?>/, '')
     end
     
     def text= s
@@ -158,7 +158,7 @@ class Shoes
       m = self.class.to_s.downcase[7..-1]
       args = [s, @args.merge({left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true})]
       tb = @app.send(m, *args)
-      @real, @height = tb.real, tb.height
+      @real, @height, @args[:markup] = tb.real, tb.height, tb.markup
     end
 
     alias :replace :text=
