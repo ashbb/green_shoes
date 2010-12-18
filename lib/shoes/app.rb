@@ -475,8 +475,9 @@ class Shoes
     end
     
     def gradient pat, w, h, angle=0
+      pat = tr_color pat
       color = case pat
-        when Range; [pat.first, pat.last]
+        when Range; [tr_color(pat.first), tr_color(pat.last)]
         when Array; [pat, pat]
         when String
           sp = Cairo::SurfacePattern.new Cairo::ImageSurface.from_png(pat)
@@ -489,6 +490,16 @@ class Shoes
       lp.add_color_stop_rgba 0, *color[0]
       lp.add_color_stop_rgba 1, *color[1]
       lp
+    end
+
+    def tr_color pat
+      if pat.is_a?(String) and pat[0] == '#'
+        color = pat[1..-1]
+        color = color.gsub(/(.)/){$1 + '0'} if color.length == 3
+        rgb *color.gsub(/(..)/).map{$1.hex}
+      else
+        pat
+      end
     end
 
     def background pat, args={}

@@ -123,6 +123,8 @@ class Shoes
       return if @hided
       clear if @real
       @left, @top, @width, @height = parent.left, parent.top, parent.width, parent.height
+      @width = @args[:width] unless @args[:width].zero?
+      @height = @args[:height] unless @args[:height].zero?
       m = self.class.to_s.downcase[7..-1]
       args = eval "{#{@args.keys.map{|k| "#{k}: @#{k}"}.join(', ')}}"
       args = [@pattern, args.merge({create_real: true, nocontrol: true})]
