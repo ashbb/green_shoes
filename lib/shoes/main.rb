@@ -55,6 +55,8 @@ class Shoes
     win.signal_connect("motion_notify_event") do
       app.mouse_pos = app.win.pointer
       mouse_motion_control app
+      mouse_hover_control app
+      mouse_leave_control app
     end
 
     app.canvas = Gtk::Layout.new

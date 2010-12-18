@@ -24,11 +24,11 @@ class Shoes
       @proc = nil
       [:app, :real].each{|k| args.delete k}
       @args = args
-      @hided, @shows = false, true
+      @hided, @shows, @hovered = false, true, false
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :args, :shows
-    attr_accessor :hided
+    attr_reader :parent, :click_proc, :release_proc, :hover_proc, :leave_proc, :args, :shows
+    attr_accessor :hided, :hovered
 
     def move x, y
       @app.cslot.contents -= [self]
@@ -103,6 +103,16 @@ class Shoes
     def release &blk
       @release_proc = blk
       @app.mrcs << self
+    end
+
+    def hover &blk
+      @hover_proc = blk
+      @app.mhcs << self
+    end
+
+    def leave &blk
+      @leave_proc = blk
+      @app.mlvcs << self
     end
     
     def style args
