@@ -22,7 +22,7 @@ class Shoes
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
-      :mhcs, :mlvcs, :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
+      :mhcs, :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
     attr_writer :mouse_button, :mouse_pos
     attr_reader :link_style, :linkhover_style
 

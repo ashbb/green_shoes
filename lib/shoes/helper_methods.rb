@@ -15,7 +15,7 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlvcs, @mlcs, @shcs, @mcs, @order = 
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order = 
         [], [], [], [], [], [], [], [], [], []
       @cmask = nil
       @mouse_button, @mouse_pos = 0, [0, 0]
@@ -119,7 +119,6 @@ class Shoes
     app.cslot.width, app.cslot.height = app.width, app.height
     contents_alignment app.cslot
     repaint_all app.cslot
-    repaint_all_by_order app
     mask_control app
     true
   end
@@ -153,13 +152,19 @@ class Shoes
 
   def self.mouse_hover_control app
     app.mhcs.each do |e|
-      (e.hovered = true; e.hover_proc.call) if mouse_on?(e) and !e.hovered
+      if mouse_on?(e) and !e.hovered
+        e.hovered = true
+        e.hover_proc.call if e.hover_proc
+      end
     end
   end
 
   def self.mouse_leave_control app
-    app.mlvcs.each do |e|
-      (e.hovered = false; e.leave_proc.call) if !mouse_on?(e) and e.hovered
+    app.mhcs.each do |e|
+      if !mouse_on?(e) and e.hovered
+        e.hovered = false
+        e.leave_proc.call if e.leave_proc
+      end
     end
   end
 

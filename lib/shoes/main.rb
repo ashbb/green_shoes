@@ -72,6 +72,7 @@ class Shoes
         app.width_pre, app.height_pre = app.width, app.height
       end
       show_hide_control app
+      repaint_all_by_order app
       set_cursor_type app
       true
     end
