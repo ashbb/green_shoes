@@ -50,6 +50,11 @@ class Shoes
       @top_slot.clear &blk
     end
 
+    def exit
+      Gtk.main_quit
+      File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
+    end
+
     def style klass, args={}
       if klass == Shoes::Link
           @link_style = LINK_DEFAULT

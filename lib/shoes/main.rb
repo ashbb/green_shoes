@@ -30,29 +30,28 @@ class Shoes
 
     win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK
 
-    win.signal_connect("delete-event") do
+    win.signal_connect "delete-event" do
       false
     end
 
     win.signal_connect "destroy" do
-      Gtk.main_quit
-      File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
+      app.exit
     end if @apps.size == 1
 
-    win.signal_connect("button_press_event") do |w, e|
+    win.signal_connect "button_press_event" do |w, e|
       app.mouse_button = e.button
       app.mouse_pos = app.win.pointer
       mouse_click_control app
       mouse_link_control app
     end
     
-    win.signal_connect("button_release_event") do
+    win.signal_connect "button_release_event" do
       app.mouse_button = 0
       app.mouse_pos = app.win.pointer
       mouse_release_control app
     end
 
-    win.signal_connect("motion_notify_event") do
+    win.signal_connect "motion_notify_event" do
       app.mouse_pos = app.win.pointer
       mouse_motion_control app
       mouse_hover_control app
@@ -67,13 +66,15 @@ class Shoes
     blk ? app.instance_eval(&blk) : app.instance_eval(&$urls[/^#{'/'}$/])
 
     Gtk.timeout_add 100 do
-      if size_allocated? app
-        call_back_procs app
-        app.width_pre, app.height_pre = app.width, app.height
+      unless app.win.destroyed?
+        if size_allocated? app
+          call_back_procs app
+          app.width_pre, app.height_pre = app.width, app.height
+        end
+        show_hide_control app
+        repaint_all_by_order app
+        set_cursor_type app
       end
-      show_hide_control app
-      repaint_all_by_order app
-      set_cursor_type app
       true
     end
 
