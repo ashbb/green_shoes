@@ -273,7 +273,7 @@ class Shoes
       end
 
       context.mask pat
-      img = app.create_tmp_png surface
+      m.real = img = app.create_tmp_png(surface)
       app.canvas.put img, 0, 0
       img.show_now
     end

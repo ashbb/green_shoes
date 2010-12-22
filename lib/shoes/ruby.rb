@@ -18,6 +18,25 @@ class Object
     dialog.run
     dialog.destroy
   end
+  
+  def ask_open_file
+    dialog = Gtk::FileChooserDialog.new(
+      "Open File",
+      app.win,
+      Gtk::FileChooser::ACTION_OPEN,
+      nil,
+      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
+      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT]
+    )
+    ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? dialog.filename : nil
+    dialog.destroy
+    ret
+  end
+  
+  def exit
+    Gtk.main_quit
+    File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
+  end
 end
 
 class String

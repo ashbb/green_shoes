@@ -198,6 +198,10 @@ class Shoes
     def text
       @real.text
     end
+    
+    def text=(s)
+      @real.text = s
+    end
 
     def move2 x, y
       @app.canvas.move @real, x, y
@@ -208,6 +212,10 @@ class Shoes
   class EditBox < Basic
     def text
       @textview.buffer.text
+    end
+    
+    def text=(s)
+      @textview.buffer.text = s
     end
 
     def move2 x, y

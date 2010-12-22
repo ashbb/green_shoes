@@ -47,12 +47,8 @@ class Shoes
     end
 
     def clear &blk
+      mcs.each &:clear
       @top_slot.clear &blk
-    end
-
-    def exit
-      Gtk.main_quit
-      File.delete TMP_PNG_FILE if File.exist? TMP_PNG_FILE
     end
 
     def style klass, args={}
@@ -165,7 +161,6 @@ class Shoes
       el.width_chars = args[:width] / 6
       el.signal_connect "changed" do
         yield el
-        el.set_focus self
       end if block_given?
       @canvas.put el, args[:left], args[:top]
       el.show_now
@@ -179,6 +174,7 @@ class Shoes
       args[:height] = 200 if args[:height].zero?
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
+      tv.buffer.text = args[:text].to_s
 
       eb = Gtk::ScrolledWindow.new
       eb.set_size_request args[:width], args[:height]
