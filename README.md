@@ -1,125 +1,52 @@
 Green Shoes
 =========
 
-This is *NOT* [Shoes](http://shoes.heroku.com/), but looks alike. So, named **Green Shoes**. This is written in Ruby. ;-)
+![logo icon](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-icon.png)
+
+This is **Green Shoes** written in Ruby. One of the colorful [Shoes](http://shoes.heroku.com/).  ;-)
 
 Fantastic logo icon was created by [Zachary Scott](https://github.com/zacharyscott). Thanks!
 
-sample 1
---------
+Now, there are 40 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
 
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample1.png)
 
-Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html).
+Tiny Streaming Flash videos
+---------------------------
 
-sample 2
---------
+- [sample01](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html) : Bouncing logo
+- [sample04](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html) : Text in edit_line moving at random
+- [sample07](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) : 20 buttons in flow
+- [sample09](http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html) : Complicated stacks and flows
+- [sample11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html) : A circle moving with mouse motion
+- [sample12](http://www.rin-shun.com/shoes/green-shoes-sample12.swf.html) : Random color change
+- [sample13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html) : Mouse click and release
+- [sample14](http://www.rin-shun.com/shoes/green-shoes-sample14.swf.html) : Flowers
+- [sample15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html) : Text reallocation
+- [sample18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html) : Text markup and link
+- [sample19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html) : Pong Game
+- [sample20](http://www.rin-shun.com/shoes/green-shoes-sample20.swf.html) : Potacho
+- [sample26](http://www.rin-shun.com/shoes/green-shoes-sample26.swf.html) : Mask
+- [sample28](http://www.rin-shun.com/shoes/green-shoes-sample28.swf.html) : Snake Game
+- [sample32](http://www.rin-shun.com/shoes/green-shoes-sample32.swf.html) : Chipmunk Physics
+- [sample38](http://www.rin-shun.com/shoes/green-shoes-sample38.swf.html) : Rotating rect, oval and star
+- [sample39](http://www.rin-shun.com/shoes/green-shoes-sample39.swf.html) : Hackety Hack opening demo
 
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample2.png)
+- [simple boids](http://www.rin-shun.com/shoes/green-shoes-a-very-simple-boids.swf.html) : A very simple boids
+- [parallax scrolling](http://www.rin-shun.com/shoes/green-shoes-parallax-scrolling.swf.html) : Parallax scrolling
+- [search sample](http://www.rin-shun.com/shoes/search_sample_with_green_shoes.swf.html) : Search sample
 
-sample 3
---------
+recorded with [CamStudio](http://camstudio.org/).
 
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample3.png)
 
-As like as the last sample of [_why's tutorial](https://github.com/ashbb/shoes_tutorial_walkthrough).
+Mini Hackety Hack
+------------------
 
-sample 4
---------
+![snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/mini-hh.png)
 
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample4.png)
+[This](http://www.rin-shun.com/shoes/green-shoes-mini-hh.swf.html) is a first try with Green Shoes. ;-)
 
-edit_line with block is nice to display realtime change.     
-Online demo is [here](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html).
+[Hackety Hack](http://hacketyhack.heroku.com/): the little coder's starter kit
 
-sample 5
---------
-
-![sample5.png](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample5.png)
-
-Launch multi Green Shoes Apps.
-
-sample 6
---------
-
-Added module Types. Now Green Shoes can use both module Shoes and class Shoes as like as (Red) Shoes.
-
-sample 7-9
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample8.png)
-
-Online demo is [sample 7](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) and [sample 9](http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html).
-
-sample 10
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample10.png)
-
-First shot of background feature implementation. Para got a transparent background.
-
-sample 11
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample11.png)
-
-Online demo is [sample 11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html). This is [the same snippet](http://shoes.heroku.com/manual/Events.html#motion{|left,top|...}) on Shoes manual.
-
-sample 12
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample12.png)
-
-Online demo is [sample 12](http://www.rin-shun.com/shoes/green-shoes-sample12.swf.html). First attempt for useful style method.
-
-sample 13
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample13.png)
-
-Online demo is [sample 13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html). This is [the same as sample60](http://shoes-tutorial-note.heroku.com/html/00535_Scope__local_variable_and_instance_variable.html) on Shoes Tutorial Note.
-
-sample 14
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample14.png)
-
-Online demo is [sample 14](http://www.rin-shun.com/shoes/green-shoes-sample14.swf.html). This is *flowers.rb* from [shoes/shoes-contrib](https://github.com/shoes/shoes-contrib). Edited a little bit for Green Shoes. It works, but very slow. Need more improvement.
-
-sample 15
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample15.png)
-
-Online demo is [sample 15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html). Para is synchronized with slot size and re-layouted immediately.
-
-sample 16-17
--------------
-
-snapshots:[sample 16](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample16.png), [sample 17](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample17.png)
-
-Implemented the following methods: `banner, title, subtitle, tagline, caption, para, inscription, code, del, em, ins, strong, sub, sup`. And added new methods `bg` and `fg` for convenience to use Pango magic.
-
-sample 18
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample18.png)
-
-Online demo is [sample 18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html). Implemented *link* method. Now Link text block will be changed between Link style and LinkHover style and used with all text fragments.
-
-sample 19
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample19.png)
-
-Online demo is [sample 19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html). Pong in Green Shoes! Almost the same code as (Red) Shoes [sample58](http://shoes-tutorial-note.heroku.com/html/00704_Assignment_4_Pong_in_Shoes.html).
-
-sample 20
-----------
-
-[snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/sample20.png)
-
-Online demo is [sample 20](http://www.rin-shun.com/shoes/green-shoes-sample20.swf.html). Potacho in Green Shoes! Code is a little bit changed from (Red) Shoes [gallery5](http://shoes-tutorial-note.heroku.com/html/01110_Fancy_Gallery_1-5.html).
 
 Note
 ----
@@ -127,6 +54,6 @@ Note
 - [Install Ruby/GTK2 and rcairo for Linux](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).
 
-For fun. :-D
+Let's have fun with Ruby and Shoes! :-D
 
 ashbb
