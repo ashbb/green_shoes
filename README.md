@@ -53,17 +53,19 @@ LICENSE
 --------
 
 Copyright (c) 2010 ashbb
+
 Except:
-  hh/static/(all).png (c) 2008 why the lucky stiff
-  lib/ext/projector/(all).rb (c) 2010 MIZUTANI Tociyuki
-  samples/akatsukiface.png (c) 2010 MIZUTANI Tociyuki
-  samples/class-book.yaml (c) 2008 why the lucky stiff
-  samples/splash-hand.png (c) 2008 why the lucky stiff
-  samples/loogink.png (c) 2008 Anita Kuno
-  samples/cy.png (c) 2008 Anita Kuno
-  static/Coolvetica.ttf (c) 1999 Ray Larabie
-  static/Lacuna.ttf (c) 2003 Glashaus, designed by Peter Hoffman
-  static/gshoes-icon.png (c) 2010 Zachary Scott
+
+- hh/static/(all).png (c) 2008 why the lucky stiff
+- lib/ext/projector/(all).rb (c) 2010 MIZUTANI Tociyuki
+- samples/akatsukiface.png (c) 2010 MIZUTANI Tociyuki
+- samples/class-book.yaml (c) 2008 why the lucky stiff
+- samples/splash-hand.png (c) 2008 why the lucky stiff
+- samples/loogink.png (c) 2008 Anita Kuno
+- samples/cy.png (c) 2008 Anita Kuno
+- static/Coolvetica.ttf (c) 1999 Ray Larabie
+- static/Lacuna.ttf (c) 2003 Glashaus, designed by Peter Hoffman
+- static/gshoes-icon.png (c) 2010 Zachary Scott
 
 
 Permission is hereby granted, free of charge, to any person
