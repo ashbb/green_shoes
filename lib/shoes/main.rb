@@ -9,6 +9,8 @@ class Shoes
     args[:title] ||= 'green shoes'
     args[:left] ||= 0
     args[:top] ||= 0
+    projector = args[:projector]
+    args.delete :projector
 
     app = App.new args
     @apps.push app
@@ -58,12 +60,18 @@ class Shoes
       mouse_leave_control app
     end
 
-    app.canvas = Gtk::Layout.new
+    app.canvas = projector ? Gtk::DrawingArea.new : Gtk::Layout.new
     win.add app.canvas
     app.canvas.style = style
     app.win = win
 
-    blk ? app.instance_eval(&blk) : app.instance_eval{$urls[/^#{'/'}$/].call app}
+    if blk
+      app.instance_eval &blk
+    elsif projector
+      app.send :projector, projector
+    else
+      app.instance_eval{$urls[/^#{'/'}$/].call app}
+    end
 
     Gtk.timeout_add 100 do
       unless app.win.destroyed?
