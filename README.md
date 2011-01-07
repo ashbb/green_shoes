@@ -1,7 +1,7 @@
 Green Shoes
-=========
+===========
 
-![logo icon](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-icon.png)
+![logo icon](https://github.com/zacharyscott/green_shoes/raw/master/static/gshoes-heading-icon.png)
 
 This is **Green Shoes** written in Ruby. One of the colorful [Shoes](http://shoes.heroku.com/).  ;-)
 
@@ -66,7 +66,7 @@ Except:
 - static/Coolvetica.ttf (c) 1999 Ray Larabie
 - static/Lacuna.ttf (c) 2003 Glashaus, designed by Peter Hoffman
 - static/gshoes-icon.png (c) 2010 Zachary Scott
-
+- static/gshoes-heading-icon.png (c) 2010 Zachary Scott
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
