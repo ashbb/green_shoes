@@ -7,8 +7,8 @@ module HH
 	file = ask_open_file
         file = File.read(file) if file
         eb.text = file
-      }.hide.move(357, 460)
-      @new_proc_eles << button('run'){instance_eval eb.text}.hide.move(391, 460)
+      }.hide.move(337, 460)
+      @new_proc_eles << button('run'){instance_eval eb.text}.hide.move(381, 460)
       @new_proc_eles << button('close'){@new_proc_eles.each &:hide}.hide.move(420, 460)
     end
     
