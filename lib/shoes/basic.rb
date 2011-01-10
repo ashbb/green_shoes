@@ -6,7 +6,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
 
-      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine) or self.is_a?(Button) or self.is_a?(ListBox)
+      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine) or self.is_a?(Button)
       (@app.cslot.contents << self) unless @nocontrol or @app.cmask
       (@app.cmask.contents << self) if @app.cmask
       @parent = @app.cslot
@@ -227,6 +227,16 @@ class Shoes
   class ListBox < Basic
     def text
       @items[@real.active]
+    end
+  end
+
+  class Progress < Basic
+    def fraction
+      real.fraction
+    end
+
+    def fraction= n
+      real.fraction = n
     end
   end
 end

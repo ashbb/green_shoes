@@ -551,5 +551,16 @@ class Shoes
       args[:app] = self
       Border.new args
     end
+
+    def progress args={}
+      args = basic_attributes args
+      args[:width] = 150 if args[:width] < 150
+      pb = Gtk::ProgressBar.new
+      pb.text = ' ' * (args[:width] / 4 - 2)
+      @canvas.put pb, args[:left], args[:top]
+      pb.show_now
+      args[:real], args[:app], args[:noorder], args[:nocontrol] = pb, self, true, true
+      Progress.new args
+    end
   end
 end
