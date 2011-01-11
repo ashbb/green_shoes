@@ -562,5 +562,9 @@ class Shoes
       args[:real], args[:app], args[:noorder], args[:nocontrol] = pb, self, true, true
       Progress.new args
     end
+
+    def download name, args={}, &blk
+      Download.new name, args, &blk
+    end
   end
 end
