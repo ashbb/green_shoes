@@ -75,6 +75,7 @@ class Shoes
 
     Gtk.timeout_add 100 do
       unless app.win.destroyed?
+        download_images_control app
         if size_allocated? app
           call_back_procs app
           app.width_pre, app.height_pre = app.width, app.height

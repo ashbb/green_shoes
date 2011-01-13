@@ -22,7 +22,7 @@ class Shoes
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
-      :mhcs, :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order
+      :mhcs, :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order, :dics
     attr_writer :mouse_button, :mouse_pos
     attr_reader :link_style, :linkhover_style
 
@@ -126,8 +126,16 @@ class Shoes
 
     def image name, args={}
       args = basic_attributes args
-      img = Gtk::Image.new name
-      unless args[:width].zero? and args[:height].zero?
+      if name =~ /^(http|https):\/\//
+        tmpname = File.join(Dir.tmpdir, "__green_shoes_#{Time.now.to_f}.png")
+        d = download name, save: tmpname
+        img = Gtk::Image.new File.join(DIR, '../static/downloading.png')
+        downloading = true
+      else
+        img = Gtk::Image.new name
+        downloading = false
+      end
+      if (!args[:width].zero? or !args[:height].zero?) and !downloading 
         w, h = imagesize(name)
         args[:width] = w if args[:width].zero?
         args[:height] = w if args[:height].zero?
@@ -136,7 +144,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       args[:real], args[:app] = img, self
-      Image.new args
+      Image.new(args).tap{|s| @dics.push([s, d, tmpname]) if downloading}
     end
 
     def imagesize name

@@ -15,8 +15,8 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order = 
-        [], [], [], [], [], [], [], [], [], []
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics = 
+        [], [], [], [], [], [], [], [], [], [], []
       @cmask = nil
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
@@ -276,6 +276,25 @@ class Shoes
       m.real = img = app.create_tmp_png(surface)
       app.canvas.put img, 0, 0
       img.show_now
+    end
+  end
+
+  def self.download_images_control app
+    app.dics.each do |e, d, tmpname|
+      args = e.args
+      if d.finished?
+        app.canvas.remove e.real
+        img = Gtk::Image.new tmpname
+        unless args[:width].zero? and args[:height].zero?
+          img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
+        end
+        app.canvas.put img, e.left, e.top
+        img.show_now
+        e.real = img
+        e.width, e.height = img.size_request
+        app.dics.delete [e, d, tmpname]
+        File.delete tmpname
+      end
     end
   end
 end
