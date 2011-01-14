@@ -6,7 +6,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
 
-      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine) or self.is_a?(Button)
+      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine)
       (@app.cslot.contents << self) unless @nocontrol or @app.cmask
       (@app.cmask.contents << self) if @app.cmask
       @parent = @app.cslot

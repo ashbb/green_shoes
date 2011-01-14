@@ -120,6 +120,7 @@ class Shoes
     contents_alignment app.cslot
     repaint_all app.cslot
     mask_control app
+    repaint_all_by_order app
     true
   end
 
@@ -226,17 +227,21 @@ class Shoes
   end
 
   def self.show_hide_control app
+    flag = false
     app.shcs.each do |e|
       case
         when(!e.shows and !e.hided)
           e.remove
           e.hided = true
+          flag = true
         when(e.shows and e.hided)
           e.hided = false
           e.is_a?(Pattern) ? e.move2(e.left, e.top) : app.canvas.put(e.real, e.left, e.top)
+          flag = true
         else
       end
     end
+    repaint_all_by_order app if flag
   end
 
   def self.mask_control app
