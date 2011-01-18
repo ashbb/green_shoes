@@ -1,13 +1,14 @@
 Green Shoes
 ===========
 
-![logo icon](https://github.com/zacharyscott/green_shoes/raw/master/static/gshoes-heading-icon.png)
+![logo icon1](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-heading-icon.png)
+![logo icon2](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-icon.png)
 
 This is **Green Shoes** written in Ruby. One of the colorful [Shoes](http://shoes.heroku.com/).  ;-)
 
 Fantastic logo icon was created by [Zachary Scott](https://github.com/zacharyscott). Thanks!
 
-Now, there are 43 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
+Now, there are 44 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
 
 
 Tiny Streaming Flash videos
@@ -32,6 +33,7 @@ Tiny Streaming Flash videos
 - [sample39](http://www.rin-shun.com/shoes/green-shoes-sample39.swf.html) : Hackety Hack opening demo
 - [sample41](http://www.rin-shun.com/shoes/green-shoes-sample41.swf.html) : 3D Texture Mapping
 - [sample43](http://www.rin-shun.com/shoes/green-shoes-sample43.swf.html) : Download and progress bar
+- [sample44](http://www.rin-shun.com/shoes/green-shoes-sample44.swf.html) : Good clock
 
 - [simple boids](http://www.rin-shun.com/shoes/green-shoes-a-very-simple-boids.swf.html) : A very simple boids
 - [parallax scrolling](http://www.rin-shun.com/shoes/green-shoes-parallax-scrolling.swf.html) : Parallax scrolling
