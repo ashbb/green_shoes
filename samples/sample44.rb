@@ -58,6 +58,6 @@ Shoes.app height: 260, width: 250 do
     end
     t = h*5+m/12; hour[(t-1)%60].hide; hour[t%60].show
     t = m*4+s/15; min[(t-1)%240].hide; min[t%240].show 
-    t = s*8+u/125000; sec[(t-1)%480].hide; sec[t%480].show  
+    t = s*8+u/125000; sec.each(&:hide); sec[t%480].show  
   end
 end
