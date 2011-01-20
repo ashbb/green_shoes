@@ -21,7 +21,7 @@ Tiny Streaming Flash videos
 - [sample11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html) : A circle moving with mouse motion
 - [sample12](http://www.rin-shun.com/shoes/green-shoes-sample12.swf.html) : Random color change
 - [sample13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html) : Mouse click and release
-- [sample14](http://www.rin-shun.com/shoes/green-shoes-sample14.swf.html) : Flowers
+- [sample14-1](http://www.rin-shun.com/shoes/green-shoes-sample14-1.swf.html) : Flowers
 - [sample15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html) : Text reallocation
 - [sample18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html) : Text markup and link
 - [sample19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html) : Pong Game
