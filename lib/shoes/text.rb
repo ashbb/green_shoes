@@ -18,6 +18,10 @@ class Shoes
     def link str, &blk
       Link.new "#{LINK_DEFAULT}#{str}</span>", &blk
     end
+
+    def font name
+      @font_family = name
+    end
   end
 
   class Text

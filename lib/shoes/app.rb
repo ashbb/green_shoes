@@ -73,6 +73,7 @@ class Shoes
       args[:markup] = msg.map(&:to_s).join
       attr_list, text = Pango.parse_markup args[:markup]
       args[:size] ||= font_size
+      args[:font] ||= (@font_family or 'sans')
       args[:align] ||= 'left'
       line_height =  args[:size] * 2
       
@@ -94,7 +95,8 @@ class Shoes
         layout.spacing = 5  * Pango::SCALE
         layout.text = text
         layout.alignment = eval "Pango::ALIGN_#{args[:align].upcase}"
-        fd = Pango::FontDescription.new 'sans'
+        fd = Pango::FontDescription.new
+        fd.family = args[:font]
         fd.size = args[:size] * Pango::SCALE
         layout.font_description = fd
         layout.attributes = attr_list
