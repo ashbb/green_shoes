@@ -118,10 +118,11 @@ class Shoes
   def self.call_back_procs app
     init_contents app.cslot.contents
     app.cslot.width, app.cslot.height = app.width, app.height
-    contents_alignment app.cslot
+    scrollable_height = contents_alignment app.cslot
     repaint_all app.cslot
     mask_control app
     repaint_all_by_order app
+    app.canvas.set_size 0, scrollable_height
     true
   end
 

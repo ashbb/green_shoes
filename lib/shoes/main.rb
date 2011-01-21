@@ -61,7 +61,10 @@ class Shoes
     end
 
     app.canvas = projector ? Gtk::DrawingArea.new : Gtk::Layout.new
-    win.add app.canvas
+    swin = Gtk::ScrolledWindow.new
+    swin.set_policy Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC    
+    swin.add app.canvas
+    win.add swin
     app.canvas.style = style
     app.win = win
 
