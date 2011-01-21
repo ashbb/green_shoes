@@ -574,5 +574,9 @@ class Shoes
     def download name, args={}, &blk
       Download.new name, args, &blk
     end
+
+    def nolayout
+      @nolayout = true
+    end
   end
 end

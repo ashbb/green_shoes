@@ -42,6 +42,7 @@ class Shoes
   class App
     def basic_attributes args={}
       default = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
+      default.merge!({nocontrol: true}) if @nolayout
       default.merge args
     end
 
