@@ -18,6 +18,6 @@ module Manual
   end
 
   def mk_paras str
-    (str.split("\n\n") - ['']).map{|text| text.gsub("\n", '')}
+    (str.split("\n\n") - ['']).map{|text| text.gsub("\n", ' ')}
   end
 end
