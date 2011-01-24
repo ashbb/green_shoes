@@ -13,16 +13,15 @@ class Shoes
       end
       
       init_app_vars
-      @canvas, @win = nil, nil
+      @canvas, @win, @swin, @top_slot = nil
       @cslot = (@app ||= self)
-      @top_slot = nil
       @width_pre, @height_pre = @width, @height
       @link_style, @linkhover_style = LINK_DEFAULT, LINKHOVER_DEFAULT
       @context_angle = @pixbuf_rotate = 0
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
-      :mhcs, :mlcs, :shcs, :mcs, :win, :width_pre, :height_pre, :order, :dics
+      :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics
     attr_writer :mouse_button, :mouse_pos
     attr_reader :link_style, :linkhover_style
 
@@ -579,6 +578,10 @@ class Shoes
 
     def nolayout
       @nolayout = true
+    end
+
+    def scroll_top
+      @swin.vadjustment.value
     end
   end
 end

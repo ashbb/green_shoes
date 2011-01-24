@@ -213,6 +213,7 @@ class Shoes
 
   def self.mouse_on_link tb, app
     mouse_x, mouse_y = app.win.pointer
+    mouse_y += app.scroll_top
     mouse_x -= tb.left
     mouse_y -= tb.top
     tb.links.each_with_index do |e, n|

@@ -66,7 +66,7 @@ class Shoes
     swin.add app.canvas
     win.add swin
     app.canvas.style = style
-    app.win = win
+    app.win, app.swin = win, swin
 
     if blk
       app.instance_eval &blk
