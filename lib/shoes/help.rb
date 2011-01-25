@@ -44,8 +44,21 @@ class Manual < Shoes
         
       flow width: 0.8, margin: [10, 0, 20, 0] do
         paras.each_with_index do |text, i|
-          para text.gsub(IMAGE_RE, ''), NL, i.zero? ? {size: 16} : ''
-          text.gsub IMAGE_RE do
+          if text.index CODE_RE
+            text.gsub CODE_RE do |lines|
+	      code = lines.split(NL)[2...-1].join(NL)
+              flow do
+                background lightsteelblue, curve: 5
+		para link(fg('Run this', green)){instance_eval(REQ+code)}, margin_left: 480
+                para fg(code, maroon)
+	      end
+              para
+            end
+            next
+	  end
+          txt = text.gsub "\n", ' '
+          para txt.gsub(IMAGE_RE, ''), NL, i.zero? ? {size: 16} : ''
+          txt.gsub IMAGE_RE do
             image File.join(DIR, "../static/#{$3}"), eval("{#{$2}}")
             para 
           end
@@ -59,7 +72,7 @@ class Manual < Shoes
   end
 
   def mk_paras str
-    (str.split("\n\n") - ['']).map{|text| text.gsub("\n", ' ')}
+    str.split("\n\n") - ['']
   end
 
   def self.load_docs path
@@ -90,7 +103,9 @@ class Manual < Shoes
   end
 
   IMAGE_RE = /\!(\{([^}\n]+)\})?([^!\n]+\.\w+)\!/
+  CODE_RE = /\{{3}(?:\s*\#![^\n]+)?(.+?)\}{3}/m
   NL = "\n"
+  REQ = "require File.join(DIR, 'green_shoes')\n"
   LANG = $lang.downcase[0, 2]
   DOCS = load_docs File.join(DIR, "../static/manual-#{LANG}.txt")
   PNUMS = mk_page_numbers DOCS
