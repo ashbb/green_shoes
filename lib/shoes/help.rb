@@ -12,9 +12,11 @@ class Manual < Shoes
   def get_title_and_desc pnum
     chapter, section = PNUMS[pnum]
     if section
-      [pnum, DOCS[chapter][1][:sections][section][1][:title], DOCS[chapter][1][:sections][section][1][:description]]
+      [pnum, DOCS[chapter][1][:sections][section][1][:title], 
+      DOCS[chapter][1][:sections][section][1][:description], 
+      DOCS[chapter][1][:sections][section][1][:methods]]
     else
-      [pnum, DOCS[chapter][0], DOCS[chapter][1][:description]]
+      [pnum, DOCS[chapter][0], DOCS[chapter][1][:description], []]
     end
   end
   
@@ -27,7 +29,7 @@ class Manual < Shoes
     end.flatten
   end
 
-  def manual pnum, docs_title, docs_description
+  def manual pnum, docs_title, docs_description, docs_methods
     flow do
       background tr_color("#ddd")..white, angle: 90
       background black..green, height: 90
@@ -43,30 +45,58 @@ class Manual < Shoes
       end
         
       flow width: 0.8, margin: [10, 0, 20, 0] do
-        paras.each_with_index do |text, i|
-          if text.index CODE_RE
-            text.gsub CODE_RE do |lines|
-	      code = lines.split(NL)[2...-1].join(NL)
-              flow do
-                background lightsteelblue, curve: 5
-		para link(fg('Run this', green)){instance_eval(REQ+code)}, margin_left: 480
-                para fg(code, maroon)
-	      end
-              para
+        show_page paras, true
+        docs_methods.each do |m, d|
+          flow do
+            background rgb(60, 60, 60), curve: 5
+            n = m.index("\u00BB")
+            if n
+              para '  ', fg(strong(m[0...n]), aliceblue), fg(strong(m[n..-1]), rgb(160, 160, 160))
+            else
+              para '  ', fg(strong(m), aliceblue)
             end
-            next
-	  end
-          txt = text.gsub "\n", ' '
-          para txt.gsub(IMAGE_RE, ''), NL, i.zero? ? {size: 16} : ''
-          txt.gsub IMAGE_RE do
-            image File.join(DIR, "../static/#{$3}"), eval("{#{$2}}")
-            para 
           end
+          para
+          show_page mk_paras(d)
         end
         para link('top'){visit "/manual/0"}, "  ",
           link('prev'){visit "/manual/#{(pnum-1)%PEND}"}, "  ", 
           link('next'){visit "/manual/#{(pnum+1)%PEND}"}, "  ", 
           link('end'){visit "/manual/#{PEND-1}"}
+      end
+    end
+  end
+
+  def show_page paras, intro = false
+    paras.each_with_index do |text, i|
+      if text.index CODE_RE
+        text.gsub CODE_RE do |lines|
+          lines = lines.split NL
+          n = lines[1] =~ /\#\!ruby/ ? 2 : 1
+          code = lines[n...-1].join(NL+'  ')
+          flow do
+            background lightsteelblue, curve: 5
+            inscription link(fg('Run this', green)){instance_eval code}, margin_left: 480
+            para '  ', fg(code, maroon), NL
+          end
+          para
+        end
+        next
+      end
+      
+      txt = text.gsub "\n", ' '
+      
+      case txt
+      when /\A==== (.+) ====/; caption $1, size: 24
+      when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
+      when /\A== (.+) ==/; subtitle $1
+      when /\A= (.+) =/; title $1
+      else
+        para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
+        txt.gsub IMAGE_RE do
+          image File.join(DIR, "../static/#{$3}"), eval("{#{$2}}")
+          para
+        end
       end
     end
   end
@@ -81,7 +111,7 @@ class Manual < Shoes
       sparts = v.split(/^== (.+?) ==/)
       sections = (sparts[1..-1]/2).map do |k2, v2|
         meth = v2.split(/^=== (.+?) ===/)
-	      k2t = k2[/^(?:The )?([\-\w]+)/, 1]
+        k2t = k2[/^(?:The )?([\-\w]+)/, 1]
         meth_plain = meth[0].gsub(IMAGE_RE, '')
         h = {title: k2, section: k, description: meth[0], methods: (meth[1..-1]/2)}
         [k2t, h]
@@ -105,7 +135,6 @@ class Manual < Shoes
   IMAGE_RE = /\!(\{([^}\n]+)\})?([^!\n]+\.\w+)\!/
   CODE_RE = /\{{3}(?:\s*\#![^\n]+)?(.+?)\}{3}/m
   NL = "\n"
-  REQ = "require File.join(DIR, 'green_shoes')\n"
   LANG = $lang.downcase[0, 2]
   DOCS = load_docs File.join(DIR, "../static/manual-#{LANG}.txt")
   PNUMS = mk_page_numbers DOCS
