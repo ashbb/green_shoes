@@ -155,6 +155,7 @@ class Shoes
     def button name, args={}, &blk
       args = basic_attributes args
       b = Gtk::Button.new name
+      b.set_size_request args[:width], args[:height] if args[:width] > 0 and args[:height] > 0
       b.signal_connect "clicked", &blk if blk
       @canvas.put b, args[:left], args[:top]
       b.show_now
