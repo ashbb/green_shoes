@@ -51,9 +51,9 @@ class Manual < Shoes
             background rgb(60, 60, 60), curve: 5
             n = m.index("\u00BB")
             if n
-              para '  ', fg(strong(m[0...n]), aliceblue), fg(strong(m[n..-1]), rgb(160, 160, 160))
+              para '  ', fg(strong(m[0...n]), white), fg(strong(m[n..-1]), rgb(160, 160, 160))
             else
-              para '  ', fg(strong(m), aliceblue)
+              para '  ', fg(strong(m), white)
             end
           end
           para
