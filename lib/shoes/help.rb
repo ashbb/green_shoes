@@ -57,7 +57,7 @@ class Manual < Shoes
             end
           end
           para
-          show_page mk_paras(d)
+          show_page mk_paras(d.gsub('&', '\u0026'))
         end
         para link('top'){visit "/manual/0"}, "  ",
           link('prev'){visit "/manual/#{(pnum-1)%PEND}"}, "  ", 

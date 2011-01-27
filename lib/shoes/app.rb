@@ -70,7 +70,9 @@ class Shoes
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
       args[:markup] = msg.map(&:to_s).join
-      attr_list, text = Pango.parse_markup args[:markup]
+      attr_list, dummy_text = Pango.parse_markup args[:markup].gsub('\u0026', '@')
+      dummy_attr_list, text = Pango.parse_markup args[:markup]
+      text = text.gsub('\u0026', '&')
       args[:size] ||= font_size
       args[:font] ||= (@font_family or 'sans')
       args[:align] ||= 'left'
