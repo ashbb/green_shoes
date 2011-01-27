@@ -84,7 +84,8 @@ class Manual < Shoes
         next
       end
       
-      txt = text.gsub "\n", ' '
+      txt = text.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
+        gsub(/\^(.+?)\^/m, '\1')
       
       case txt
       when /\A==== (.+) ====/; caption $1, size: 24
