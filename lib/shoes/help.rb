@@ -84,20 +84,31 @@ class Manual < Shoes
         next
       end
       
-      txt = text.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
-        gsub(/\^(.+?)\^/m, '\1')
-      
-      case txt
-      when /\A==== (.+) ====/; caption $1, size: 24
-      when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
-      when /\A== (.+) ==/; subtitle $1
-      when /\A= (.+) =/; title $1
-      else
-        para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
-        txt.gsub IMAGE_RE do
-          image File.join(DIR, "../static/#{$3}"), eval("{#{$2}}")
-          para
+      if text =~ /\A \* (.+)/m
+        $1.split(/^ \* /).each do |txt|
+          image File.join(DIR, '../static/gshoes-icon.png'), width: 20, height: 20
+          flow(width: 510){show_paragraph txt, intro, i}
         end
+      else
+        show_paragraph text, intro, i
+      end
+    end
+  end
+  
+  def show_paragraph txt, intro, i, dot = nil
+    txt = txt.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
+      gsub(/\^(.+?)\^/m, '\1').gsub(/'''(.+?)'''/m){strong($1)}.gsub(/''(.+?)''/m){em($1)}.
+      gsub(/\[\[BR\]\]/i, "\n")
+    case txt
+    when /\A==== (.+) ====/; caption $1, size: 24
+    when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
+    when /\A== (.+) ==/; subtitle $1
+    when /\A= (.+) =/; title $1
+    else
+      para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
+      txt.gsub IMAGE_RE do
+        image File.join(DIR, "../static/#{$3}"), eval("{#{$2 or "margin_left: 50"}}")
+        para
       end
     end
   end
