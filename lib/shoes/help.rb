@@ -104,6 +104,7 @@ class Manual < Shoes
     when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
     when /\A== (.+) ==/; subtitle $1
     when /\A= (.+) =/; title $1
+    when /\A\{COLORS\}/; flow{color_page}
     else
       para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
       txt.gsub IMAGE_RE do
@@ -115,6 +116,19 @@ class Manual < Shoes
 
   def mk_paras str
     str.split("\n\n") - ['']
+  end
+
+  def color_page
+    Shoes::App::COLORS.each do |color, v|
+      r, g, b = v
+      c = v.dark? ? white : black
+      flow width: 0.33 do
+        background send(color)
+        para fg(strong(color), c), align: 'center'
+        para fg("rgb(#{r}, #{g}, #{b})", c), align: 'center'
+      end
+    end
+    para
   end
 
   def self.load_docs path

@@ -60,4 +60,14 @@ class Array
     end
     a
   end
+
+  def dark?
+    r, g, b = self
+    r + g + b < 0x55 * 3
+  end
+
+  def light?
+    r, g, b = self
+    r + g + b > 0xAA * 3
+  end
 end
