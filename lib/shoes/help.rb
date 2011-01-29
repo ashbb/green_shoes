@@ -98,7 +98,8 @@ class Manual < Shoes
   def show_paragraph txt, intro, i, dot = nil
     txt = txt.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
       gsub(/\^(.+?)\^/m, '\1').gsub(/'''(.+?)'''/m){strong($1)}.gsub(/''(.+?)''/m){em($1)}.
-      gsub(/\[\[BR\]\]/i, "\n")
+      gsub(/\[\[BR\]\]/i, "\n").gsub(/\[\[(\S+?)\]\]/m){link ins($1.split('.').last)}.
+      gsub(/\[\[(\S+?) (.+?)\]\]/m){link ins($2)}
     case txt
     when /\A==== (.+) ====/; caption $1, size: 24
     when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
