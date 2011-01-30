@@ -2,7 +2,8 @@
 
 Shoes is a tiny graphics toolkit. It's simple and straightforward. Shoes was
 born to be easy!  Really, it was made for absolute beginners. There's really
-nothing to it.
+nothing to it. Green Shoes is one of colorful Shoes. It is written in pure Ruby 
+with GTK2, Pango and Cairo.
 
 You see, the trivial Shoes program can be just one line:
 
@@ -15,16 +16,15 @@ Shoes programs are written in a language called Ruby.  When Shoes is handed
 this simple line of Ruby code, a window appears with a button inside reading
 "Click me!"  When the button is clicked, a message pops up.
 
-On Linux, here's how this might look: !{:margin_left => 100}man-shot1.png!
+On Windows 7, here's how this might look: !{margin_left: 100}man-shot1.png!
 
 While lots of Shoes apps are graphical games and art programs, you can also
-layout text and edit controls easily. !{:margin_left =>
-40}shoes-manual-apps.gif!
+layout text and edit controls easily. !{margin_left: 80}shoes-manual-apps.png!
 
 And, ideally, Shoes programs will run on any of the major platforms out there.
 Microsoft Windows, Apple's Mac OS X, Linux and many others.
 
-^So, welcome to Shoes' built-in manual. This manual is a Shoes program itself!^
+^So, welcome to Green Shoes' built-in manual. This manual is a Green Shoes program itself!^
 
 == Introducing Shoes ==
 
