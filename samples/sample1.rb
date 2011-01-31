@@ -17,7 +17,7 @@ Shoes.app width: 300, height: 300 do
   size = [128, 128]
   pause = 0
 
-  a = animate(24) do |n|
+  a = animate(24, false) do |n|
     unless pause == n
       x += xspeed * xdir
       y += yspeed * ydir

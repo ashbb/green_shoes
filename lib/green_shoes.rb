@@ -2,6 +2,7 @@ require 'tmpdir'
 require 'pathname'
 require 'cairo'
 require 'pango'
+require 'gdk_pixbuf2'
 require 'gtk2'
 
 Types = module Shoes; self end

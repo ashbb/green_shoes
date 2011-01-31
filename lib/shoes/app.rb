@@ -220,12 +220,12 @@ class Shoes
       ListBox.new args
     end
 
-    def animate n=10, &blk
+    def animate n=10, repaint=true, &blk
       n, i = 1000 / n, 0
       a = Anim.new
       GLib::Timeout.add n do
         blk[i = a.pause? ? i : i+1]
-        Shoes.repaint_all_by_order self
+        Shoes.repaint_all_by_order self if repaint
         a.continue?
       end
       a
