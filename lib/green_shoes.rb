@@ -5,6 +5,8 @@ require 'pango'
 require 'gdk_pixbuf2'
 require 'gtk2'
 
+STDOUT.sync = true
+
 Types = module Shoes; self end
 
 module Shoes

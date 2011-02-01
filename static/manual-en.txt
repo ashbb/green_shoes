@@ -3,7 +3,7 @@
 Shoes is a tiny graphics toolkit. It's simple and straightforward. Shoes was
 born to be easy!  Really, it was made for absolute beginners. There's really
 nothing to it. Green Shoes is one of colorful Shoes. It is written in pure Ruby 
-with GTK2, Pango and Cairo.
+with Ruby/GTK2.
 
 You see, the trivial Shoes program can be just one line:
 
@@ -38,9 +38,9 @@ just check out some screenshots, to give you an idea of what you can do.
 ==== Mac OS X ====
 
 Green Shoes is confirmed on Apple Mac OSX10.5 PPC via X11. 
-!{margin_left: 100}../snapshots/sample3.png!
+!{margin_left: 100}../snapshots/sample3-osx.png!
 
-This is the `simple3.rb` on Mac OS X.  
+This is the `sample3.rb` on Mac OS X.  
 
 All circles are drawn randomly. You can draw and animate shapes in Green Shoes.
 
@@ -65,28 +65,28 @@ Notice the text on the top of the app, showing the current time. Green Shoes has
 skills to layout words using any color, bold, italics, underlines, and supports
 loading fonts.
 
-== Installing Shoes ==
+== Installing Green Shoes ==
 
-Okay, on to installing Shoes. I'm sure you're wondering: do I need to install
+Okay, on to installing Green Shoes. I'm sure you're wondering: do I need to install
 Ruby? Do I need to unzip anything? What commands do I need to type?
 
-Nope. You don't need Ruby. You don't need WinZip. Nothing to type.
+Yeah. You need to install Ruby and Gems. But, no need to worry about it.
+We'll talk through all the steps.
 
-On most systems, starting Shoes is just a matter of running the installer and
-clicking the Shoes icon.  Shoes comes with everything built in. We'll talk
-through all the steps, though, just to be clear about it.
+==== Step 1: Installing Green Shoes ====
 
-==== Step 1: Installing Shoes ====
+At first, install Ruby. On '''Windows''', 
+visit the site of [[http://rubyinstaller.org/ RubyInstaller for Windows]] to 
+download '''RubyInstaller 1.9.2-p136'''.
 
-You'll want to visit [[http://shoesrb.com/ the site of Shoes]] to download
-the Shoes installer.  Usually, you'll just want one of the installers on the
-downloads page of the site. !man-builds1.png!
+Then just do the following.
 
-Here's how to run the installer:
+ * gem install gtk2 --no-ri --no-rdoc
+ * gem install green_shoes
 
- * On '''Mac OS X''', you'll have a file ending with '''.dmg'''.  Double-click this file and a window should appear with a '''Shoes''' icon and an '''Applications''' folder.  Following the arrow, drag the Shoes icon into the '''Applications''' folder. !man-intro-dmg.png!
- * On '''Windows''', you'll download a '''.exe''' file.  Double-click this file and follow the instructions. !man-intro-exe.png!
- * On '''Linux''', you'll download a file ending with '''.run'''.  Double-click this file and Shoes will start up.  (You can also run this file from a prompt as if it was a shell script.  In fact, it is a shell script!)
+That's all. Too easy?
+
+''Note: green_shoes gem is now under development.''
 
 ==== Step 2: Start a New Text File ====
 
@@ -111,11 +111,9 @@ Save to your desktop as `welcome.rb`.
 
 ==== Step 3: Run It! Go Shoes! ====
 
-To run your program:
+To run your program, just open console window and run the following.
 
- * On '''Mac OS X''', visit your '''Applications''' folder again.  This time, double-click the '''Shoes''' icon in that folder.  You should see the red shoes icon appear in the dock.  Drag your `welcome.rb` from the desktop on to that dock icon. !man-run-osx.png!
- * On '''Windows''', get to the Start menu.  Go into '''All Programs''', then '''Shoes''', then '''Shoes'''.  A file selector box should come up.  Browse to your desktop and select `welcome.rb`.  Click '''OK''' and you're on your way. !man-run-xp.png! !man-run-vista.png!
- * On '''Linux''', run Shoes just like you did in step one.  You should see a file selector box.  Browse to your desktop, select `welcome.rb` and hit '''OK'''.
+ * ruby welcome.rb !man-editor-osx.png!
 
 So, not much of a program yet.  But it's something!  You've got the knack of it, at least!
 
@@ -131,35 +129,38 @@ missing elements (like tabbed controls or toolbars) can be simulated with
 images.
 
 Shoes is written in part thanks to a very good art engine called Cairo, which
-is used for drawing with shapes and colors. In this way, Shoes is inspired by
+is used for drawing with shapes and colors. Also thanks to an awesome text 
+lay out engine called Pango. In this way, Shoes is inspired by
 NodeBox and Processing, two very good languages for drawing animated graphics.
 
-== The Rules of Shoes ==
+== The Rules of Green Shoes ==
 
-Time to stop guessing how Shoes works.  Some of the tricky things will come
-back to haunt you.  I've boiled down the central rules to Shoes.  These are the
+Time to stop guessing how Green Shoes works.  Some of the tricky things will come
+back to haunt you.  I've boiled down the central rules to Green Shoes.  These are the
 things you MUST know to really make it all work.
 
-These are general rules found throughout Shoes.  While Shoes has an overall
+These are general rules found throughout Green Shoes.  While Green Shoes has an overall
 philosophy of simplicity and clarity, there are a few points that need to be
 studied and remembered.
 
 ==== Shoes Tricky Blocks ====
 
-Okay, this is absolutely crucial.  Shoes does a trick with blocks.  This trick
+Okay, this is absolutely crucial.  Green Shoes does a trick with blocks.  This trick
 makes everything easier to read.  But it also can make blocks harder to use
 once you're in deep.
 
 '''Let's take a normal Ruby block:'''
 
 {{{
- ary = ['potion', 'swords', 'shields']
- ary.each do |item|
-   puts item
+ Shoes.app do
+   ary = ['potion', 'swords', 'shields']
+   ary.each do |item|
+     puts item
+   end
  end
 }}}
 
-In Shoes, these sorts of blocks work the same.  This block above loops through
+In Green Shoes, these sorts of blocks work the same.  This block above loops through
 the array and stores each object in the `item` variable.  The `item` variable
 disappears (goes out of scope) when the block ends.
 
@@ -167,7 +168,7 @@ One other thing to keep in mind is that `self` stays the same inside normal
 Ruby blocks.  Whatever `self` was before the call to `each`, it is the same
 inside the `each` block.
 
-'''Both of these things are also true for most Shoes blocks.'''
+'''Both of these things are also true for most Green Shoes blocks.'''
 
 {{{
  Shoes.app do
@@ -197,7 +198,7 @@ spelling out that last example completely.
  end
 }}}
 
-All of the `self`s in the above example are the App object.  Shoes uses Ruby's
+All of the `self`s in the above example are the App object.  Green Shoes uses Ruby's
 `instance_eval` to change self inside the `app` block.  So the method calls to
 `stack` and `para` get sent to the app.
 
@@ -215,20 +216,20 @@ All of the `self`s in the above example are the App object.  Shoes uses Ruby's
 
 These instance variables will all end up inside the App object.
 
-'''Whenever you create a new window, `self` is also changed.'''  So, this means
-the [[Element.window]] and [[Element.dialog]] methods, in addition to
-Shoes.app.
+'''Whenever you create a new Shoes.app window, `self` is also changed.'''
 
 {{{
- Shoes.app :title => "MAIN" do
+ Shoes.app title: "MAIN" do
    para self
    button "Spawn" do
-     window :title => "CHILD" do
+     Shoes.app title: "CHILD" do
        para self
      end
    end
  end
 }}}
+
+''Note: para method displays self with [ and ] in Green Shoes.''
 
 ==== Block Redirection ====
 

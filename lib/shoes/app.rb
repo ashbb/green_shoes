@@ -69,6 +69,7 @@ class Shoes
     def textblock klass, font_size, *msg
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
+      msg = msg.map{|s| s == self ? s.to_s.gsub('<', '[').gsub('>', ']') : s}
       args[:markup] = msg.map(&:to_s).join
       attr_list, dummy_text = Pango.parse_markup args[:markup].gsub('\u0026', '@')
       dummy_attr_list, text = Pango.parse_markup args[:markup]
