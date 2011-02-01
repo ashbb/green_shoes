@@ -9,7 +9,7 @@ class Shoes
     args[:title] ||= 'green shoes'
     args[:left] ||= 0
     args[:top] ||= 0
-    projector = args[:projector]
+    projector = args[:prjct] = args[:projector]
     args.delete :projector
 
     app = App.new args

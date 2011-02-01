@@ -122,7 +122,7 @@ class Shoes
     repaint_all app.cslot
     mask_control app
     repaint_all_by_order app
-    app.canvas.set_size 0, scrollable_height
+    app.canvas.set_size 0, scrollable_height unless app.prjct
     true
   end
 
