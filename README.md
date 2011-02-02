@@ -66,7 +66,7 @@ You can see this snapshot:
 
 ![snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/helloworld.png)
 
-<s>**NOTE: For now, have to do the following**
+<strike>**NOTE: For now, have to do the following**
 
 - make this file: %{your path of gtk2 gem}\vendor\local\etc\gtk-2.0\gtkrc    
 - store just one line: gtk-theme-name = "MS-Windows"    
@@ -74,7 +74,7 @@ You can see this snapshot:
 Then you can look at good-looking button on Green Shoes.
 (left button of [this snapshot](http://www.rin-shun.com/tmp/ruby-gtk2-buttons.png))
 
-Ruby-GNOME2 developer Kou (Kouhei Sutou) said he'd include gtkrc in the next distribution of Ruby/GTK2. </s> 
+Ruby-GNOME2 developer Kou (Kouhei Sutou) said he'd include gtkrc in the next distribution of Ruby/GTK2. </strike> 
 ==> Done! [Ruby-GNOME2 0.90.7 released](http://ruby-gnome2.sourceforge.jp/?News_20110202_1) Thanks, Kou. Awesome!
 
 
