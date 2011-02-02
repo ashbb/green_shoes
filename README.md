@@ -41,6 +41,41 @@ Tiny Streaming Flash videos
 
 recorded with [CamStudio](http://camstudio.org/).
 
+Install and run
+--------------
+
+For Windows:
+
+1. download and install [rubyinstaller-1.9.2-p136.exe](http://rubyinstaller.org/downloads/)   
+2. gem install gtk2 --no-ri --no-rdoc   
+3. gem install green_shoes --no-ri --no-rdoc   
+
+That's it!
+
+Now open your text editor and write your first Green Shoes app like this:
+
+	#my_first_green_shoes_app.rb
+	require 'green_shoes'
+	Shoes.app{ title 'hello world' }
+
+Then run your app on the console window:
+
+	ruby my_first_green_shoes_app.rb
+
+You can see this snapshot:
+
+![snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/helloworld.png)
+
+**NOTE: For now, have to do the following**
+
+- make this file: %{your path of gtk2 gem}\vendor\local\etc\gtk-2.0\gtkrc    
+- store just one line: gtk-theme-name = "MS-Windows"    
+
+Then you can look at good-looking button on Green Shoes.
+(left button of [this snapshot](http://www.rin-shun.com/tmp/ruby-gtk2-buttons.png))
+
+Ruby-GNOME2 developer Kou (Kouhei Sutou) said he'd include gtkrc in the next distribution of Ruby/GTK2.
+
 
 Mini Hackety Hack
 ------------------
@@ -93,8 +128,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-Note
-----
+Note (old piece of information)
+-----------------------------
 
 - [Install Ruby/GTK2 and rcairo for Linux](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
 - [Install Ruby/GTK2 and rcairo for Windows](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).
