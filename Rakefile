@@ -9,6 +9,6 @@ Jeweler::Tasks.new do |gem|
   gem.email = "ashbbb@gmail.com"
   gem.homepage = "http://github.com/ashbb/green_shoes"
   gem.authors = ["ashbb"]
-  gem.files = FileList['lib/**/*'] + FileList['static/**/*']
+  gem.files = %w[lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten
 end
 

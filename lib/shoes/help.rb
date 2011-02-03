@@ -106,6 +106,7 @@ class Manual < Shoes
     when /\A== (.+) ==/; subtitle $1
     when /\A= (.+) =/; title $1
     when /\A\{COLORS\}/; flow{color_page}
+    when /\A\{SAMPLES\}/; flow{sample_page}
     else
       para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
       txt.gsub IMAGE_RE do
@@ -130,6 +131,25 @@ class Manual < Shoes
       end
     end
     para
+  end
+  
+  def sample_page
+    names = Dir[File.join(DIR, '../samples/sample*.rb')].map do |file|
+      orig_name = File.basename file
+      dummy_name = orig_name.sub(/sample(.*)\.rb/){
+        first, second = $1.split('-')
+        "%02d%s%s" % [first.to_i, ('-' if second), second]
+      }
+      [dummy_name, orig_name]
+    end
+    names.sort.map(&:last).each do |file|
+      stack width: 80 do
+        inscription file[0...-3]
+        img = image File.join(DIR, "../snapshots/#{file[0..-3]}png"), width: 50, height: 50
+        img.click{Dir.chdir(File.join DIR, '../samples'){instance_eval IO.read(file)}}
+        para
+      end
+    end
   end
 
   def self.load_docs path
@@ -166,6 +186,7 @@ class Manual < Shoes
   DOCS = load_docs File.join(DIR, "../static/manual-#{LANG}.txt")
   PNUMS = mk_page_numbers DOCS
   PEND = PNUMS.length
+  COLORS = Shoes::App::COLORS
 end
 
 Shoes.app title: 'The Green Shoes Manual', width: 720, height: 640
