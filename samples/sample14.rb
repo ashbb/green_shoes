@@ -16,16 +16,12 @@ degree = 0
 color = 0
 size = 0
 
-# Convert degrees to radians
-class Shoes
-  class App
-    def to_radians(deg)
-      deg * Math::PI / 180
-    end
-  end
-end
-
 Shoes.app :width => 537, :height => 500 do
+  # Convert degrees to radians
+  def to_radians(deg)
+    deg * Math::PI / 180
+  end
+
   mx, my = (500/2).to_i, (537/2).to_i
   animate(2) do
     clear do
