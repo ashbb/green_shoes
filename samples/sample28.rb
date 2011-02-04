@@ -56,7 +56,7 @@ Shoes.app :title => 'Snake Game v0.1' do
 
   def brick? s
     @bricks.each do |b|
-      (@run.stop; alert 'Game Over. '; exit) if b.left == s.left and b.top == s.top      
+      (@run.stop; alert 'Game Over. ') if b.left == s.left and b.top == s.top      
     end
   end
 
