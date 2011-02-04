@@ -23,7 +23,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style
+    attr_reader :link_style, :linkhover_style, :animates
 
     def visit url
       $urls.each do |k, v|
@@ -224,9 +224,12 @@ class Shoes
     def animate n=10, repaint=true, &blk
       n, i = 1000 / n, 0
       a = Anim.new
+      @animates << a
       GLib::Timeout.add n do
-        blk[i = a.pause? ? i : i+1]
-        Shoes.repaint_all_by_order self if repaint
+        if a.continue? 
+          blk[i = a.pause? ? i : i+1]
+          Shoes.repaint_all_by_order self if repaint
+        end
         a.continue?
       end
       a

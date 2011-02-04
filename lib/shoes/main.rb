@@ -33,6 +33,7 @@ class Shoes
     win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK
 
     win.signal_connect "delete-event" do
+      app.animates.each &:stop
       false
     end
 

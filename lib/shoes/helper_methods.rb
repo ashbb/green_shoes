@@ -15,8 +15,8 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics = 
-        [], [], [], [], [], [], [], [], [], [], []
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates = 
+        [], [], [], [], [], [], [], [], [], [], [], []
       @cmask = nil
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
