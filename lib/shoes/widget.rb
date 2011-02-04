@@ -1,7 +1,7 @@
 class Shoes
   class Widget
     def self.inherited klass, &blk
-      m = klass.inspect.downcase
+      m = klass.inspect.downcase.split('::').last
       Shoes::App.class_eval do
         define_method m do |*args, &blk|
           klass.class_variable_set :@@app, self
