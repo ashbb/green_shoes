@@ -86,7 +86,7 @@ Then just do the following.
 
 That's all. Too easy?
 
-''Note: green_shoes gem is now under development.''
+'''Note:''' green_shoes gem is on [[http://rubygems.org/gems/green_shoes RubyGems.org]].
 
 ==== Step 2: Start a New Text File ====
 
@@ -263,16 +263,19 @@ Like let's say you pass around a stack object.  And you have a class that edits
 that object.
 
 {{{
- # Not yet available
  class Messenger
-   def initialize(stack)
-     @stack = stack
+   def initialize slot
+     @slot = slot
    end
-   def add(msg)
-     @stack.append do
-       para msg
-     end
+   def add msg
+     para msg rescue puts $!
    end
+ end
+ 
+ Shoes.app do
+   slot = stack
+   m = Messenger.new slot
+   m.add 'hello'
  end
 }}}
 
@@ -284,21 +287,24 @@ Nope, it won't work.  The `para` method won't be found.  The App object isn't
 around any more.  And it's the one with the `para` method.
 
 Fortunately, each Shoes object has an `app` method that will let you reopen the
-App object so you can do somefurther editing.
+App object so you can do some further editing.
 
 {{{
-# Not yet available
  class Messenger
-   def initialize(stack)
-     @stack = stack
+   def initialize slot
+     @slot = slot
    end
-   def add(msg)
-     @stack.app do
-       @stack.append do
-         para msg
-       end
+   def add msg
+     @slot.app do
+       para msg rescue puts $!
      end
    end
+ end
+ 
+ Shoes.app do
+   slot = stack
+   m = Messenger.new slot
+   m.add 'hello'
  end
 }}}
 

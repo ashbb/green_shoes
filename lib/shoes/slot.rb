@@ -8,7 +8,7 @@ class Shoes
       end
       
       Slot.class_eval do
-        attr_accessor *args.keys
+        attr_accessor *(args.keys - [:app])
       end
 
       set_margin
@@ -28,6 +28,11 @@ class Shoes
 
     attr_accessor :contents, :masked
     attr_reader :parent, :initials
+    attr_writer :app
+
+    def app &blk
+      blk ? @app.instance_eval(&blk) : @app
+    end
 
     def move3 x, y
       @left, @top = x, y
