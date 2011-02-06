@@ -76,7 +76,7 @@ class Manual < Shoes
           code = lines[n...-1].join(NL+'  ')
           flow do
             background lightsteelblue, curve: 5
-            inscription link(fg('Run this', green)){instance_eval code}, margin_left: 480
+            inscription link(fg('Run this', green)){eval mk_executable(code), TOPLEVEL_BINDING}, margin_left: 480
             para '  ', fg(code, maroon), NL
           end
           para
@@ -118,6 +118,14 @@ class Manual < Shoes
 
   def mk_paras str
     str.split("\n\n") - ['']
+  end
+
+  def mk_executable code
+    if code =~ /\# Not yet available/
+      "Shoes.app{para 'Sorry, not yet available...'}"
+    else
+      code
+    end
   end
 
   def color_page

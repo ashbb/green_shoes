@@ -263,6 +263,7 @@ Like let's say you pass around a stack object.  And you have a class that edits
 that object.
 
 {{{
+ # Not yet available
  class Messenger
    def initialize(stack)
      @stack = stack
@@ -286,6 +287,7 @@ Fortunately, each Shoes object has an `app` method that will let you reopen the
 App object so you can do somefurther editing.
 
 {{{
+# Not yet available
  class Messenger
    def initialize(stack)
      @stack = stack
@@ -316,6 +318,7 @@ stack.'''
 Fixed widths on slots are great so you can split the window into columns.
 
 {{{
+ # Not yet available
  Shoes.app do
    flow do
      stack :width => 200 do
@@ -343,6 +346,7 @@ On difference between normal slots and nested window slots is that the latter
 can have scrollbars.
 
 {{{
+ # Not yet available
  Shoes.app do
    stack :width => 200, :height => 200, :scroll => true do
      background "#DFA"
@@ -367,9 +371,9 @@ shapes!'''
 
 {{{
  Shoes.app do
-   fill black(0.1)
+   fill black.push(0.1)
    100.times do |i|
-     oval i, i, i * 2
+     oval i, i, i * 2 if i > 0
    end
  end
 }}}
@@ -378,11 +382,12 @@ In this example, one-hundred Oval objects are created.  This isn't too bad.
 But things would be slimmer if we made these into a single shape.
 
 {{{
+ # Not yet available
  Shoes.app do
    fill black(0.1)
    shape do
      100.times do |i|
-       oval i, i, i * 2
+       oval i, i, i * 2 if i > 0
      end
    end
  end
@@ -398,6 +403,7 @@ strictly with outlines.
 Another option is to combine all those ovals into a single image.
 
 {{{
+ # Not yet available
  Shoes.app do
    fill black(0.1)
    image 300, 300 do
@@ -436,7 +442,7 @@ To illustrate:
 {{{
  Shoes.app do
    stack :margin => 10 do
-     @edit = edit_box :width => 1.0 do
+     @edit = edit_box do
        @para.text = @edit.text
      end
      @para = para ""
@@ -569,7 +575,9 @@ A common one is `alert`:
 
 {{{
  #!ruby
- alert "No dots in sight"
+ Shoes.app do
+   alert "No dots in sight"
+ end
 }}}
 
 Compare that to the method `reverse`, which isn't a Kernel method and is only
@@ -577,10 +585,12 @@ available for Arrays and Strings:
 
 {{{
  #!ruby
- "Plaster of Paris".reverse
-  #=> "siraP fo retsalP"
- [:dogs, :cows, :snakes].reverse
-  #=> [:snakes, :cows, :dogs]
+ Shoes.app do
+   para "Plaster of Paris".reverse
+   #=> "siraP fo retsalP"
+   para [:dogs, :cows, :snakes].reverse
+   #=> [:snakes, :cows, :dogs]
+ end
 }}}
 
 Most Shoes methods for drawing and making buttons and so on are attached to
@@ -608,7 +618,7 @@ Pops up a window containing a short message.
 
 {{{
  #!ruby
- alert("I'm afraid I must interject!")
+ Shoes.app{ alert("I'm afraid I must interject!") }
 }}}
 
 Please use alerts sparingly, as they are incredibly annoying!  If you are using
@@ -622,6 +632,7 @@ their name.
 
 {{{
  #!ruby
+ # Not yet available
  name = ask("Please, enter your name:")
 }}}
 
@@ -637,6 +648,7 @@ use this color.
 
 {{{
  #!ruby
+ # Not yet available
  backcolor = ask_color("Pick a background")
  Shoes.app do
   background backcolor
@@ -651,8 +663,8 @@ file.
 
 {{{
  #!ruby
- filename = ask_open_file
  Shoes.app do
+   filename = ask_open_file
    para File.read(filename)
  end
 }}}
@@ -664,6 +676,7 @@ previously.
 
 {{{
  #!ruby
+ # Not yet available
  save_as = ask_save_file
 }}}
 
@@ -675,6 +688,7 @@ the folder.
 
 {{{
  #!ruby
+ # Not yet available
  folder = ask_open_folder
  Shoes.app do
    para Dir.entries(folder)
@@ -689,6 +703,7 @@ previously. On OS X, this method currently behaves like an alias of
 
 {{{
  #!ruby
+ # Not yet available
  save_to = ask_save_folder
 }}}
 
@@ -700,6 +715,7 @@ you'll get back a `true`. If not, you'll get back `false`.
 
 {{{
  #!ruby
+ # Not yet available
  if confirm("Draw a circle?")
   Shoes.app{ oval :top => 0, :left => 0, :radius => 50 }
  end
@@ -712,6 +728,7 @@ by pressing `Alt-/` on any Shoes window (or `⌘-/` on OS X.)
 
 {{{
  #!ruby
+ # Not yet available
  debug("Running Shoes on " + RUBY_PLATFORM)
 }}}
 
@@ -760,6 +777,7 @@ available to you on this platform.  You can check for a certain font by using
 `include?`.
 
 {{{
+ # Not yet available
  if Shoes::FONTS.include? "Helvetica"
    alert "Helvetica is available on this system."
  else
@@ -782,6 +800,7 @@ Create a grayscale color from a level of darkness and, optionally, an alpha
 level.
 
 {{{
+ # Not yet available
  black = gray(0.0)
  white = gray(1.0)
 }}}
@@ -794,7 +813,7 @@ debug messages are designed to help the program figure out what's happening,
 
 {{{
  #!ruby
- 
+ # Not yet available
  info("You just ran the info example on Shoes #{Shoes::RELEASE_NAME}.")
 }}}
 
@@ -809,15 +828,21 @@ transparency) can also be added, optionally.
 When passing in a whole number, use values from 0 to 255.
 
 {{{
- blueviolet = rgb(138, 43, 226)
- darkgreen = rgb(0, 100, 0)
+ Shoes.app do
+   blueviolet = rgb(138, 43, 226)
+   darkgreen = rgb(0, 100, 0)
+   oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
+ end
 }}}
 
 Or, use a decimal number from 0.0 to 1.0.
 
 {{{
- blueviolet = rgb(0.54, 0.17, 0.89)
- darkgreen = rgb(0, 0.4, 0)
+ Shoes.app do
+   blueviolet = rgb(0.54, 0.17, 0.89)
+   darkgreen = rgb(0, 0.4, 0)
+   oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
+ end
 }}}
 
 This method may also be called as `Shoes.rgb`.
@@ -904,11 +929,12 @@ If you attach a block to a download, it'll get called as the `finish` event.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      title "Searching Google", :size => 16
      @status = para "One moment..."
-
+ 
      # Search Google for 'shoes' and print the HTTP headers
      download "http://www.google.com/search?q=shoes" do |goog|
        @status.text = "Headers: " + goog.response.headers.inspect
@@ -926,11 +952,12 @@ Another simple use of `download` is to save some web data to a file, using the
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      title "Downloading Google image", :size => 16
      @status = para "One moment..."
-
+ 
      download "http://www.google.com/logos/nasa50th.gif",
        :save => "nasa50th.gif" do
          @status.text = "Okay, is downloaded."
@@ -950,11 +977,12 @@ class.)
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      title "GET Google", :size => 16
      @status = para "One moment..."
-
+ 
      download "http://www.google.com/search?q=shoes", 
          :method => "GET" do |dump|
        @status.text = dump.response.body
@@ -1027,6 +1055,7 @@ The style hash can also be changed by using the [[Common.style]] method,
 available on every element and slot.
 
 {{{
+ # Not yet available
  Shoes.app :title => "A Styling Sample" do
    @text = para "Red with an underline"
    @text.style(:stroke => red, :underline => "single")
@@ -1037,6 +1066,7 @@ Most styles can also be set by calling them as methods.  (I'd use the manual
 search to find the method.)
 
 {{{
+ # Not yet available
  Shoes.app :title => "A Styling Sample" do
    @text = para "Red with an underline"
    @text.stroke = red
@@ -1677,8 +1707,8 @@ To draw a star with an image pattern:
 {{{
  #!ruby
  Shoes.app do
-   fill "static/avatar.png"
-   star 200, 200, 5
+   fill "../static/gshoes-icon.png"
+   star 200, 200, 5, 100, 50
  end
 }}}
 
@@ -1792,6 +1822,7 @@ and arcs and bends.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    fill red(0.2)
    shape do
@@ -1827,6 +1858,7 @@ So, to draw an arrow with a red line around it:
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stroke red
    arrow 0, 100, 10
@@ -1957,8 +1989,8 @@ attached here which is called any type the user changes the text in the box.
  #!ruby
  Shoes.app do
    edit_box
-   edit_box "HORRAY EDIT ME"
-   edit_box "small one", :width => 100, :height => 160
+   edit_box text: "HORRAY EDIT ME"
+   edit_box text: "small one", :width => 100, :height => 160
  end
 }}}
 
@@ -2131,6 +2163,7 @@ window.  This way the child window can call the parent.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app :title => "The Owner" do
    button "Pop up?" do
      window do
@@ -2158,6 +2191,7 @@ away.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    s = stack :width => 200, :height => 200 do
      background red
@@ -2254,7 +2288,7 @@ The block is handed the cursor's `left` and `top` coordinates.
    background black
    fill white
    @circ = oval 0, 0, 100, 100
-
+ 
    motion do |top, left|
      @circ.move top - 50, left - 50
    end
@@ -2286,6 +2320,7 @@ Adds elements to the end of a slot.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    @slot = stack { para 'Good Morning' }
    timer 3 do
@@ -2339,6 +2374,7 @@ Adds elements to the beginning of a slot.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    @slot = stack { para 'Good Morning' }
    timer 3 do
@@ -2389,6 +2425,7 @@ This is commonly used to pad elements on the right, like so:
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack :margin_right => 20 + gutter do
      para "Insert fat and ratified declaration of independence here..."
@@ -2465,6 +2502,7 @@ originally requested.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    @s = stack :width => "100%"
    para @s.style[:width]
@@ -2481,6 +2519,7 @@ example, there is a `width` method, thus there is also a `width` style.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    @s = stack { background green }
    @s.style(:width => 400, :height => 200)
@@ -2554,13 +2593,14 @@ covered as the [[Position.style]] method for slots.)
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      # Background, text and a button: both are elements!
      @back  = background green
      @text  = banner "A Message for You, Rudy"
      @press = button "Stop your messin about!"
-
+ 
      # And so, both can be styled.
      @text.style :size => 12, :stroke => red, :margin => 10
      @press.style :width => 400
@@ -2587,13 +2627,14 @@ displace it 2 pixels left and 6 pixels on top, you end up with the coordinates
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    flow :margin => 12 do
      # Set up three buttons
      button "One"
      @two = button "Two"
      button "Three"
-
+ 
      # Bounce the second button
      animate do |i|
        @two.displace(0, (Math.sin(i) * 6).to_i)
@@ -2647,7 +2688,7 @@ positioned instead.
      button "One"
      @two = button "Two"
      button "Three"
-
+ 
      # Bounce the second button
      animate do |i|
        @two.move(40, 40 + (Math.sin(i) * 6).to_i)
@@ -2684,10 +2725,11 @@ original setting (things like "100%" for width or "10px" for top.)
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    # A button which take up the whole page
    @b = button "All of it", :width => 1.0, :height => 1.0
-
+ 
    # When clicked, show the styles
    @b.click { alert(@b.style.inspect) }
  end
@@ -2720,6 +2762,7 @@ a stack which is 120 pixels wide, you'll get back `120`.  However, if you call
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack :width => 120 do
      @b = button "Click me", :width => "100%" do
@@ -2864,6 +2907,7 @@ order to get them to work, you've got to hook up a block to each button.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    button "OK!" do
      append { para "Well okay then." }
@@ -2923,6 +2967,7 @@ Here's a sample checklist.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      flow { check; para "Frances Johnson" }
@@ -2940,16 +2985,17 @@ Okay, let's add to the above example.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    @list = ['Frances Johnson', 'Ignatius J. Reilly',
      'Winston Niles Rumfoord']
-
+ 
    stack do
      @list.map! do |name|
        flow { @c = check; para name }
        [@c, name]
      end
-
+ 
      button "What's been checked?" do
        selected = @list.map { |c, name| name if c.checked? }.compact
        alert("You selected: " + selected.join(', '))
@@ -3010,10 +3056,9 @@ every time someone types into or deletes from the box.
  #!ruby
  Shoes.app do
    edit_box do |e|
-     @counter.text = e.text.size
+     @counter.text = "#{e.text.size} characters"
    end
-   @counter = strong("0")
-   para @counter, " characters"
+   @counter = para strong("0"), " characters"
  end
 }}}
 
@@ -3102,7 +3147,7 @@ To create an image, use the `image` method in a slot:
  #!ruby
  Shoes.app do
    para "Nice, nice, very nice.  Busy, busy, busy."
-   image "static/shoes-manual-apps.gif"
+   image "../static/shoes-manual-apps.png"
   end
 }}}
 
@@ -3177,9 +3222,9 @@ You can adjust this length using the `:width` style.
    para "Choose a fruit:"
    list_box :items => ["Grapes", "Pears", "Apricots"],
      :width => 120, :choose => "Apricots" do |list|
-       @fruit.text = list.text
+       @fruit.text = list
    end
-
+ 
    @fruit = para "No fruit selected"
  end
 }}}
@@ -3236,13 +3281,11 @@ A simple progress bar is 200 pixels wide, but you can use the `:width` style
 
 {{{
  Shoes.app do
-   stack :margin => 0.1 do
-     title "Progress example"
-     @p = progress :width => 1.0
-
-     animate do |i|
-       @p.fraction = (i % 100) / 100.0
-     end
+   title "Progress example"
+   @p = progress left: 10, top: 100, width: width - 20
+ 
+   animate do |i|
+     @p.fraction = (i % 100) / 100.0
    end
  end
 }}}
@@ -3272,6 +3315,7 @@ marked.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    para "Among these films, which do you prefer?\n"
    radio; para strong("The Taste of Tea"), " by Katsuhito Ishii\n"
@@ -3287,6 +3331,7 @@ If we move them each into their own slot, the example breaks.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      para "Among these films, which do you prefer?"
@@ -3304,6 +3349,7 @@ Here, let's group all these radios in the `:films` group.
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
      para "Among these films, which do you prefer?"
