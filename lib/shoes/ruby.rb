@@ -37,6 +37,10 @@ class Object
     Gtk.main_quit
     File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
   end
+
+  def to_s
+    super.gsub('<', '[').gsub('>', ']')
+  end
 end
 
 class String
