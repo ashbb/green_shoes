@@ -33,7 +33,8 @@ class Manual < Shoes
     flow do
       background tr_color("#ddd")..white, angle: 90
       background black..green, height: 90
-      para fg("The Green Shoes Manual", gray), left: 120, top: 10
+      ver = IO.read File.join(DIR, '../VERSION')
+      para fg("The Green Shoes Manual #{ver}", gray), left: 120, top: 10
       title fg(docs_title, white), left: 120, top: 30, font: 'Coolvetica'
       image File.join(DIR, '../static/gshoes-icon.png'), left: 5, top: -12, width: 110, height: 110, nocontrol: true
 
@@ -75,7 +76,7 @@ class Manual < Shoes
           n = lines[1] =~ /\#\!ruby/ ? 2 : 1
           code = lines[n...-1].join(NL+'  ')
           flow do
-            background lightsteelblue, curve: 5
+            background rgb(190, 190, 190), curve: 5
             inscription link(fg('Run this', green)){eval mk_executable(code), TOPLEVEL_BINDING}, margin_left: 480
             para '  ', fg(code, maroon), NL
           end

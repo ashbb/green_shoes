@@ -88,6 +88,7 @@ class Shoes
       end
       
       if args[:create_real] or !layout_control
+        args[:width] = 1 if args[:width] <= 0
         surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
         context = Cairo::Context.new surface
         layout = context.create_pango_layout
@@ -523,6 +524,7 @@ class Shoes
       args = basic_attributes args
 
       if args[:create_real] and !args[:height].zero?
+        args[:width] = 1 if args[:width] <= 0
         surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
         context = Cairo::Context.new surface
         context.rounded_rectangle 0, 0, args[:width], args[:height], args[:curve]

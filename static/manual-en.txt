@@ -79,14 +79,14 @@ At first, install Ruby. On '''Windows''',
 visit the site of [[http://rubyinstaller.org/ RubyInstaller for Windows]] to 
 download '''RubyInstaller 1.9.2-p136'''.
 
-Then just do the following.
+Then just do the following one line.
 
- * gem install gtk2 --no-ri --no-rdoc
  * gem install green_shoes
 
 That's all. Too easy?
 
 '''Note:''' green_shoes gem is on [[http://rubygems.org/gems/green_shoes RubyGems.org]].
+If you get some errors of rdoc, try to add `--no-ri --no-rdoc` option.
 
 ==== Step 2: Start a New Text File ====
 
@@ -324,14 +324,15 @@ stack.'''
 Fixed widths on slots are great so you can split the window into columns.
 
 {{{
- # Not yet available
  Shoes.app do
    flow do
      stack :width => 200 do
+       background lavender
        caption "Column one"
        para "is 200 pixels wide"
      end
      stack :width => -200 do
+       background bisque
        caption "Column two"
        para "is 100% minus 200 pixels wide"
      end
@@ -352,7 +353,6 @@ On difference between normal slots and nested window slots is that the latter
 can have scrollbars.
 
 {{{
- # Not yet available
  Shoes.app do
    stack :width => 200, :height => 200, :scroll => true do
      background "#DFA"
@@ -366,6 +366,20 @@ can have scrollbars.
 These nested windows require more memory.  They tax the application a bit more.
 So if you're experiencing some slowness with hundreds of fixed-height slots,
 try a different approach.
+
+'''Note''': Fixed height magic (the slot becomes a nested window) is not implemented 
+in Green Shoes so far. Scrollbar will appear automatically but at main window only.
+
+{{{
+ Shoes.app do
+   stack :width => 200 do
+     background "#DFA"
+     100.times do |i|
+       para "Paragraph No. #{i}"
+     end
+   end
+ end
+}}}
 
 ==== Image and Shape Blocks ====
 
@@ -516,7 +530,7 @@ The second part is especially important to remember.
 
 {{{
  class Storage; end
-
+ 
  Shoes.app do
    para Storage.new
  end
