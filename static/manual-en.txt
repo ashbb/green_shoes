@@ -443,6 +443,9 @@ The point is: it's easy to group shapes together into image or shape blocks, so
 give it a try if you're looking to gain some speed.  Shape blocks particularly
 will save you some memory and speed.
 
+'''NOTE''': Green Shoes doesn't support this magic (grouping shapes together 
+into image or shape blocks) so far.
+
 ==== UTF-8 Everywhere ====
 
 Ruby itself isn't Unicode aware.  And UTF-8 is a type of Unicode.  (See
@@ -450,11 +453,11 @@ Ruby itself isn't Unicode aware.  And UTF-8 is a type of Unicode.  (See
 UTF-8.)
 
 However, UTF-8 is common on the web.  And lots of different platforms support
-it.  So to cut down on the amount of conversion that Shoes has to do, Shoes
-expects all strings to be in UTF-8 format.
+it.  So to cut down on the amount of conversion that Green Shoes has to do, 
+Green Shoes expects all strings to be in UTF-8 format.
 
 This is great because you can show a myriad of languages (Russian, Japanese,
-Spanish, English) using UTF-8 in Shoes.  Just be sure that your text editor
+Spanish, English) using UTF-8 in Green Shoes.  Just be sure that your text editor
 uses UTF-8!
 
 To illustrate:
@@ -471,8 +474,8 @@ To illustrate:
 }}}
 
 This app will copy anything you paste into the edit box and display it in a
-Shoes paragraph.  You can try copying some foreign text (such as Greek or
-Japanese) into this box to see how it displays.
+Green Shoes paragraph.  You can try copying some foreign text (such as 
+Greek or Japanese) into this box to see how it displays.
 
 This is a good test because it proves that the edit box gives back UTF-8
 characters.  And the paragraph can be set to any UTF-8 characters.
@@ -493,15 +496,15 @@ UI Gothic'''.
  end
 }}}
 
-Again, anything which takes a string in Shoes will need a UTF-8 string.  Edit
-boxes, edit lines, list boxes, window titles and text blocks all take UTF-8. If
-you give a string with bad characters in it, an error will show up in the
+Again, anything which takes a string in Green Shoes will need a UTF-8 string.
+Edit boxes, edit lines, list boxes, window titles and text blocks all take UTF-8.
+If you give a string with bad characters in it, an error will show up in the
 console.
 
 ==== The Main App and Its Requires ====
 
-'''NOTE:''' This rule is for Raisins. Policeman uses TOPLEVEL_BINDING. So, you
-can get `main`, Ruby top-level object, with the first snippet. Although you
+'''NOTE:''' This rule is for Raisins. Policeman and Green Shoes use TOPLEVEL_BINDING. 
+So, you can get `main`, Ruby top-level object, with the first snippet. Although you
 need to use `Shoes::Para` instead of `Para` outside `Shoes.app` block.
 
 Each Shoes app is given a little room where it can create itself.  You can

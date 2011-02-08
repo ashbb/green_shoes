@@ -589,7 +589,11 @@ class Shoes
     end
 
     def scroll_top
-      @swin.vadjustment.value
+      @swin.vscrollbar.value
+    end
+
+    def scroll_top=(n)
+      @swin.vscrollbar.value = n
     end
   end
 end

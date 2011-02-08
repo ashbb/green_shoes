@@ -6,6 +6,7 @@ class Manual < Shoes
     font LANG == 'ja' ? 'MS UI Gothic' : 'Arial'
     style Link, underline: false, weight: 'bold'
     style LinkHover, stroke: '#06E'
+    self.scroll_top = 0
     manual *get_title_and_desc(pnum.to_i)
   end
   

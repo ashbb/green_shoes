@@ -23,6 +23,7 @@ class Book < Shoes
   end
 
   def incident num
+    self.scroll_top = 0
     num = num.to_i
     stack  margin_left: 190 do
       banner "Incident"
