@@ -561,7 +561,7 @@ thorough and clear about everything.
 
 So, if you've hit this far in the manual and you're still hazy about getting
 started, you should probably either go back to the [[Hello! beginning]] of the
-manual. Or you could try [[https://github.com/downloads/shoes/shoes/nks.pdf Nobody Knows
+manual. Or you could try [[https://cloud.github.com/downloads/shoes/shoes/nks.pdf Nobody Knows
 Shoes]], the beginner's leaflet PDF.
 
 ==== Finding Your Way ====

@@ -99,9 +99,9 @@ class Manual < Shoes
   def show_paragraph txt, intro, i, dot = nil
     txt = txt.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
       gsub(/\^(.+?)\^/m, '\1').gsub(/'''(.+?)'''/m){strong($1)}.gsub(/''(.+?)''/m){em($1)}.
-      gsub(/\[\[BR\]\]/i, "\n").gsub(/\[\[(\S+?)\]\]/m){link ins($1.split('.').last)}.
-      gsub(/\[\[(\S+?) (.+?)\]\]/m){link ins($2)}
-    case txt
+      gsub(/\[\[BR\]\]/i, "\n")
+    txts = txt.split(/(\[\[\S+?\]\])/m).map{|s| s.split(/(\[\[\S+? .+?\]\])/m)}.flatten
+    case txts[0]
     when /\A==== (.+) ====/; caption $1, size: 24
     when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
     when /\A== (.+) ==/; subtitle $1
@@ -109,12 +109,18 @@ class Manual < Shoes
     when /\A\{COLORS\}/; flow{color_page}
     when /\A\{SAMPLES\}/; flow{sample_page}
     else
-      para txt.gsub(IMAGE_RE, ''), NL, (intro and i.zero?) ? {size: 16} : ''
+      para *mk_links(txts), NL, (intro and i.zero?) ? {size: 16} : ''
       txt.gsub IMAGE_RE do
         image File.join(DIR, "../static/#{$3}"), eval("{#{$2 or "margin_left: 50"}}")
         para
       end
     end
+  end
+
+  def mk_links txts
+    txts.map{|txt| txt.gsub(IMAGE_RE, '')}.
+      map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1; link(ins t.split('.').last){puts t}) : txt}.
+      map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins $2){visit url}) : txt}
   end
 
   def mk_paras str

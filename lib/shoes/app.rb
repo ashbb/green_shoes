@@ -26,8 +26,17 @@ class Shoes
     attr_reader :link_style, :linkhover_style, :animates
 
     def visit url
-      $urls.each do |k, v|
-        clear{init_app_vars; v.call self, $1} if k =~ url
+      if url =~ /^(http|https):\/\//
+	Thread.new do
+          case RUBY_PLATFORM
+          when /mingw/; system "start #{url}"
+          when /linux/; system("/etc/alternatives/x-www-browser #{url} &")
+          else
+            puts "Sorry, your platform [#{RUBY_PLATFORM}] is not supported..."
+          end
+        end
+      else
+        $urls.each{|k, v| clear{init_app_vars; v.call self, $1} if k =~ url}
       end
     end
     
