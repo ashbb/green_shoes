@@ -34,8 +34,7 @@ class Manual < Shoes
     flow do
       background tr_color("#ddd")..white, angle: 90
       background black..green, height: 90
-      ver = IO.read File.join(DIR, '../VERSION')
-      para fg("The Green Shoes Manual #{ver}", gray), left: 120, top: 10
+      para fg("The Green Shoes Manual #{VERSION}", gray), left: 120, top: 10
       title fg(docs_title, white), left: 120, top: 30, font: 'Coolvetica'
       image File.join(DIR, '../static/gshoes-icon.png'), left: 5, top: -12, width: 110, height: 110, nocontrol: true
 

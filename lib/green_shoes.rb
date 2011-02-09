@@ -18,6 +18,7 @@ module Shoes
   LINK_DEFAULT = "<span underline='single' underline_color='#06E' foreground='#06E' weight='normal'>"
   LINKHOVER_DEFAULT = "<span underline='single' underline_color='#039' foreground='#039' weight='normal'>"
   ROTATE = [Gdk::Pixbuf::ROTATE_NONE, Gdk::Pixbuf::ROTATE_CLOCKWISE, Gdk::Pixbuf::ROTATE_UPSIDEDOWN, Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE]
+  VERSION = IO.read(File.join(DIR, '../VERSION')).chomp
 end
 
 class Object

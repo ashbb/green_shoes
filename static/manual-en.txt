@@ -621,19 +621,24 @@ slots.  See the section on [[Slots]] for more.
 
 ==== Built-in Constants ====
 
-Shoes also has a handful of built-in constants which may prove useful if you
-are trying to sniff out what release of Shoes is running.
+Green Shoes also has a handful of built-in constants which may prove useful if you
+are trying to sniff out what release of Green Shoes is running.
 
-'''Shoes::RELEASE_NAME''' contains a string with the name of the Shoes release.
-All Shoes releases are named, starting with Curious.
+'''DIR''' is a full path of `green_shoes/lib`. 
 
-'''Shoes::RELEASE_ID''' contains a number representing the Shoes release.  So,
-for example, Curious is number 1, as it was the first official release.
+'''COLORS''' is a complete list of colors available to the app. 
 
-'''Shoes::REVISION''' is the Subversion revision number for this build.
+'''FONTS''' is a complete list of fonts available to the app. 
 
-'''Shoes::FONTS''' is a complete list of fonts available to the app.  This list
-includes any fonts loaded by the [[Built-in.font]] method.
+{{{
+ Shoes.app do
+   para VERSION
+   para fg(DIR, red)
+   image File.join(DIR, '../static/gshoes-icon.png')
+   para fg(FONTS.join(', '), green)
+   para COLORS.map{|k, v| [k, v]}
+ end
+}}}
 
 === alert(message: a string) » nil ===
 
