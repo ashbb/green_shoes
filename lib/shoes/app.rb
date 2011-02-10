@@ -27,7 +27,7 @@ class Shoes
 
     def visit url
       if url =~ /^(http|https):\/\//
-	Thread.new do
+        Thread.new do
           case RUBY_PLATFORM
           when /mingw/; system "start #{url}"
           when /linux/; system("/etc/alternatives/x-www-browser #{url} &")

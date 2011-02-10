@@ -7,6 +7,7 @@ class Manual < Shoes
     style Link, underline: false, weight: 'bold'
     style LinkHover, stroke: '#06E'
     self.scroll_top = 0
+    table_of_contents.each{|toc| TOC << toc} if TOC.empty?
     manual *get_title_and_desc(pnum.to_i)
   end
   
@@ -26,6 +27,7 @@ class Manual < Shoes
       chapter, section = e
       title = section ? DOCS[chapter][1][:sections][section][1][:title] : DOCS[chapter][0]
       title = title.sub('The', '').split(' ').first
+      TOC_LIST << [title, section]
       section ? ['   ', link(title){visit "/manual/#{pnum}"}, "\n"] : [link(fg(title, darkgreen)){visit "/manual/#{pnum}"}, "\n"]
     end.flatten
   end
@@ -42,7 +44,7 @@ class Manual < Shoes
 
       stack{para NL * 4}
       flow width: 0.2, margin_left: 10 do
-        para *table_of_contents
+        para *TOC
       end
         
       flow width: 0.8, margin: [10, 0, 20, 0] do
@@ -119,7 +121,7 @@ class Manual < Shoes
 
   def mk_links txts
     txts.map{|txt| txt.gsub(IMAGE_RE, '')}.
-      map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1; link(ins t.split('.').last){puts t}) : txt}.
+      map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1.split('.'); link(ins t.last){visit "/manual/#{find_pnum t.first}"}) : txt}.
       map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins $2){visit url}) : txt}
   end
 
@@ -166,6 +168,13 @@ class Manual < Shoes
       end
     end
   end
+  
+  def find_pnum page
+    TOC_LIST.each_with_index do |e, i|
+      title, section = e
+      return i if title == page
+    end
+  end
 
   def self.load_docs path
     str = IO.read(path).force_encoding("UTF-8")
@@ -201,6 +210,7 @@ class Manual < Shoes
   DOCS = load_docs File.join(DIR, "../static/manual-#{LANG}.txt")
   PNUMS = mk_page_numbers DOCS
   PEND = PNUMS.length
+  TOC, TOC_LIST = [], []
   COLORS = Shoes::App::COLORS
 end
 
