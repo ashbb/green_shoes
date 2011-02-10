@@ -36,7 +36,9 @@ class Shoes
           end
         end
       else
-        $urls.each{|k, v| clear{init_app_vars; v.call self, $1} if k =~ url}
+        timer 0.001 do
+          $urls.each{|k, v| clear{init_app_vars; v.call self, $1} if k =~ url}
+        end
       end
     end
     
