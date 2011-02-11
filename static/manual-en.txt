@@ -839,11 +839,11 @@ Or, use a decimal number from 0.0 to 1.0.
 == The App Object ==
 
 An App is a single window running code at a URL. When you switch URLs, a new
-App object is created and filled up with stacks, flows and other Shoes
+App object is created and filled up with stacks, flows and other Green Shoes
 elements.
 
 The App is the window itself. Which may be closed or cleared and filled with
-new elements. !{:margin_left => 100}man-app.png!
+new elements. !{:margin_left => 100}../snapshots/sample46.png!
 
 The App itself, in slot/box terminology, is a flow.  See the ''Slots'' section
 for more, but this just means that any elements placed directly at the
@@ -851,24 +851,22 @@ top-level will flow.
 
 === Shoes.app(styles) { ... } » Shoes::App ===
 
-Starts up a Shoes app window.  This is the starting place for making a Shoes
-program.  Inside the block, you fill the window with various Shoes elements
-(buttons, artwork, etc.) and, outside the block, you use the `styles` to
-describe how big the window is.  Perhaps also the name of the app or if it's
-resizable.
+Starts up a Green Shoes app window.  This is the starting place for making a Green 
+Shoes program.  Inside the block, you fill the window with various Green Shoes 
+elements (buttons, artwork, etc.) and, outside the block, you use the `styles` to
+describe how big the window is.  Perhaps also the name of the app.
 
 {{{
  #!ruby
- Shoes.app(:title => "White Circle",
-   :width => 200, :height => 200, :resizable => false) {
-     background black
-     fill white
-     oval :top => 20, :left => 20, :radius => 160
- }
+ Shoes.app title: "White Circle", width: 200, height: 200 do
+    background black
+    fill white
+    oval top: 20, left: 20, radius: 160
+ end
 }}}
 
-In the case above, a small window is built.  200 pixels by 200 pixels.  It's
-not resizable.  And, inside the window, two elements: a black background and a
+In the case above, a small window is built.  200 pixels by 200 pixels.
+And, inside the window, two elements: a black background and a
 white circle.
 
 Once an app is created, it is added to the [[App.Shoes.APPS]] list.  If you
