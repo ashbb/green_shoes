@@ -122,7 +122,7 @@ class Manual < Shoes
   def mk_links txts
     txts.map{|txt| txt.gsub(IMAGE_RE, '')}.
       map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1.split('.'); link(ins t.last){visit "/manual/#{find_pnum t.first}"}) : txt}.
-      map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins $2){visit url}) : txt}
+      map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins $2){visit url =~ /^http/ ? url : "/manual/#{find_pnum url}"}) : txt}
   end
 
   def mk_paras str

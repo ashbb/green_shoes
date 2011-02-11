@@ -551,7 +551,7 @@ keep your permanent classes in requires.'''
 
 = Shoes =
 
-Shoes is all about drawing windows and the stuff inside those windows.  Let's
+Green Shoes is all about drawing windows and the stuff inside those windows.  Let's
 focus on the window itself, for now.  The other sections [[Slots]] and
 [[Elements]] cover everything that goes inside the window.
 
@@ -568,14 +568,16 @@ Shoes]], the beginner's leaflet PDF.
 
 This section covers:
 
- * [[Built-in Built-in methods]] - general methods available anywhere in a Shoes program.
- * [[App The App window]] - methods found attached to every main Shoes window.
- * [[Styles The Styles Master List]] - a complete list of every style in Shoes.
- * [[Classes The Classes list]] - a chart showing what Shoes classes subclass what.
+ * [[Built-in Built-in methods]] - general methods available anywhere in a Green Shoes program.
+ * [[App The App window]] - methods found attached to every main Green Shoes window.
+ * [[Styles The Styles Master List]] - a complete list of every style in Green Shoes.
+ * [[Classes The Classes list]] - a chart showing what Green Shoes classes subclass what.
  * [[Colors The Colors list]] - a chart of all built-in colors and the [[Built-in.rgb]] numbers for each.
 
 If you find yourself paging around a lot and not finding something, give the
 [[Search]] page a try. It's the quickest way to get around.
+
+'''Note:''' Green Shoes doesn't support Search page so far.
 
 After this general reference, there are two other more specific sections:
 
@@ -588,7 +590,7 @@ page (which lists methods you'll find on any slot or element.)
 
 == Built-in Methods ==
 
-These methods can be used anywhere throughout Shoes programs.
+These methods can be used anywhere throughout Green Shoes programs.
 
 All of these commands are unusual because you don't attach them with a dot.
 '''Every other method in this manual must be attached to an object with a dot.'''
@@ -616,7 +618,7 @@ available for Arrays and Strings:
  end
 }}}
 
-Most Shoes methods for drawing and making buttons and so on are attached to
+Most Green Shoes methods for drawing and making buttons and so on are attached to
 slots.  See the section on [[Slots]] for more.
 
 ==== Built-in Constants ====
@@ -651,7 +653,7 @@ Pops up a window containing a short message.
 
 Please use alerts sparingly, as they are incredibly annoying!  If you are using
 alerts to show messages to help you debug your program, try checking out the
-[[Built-in.debug]] or [[Built-in.info]] methods.
+standard Ruby method `puts` or `p` methods.
 
 === ask(message: a string) » a string ===
 
@@ -749,29 +751,6 @@ you'll get back a `true`. If not, you'll get back `false`.
  end
 }}}
 
-=== debug(message: a string) » nil ===
-
-Sends a debug message to the Shoes console.  You can bring up the Shoes console
-by pressing `Alt-/` on any Shoes window (or `⌘-/` on OS X.)
-
-{{{
- #!ruby
- # Not yet available
- debug("Running Shoes on " + RUBY_PLATFORM)
-}}}
-
-Also check out the [[Built-in.error]], [[Built-in.warn]] and [[Built-in.info]]
-methods.
-
-=== error(message: a string) » nil ===
-
-Sends an error message to the Shoes console.  This method should only be used
-to log errors.  Try the [[Built-in.debug]] method for logging messages to
-yourself.
-
-Oh, and, rather than a string, you may also hand exceptions directly to this
-method and they'll be formatted appropriately.
-
 === exit() ===
 
 Stops your program. Call this anytime you want to suddenly call it quits.
@@ -784,6 +763,8 @@ forked Ruby process,) call `Kernel.exit`.
 Loads a TrueType (or other type of font) from a file.  While TrueType is
 supported by all platforms, your platform may support other types of fonts.
 Shoes uses each operating system's built-in font system to make this work.
+
+'''Note:''' Green Shoes doesn't support font method so far.
 
 Here's a rough idea of what fonts work on which platforms:
 
@@ -805,22 +786,18 @@ available to you on this platform.  You can check for a certain font by using
 `include?`.
 
 {{{
- # Not yet available
- if Shoes::FONTS.include? "Helvetica"
-   alert "Helvetica is available on this system."
- else
-   alert "You do not have the Helvetica font."
- end
+ Shoes.app do
+   if Shoes::FONTS.include? "Coolvetica"
+     alert "Coolvetica is available on this system."
+   else
+     alert "You do not have the Coolvetica font."
+   end
+end
 }}}
 
 If you have trouble with fonts showing up, make sure your app loads the font
 before it is used.  Especially on OS X, if fonts are used before they are
 loaded, the font cache will tend to ignore loaded fonts.
-
-=== gradient(color1, color2) » Shoes::Pattern ===
-
-Builds a linear gradient from two colors.  For each color, you may pass in a
-Shoes::Color object or a string describing the color.
 
 === gray(the numbers: darkness, alpha) » Shoes::Color ===
 
@@ -833,22 +810,8 @@ level.
  white = gray(1.0)
 }}}
 
-=== info(message: a string) » nil ===
 
-Logs an informational message to the user in the Shoes console.  So, where
-debug messages are designed to help the program figure out what's happening,
-`info` messages tell the user extra information about the program.
-
-{{{
- #!ruby
- # Not yet available
- info("You just ran the info example on Shoes #{Shoes::RELEASE_NAME}.")
-}}}
-
-For example, whenever a Shy file loads, Shoes prints an informational message
-in the console describing the author of the Shy and its version.
-
-=== rgb(a series of numbers: red, green, blue, alpha) » Shoes::Color ===
+=== rgb(red, green, blue, alpha) » an array of decimal numbers ===
 
 Create a color from red, green and blue components.  An alpha level (indicating
 transparency) can also be added, optionally.
@@ -857,8 +820,8 @@ When passing in a whole number, use values from 0 to 255.
 
 {{{
  Shoes.app do
-   blueviolet = rgb(138, 43, 226)
-   darkgreen = rgb(0, 100, 0)
+   blueviolet = rgb(138, 43, 226, 0.5)
+   darkgreen = rgb(0, 100, 0, 0.5)
    oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
  end
 }}}
@@ -872,18 +835,6 @@ Or, use a decimal number from 0.0 to 1.0.
    oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
  end
 }}}
-
-This method may also be called as `Shoes.rgb`.
-
-=== warn(message: a string) » nil ===
-
-Logs a warning for the user.  A warning is not a catastrophic error (see
-[[Built-in.error]] for that.)  It is just a notice that the program will be
-changing in the future or that certain parts of the program aren't reliable
-yet.
-
-To view warnings and errors, open the Shoes console with `Alt-/` (or `⌘-/` on
-OS X.)
 
 == The App Object ==
 
