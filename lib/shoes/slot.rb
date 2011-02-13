@@ -51,9 +51,18 @@ class Shoes
         @height = Shoes.contents_alignment self
         max = self
       end
-      max.height = @height = @initials[:height] unless @initials[:height].zero?
+      case @initials[:height]
+      when 0
+      when Float
+        max.height = @height = (parent.height * @initials[:height]).to_i
+      else
+        max.height = @height = @initials[:height]
+      end
+      contents.each &:fix_size
       max
     end
+
+    def fix_size; end
     
     def clear &blk
       @contents.each &:clear

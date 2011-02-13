@@ -2,6 +2,7 @@ class Shoes
   class Basic
     include Mod
     def initialize args
+      @initials = args
       args.each do |k, v|
         instance_variable_set "@#{k}", v
       end
@@ -27,7 +28,7 @@ class Shoes
       @hided, @shows, @hovered = false, true, false
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :hover_proc, :leave_proc, :args, :shows
+    attr_reader :parent, :click_proc, :release_proc, :hover_proc, :leave_proc, :args, :shows, :initials
     attr_accessor :hided, :hovered
 
     def move x, y
@@ -93,6 +94,29 @@ class Shoes
         max = self
       end
       max
+    end
+
+    def fix_size
+      set_margin
+      case self
+      when EditBox, Button
+        if 0 < @initials[:width] and @initials[:width] <= 1.0
+          @width = @parent.width * @initials[:width] - @margin_left - @margin_right
+        end
+        if 0 < @initials[:height] and @initials[:height] <= 1.0
+          @height = @parent.height * @initials[:height] - @margin_top - @margin_bottom
+        end
+        @real.set_size_request @width, @height
+	move @left, @top
+      when EditLine, ListBox
+        if 0 < @initials[:width] and @initials[:width] <= 1.0
+          @width = @parent.width * @initials[:width] - @margin_left - @margin_right
+          @height = 26
+        end
+        @real.set_size_request @width, @height
+        move @left, @top
+      else
+      end
     end
 
     def click &blk
