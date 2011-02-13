@@ -97,25 +97,29 @@ class Shoes
     end
 
     def fix_size
+      flag = false
       set_margin
       case self
       when EditBox, Button
         if 0 < @initials[:width] and @initials[:width] <= 1.0
           @width = @parent.width * @initials[:width] - @margin_left - @margin_right
+          flag = true
         end
         if 0 < @initials[:height] and @initials[:height] <= 1.0
           @height = @parent.height * @initials[:height] - @margin_top - @margin_bottom
+          flag = true
         end
-        @real.set_size_request @width, @height
-	move @left, @top
       when EditLine, ListBox
         if 0 < @initials[:width] and @initials[:width] <= 1.0
           @width = @parent.width * @initials[:width] - @margin_left - @margin_right
           @height = 26
+          flag = true
         end
-        @real.set_size_request @width, @height
-        move @left, @top
       else
+      end
+      if flag
+        @real.set_size_request @width, @height
+	move @left, @top
       end
     end
 
