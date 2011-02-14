@@ -2,6 +2,9 @@ class Shoes
   include Types
   @apps = []
   $urls = {}
+  APPS = []
+
+  def self.APPS; APPS end
 
   def self.app args={}, &blk
     args[:width] ||= 600
@@ -33,6 +36,7 @@ class Shoes
     win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK
 
     win.signal_connect "delete-event" do
+      Shoes.APPS.delete app
       app.animates.each &:stop
       false
     end

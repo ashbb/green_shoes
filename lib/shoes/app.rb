@@ -18,6 +18,7 @@ class Shoes
       @width_pre, @height_pre = @width, @height
       @link_style, @linkhover_style = LINK_DEFAULT, LINKHOVER_DEFAULT
       @context_angle = @pixbuf_rotate = 0
+      Shoes.APPS << self
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
