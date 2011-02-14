@@ -875,9 +875,16 @@ want an app to spawn more windows, see the [[Element.window]] method and the
 
 === Shoes.APPS() » An array of Shoes::App objects ===
 
-Builds a complete list of all the Shoes apps that are open right now.  Once an
+Builds a complete list of all the Green Shoes apps that are open right now.  Once an
 app is closed, it is removed from the list.  Yes, you can run many apps at once
-in Shoes.  It's completely encouraged.
+in Green Shoes.  It's completely encouraged.
+
+{{{
+ Shoes.app do
+   button('Open a new app'){Shoes.app{}}
+   button('Print Shoes.APPS'){p Shoes.APPS}
+ end
+}}}
 
 === clipboard() » a string ===
 
