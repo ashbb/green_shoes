@@ -607,5 +607,13 @@ class Shoes
     def scroll_top=(n)
       @swin.vscrollbar.value = n
     end
+
+    def clipboard
+      Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD).wait_for_text
+    end
+
+    def clipboard=(str)
+      Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD).text = str
+    end
   end
 end
