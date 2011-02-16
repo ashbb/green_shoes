@@ -927,47 +927,39 @@ events.  You can send the download to a file or just get back a string (in the
 If you attach a block to a download, it'll get called as the `finish` event.
 
 {{{
- #!ruby
- # Not yet available
  Shoes.app do
    stack do
-     title "Searching Google", :size => 16
+     title "Searching Google", size: 16
      @status = para "One moment..."
  
      # Search Google for 'shoes' and print the HTTP headers
      download "http://www.google.com/search?q=shoes" do |goog|
-       @status.text = "Headers: " + goog.response.headers.inspect
+       @status.text = "Headers: #{goog.meta}"
      end
    end
  end
 }}}
 
-And, if we wanted to use the downloaded data, we'd get it using
-`goog.response.body`.  This example is truly the simplest form of `download`:
+This example is truly the simplest form of `download`:
 pulling some web data down into memory and handling it once it's done.
 
 Another simple use of `download` is to save some web data to a file, using the
 `:save` style.
 
 {{{
- #!ruby
- # Not yet available
  Shoes.app do
    stack do
-     title "Downloading Google image", :size => 16
+     title "Downloading Google image", size: 16
      @status = para "One moment..."
  
      download "http://www.google.com/logos/nasa50th.gif",
        :save => "nasa50th.gif" do
-         @status.text = "Okay, is downloaded."
+	@status.text = "Okay, is downloaded."
+	image "nasa50th.gif", top: 100
      end
    end
  end
 }}}
-
-In this case, you can still get the headers for the downloaded file, but
-`response.body` will be `nil`, since the data wasn't saved to memory.  You will
-need to open the file to get the downloaded goods.
 
 If you need to send certain headers or actions to the web server, you can use
 the `:method`, `:headers` and `:body` styles to customize the HTTP request.
@@ -979,7 +971,7 @@ class.)
  # Not yet available
  Shoes.app do
    stack do
-     title "GET Google", :size => 16
+     title "GET Google", size: 16
      @status = para "One moment..."
  
      download "http://www.google.com/search?q=shoes", 
@@ -993,9 +985,13 @@ class.)
 As you can see from the above example, Shoes makes use of the "GET" method to
 query google's search engine.
 
+'''Note:''' Green Shoes doesn't support the `:method`, `:headers` and `:body` styles.
+
 === location() » a string ===
 
 Gets a string containing the URL of the current app.
+
+'''Note:''' Green Shoes doesn't support location method so far.
 
 === mouse() » an array of numbers: button, left, top ===
 
@@ -1019,18 +1015,22 @@ Gets the app which launched this app.  In most cases, this will be `nil`.  But
 if this app was launched using the [[Element.window]] method, the owner will be
 the app which called `window`.
 
+'''Note:''' Green Shoes doesn't support owner method so far.
+
 === started?() » true or false ===
 
 Has the window been fully constructed and displayed?  This is useful for
 threaded code which may try to use the window before it is completely built.
 (Also see the `start` event which fires once the window is open.)
 
+'''Note:''' Green Shoes doesn't support started? method so far.
+
 === visit(url: a string) ===
 
 Changes the location, in order to view a different Shoes URL.
 
-Absolute URLs (such as http://google.com) are okay, but Shoes will be expecting
-a Shoes application to be at that address.  (So, google.com won't work, as it's
+Absolute URLs (such as http://google.com) are okay, but Green Shoes will be expecting
+a Green Shoes application to be at that address.  (So, google.com won't work, as it's
 an HTML app.)
 
 == The Styles Master List ==
