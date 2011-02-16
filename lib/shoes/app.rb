@@ -615,5 +615,12 @@ class Shoes
     def clipboard=(str)
       Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD).text = str
     end
+
+    def close
+      win.destroy
+      Gtk.main_quit
+      Shoes.APPS.delete app
+      exit if Shoes.APPS.empty?
+    end
   end
 end

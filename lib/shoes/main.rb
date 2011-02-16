@@ -36,13 +36,12 @@ class Shoes
     win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK
 
     win.signal_connect "delete-event" do
-      Shoes.APPS.delete app
       app.animates.each &:stop
       false
     end
 
     win.signal_connect "destroy" do
-      app.exit
+      app.close
     end if @apps.size == 1
 
     win.signal_connect "button_press_event" do |w, e|

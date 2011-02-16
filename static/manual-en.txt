@@ -901,6 +901,21 @@ Stores `a string` of text in the system clipboard.
 Closes the app window.  If multiple windows are open and you want to close the
 entire application, use the built-in method `exit`.
 
+{{{
+ Shoes.app do
+   para 'hello'
+   button 'spawn' do
+     Shoes.app do
+       para 'hello'
+       button('close: close this window only'){close}
+       button('exit: quit Green Shoes'){exit}
+     end
+   end
+   button('close: close this window only'){close}
+   button('exit: quit Green Shoes'){exit}
+ end
+}}}
+
 === download(url: a string, styles) ===
 
 Starts a download thread (much like XMLHttpRequest, if you're familiar with

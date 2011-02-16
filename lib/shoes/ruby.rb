@@ -34,7 +34,7 @@ class Object
   end
   
   def exit
-    Gtk.main_quit
+    (Shoes.APPS.length + 1).times{|i| timer(0.01*i){Gtk.main_quit}}
     File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
   end
 
