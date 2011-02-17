@@ -1035,52 +1035,55 @@ an HTML app.)
 
 == The Styles Master List ==
 
-You want to mess with the look of things?  Well, throughout Shoes, styles are
+You want to mess with the look of things?  Well, throughout Green Shoes, styles are
 used to change the way elements appear.  In some cases, you can even style an
-entire class of elements.  (Like giving all paragraphs a certain font.)
+entire class of elements.  (Like giving all links without an underline.)
 
 Styles are easy to spot.  They usually show up when the element is created.
 
 {{{
- Shoes.app :title => "A Styling Sample" do
-   para "Red with an underline", :stroke => red, :underline => "single"
+ Shoes.app title: "A Styling Sample" do
+   para 'Green Shoes', align: 'center', size: 50
  end
 }}}
 
 Here we've got a `:title` style on the app.  And on the paragraph inside the
-app, a red `:stroke` style and an `:underline` style.
+app, a center `:align` style and 50 font `:size` style.
 
 The style hash can also be changed by using the [[Common.style]] method,
 available on every element and slot.
 
+'''Note:''' Green Shoes can change style hash on Shape element only so far.
+
 {{{
- # Not yet available
- Shoes.app :title => "A Styling Sample" do
-   @text = para "Red with an underline"
-   @text.style(:stroke => red, :underline => "single")
+ Shoes.app title: "A Styling Sample" do
+   choose = lambda{[red, blue, green, yellow].sample}
+   s = star 100, 50, 30, 200, 180, strokewidth: 5
+   button('change colors'){s.style stroke: choose.call, fill: choose.call}
  end
 }}}
 
 Most styles can also be set by calling them as methods.  (I'd use the manual
 search to find the method.)
 
+'''Note:''' Green Shoes doesn't support them as methods.
+
 {{{
  # Not yet available
- Shoes.app :title => "A Styling Sample" do
-   @text = para "Red with an underline"
-   @text.stroke = red
-   @text.underline = "single"
+ Shoes.app title: "A Styling Sample" do
+   choose = lambda{[red, blue, green, yellow].sample}
+   s = star 100, 50, 30, 200, 180, strokewidth: 5
+   button('change colors'){s.stroke = choose.call; s.fill = choose.call}
  end
 }}}
 
 Rather than making you plow through the whole manual to figure out what styles
-go where, this helpful page speeds through every style in Shoes and suggests
+go where, this helpful page speeds through every style in Green Shoes and suggests
 where that style is used.
 
 === :align » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''
+For: ''banner, caption, inscription, para, subtitle, tagline, title''
 
 The alignment of the text. It is either:
 
@@ -1090,7 +1093,7 @@ The alignment of the text. It is either:
 
 === :angle » a number ===
 
-For: ''background, border, gradient''.
+For: ''background, border, line, oval, rect, shape, star''.
 
 The angle at which to apply a gradient.  Normally, gradient colors range from
 top to bottom.  If the `:angle` is set to 90, the gradient will rotate 90
@@ -1109,12 +1112,16 @@ If a slot is attached to an element that moves, the slot will move with it.  If
 the attachment is reset to `nil`, the slot will flow in with the other objects
 that surround, as normal.
 
+'''Note:''' Green Shoes doesn't support `:attach` style.
+
 === :autoplay » true or false ===
 
 For: ''video''.
 
 Should this video begin playing after it appears?  If set to `true`, the video
 will start without asking the user.
+
+'''Note:''' Green Shoes doesn't support ''video''.
 
 === :bottom » a number ===
 
@@ -1124,12 +1131,16 @@ Sets the pixel coordinate of an element's lower edge.  The edge is placed
 relative to its container's lower edge.  So, `:bottom => 0` will align the
 element so that its bottom edge and the bottom edge of its slot touch.
 
+'''Note:''' Green Shoes doesn't support `:bottom` style.
+
 === :cap » :curve or :rect or :project ===
 
 For: ''arc, arrow, border, flow, image, mask, rect, star, shape, stack''.
 
 Sets the shape of the line endpoint, whether curved or square.  See the
 [[Art.cap]] method for more explanation.
+
+'''Note:''' Green Shoes doesn't support `:cap` style.
 
 === :center » true or false ===
 
@@ -1139,6 +1150,8 @@ Indicates whether the `:top` and `:left` coordinates refer to the center of the
 shape or not.  If set to `true`, this is similar to setting the
 [[Art.transform]] method to `:center`.
 
+'''Note:''' Green Shoes doesn't support `:center` style.
+
 === :change » a proc ===
 
 For: ''edit_box, edit_line, list_box''.
@@ -1146,12 +1159,16 @@ For: ''edit_box, edit_line, list_box''.
 The `change` event handler is stored in this style.  See the [[EditBox.change]]
 method for the edit_box, as an example.
 
+'''Note:''' Green Shoes doesn't support `:change` style.
+
 === :checked » true or false ===
 
 For: ''check, radio''.
 
 Is this checkbox or radio button checked?  If set to `true`, the box is
 checked.  Also see the [[Check.checked=]] method.
+
+'''Note:''' Green Shoes doesn't support ''check'' and ''radio''.
 
 === :choose » a string ===
 
@@ -1168,6 +1185,8 @@ tagline, title''.
 
 The `click` event handler is stored in this style.  See the [[Events.click]]
 method for a description.
+
+'''Note:''' Green Shoes doesn't support `:click` style.
 
 === :curve » a number ===
 
@@ -1187,6 +1206,8 @@ negative number displaces to the left.  Displacing an object doesn't effect the
 actual layout of the page.  Before using this style, be sure to read the
 [[Position.displace]] docs, since its behavior can be a bit surprising.
 
+'''Note:''' Green Shoes doesn't support `:displace_left` style.
+
 === :displace_top » a number ===
 
 For: ''all slots and elements''.
@@ -1196,6 +1217,8 @@ number moves the object down by this number of pixels; a negative number moves
 it up.  Displacing doesn't effect the actual layout of the page or the object's
 true coordinates.  Read the [[Position.displace]] docs, since its behavior can
 be a bit surprising.
+
+'''Note:''' Green Shoes doesn't support `:displace_top` style.
 
 === :emphasis » a string ===
 
@@ -1210,6 +1233,8 @@ This style recognizes three possible settings:
  * "oblique" - the font is slanted, but in a roman style.
  * "italic" - the font is slanted in an italic style. 
 
+'''Note:''' Green Shoes doesn't support `:emphasis` style.
+
 === :family » a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
@@ -1218,20 +1243,18 @@ strong, sub, sup, subtitle, tagline, title''.
 Styles the text with a given font family.  The string should contain the family
 name or a comma-separated list of families.
 
-=== :fill » a hex code, a Shoes::Color or a range of either ===
+'''Note:''' Green Shoes doesn't support `:family` style.
 
-For: ''arc, arrow, background, banner, caption, code, del, em, flow, image,
-ins, inscription, line, link, mask, oval, para, rect, shape, span, stack, star,
-strong, sub, sup, subtitle, tagline, title''.
+=== :fill » a hex code, a rgb array or a range of either ===
+
+For: ''background, border, line, oval, rect, shape, star''.
 
 The color of the background pen.  For shapes, this is the fill color, the paint
-inside the shape.  For text stuffs, this color is painted in the background (as
-if marked with a highlighter pen.)
+inside the shape.  
 
 === :font » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Styles the text with a font description.  The string is pretty flexible, but
 can take the form "[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]", where FAMILY-LIST is
@@ -1255,6 +1278,8 @@ at a time.
 By giving this style a string, the radio button will be grouped with other
 radio buttons that have the same group name.
 
+'''Note:''' Green Shoes doesn't support ''radio''.
+
 === :height » a number ===
 
 For: ''all slots and elements''.
@@ -1269,6 +1294,8 @@ For: ''all slots and elements''.
 
 Hides or shows this object.  Any object with `:hidden => true` are not
 displayed on the screen.  Neither are its children.
+
+'''Note:''' Green Shoes doesn't support `:hidden` style.
 
 === :inner » a number ===
 
@@ -1291,6 +1318,8 @@ strong, sub, sup, subtitle, tagline, title''
 
 Evenly spaces the text horizontally.
 
+'''Note:''' Green Shoes doesn't support `:justify` style.
+
 === :kerning » a number ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
@@ -1298,18 +1327,22 @@ strong, sub, sup, subtitle, tagline, title''.
 
 Adds to the natural spacing between letters, in pixels.
 
+'''Note:''' Green Shoes doesn't support `:kerning` style.
+
 === :leading » a number ===
 
 For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Sets the spacing between lines in a text block.  Defaults to 4 pixels.
 
+'''Note:''' Green Shoes doesn't support `:leading` style.
+
 === :left » a number ===
 
 For: ''all slots and elements''.
 
-Sets the left coordinate of this object to a specific pixel.  Setting `:left =>
-10` places the object's left edge ten pixels away from the left edge of the
+Sets the left coordinate of this object to a specific pixel.  Setting `left: 10` 
+places the object's left edge ten pixels away from the left edge of the
 slot containing it.  If this style is left unset (or set to `nil`,) the object
 will flow in with the other objects surrounding it.
 
@@ -1320,7 +1353,7 @@ For: ''all slots and elements''.
 Margins space an element out from its surroundings.  Each element has a left,
 top, right, and bottom margin.  If the `:margin` style is set to a single
 number, the spacing around the element uniformly matches that number.  In other
-words, if `:margin => 8` is set, all the margins around the element are set to
+words, if `margin: 8` is set, all the margins around the element are set to
 eight pixels in length.
 
 This style can also be given an array of four numbers in the form `[left, top,
@@ -1360,12 +1393,12 @@ Sets the outer radius (half of the ''total'' width) of the star, in pixels.
 
 For: ''star''.
 
-How many points does this star have?  A style of `:points => 5` creates a
+How many points does this star have?  A style of `points: 5` creates a
 five-pointed star.
 
 === :radius » a number ===
 
-For: ''arc, arrow, background, border, gradient, oval, rect, shape''.
+For: ''oval''.
 
 Sets the radius (half of the diameter or total width) for each of these
 elements.  Setting this is equivalent to setting both `:width` and `:height` to
@@ -1381,6 +1414,8 @@ element so that its own right edge and the right edge of its slot touch.
 Whereas `:right => 20` will position the right edge of the element off to the
 left of its slot's right edge by twenty pixels.
 
+'''Note:''' Green Shoes doesn't support `:right` style.
+
 === :rise » a number ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
@@ -1389,6 +1424,8 @@ strong, sub, sup, subtitle, tagline, title''.
 Lifts or plunges the font baseline for some text.  For example, a
 [[Element.sup]] has a `:rise` of 10 pixels.  Conversely, the [[Element.sub]]
 element has a `:rise` of -10 pixels.
+
+'''Note:''' Green Shoes doesn't support `:rise` style.
 
 === :scroll » true or false ===
 
@@ -1400,6 +1437,8 @@ scrollbar will appear and disappear as needed.  It will also appear inside the
 width of the slot, meaning the slot's width will never change, regardless of
 whether there is a scrollbar or not.
 
+'''Note:''' Green Shoes doesn't support `:scroll` style.
+
 === :secret » true or false ===
 
 For: ''ask, edit_line''.
@@ -1408,12 +1447,13 @@ Used for password fields, this setting keeps any characters typed in from
 becoming visible on the screen.  Instead, a replacement character (such as an
 asterisk) is show for each letter typed.
 
+'''Note:''' Green Shoes doesn't support `:secret` style.
+
 === :size » a number ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
-Sets the pixel size for the font used inside this text block or text fragment.
+Sets the pixel size for the font used inside this text block.
 
 Font size may also be augmented, through use of the following strings:
 
@@ -1424,6 +1464,8 @@ Font size may also be augmented, through use of the following strings:
  * "large" - 120% of present size.
  * "x-large" - 143% of present size.
  * "xx-large" - 173% of present size.
+
+'''Note:''' Green Shoes doesn't support as the above string style settings.
 
 === :state » a string ===
 
@@ -1438,6 +1480,8 @@ Here are the possible style settings:
  * "readonly" - the control is active but cannot be edited.
  * "disabled" - the control is not active (grayed out) and cannot be edited.
 
+'''Note:''' Green Shoes doesn't support `:state` style.
+
 === :stretch » a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
@@ -1451,12 +1495,16 @@ Possible settings are:
  * "normal" - the standard width of letters.
  * "expanded" - a larger width of letters.
 
+'''Note:''' Green Shoes doesn't support `:stretch` style.
+
 === :strikecolor » a Shoes::Color ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
 strong, sub, sup, subtitle, tagline, title''.
 
 The color used to paint any lines stricken through this text.
+
+'''Note:''' Green Shoes doesn't support `:strikecolor` style.
 
 === :strikethrough » a string ===
 
@@ -1468,39 +1516,37 @@ Is this text stricken through?  Two options here:
  * "none" - no strikethrough
  * "single" - a single-line strikethrough.
 
-=== :stroke » a hex code, a Shoes::Color or a range of either ===
+'''Note:''' Green Shoes doesn't support `:strikethrough` style.
 
-For: ''arc, arrow, banner, border, caption, code, del, em, flow, image, ins,
-inscription, line, link, mask, oval, para, rect, shape, span, stack, star,
-strong, sub, sup, subtitle, tagline, title''.
+=== :stroke » a hex code, a rgb array or a range of either ===
+
+For: ''background, border, line, oval, rect, shape, star''.
 
 The color of the foreground pen.  In the case of shapes, this is the color the
-lines are drawn with.  For paragraphs and other text, the letters are printed
-in this color.
+lines are drawn with. 
 
 === :strokewidth » a number ===
 
-For: ''arc, arrow, border, flow, image, line, mask, oval, rect, shape, star, stack''.
+For: ''background, border, line, oval, rect, shape, star''.
 
 The thickness of the stroke, in pixels, of the line defining each of these
 shapes.  For example, the number two would set the strokewidth to 2 pixels.
 
 === :text » a string ===
 
-For: ''button, edit_box, edit_line''.
+For: ''edit_box, edit_line''.
 
-Sets the message displayed on a button control, or the contents of an edit_box
-or edit_line.
+Sets the message displayed on the contents of edit_box or edit_line.
 
 === :top » a number ===
 
 For: ''all slots and elements''.
 
-Sets the top coordinate for an object, relative to its parent slot.  If an
-object is set with `:top => 40`, this means the object's top edge will be
-placed 40 pixels beneath the top edge of the slot that contains it.  If no
+Sets the top coordinate for an object, relative to the top slot (window).  If an
+object is set with `top: 40`, this means the object's top edge will be
+placed 40 pixels beneath the top edge of the top slot (window).  If no
 `:top` style is given, the object is automatically placed in the natural flow
-of its slot.
+of the slot it contains.
 
 === :undercolor » a Shoes::Color ===
 
@@ -1508,6 +1554,8 @@ For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
 strong, sub, sup, subtitle, tagline, title''.
 
 The color used to underline text.
+
+'''Note:''' Green Shoes doesn't support `:undercolor` style.
 
 === :underline » a string ===
 
@@ -1524,6 +1572,8 @@ The choices for this setting are:
  * "low" - a lower underline, beneath the font baseline.  (This is generally recommended only for single characters, particularly when showing keyboard accelerators.)
  * "error" - a wavy underline, usually found indicating a misspelling.
 
+'''Note:''' Green Shoes doesn't support `:underline` style.
+
 === :variant » a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
@@ -1533,6 +1583,8 @@ Vary the font for a group of text.  Two choices:
 
  * "normal" - standard font.
  * "smallcaps" - font with the lower case characters replaced by smaller variants of the capital characters. 
+
+'''Note:''' Green Shoes doesn't support `:variant` style.
 
 === :weight » a string ===
 
@@ -1552,6 +1604,8 @@ following strings:
 
 However, you may also pass in the numerical weight directly.
 
+'''Note:''' Green Shoes doesn't support `:weight` style.
+
 === :width » a number ===
 
 For: ''all slots and elements''.
@@ -1570,6 +1624,8 @@ How should the text wrap when it fills its width? Possible options are:
  * "word" - Break lines at word breaks.
  * "char" - Break lines between characters, thus breaking some words.
  * "trim" - Cut the line off with an ellipsis if it goes too long.
+
+'''Note:''' Green Shoes doesn't support `:wrap` style.
 
 == Classes List ==
 
