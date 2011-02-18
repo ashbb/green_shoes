@@ -119,7 +119,7 @@ class Shoes
       end
       if flag
         @real.set_size_request @width, @height
-	move @left, @top
+        move @left, @top
       end
     end
 
@@ -194,6 +194,7 @@ class Shoes
     def text= s
       clear if @real
       @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left
+      @width = initials[:width] unless initials[:width].zero?
       @height = 20 if @height.zero?
       m = self.class.to_s.downcase[7..-1]
       args = [s, @args.merge({left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true})]
