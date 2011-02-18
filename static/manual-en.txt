@@ -3022,12 +3022,11 @@ Here's a sample checklist.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    stack do
-     flow { check; para "Frances Johnson" }
-     flow { check; para "Ignatius J. Reilly" }
-     flow { check; para "Winston Niles Rumfoord" }
+     flow { check; para "Frances Johnson", width: 200 }
+     flow { check; para "Ignatius J. Reilly", width: 200 }
+     flow { check; para "Winston Niles Rumfoord", width: 200 }
    end
  end
 }}}
@@ -3040,14 +3039,13 @@ Okay, let's add to the above example.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    @list = ['Frances Johnson', 'Ignatius J. Reilly',
      'Winston Niles Rumfoord']
  
    stack do
      @list.map! do |name|
-       flow { @c = check; para name }
+       flow { @c = check; para name, width: 200 }
        [@c, name]
      end
  
@@ -3370,12 +3368,11 @@ marked.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    para "Among these films, which do you prefer?\n"
-   radio; para strong("The Taste of Tea"), " by Katsuhito Ishii\n"
-   radio; para strong("Kin-Dza-Dza"), " by Georgi Danelia\n"
-   radio; para strong("Children of Heaven"), " by Majid Majidi\n"
+   radio; para strong("The Taste of Tea"), " by Katsuhito Ishii\n", width: 570
+   radio; para strong("Kin-Dza-Dza"), " by Georgi Danelia\n", width: 570
+   radio; para strong("Children of Heaven"), " by Majid Majidi\n", width: 570
  end
 }}}
 
@@ -3386,13 +3383,12 @@ If we move them each into their own slot, the example breaks.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    stack do
      para "Among these films, which do you prefer?"
-     flow { radio; para "The Taste of Tea by Katsuhito Ishii" }
-     flow { radio; para "Kin-Dza-Dza by Georgi Danelia" }
-     flow { radio; para "Children of Heaven by Majid Majidi" }
+     flow { radio; para "The Taste of Tea by Katsuhito Ishii", width: 300 }
+     flow { radio; para "Kin-Dza-Dza by Georgi Danelia", width: 300 }
+     flow { radio; para "Children of Heaven by Majid Majidi", width: 300 }
    end
  end
 }}}
@@ -3404,21 +3400,20 @@ Here, let's group all these radios in the `:films` group.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    stack do
      para "Among these films, which do you prefer?"
      flow do
        radio :films
-       para "The Taste of Tea by Katsuhito Ishii"
+       para "The Taste of Tea by Katsuhito Ishii", width: 300
      end
      flow do
        radio :films
-       para "Kin-Dza-Dza by Georgi Danelia"
+       para "Kin-Dza-Dza by Georgi Danelia", width: 300
      end
      flow do
        radio :films
-       para "Children of Heaven by Majid Majidi"
+       para "Children of Heaven by Majid Majidi", width: 300
      end
    end
  end
