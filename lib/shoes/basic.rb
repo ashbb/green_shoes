@@ -154,7 +154,22 @@ class Shoes
   end
 
   class Image < Basic; end
-  class Button < Basic; end
+  class Button < Basic
+    def click &blk
+      real.signal_connect "clicked", &blk if blk
+    end
+  end
+  class ToggleButton < Button
+    def checked?
+      real.active?
+    end
+    
+    def checked=(tof)
+      real.active = tof
+    end
+  end
+  class Check < ToggleButton; end
+  class Radio < ToggleButton; end
 
   class Pattern < Basic
     def move2 x, y

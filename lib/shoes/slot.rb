@@ -13,6 +13,7 @@ class Shoes
 
       set_margin
 
+      @radio_group = Gtk::RadioButton.new
       @masked = false
       @parent = @app.cslot
       @app.cslot = self
@@ -27,7 +28,7 @@ class Shoes
     end
 
     attr_accessor :contents, :masked
-    attr_reader :parent, :initials
+    attr_reader :parent, :initials, :radio_group
     attr_writer :app
 
     def app &blk

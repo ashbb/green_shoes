@@ -178,6 +178,31 @@ class Shoes
       Button.new args
     end
 
+    def check args={}, &blk
+      args = basic_attributes args
+      cb = Gtk::CheckButton.new
+      cb.active = true if args[:checked]
+      cb.signal_connect "clicked", &blk if blk
+      @canvas.put cb, args[:left], args[:top]
+      cb.show_now
+      args[:real], args[:app] = cb, self
+      Check.new args
+    end
+    
+    def radio *attrs, &blk
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      group = attrs.first unless attrs.empty?
+      group = group ? (@radio_groups[group] ||= Gtk::RadioButton.new) : cslot.radio_group
+      args = basic_attributes args
+      rb = Gtk::RadioButton.new group
+      rb.active = true if args[:checked]
+      rb.signal_connect "clicked", &blk if blk
+      @canvas.put rb, args[:left], args[:top]
+      rb.show_now
+      args[:real], args[:app] = rb, self
+      Radio.new args
+    end
+
     def edit_line args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
