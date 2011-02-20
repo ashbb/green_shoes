@@ -1629,15 +1629,13 @@ How should the text wrap when it fills its width? Possible options are:
 
 == Classes List ==
 
-Here is a complete list of all the classes introduced by Shoes.  This chart is
-laid out according to how classes inherits from each other.  Subclasses are
-indented one level to the right, beneath their parent class.
+There is a complete list of all the classes introduced by Green Shoes.  
 
-{INDEX}
+Look at [[http://rdoc.info/github/ashbb/green_shoes/master/frames/file/README.md Green Shoes RDoc]].
 
 == Colors List ==
 
-The following list of colors can be used throughout Shoes.  As background
+The following list of colors can be used throughout Green Shoes.  As background
 colors or border colors.  As stroke and fill colors.  Most of these colors come
 from the X11 and HTML palettes.
 
@@ -1651,11 +1649,11 @@ find the exact numbers which can be used with the [[Built-in.rgb]] method.
 
 Slots are boxes used to lay out images, text and so on. The two most common
 slots are `stacks` and `flows`. Slots can also be referred to as "boxes" or
-"canvases" in Shoes terminology.
+"canvases" in Green Shoes terminology.
 
 Since the mouse wheel and PageUp and PageDown are so pervasive on every
 platform, vertical scrolling has really become the only overflow that matters.
-So, in Shoes, just as on the web, width is generally fixed. While height goes
+So, in Green Shoes, just as on the web, width is generally fixed. While height goes
 on and on.
 
 Now, you can also just use specific widths and heights for everything, if you
@@ -1690,7 +1688,7 @@ contents differently.
 Making a flow means calling the [[Element.flow]] method.  Flows may contain
 other flows and stacks.
 
-Last thing: The Shoes window itself is a flow.
+Last thing: The Green Shoes window itself is a flow.
 
 == Art for Slots ==
 
@@ -1708,15 +1706,14 @@ color used to paint inside the lines.
  Shoes.app do
    stroke red
    fill blue
-   oval :top => 10, :left => 10,
-     :radius => 100
+   oval top: 10, left: 10, radius: 100
  end
 }}}
 
 That code gives you a blue pie with a red line around it.  One-hundred pixels
 wide, placed just a few pixels southeast of the window's upper left corner.
 
-The `blue` and `red` methods above are Color objects.  See the section on
+The `blue` and `red` methods above are RGB array.  See the section on
 Colors for more on how to mix colors.
 
 ==== Inspiration from Processing and NodeBox ====
@@ -1726,9 +1723,9 @@ Python.  In turn, NodeBox gets much of its ideas from Processing, a Java-like
 language for graphics and animation.  I owe a great debt to the creators of
 these wonderful programs!
 
-Shoes does a few things differently from NodeBox and Processing.  For example,
-Shoes has different color methods, including having its own Color objects,
-though these are very similar to Processing's color methods.  And Shoes also
+Green Shoes does a few things differently from NodeBox and Processing.  For example,
+Green Shoes has different color methods, including having its own RGB array,
+though these are very similar to Processing's color methods.  And Green Shoes also
 allows images and gradients to be used for drawing lines and filling in shapes.
 
 Shoes also borrows some animation ideas from Processing and will continue to
@@ -1741,15 +1738,21 @@ method just give you a bit more control than [[oval]], by offering the
 `:angle1` and `:angle2` styles.  (In fact, you can mimick the `oval` method by
 setting `:angle1` to 0 and `:angle2` to `Shoes::TWO_PI`.)
 
+'''Note:''' Green Shoes doesn't support `arc` method.
+
 === arrow(left, top, width) » Shoes::Shape ===
 
 Draws an arrow at coordinates (left, top) with a pixel `width`.
+
+'''Note:''' Green Shoes doesn't support `arrow` method.
 
 === cap(:curve or :rect or :project) » self ===
 
 Sets the line cap, which is the shape at the end of every line you draw.  If
 set to `:curve`, the end is rounded.  The default is `:rect`, a line which ends
 abruptly flat.  The `:project` cap is also fat, but sticks out a bit longer.
+
+'''Note:''' Green Shoes doesn't support `cap` method.
 
 === fill(pattern) » pattern ===
 
@@ -1780,12 +1783,12 @@ Instead, shapes will have only a lining, leaving the middle transparent.
 Empties the line color.  Shapes drawn will have no outer line.  If `nofill` is
 also set, shapes drawn will not be visible.
 
-=== line(left, top, x2, y2) » Shoes::Shape ===
+=== line(left, top, x2, y2) » Shoes::Line ===
 
 Draws a line using the current line color (aka "stroke") starting at
 coordinates (left, top) and ending at coordinates (x2, y2).
 
-=== oval(left, top, radius) » Shoes::Shape ===
+=== oval(left, top, radius) » Shoes::Oval ===
 
 Draws a circular form at pixel coordinates (left, top) with a width and height
 of `radius` pixels.  The line and fill colors are used to draw the shape.  By
@@ -1805,7 +1808,7 @@ style on the next method below.
 
 To draw an oval of varied proportions, you may also use the syntax: `oval(left, top, width, height)`.
 
-=== oval(styles) » Shoes::Shape ===
+=== oval(styles) » Shoes::Oval ===
 
 Draw circular form using a style hash.  The following styles are supported:
 
@@ -1818,11 +1821,12 @@ Draw circular form using a style hash.  The following styles are supported:
 
 These styles may also be altered using the `style` method on the Shape object.
 
-=== rect(top, left, width, height, corners = 0) » Shoes::Shape ===
+'''Note:''' Green Shoes doesn't support `center` style.
+
+=== rect(top, left, width, height) » Shoes::Rect ===
 
 Draws a rectangle starting from coordinates (top, left) with dimensions of
-width x height.  Optionally, you may give the rectangle rounded corners with a
-fifth argument: the radius of the corners in pixels.
+width x height. 
 
 As with all other shapes, the rectangle is drawn using the stroke and fill colors.
 
@@ -1839,7 +1843,7 @@ The above sample draws a rectangle which fills the area of its parent box,
 leaving a margin of 10 pixels around the edge.  Also see the `background`
 method for a rectangle which defaults to filling its parent box.
 
-=== rect(styles) » Shoes::Shape ===
+=== rect(styles) » Shoes::Rect ===
 
 Draw a rectangle using a style hash.  The following styles are supported:
 
@@ -1851,6 +1855,8 @@ Draw a rectangle using a style hash.  The following styles are supported:
  * `center`: do the coordinates specific the rectangle's center? (true or false)
 
 These styles may also be altered using the `style` method on the Shape object.
+
+'''Note:''' Green Shoes doesn't support `center` style.
 
 === rotate(degrees: a number) » self ===
 
@@ -1876,16 +1882,13 @@ block.  You can look at it as sketching a shape with a long line that curves
 and arcs and bends.
 
 {{{
- #!ruby
- # Not yet available
  Shoes.app do
-   fill red(0.2)
+   fill yellow
    shape do
-     move_to(90, 55)
-     arc_to(50, 55, 50, 50, 0, PI/2)
-     arc_to(50, 55, 60, 60, PI/2, PI)
-     arc_to(50, 55, 70, 70, PI, TWO_PI-PI/2)
-     arc_to(50, 55, 80, 80, TWO_PI-PI/2, TWO_PI)
+     move_to 50, 30
+     curve_to 100, 100, 10, 20, 100, 50
+     line_to 20, 100
+     line_to 30, 30
    end
  end
 }}}
@@ -1896,7 +1899,11 @@ the other methods in this [[Art]] section) inside a shape, but they will not be
 part of the line.  They will be more like a group of shapes are all drawn as
 one.
 
-=== star(left, top, points = 10, outer = 100.0, inner = 50.0) » Shoes::Shape ===
+'''Note:''' The above `line_to`, `move_to` and `curve_to` are Cairo::Context methods. 
+Green Shoes uses them directly inside the block. So, Green Shoes doesn't support `arc_to`.
+Also Green Shoes shape can not contain other shapes.
+
+=== star(left, top, points = 10, outer = 100.0, inner = 50.0) » Shoes::Star ===
 
 Draws a star using the stroke and fill colors.  The star is positioned with its
 center point at coordinates (left, top) with a certain number of `points`.  The
@@ -1909,14 +1916,14 @@ Set the active line color for this slot.  The `pattern` may be a color, a
 gradient or an image, all of which are categorized as "patterns."  The line
 color is then used to draw the borders of any subsequent shape.
 
-So, to draw an arrow with a red line around it:
+So, to draw a star with a red line around it:
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    stroke red
-   arrow 0, 100, 10
+   nofill
+   star 100, 100
  end
 }}}
 
@@ -1933,6 +1940,8 @@ pixels.  Calling `strokewidth(4)` will cause lines to be drawn 4 pixels wide.
 Should transformations (such as `skew` and `rotate`) be performed around the
 center of the shape?  Or the corner of the shape?  Shoes defaults to `:corner`.
 
+'''Note:''' Green Shoes doesn't support `transform` method.
+
 === translate(left, top) » self ===
 
 Moves the starting point of the drawing pen for this slot.  Normally, the pen
@@ -1940,6 +1949,8 @@ starts at (0, 0) in the top-left corner, so that all shapes are drawn from that
 point.  With `translate`, if the starting point is moved to (10, 20) and a
 shape is drawn at (50, 60), then the shape is actually drawn at (60, 80) on the
 slot.
+
+'''Note:''' Green Shoes doesn't support `translate` method.
 
 == Element Creation ==
 

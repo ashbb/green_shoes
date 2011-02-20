@@ -477,7 +477,9 @@ class Shoes
       klass.new args
     end
 
-    def shape args, &blk
+    def shape args={}, &blk
+      args[:left] ||= 0
+      args[:top] ||= 0
       args[:block] = blk
       shapebase Shape, args
     end
