@@ -7,7 +7,15 @@ class Shoes
       args.each do |k, v|
         instance_variable_set "@#{k}", v
       end
-      
+
+      win_title = @owner.instance_variable_get('@title')
+      class << @owner; self end.
+      class_eval do
+        define_method :to_s do
+          win_title or 'green shoes'
+        end
+      end if @owner
+
       App.class_eval do
         attr_accessor *(args.keys - [:width, :height, :title])
       end
@@ -24,7 +32,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style, :animates
+    attr_reader :link_style, :linkhover_style, :animates, :owner
 
     def visit url
       if url =~ /^(http|https):\/\//
@@ -648,6 +656,11 @@ class Shoes
       Gtk.main_quit
       Shoes.APPS.delete app
       exit if Shoes.APPS.empty?
+    end
+
+    def window args={}, &blk
+      args.merge! owner: self
+      Shoes.app args, &blk
     end
   end
 end

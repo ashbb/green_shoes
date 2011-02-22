@@ -1765,7 +1765,7 @@ To draw a star with an image pattern:
 {{{
  #!ruby
  Shoes.app do
-   fill "../static/gshoes-icon.png"
+   fill File.join(DIR, "../static/gshoes-icon.png")
    star 200, 200, 5, 100, 50
  end
 }}}
@@ -1954,12 +1954,12 @@ slot.
 
 == Element Creation ==
 
-Shoes has a wide variety of elements, many cherry-picked from HTML.  This page
+Green Shoes has a wide variety of elements, many cherry-picked from HTML.  This page
 describes how to create these elements in a slot.  See the Elements section of
 the manual for more on how to modify and use these elements after they have
 been placed.
 
-=== animate(fps) { |frame| ... } » Shoes::Animation ===
+=== animate(fps) { |frame| ... } » Shoes::Anim ===
 
 Starts an animation timer, which runs parallel to the rest of the app.  The
 `fps` is a number, the frames per seconds.  This number dictates how many times
@@ -1971,9 +1971,9 @@ tells the block how many frames of the animation have been shown.
 {{{
  #!ruby
  Shoes.app do
-   @counter = para "STARTING"
-   animate(24) do |frame|
-     @counter.replace "FRAME #{frame}"
+   counter = para "STARTING"
+   animate 24 do |frame|
+     counter.replace "FRAME #{frame}"
    end
  end
 }}}
@@ -1989,13 +1989,13 @@ background.  Gradients stretch to fill the background.
 
 '''PLEASE NOTE:''' Backgrounds are actual elements, not styles.  HTML treats
 backgrounds like styles.  Which means every box can only have one background.
-Shoes layers background elements.
+Green Shoes layers background elements.
 
 {{{
  #!ruby
  Shoes.app do
    background black
-   background white, :width => 50
+   background white, width: 50
  end
 }}}
 
@@ -2005,7 +2005,7 @@ along the left side.
 
 === banner(text) » Shoes::Banner ===
 
-Creates a Banner text block.  Shoes automatically styles this text to 48 pixels high.
+Creates a Banner text block.  Green Shoes automatically styles this text to 48 pixels high.
 
 === border(text, :strokewidth => a number) » Shoes::Border ===
 
@@ -2015,7 +2015,7 @@ Gradients stretch to fill the border.
 
 '''PLEASE NOTE:''' Like Backgrounds, Borders are actual elements, not styles.
 HTML treats backgrounds and borders like styles.  Which means every box can
-only have one borders.  Shoes layers border and background elements, along with
+only have one borders.  Green Shoes layers border and background elements, along with
 text blocks, images, and everything else.
 
 === button(text) { ... } » Shoes::Button ===
@@ -2025,17 +2025,17 @@ optional block can be attached, which is called if the button is pressed.
 
 === caption(text) » Shoes::Caption ===
 
-Creates a Caption text block.  Shoes styles this text to 14 pixels high.
+Creates a Caption text block.  Green Shoes styles this text to 14 pixels high.
 
 === check() » Shoes::Check ===
 
 Adds a check box.
 
-=== code(text) » Shoes::Code ===
+=== code(text) » String ===
 
 Create a Code text fragment.  This text defaults to a monospaced font.
 
-=== del(text) » Shoes::Del ===
+=== del(text) » String ===
 
 Creates a Del text fragment (short for "deleted") which defaults to text with a
 single strikethrough in its middle.
@@ -2044,6 +2044,8 @@ single strikethrough in its middle.
 
 Opens a new app window (just like the [[Element.window]] method does,) but the
 window is given a dialog box look.
+
+'''Note:''' Green Shoes doesn't support `dialog` method.
 
 === edit_box(text) » Shoes::EditBox ===
 
@@ -2056,7 +2058,7 @@ attached here which is called any type the user changes the text in the box.
  Shoes.app do
    edit_box
    edit_box text: "HORRAY EDIT ME"
-   edit_box text: "small one", :width => 100, :height => 160
+   edit_box text: "small one", width: 100, height: 160
  end
 }}}
 
@@ -2066,21 +2068,21 @@ Adds a single-line text box to this slot.  The `text` is optional and should be
 a string that will start out the box.  An optional block can be attached here
 which is called any type the user changes the text in the box.
 
-=== em(text) » Shoes::Em ===
+=== em(text) » String ===
 
 Creates an Em text fragment (short for "emphasized") which, by default, is
 styled with italics.
 
-=== every(seconds) { |count| ... } » Shoes::Every ===
+=== every(seconds) { |count| ... } » Shoes::Anim ===
 
-A timer similar to the `animation` method, but much slower.  This timer fires a
+A timer similar to the `animate` method, but much slower.  This timer fires a
 given number of seconds, running the block attached.  So, for example, if you
 need to check a web site every five minutes, you'd call `every(300)` with a
 block containing the code to actually ping the web site.
 
 === flow(styles) { ... } » Shoes::Flow ===
 
-A flow is an invisible box (or "slot") in which you place Shoes elements.  Both
+A flow is an invisible box (or "slot") in which you place Green Shoes elements.  Both
 flows and stacks are explained in great detail on the main [[Slots]] page.
 
 Flows organize elements horizontally.  Where one would use a [[Element.stack]]
@@ -2099,6 +2101,8 @@ personal Shoes directory.  Remote images are loaded in the background; as with
 browsers, the images will not appear right away, but will be shown when they
 are loaded.
 
+'''Note:''' Green Shoes doesn't support the above personal Shoes directory.
+
 === imagesize(path) » [width, height] ===
 
 Quickly grab the width and height of an image.  The image won't be loaded into
@@ -2107,18 +2111,18 @@ the cache or displayed.
 URGENT NOTE: This method cannot be used with remote images (loaded from HTTP,
 rather than the hard drive.)
 
-=== ins(text) » Shoes::Ins ===
+=== ins(text) » String ===
 
-Creates an Ins text fragment (short for "inserted") which Shoes styles with a
+Creates an Ins text fragment (short for "inserted") which Green Shoes styles with a
 single underline.
 
 === inscription(text) » Shoes::Inscription ===
 
-Creates an Inscription text block.  Shoes styles this text at 10 pixels high.
+Creates an Inscription text block.  Green Shoes styles this text at 10 pixels high.
 
 === link(text, :click => proc or string) » Shoes::Link ===
 
-Creates a Link text block, which Shoes styles with a single underline and
+Creates a Link text block, which Green Shoes styles with a single underline and
 colors with a #06E (blue) colored stroke.
 
 The default LinkHover style is also single-underlined with a #039 (dark blue) stroke.
@@ -2132,9 +2136,12 @@ box becomes selected by the user.
 {{{
  #!ruby
  Shoes.app do
-   stack :margin => 10 do
+   stack  margin: 10 do
      para "Pick a card:"
-     list_box :items => ["Jack", "Ace", "Joker"]
+     list_box items: ["Jack", "Ace", "Joker"] do |item|
+       @p.text = "#{item} was picked!"
+     end
+     @p = para
    end
  end
 }}}
@@ -2148,7 +2155,7 @@ Adds a progress bar.
 
 === para(text) » Shoes::Para ===
 
-Create a Para text block (short for "paragraph") which Shoes styles at 12
+Create a Para text block (short for "paragraph") which Green Shoes styles at 12
 pixels high.
 
 === radio(group name: a string or symbol) » Shoes::Radio ===
@@ -2162,6 +2169,8 @@ any other radio buttons in the same slot.)
 
 Creates a Span text fragment, unstyled by default.
 
+'''Note:''' Green Shoes doesn't support `span` method.
+
 === stack(styles) { ... } » Shoes::Stack ===
 
 Creates a new stack.  A stack is a type of slot.  (See the main [[Slots]] page
@@ -2171,29 +2180,29 @@ In short, stacks are an invisible box (a "slot") for placing stuff.  As you add
 things to the stack, such as buttons or images, those things pile up
 vertically.  Yes, they stack up!
 
-=== strong(text) » Shoes::Strong ===
+=== strong(text) » String ===
 
 Creates a Strong text fragment, styled in bold by default.
 
-=== sub(text) » Shoes::Sub ===
+=== sub(text) » String ===
 
 Creates a Sub text fragment (short for "subscript") which defaults to lowering
 the text by 10 pixels and styling it in an x-small font.
 
-=== subtitle(text) » Shoes::Subtitle ===
+=== subtitle(text) » String ===
 
-Creates a Subtitle text block.  Shoes styles this text to 26 pixels high.
+Creates a Subtitle text block.  Green Shoes styles this text to 26 pixels high.
 
-=== sup(text) » Shoes::Sup ===
+=== sup(text) » String ===
 
 Creates a Sup text fragment (short for "superscript") which defaults to raising
 the text by 10 pixels and styling it in an x-small font.
 
 === tagline(text) » Shoes::Tagline ===
 
-Creates a Tagline text block.  Shoes styles this text to 18 pixels high.
+Creates a Tagline text block.  Green Shoes styles this text to 18 pixels high.
 
-=== timer(seconds) { ... } » Shoes::Timer ===
+=== timer(seconds) { ... } » Fixnum ===
 
 A one-shot timer.  If you want to schedule to run some code in a few seconds
 (or minutes, hours) you can attach the code as a block here.
@@ -2203,19 +2212,21 @@ To display an alert box five seconds from now:
 {{{
  #!ruby
  Shoes.app do
-   timer(5) do
-     alert("Your five seconds are up.")
+   timer 5 do
+     alert "Your five seconds are up."
    end
  end
 }}}
 
 === title(text) » Shoes::Title ===
 
-Creates a Title text block.  Shoes styles these elements to 34 pixels high.
+Creates a Title text block.  Green Shoes styles these elements to 34 pixels high.
 
 === video(path or url) » Shoes::Video ===
 
 Embeds a movie in this slot.
+
+'''Note:''' Green Shoes doesn't support `video` method.
 
 === window(styles) { ... } » Shoes::App ===
 
@@ -2229,11 +2240,10 @@ window.  This way the child window can call the parent.
 
 {{{
  #!ruby
- # Not yet available
- Shoes.app :title => "The Owner" do
+ Shoes.app title: "The Owner" do
    button "Pop up?" do
      window do
-       para "Okay, popped up from #{owner}"
+       para "Okay, popped up from [#{owner}]."
      end
    end
  end
