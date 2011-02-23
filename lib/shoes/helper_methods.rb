@@ -10,7 +10,28 @@ class Shoes
       @margin_bottom ||= margin_bottom
     end
 
-    attr_reader :margin_left, :margin_top, :margin_right, :margin_bottom
+    def click &blk
+      @click_proc = blk
+      @app.mccs << self
+    end
+    
+    def release &blk
+      @release_proc = blk
+      @app.mrcs << self
+    end
+
+    def hover &blk
+      @hover_proc = blk
+      (@app.mhcs << self) unless @app.mhcs.include? self
+    end
+
+    def leave &blk
+      @leave_proc = blk
+      (@app.mhcs << self) unless @app.mhcs.include? self
+    end
+
+    attr_reader :margin_left, :margin_top, :margin_right, :margin_bottom, :click_proc, :release_proc, :hover_proc, :leave_proc
+    attr_accessor :hovered
   end
   
   module Mod2
@@ -137,13 +158,13 @@ class Shoes
 
   def self.mouse_click_control app
     app.mccs.each do |e|
-      e.click_proc.call if mouse_on? e
+      e.click_proc[*app.mouse] if mouse_on? e
     end
   end
   
   def self.mouse_release_control app
     app.mrcs.each do |e|
-      e.release_proc.call if mouse_on? e
+      e.release_proc[*app.mouse] if mouse_on? e
     end
   end
 
@@ -157,7 +178,7 @@ class Shoes
     app.mhcs.each do |e|
       if mouse_on?(e) and !e.hovered
         e.hovered = true
-        e.hover_proc.call if e.hover_proc
+        e.hover_proc[e] if e.hover_proc
       end
     end
   end
@@ -166,7 +187,7 @@ class Shoes
     app.mhcs.each do |e|
       if !mouse_on?(e) and e.hovered
         e.hovered = false
-        e.leave_proc.call if e.leave_proc
+        e.leave_proc[e] if e.leave_proc
       end
     end
   end
@@ -180,6 +201,7 @@ class Shoes
   
   def self.set_cursor_type app
     app.mccs.each do |e|
+      next if e.is_a? Slot
       e.real.window.cursor = ARROW if e.real.window
       (e.real.window.cursor = HAND; return) if mouse_on? e
     end
@@ -207,8 +229,13 @@ class Shoes
   end
   
   def self.mouse_on? e
-    mouse_x, mouse_y = e.real.pointer
-    (0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y)
+    if e.is_a? Slot
+      mouse_x, mouse_y = e.app.win.pointer
+      (e.left..e.left+e.width).include?(mouse_x) and (e.top..e.top+e.height).include?(mouse_y)
+    else
+      mouse_x, mouse_y = e.real.pointer
+      (0..e.width).include?(mouse_x) and (0..e.height).include?(mouse_y)
+    end
   end
 
   def self.mouse_on_link tb, app

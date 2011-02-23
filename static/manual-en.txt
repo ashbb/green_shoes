@@ -2256,7 +2256,7 @@ to a slot whenever a mouse moves inside the slot.  Or whenever a key is
 pressed.  Even when the slot is created or destroyed.  You can attach a block
 to each of these events.
 
-Mouse events include `motion`, `click`, `hover` and `leave`.  Keyboard typing
+Mouse events include `motion`, `click`, `release`, `hover` and `leave`.  Keyboard typing
 is represented by the `keypress` event.  And the `start` and `finish` events
 indicate when a canvas comes into play or is discarded.
 
@@ -2267,16 +2267,15 @@ away.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
-   s = stack :width => 200, :height => 200 do
+   s = stack width: 200, height: 200 do
      background red
-     hover do
+   end
+   s.hover do
        s.clear { background blue }
-     end
-     leave do
-       s.clear { background red }
-     end
+   end
+   s.leave do
+     s.clear { background red }
    end
  end
 }}}
@@ -2294,6 +2293,8 @@ To catch the moment when the mouse is unclicked, see the [[Events.release]] even
 When a slot is removed, it's finish event occurs.  The finish block is
 immediately handed `self`, the slot object which has been removed.
 
+'''Note:''' Green Shoes doesn't support `finish` method.
+
 === hover { |self| ... } » self ===
 
 The hover event happens when the mouse enters the slot.  The block gets `self`,
@@ -2305,45 +2306,31 @@ To catch the mouse exiting the slot, check out the [[Events.leave]] event.
 
 Whenever a key (or combination of keys) is pressed, the block gets called.  The
 block is sent a `key` which is a string representing the character (such as the
-letter or number) on the key.  For special keys and key combos, a Ruby symbol
-is sent, rather than a string.
+letter or number) on the key. 
 
-So, for example, if `Shift-a` is pressed, the block will get the string `"A"`.
+So, for example, if `Shift-a` is pressed, the block will get the string `"Shift_L"` and `"A"`.
 
-However, if the F1 key is pressed, the `:f1` symbol is received.  For
-`Shift-F1`, the symbol would be `:shift_f1`.
+And if the `F1` key is pressed, the `"F1"` string is received. 
 
-The modifier keys are `control`, `shift` and `alt`.  They appear in that order.
-If `Shift-Control-Alt-PgUp` is pressed, the symbol will be
-`:control_shift_alt_page_up`.
+The left side modifier keys are `"Control_L"`, `"Shift_L"` and `"Alt_L"`.  They appear in that order.
+If `Shift-Control-Alt-PgUp` is pressed, the strings will be
+`"Shift_L"`, `"Control_L"`, `"Alt_L"` and `"Page_Up"`.
 
-One thing about the shift key.  You won't see the shift key on most keys.  On
-US keyboards, `Shift-7` is an ampersand.  So you'll get the string `"&"` rather
-than `:shift_5`.  And, if you press `Shift-Alt-7` on such a keyboard, you'll
-get the symbol: `:alt_&`.  You'll only see the shift modifier on the special
-keys listed a few paragraphs down.
+One thing about the shift key.  On
+US keyboards, `Shift-7` is an ampersand.  So you'll get the string `"Shift_L"` and `"ampersand"` rather
+than `"Shift_L"` and `"7"`.  And, if you press `Shift-Alt-7` on such a keyboard, you'll
+get the strings: `"Shift_L"`, `"Alt_L"` and `"ampersand"`.  
 
 {{{
  #!ruby
  Shoes.app do
-   @info = para "NO KEY is PRESSED."
+   info = para "NO KEY is PRESSED."
    keypress do |k|
-     @info.replace "#{k.inspect} was PRESSED."
+     info.replace "#{k.inspect} was PRESSED."
    end
  end
 }}}
 
-Keep in mind that Shoes itself uses a few hotkeys.  Alt-Period (`:alt_.`),
-Alt-Question (`:alt_?`) and Alt-Slash (`:alt_/`) are reserved for Shoes.
-
-The list of special keys is as follows: `:escape`, `:delete`, `:backspace`,
-`:tab`, `:page_up`, `:page_down`, `:home`, `:end`, `:left`, `:up`, `:right`,
-`:down`, `:f1`, `:f2`, `:f3`, `:f4`, `:f5`, `:f6`, `:f7`, `:f8`, `:f9`, `:f10`,
-`:f11` and `:f12`.
-
-One caveat to all of those rules: normally the Return key gives you a string
-`"\n"`.  When pressed with modifier keys, however, you end up with
-`:control_enter`, `:control_alt_enter`, `:shift_alt_enter` and the like.
 
 === leave { |self| ... } » self ===
 
@@ -2360,13 +2347,13 @@ The block is handed the cursor's `left` and `top` coordinates.
 
 {{{
  #!ruby
- Shoes.app :width => 200, :height => 200 do
+ Shoes.app width: 200, height: 200 do
    background black
    fill white
-   @circ = oval 0, 0, 100, 100
+   circ = oval 0, 0, 100, 100
  
    motion do |top, left|
-     @circ.move top - 50, left - 50
+     circ.move top - 50, left - 50
    end
  end
 }}}
@@ -2384,6 +2371,8 @@ To catch the actual mouse click, use the [[Events.click]] event.
 
 The first time the slot is drawn, the start event fires.  The block is handed
 `self`, the slot object which has just been drawn.
+
+'''Note:''' Green Shoes doesn't support `start` method.
 
 == Manipulation Blocks ==
 

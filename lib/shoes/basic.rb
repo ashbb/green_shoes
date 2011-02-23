@@ -28,8 +28,8 @@ class Shoes
       @hided, @shows, @hovered = false, true, false
     end
 
-    attr_reader :parent, :click_proc, :release_proc, :hover_proc, :leave_proc, :args, :shows, :initials
-    attr_accessor :hided, :hovered
+    attr_reader :parent,  :args, :shows, :initials
+    attr_accessor :hided
 
     def move x, y
       @app.cslot.contents -= [self]
@@ -123,26 +123,6 @@ class Shoes
       end
     end
 
-    def click &blk
-      @click_proc = blk
-      @app.mccs << self
-    end
-    
-    def release &blk
-      @release_proc = blk
-      @app.mrcs << self
-    end
-
-    def hover &blk
-      @hover_proc = blk
-      (@app.mhcs << self) unless @app.mhcs.include? self
-    end
-
-    def leave &blk
-      @leave_proc = blk
-      (@app.mhcs << self) unless @app.mhcs.include? self
-    end
-    
     def style args
       clear
       @args[:nocontrol] = @args[:noorder] = true

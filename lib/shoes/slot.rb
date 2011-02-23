@@ -14,7 +14,7 @@ class Shoes
       set_margin
 
       @radio_group = Gtk::RadioButton.new
-      @masked = false
+      @masked = @hovered = false
       @parent = @app.cslot
       @app.cslot = self
       @contents = []
