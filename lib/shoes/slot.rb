@@ -70,12 +70,35 @@ class Shoes
       if blk
         args = {}
         initials.keys.each{|k| args[k] = instance_variable_get "@#{k}"}
-	args[:nocontrol] = true
+        args[:nocontrol] = true
         tmp = self.is_a?(Stack) ? Stack.new(@app.slot_attributes(args), &blk) : Flow.new(@app.slot_attributes(args), &blk)
         self.contents = tmp.contents
         Shoes.call_back_procs @app
         Shoes.set_cursor_type @app
       end
+    end
+
+    def append &blk
+      prepend contents.length, &blk
+    end
+    
+    def prepend n = 0
+      self.contents, tmp = contents[0...n], contents[n..-1]
+      cslot, @app.cslot = @app.cslot, self
+      yield
+      self.contents += tmp
+      @app.cslot = cslot
+      Shoes.call_back_procs @app
+    end
+    
+    def before e, &blk
+      prepend contents.index(e).to_i, &blk
+    end
+    
+    def after e, &blk
+      n = contents.index e
+      n = n ? n+1 : contents.length
+      prepend n, &blk
     end
   end
 

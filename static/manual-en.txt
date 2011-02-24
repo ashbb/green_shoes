@@ -2385,7 +2385,6 @@ Adds elements to the end of a slot.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    @slot = stack { para 'Good Morning' }
    timer 3 do
@@ -2439,7 +2438,6 @@ Adds elements to the beginning of a slot.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    @slot = stack { para 'Good Morning' }
    timer 3 do
