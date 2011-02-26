@@ -122,15 +122,6 @@ class Shoes
         move @left, @top
       end
     end
-
-    def style args
-      clear
-      @args[:nocontrol] = @args[:noorder] = true
-      m = self.class.to_s.downcase[7..-1]
-      args = @args.merge args
-      blk = args[:block]
-      @real = @app.send(m, args, &blk).real
-    end
   end
 
   class Image < Basic; end
@@ -187,14 +178,7 @@ class Shoes
     end
     
     def text= s
-      clear if @real
-      @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left
-      @width = initials[:width] unless initials[:width].zero?
-      @height = 20 if @height.zero?
-      m = self.class.to_s.downcase[7..-1]
-      args = [s, @args.merge({left: @left, top: @top, width: @width, height: @height, create_real: true, nocontrol: true})]
-      tb = @app.send(m, *args)
-      @real, @height, @args[:markup] = tb.real, tb.height, tb.markup
+      style markup: s
     end
 
     alias :replace :text=

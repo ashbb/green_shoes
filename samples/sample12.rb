@@ -11,7 +11,7 @@ Shoes.app width: 300, height: 300 do
   j = 0
   a = animate 1 do |i|
     unless j == i
-      r.style fill: send(COLORS.keys[rand size]), stroke: send(COLORS.keys[rand size])
+      r.style fill: send(COLORS.keys[rand size]), stroke: send(COLORS.keys[rand size]), noorder: true
       o.style fill: send(COLORS.keys[rand size]), stroke: send(COLORS.keys[rand size])
       j = i
     end
