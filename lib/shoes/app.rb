@@ -646,5 +646,9 @@ class Shoes
       args.merge! owner: self
       Shoes.app args, &blk
     end
+
+    def flush
+      Shoes.call_back_procs self
+    end
   end
 end

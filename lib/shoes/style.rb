@@ -46,4 +46,11 @@ class Shoes
       @args[:markup], @args[:size], @args[:font], @args[:align] = tb.markup, tb.size, tb.font, tb.align
     end
   end
+
+  class Slot
+    def style args = nil
+      args ? [:width, :height].each{|s| @initials[s] = args[s] if args[s]} :
+        {width: @width, height: @height}
+    end
+  end
 end
