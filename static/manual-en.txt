@@ -1168,8 +1168,6 @@ For: ''check, radio''.
 Is this checkbox or radio button checked?  If set to `true`, the box is
 checked.  Also see the [[Check.checked=]] method.
 
-'''Note:''' Green Shoes doesn't support ''check'' and ''radio''.
-
 === :choose » a string ===
 
 For: ''list_box''.
@@ -2457,7 +2455,10 @@ To set the width of a stack to 150 pixels:
 {{{
  #!ruby
  Shoes.app do
-   stack(:width => 150) { para "Now that's precision." }
+   stack width: 150 do
+     background yellow
+     para "Now that's precision." 
+   end
  end
 }}}
 
@@ -2476,6 +2477,8 @@ jiggling a button in place.
 The `left` and `top` numbers sent to `displace` are added to the slot's own
 top-left coordinates.  To subtract from the top-left coordinate, use negative
 numbers.
+
+'''Note:''' Green Shoes doesn't support `displace` method.
 
 === gutter() » a number ===
 
@@ -2496,6 +2499,8 @@ This is commonly used to pad elements on the right, like so:
  end
 }}}
 
+'''Note:''' Green Shoes doesn't support `gutter` method.
+
 === height() » a number ===
 
 The vertical size of the viewable slot in pixels.  So, if this is a scrolling
@@ -2504,6 +2509,8 @@ slot, you'll need to use `scroll_height()` to get the full size of the slot.
 === hide() » self ===
 
 Hides the slot, so that it can't be seen.  See also [[Position.show]] and [[Position.toggle]].
+
+'''Note:''' Green Shoes doesn't support `hide` method.
 
 === left() » a number ===
 
@@ -2514,19 +2521,27 @@ The left pixel location of the slot.  Also known as the x-axis coordinate.
 Moves the slot to specific coordinates, the (left, top) being the upper left
 hand corner of the slot.
 
+'''Note:''' Green Shoes doesn't support `gutter` method.
+
 === remove() » self ===
 
 Removes the slot. It will no longer be displayed and will not be listed in its
 parent's contents. It's gone.
+
+'''Note:''' Green Shoes doesn't support `remove` method. Use `clear` method.
 
 === scroll() » true or false ===
 
 Is this slot allowed to show a scrollbar? True or false. The scrollbar will
 only appear if the height of the slot is also fixed.
 
+'''Note:''' Green Shoes doesn't support `scroll` method.
+
 === scroll_height() » a number ===
 
 The vertical size of the full slot, including any of it which is hidden by scrolling.
+
+'''Note:''' Green Shoes doesn't support `scroll_height` method.
 
 === scroll_max() » a number ===
 
@@ -2539,20 +2554,28 @@ This is basically a shortcut for writing `slot.scroll_height - slot.height`.
 
 To scroll to the bottom of a slot, use `slot.scroll_top = slot.scroll_max`.
 
+'''Note:''' Green Shoes doesn't support `scroll_max` method.
+
 === scroll_top() » a number ===
 
 The top coordinate which this slot is scrolled down to.  So, if the slot is
 scrolled down twenty pixels, this method will return `20`.
+
+'''Note:''' Green Shoes doesn't support `scroll_top` method.
 
 === scroll_top = a number ===
 
 Scrolls the slot to a certain coordinate.  This must be between zero and
 `scroll_max`.
 
+'''Note:''' Green Shoes doesn't support `scroll_top=` method.
+
 === show() » self ===
 
 Reveals the slot, if it is hidden.  See also [[Position.hide]] and
 [[Position.toggle]].
+
+'''Note:''' Green Shoes doesn't support `show` method.
 
 === style() » styles ===
 
@@ -2565,14 +2588,15 @@ originally requested.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
-   @s = stack :width => "100%"
-   para @s.style[:width]
+   s = stack width: 1.0
+   para s.style[:width]
+   button('Then..'){s.append{para s.style[:width]}}
  end
 }}}
 
-In this example, the paragraph under the stack will display the string "100%".
+In this example, the paragraph under the stack will display "1.0". 
+After click the button, will show you "600" pixels.
 
 === style(styles) » styles ===
 
@@ -2582,16 +2606,17 @@ example, there is a `width` method, thus there is also a `width` style.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
-   @s = stack { background green }
-   @s.style(:width => 400, :height => 200)
+   s = stack { background green }
+   s.style width: 400, height: 200
  end
 }}}
 
 === toggle() » self ===
 
 Hides the slot, if it is shown.  Or shows the slot, if it is hidden.
+
+'''Note:''' Green Shoes doesn't support `toggle` method.
 
 === top() » a number ===
 
@@ -2609,8 +2634,7 @@ element.
 
 On any element, you may call the `parent` method to get the slot directly above
 it. And on slots, you can call the `contents` method to get all of the
-children. (Some elements, such as text blocks, also have a `contents` method
-for getting their children.)
+children. (Some elements, such as shapes, are not included in any slots.)
 
 === contents() » an array of elements ===
 
@@ -2619,6 +2643,18 @@ Lists all elements in a slot.
 === parent() » a Shoes::Stack or Shoes::Flow ===
 
 Gets the object for this element's container.
+
+{{{
+ Shoes.app do
+   s = stack do
+     para 'Green'
+     @p = para 'Shoes'
+   end
+   para s
+   para s.contents
+   para @p.parent
+ end
+}}}
 
 = Elements =
 
