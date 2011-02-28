@@ -27,6 +27,17 @@ class Shoes
     end
   end
 
+  class Pattern
+    def style args
+      real.clear if real
+      args[:pattern] ||= @pattern
+      m = self.class.to_s.downcase[7..-1]
+      args = @args.merge args
+      obj = @app.send m, args[:pattern], args, &args[:block]
+      obj.instance_variables.each{|iv| eval "#{iv} = obj.instance_variable_get('#{iv}')"}
+    end
+  end
+
   class TextBlock
     def style args
       args[:markup] ||= @args[:markup]
@@ -51,6 +62,25 @@ class Shoes
     def style args = nil
       args ? [:width, :height].each{|s| @initials[s] = args[s] if args[s]} :
         {width: @width, height: @height}
+    end
+  end
+
+  class Basic
+    def style args = nil
+      return {width: @width, height: @height} unless args
+      args[:width] ||= @width
+      args[:height] ||= @height
+      case self
+        when Button, EditBox, ListBox
+          real.set_size_request args[:width], args[:height]
+          @height = args[:height]
+        when EditLine
+          real.width_chars = args[:width] / 6
+        when Progress
+          real.text = ' ' * (args[:width] / 4 - 2)
+        else
+      end
+      @width = args[:width]
     end
   end
 end

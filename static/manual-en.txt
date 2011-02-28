@@ -2658,18 +2658,17 @@ Gets the object for this element's container.
 
 = Elements =
 
-Ah, here's the stuff of Shoes. An element can be as simple as an oval shape. Or
-as complex as a video stream. You've encountered all of these elements before
-in the Slots section of th manual.
+Ah, here's the stuff of Green Shoes. An element can be as simple as an oval shape. Or
+as complex as a para text string. You've encountered all of these elements before
+in the Slots section of the manual.
 
-Shoes has seven native controls: the Button, the EditLine, the EditBox, the
+Green Shoes has seven native controls: the Button, the EditLine, the EditBox, the
 ListBox, the Progress meter, the Check box and the Radio.  By "native"
-controls, we mean that each of these seven elements is drawn by the operating
-system.  So, a Progress bar will look one way on Windows and another way on OS
-X.
+controls, we mean that each of these seven elements is drawn by Ruby/GTK2 apis 
+directly.  So, a Progress bar will never convert to the PNG image data.
 
-Shoes also has seven basic other types of elements: Background, Border, Image,
-Shape, TextBlock, Timer and Video.  These all should look and act the same on
+Greem Shoes also has seven basic other types of elements: Background, Border, Image,
+Shape, TextBlock, Animate and Video.  These all should look and act the same on
 every operating system.
 
 Once an element is created, you will often still want to change it. To move it
@@ -2677,13 +2676,13 @@ or hide it or get rid of it. You'll use the commands in this section to do that
 sort of stuff. (Especially check out the [[Common Common Methods]] section for
 commands you can use on any element.)
 
-So, for example, use the `image` method of a Slot to place a PNG on the screen.
+So, for example, use the `image` method to place a PNG on the screen.
 The `image` method gives you back an Image object. Use the methods of the Image
 object to change things up.
 
 == Common Methods ==
 
-A few methods are shared by every little element in Shoes.  Moving, showing,
+A few methods are shared by every little element in Green Shoes.  Moving, showing,
 hiding.  Removing an element.  Basic and very general things.  This list
 encompasses those common commands.
 
@@ -2692,7 +2691,6 @@ covered as the [[Position.style]] method for slots.)
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    stack do
      # Background, text and a button: both are elements!
@@ -2701,9 +2699,9 @@ covered as the [[Position.style]] method for slots.)
      @press = button "Stop your messin about!"
  
      # And so, both can be styled.
-     @text.style :size => 12, :stroke => red, :margin => 10
-     @press.style :width => 400
-     @back.style :height => 10
+     @text.style size: 12, markup: fg(@text.text, red), margin: 10
+     @press.style width: 400
+     @back.style height: 10
    end
  end
 }}}
@@ -2711,6 +2709,8 @@ covered as the [[Position.style]] method for slots.)
 For specific commands, see the other links to the left in the Elements section.
 Like if you want to pause or play a video file, check the [[Video]] section,
 since pausing and playing is peculiar to videos.  No sense pausing a button.
+
+'''Note:''' Green Shoes doesn't support `video` method.
 
 === displace(left: a number, top: a number) » self ===
 
@@ -2752,6 +2752,8 @@ coordinates of a displaced element, you'll just get back the normal
 coordinates.  As if there was no displacement.  Displacing is just intended for
 quick animations!
 
+'''Note:''' Green Shoes doesn't support `displace` method.
+
 === height() » a number ===
 
 The vertical screen size of the element in pixels. In the case of images, this
@@ -2774,31 +2776,29 @@ Gets you the pixel position of the left edge of the element.
 
 === move(left: a number, top: a number) » self  ===
 
-Moves the element to a specific pixel position within its slot.  The element is
-still inside the slot.  But it will no longer be stacked or flowed in with the
+Moves the element to a specific pixel position.  The element is no longer
+inside the slot.  So, it will not be stacked or flowed in with the
 other stuff in the slot.  The element will float freely, now absolutely
 positioned instead.
 
 {{{
  #!ruby
  Shoes.app do
-   flow :margin => 12 do
-     # Set up three buttons
-     button "One"
-     @two = button "Two"
-     button "Three"
+   # Set up three buttons
+   b = button "One"
+   @two = button "Two"
+   button "Three"
  
-     # Bounce the second button
-     animate do |i|
-       @two.move(40, 40 + (Math.sin(i) * 6).to_i)
-     end
+   # Bounce the second button
+   animate do |i|
+     @two.move(33, 33 + (Math.sin(i) * 6).to_i)
    end
  end
 }}}
 
 The second button is moved to a specific place, allowing the third button to
-slide over into its place.  If you want to move an element without shifting
-other pieces, see the [[Common.displace]] method.
+slide over into its place.  But it will not happen until you resize the window.
+If you want to slide the third button without resizing the window, add `flush` method.
 
 === parent() » a Shoes::Stack or Shoes::Flow ===
 
@@ -2824,10 +2824,9 @@ original setting (things like "100%" for width or "10px" for top.)
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
    # A button which take up the whole page
-   @b = button "All of it", :width => 1.0, :height => 1.0
+   @b = button "All of it", width: width, height: height
  
    # When clicked, show the styles
    @b.click { alert(@b.style.inspect) }
@@ -2855,16 +2854,15 @@ returns an exact pixel size.  In the case of images, this is not the full width
 of the image, just the size it is shown at.  See the [[Common.height]] method
 for more.
 
-Also, if you create an element with a width of 100% and that element is inside
-a stack which is 120 pixels wide, you'll get back `120`.  However, if you call
-`style[:width]`, you'll get `"100%"`.
+Also, if you create an element with a width of 1.0 and that element is inside
+a stack which is 120 pixels wide, you'll get back `120`.  And, if you call
+`style[:width]`, you'll get `120`.
 
 {{{
  #!ruby
- # Not yet available
  Shoes.app do
-   stack :width => 120 do
-     @b = button "Click me", :width => "100%" do
+   stack width: 120 do
+     @b = button "Click me", width: 1.0 do
        alert "button.width = #{@b.width}\n" +
          "button.style[:width] = #{@b.style[:width]}"
      end
@@ -2873,11 +2871,7 @@ a stack which is 120 pixels wide, you'll get back `120`.  However, if you call
 }}}
 
 In order to set the width, you'll have to go through the [[Common.style]]
-method again.  So, to set the button to 150 pixels wide: `@b.style(:width =>
-150)`.
-
-To let Shoes pick the element's width, go with `@b.style(:width => nil)` to
-empty out the setting.
+method again.  So, to set the button to 150 pixels wide: `@b.style(width: 150)`.
 
 == Background ==
 
