@@ -20,10 +20,10 @@ class Shoes
   class ShapeBase
     def style args
       real.clear
+      @args[:nocontrol] = @args[:noorder] = true
       m = self.class.to_s.downcase[7..-1]
       args = @args.merge args
-      obj = @app.send m, args, &args[:block]
-      obj.instance_variables.each{|iv| eval "#{iv} = obj.instance_variable_get('#{iv}')"}
+      @real = @app.send(m, args, &args[:block]).real
     end
   end
 
