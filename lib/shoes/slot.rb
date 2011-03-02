@@ -73,6 +73,7 @@ class Shoes
         args[:nocontrol] = true
         tmp = self.is_a?(Stack) ? Stack.new(@app.slot_attributes(args), &blk) : Flow.new(@app.slot_attributes(args), &blk)
         self.contents = tmp.contents
+        contents.each{|e| e.parent = self if e.is_a? Basic}
         Shoes.call_back_procs @app
         Shoes.set_cursor_type @app
       end

@@ -28,8 +28,8 @@ class Shoes
       @hided, @shows, @hovered = false, true, false
     end
 
-    attr_reader :parent,  :args, :shows, :initials
-    attr_accessor :hided
+    attr_reader :args, :shows, :initials
+    attr_accessor :parent, :hided
 
     def move x, y
       @app.cslot.contents -= [self]
