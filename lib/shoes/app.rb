@@ -650,5 +650,11 @@ class Shoes
     def flush
       Shoes.call_back_procs self
     end
+
+    [:append, :prepend, :after, :before].each do |m|
+      define_method m do |*args, &blk|
+        top_slot.send m, *args, &blk
+      end
+    end
   end
 end

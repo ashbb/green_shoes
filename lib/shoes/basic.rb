@@ -127,7 +127,7 @@ class Shoes
   class Image < Basic; end
   class Button < Basic
     def click &blk
-      real.signal_connect "clicked", &blk if blk
+      real.signal_connect "clicked", &proc{parent.append{blk[self]}} if blk
     end
   end
   class ToggleButton < Button
