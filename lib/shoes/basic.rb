@@ -81,6 +81,7 @@ class Shoes
         when Button, EditLine, EditBox, ListBox
           @app.cslot.contents.delete self
           remove
+          @real = nil
         else @real.clear
       end
     end
