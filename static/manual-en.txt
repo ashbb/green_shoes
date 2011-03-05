@@ -3127,6 +3127,8 @@ Clicks are sent for both checking and unchecking the box.
 Moves focus to the check.  The check will be highlighted and, if the user hits
 Enter, the check will be toggled between its checked and unchecked states.
 
+'''Note:''' Green Shoes doesn't support `focus` method.
+
 == EditBox ==
 
 Edit boxes are wide, rectangular boxes for entering text.  On the web, they
@@ -3140,7 +3142,7 @@ can also use `:width` and `:height` styles to set specific sizes.
  #!ruby
  Shoes.app do
    edit_box
-   edit_box :width => 100, :height => 100
+   edit_box width: 100, height: 100
  end
 }}}
 
@@ -3152,7 +3154,7 @@ every time someone types into or deletes from the box.
  #!ruby
  Shoes.app do
    edit_box do |e|
-     @counter.text = "#{e.text.size} characters"
+     @counter.text = strong("#{e.text.size}") + " characters"
    end
    @counter = para strong("0"), " characters"
  end
@@ -3174,6 +3176,8 @@ has changed.
 
 Moves focus to the edit box. The edit box will be highlighted and the user will
 be able to type into the edit box.
+
+'''Note:''' Green Shoes doesn't support `focus` method.
 
 === text() » self ===
 
@@ -3197,14 +3201,14 @@ height may vary on some platforms.
  Shoes.app do
    stack do
      edit_line
-     edit_line :width => 400
+     edit_line width: 400
    end
  end
 }}}
 
 You can change the size by styling both the `:width` and the `:height`.
 However, you generally only want to style the `:width`, as the height will be
-sized to fit the font. (And, in current versions of Shoes, the font for edit
+sized to fit the font. (And, in current versions of Green Shoes, the font for edit
 lines and edit boxes cannot be altered anyway.)
 
 If a block is given to an edit line, it receives `change` events. Check out the
@@ -3222,6 +3226,8 @@ has changed.
 
 Moves focus to the edit line. The edit line will be highlighted and the user
 will be able to type into the edit line.
+
+'''Note:''' Green Shoes doesn't support `focus` method.
 
 === text() » self ===
 
@@ -3305,7 +3311,7 @@ passed into the `:items` style.
  #!ruby
  Shoes.app do
    para "Choose a fruit:"
-   list_box :items => ["Grapes", "Pears", "Apricots"]
+   list_box items: ["Grapes", "Pears", "Apricots"]
  end
 }}}
 
@@ -3316,9 +3322,9 @@ You can adjust this length using the `:width` style.
  #!ruby
  Shoes.app do
    para "Choose a fruit:"
-   list_box :items => ["Grapes", "Pears", "Apricots"],
-     :width => 120, :choose => "Apricots" do |list|
-       @fruit.text = list
+   list_box items: ["Grapes", "Pears", "Apricots"],
+     width: 120, choose: "Apricots" do |list|
+       @fruit.text = list.text
    end
  
    @fruit = para "No fruit selected"
@@ -3351,6 +3357,8 @@ Selects the option in the list box that matches the string given by `item`.
 
 Moves focus to the list box. The list box will be highlighted and, if the user
 hits the up and down arrow keys, other options in the list will be selected.
+
+'''Note:''' Green Shoes doesn't support `focus` method.
 
 === items() » an array of strings ===
 

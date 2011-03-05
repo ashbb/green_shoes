@@ -126,22 +126,6 @@ class Shoes
   end
 
   class Image < Basic; end
-  class Button < Basic
-    def click &blk
-      real.signal_connect "clicked", &proc{parent.append{blk[self]}} if blk
-    end
-  end
-  class ToggleButton < Button
-    def checked?
-      real.active?
-    end
-    
-    def checked=(tof)
-      real.active = tof
-    end
-  end
-  class Check < ToggleButton; end
-  class Radio < ToggleButton; end
 
   class Pattern < Basic
     def move2 x, y
@@ -203,7 +187,29 @@ class Shoes
   class Para < TextBlock; end
   class Inscription < TextBlock; end
 
-  class EditLine < Basic
+  class Native < Basic
+    def change obj, &blk
+      obj.signal_connect "changed", &proc{parent.append{blk[self]}} if blk
+    end
+  end
+  class Button < Native
+    def click &blk
+      real.signal_connect "clicked", &proc{parent.append{blk[self]}} if blk
+    end
+  end
+  class ToggleButton < Button
+    def checked?
+      real.active?
+    end
+    
+    def checked=(tof)
+      real.active = tof
+    end
+  end
+  class Check < ToggleButton; end
+  class Radio < ToggleButton; end
+
+  class EditLine < Native
     def text
       @real.text
     end
@@ -216,9 +222,13 @@ class Shoes
       @app.canvas.move @real, x, y
       move3 x, y
     end
+
+    def change &blk
+      super @real, &blk
+    end
   end
 
-  class EditBox < Basic
+  class EditBox < Native
     def text
       @textview.buffer.text
     end
@@ -231,15 +241,32 @@ class Shoes
       @app.canvas.move @real, x, y
       move3 x, y
     end
+
+    def change &blk
+      super @textview.buffer, &blk
+    end
   end
   
-  class ListBox < Basic
+  class ListBox < Native
     def text
       @items[@real.active]
     end
+
+    def choose item
+      @real.active = @items.index item
+    end
+
+    def change &blk
+      super @real, &blk
+    end
+
+    def items= items
+      @items = items
+      items.each{|item| real.append_text item.to_s}
+    end
   end
 
-  class Progress < Basic
+  class Progress < Native
     def fraction
       real.fraction
     end

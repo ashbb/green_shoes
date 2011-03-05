@@ -71,11 +71,9 @@ class Shoes
       args[:width] ||= @width
       args[:height] ||= @height
       case self
-        when Button, EditBox, ListBox
+        when Button, EditBox, EditLine, ListBox
           real.set_size_request args[:width], args[:height]
           @height = args[:height]
-        when EditLine
-          real.width_chars = args[:width] / 6
         when Progress
           real.text = ' ' * (args[:width] / 4 - 2)
         else

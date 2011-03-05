@@ -159,61 +159,68 @@ class Shoes
       Gtk::Image.new(name).size_request
     end
 
-    def button name, args={}, &blk
+    def button name, args={}
       args = basic_attributes args
       b = Gtk::Button.new name
       b.set_size_request args[:width], args[:height] if args[:width] > 0 and args[:height] > 0
-      b.signal_connect "clicked", &blk if blk
+      b.signal_connect "clicked" do
+        yield @_b
+      end if block_given?
       @canvas.put b, args[:left], args[:top]
       b.show_now
       args[:real], args[:text], args[:app] = b, name, self
-      Button.new args
+      @_b = Button.new args
     end
 
-    def check args={}, &blk
+    def check args={}
       args = basic_attributes args
       cb = Gtk::CheckButton.new
       cb.active = true if args[:checked]
-      cb.signal_connect "clicked", &blk if blk
+      cb.signal_connect "clicked" do
+        yield @_cb
+      end if block_given?
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      Check.new args
+      @_cb = Check.new args
     end
     
-    def radio *attrs, &blk
+    def radio *attrs
       args = attrs.last.class == Hash ? attrs.pop : {}
       group = attrs.first unless attrs.empty?
       group = group ? (@radio_groups[group] ||= Gtk::RadioButton.new) : cslot.radio_group
       args = basic_attributes args
       rb = Gtk::RadioButton.new group
       rb.active = true if args[:checked]
-      rb.signal_connect "clicked", &blk if blk
+      rb.signal_connect "clicked" do
+        yield @_rb
+      end if block_given?
       @canvas.put rb, args[:left], args[:top]
       rb.show_now
       args[:real], args[:app] = rb, self
-      Radio.new args
+      @_rb = Radio.new args
     end
 
     def edit_line args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
+      args[:height] = 28 if args[:height].zero?
       el = Gtk::Entry.new
       el.text = args[:text].to_s
-      el.width_chars = args[:width] / 6
+      el.set_size_request args[:width], args[:height]
       el.signal_connect "changed" do
-        yield el
+        yield @_el
       end if block_given?
       @canvas.put el, args[:left], args[:top]
       el.show_now
       args[:real], args[:app] = el, self
-      EditLine.new args
+      @_el = EditLine.new args
     end
 
     def edit_box args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
-      args[:height] = 200 if args[:height].zero?
+      args[:height] = 108 if args[:height].zero?
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
       tv.buffer.text = args[:text].to_s
@@ -225,29 +232,31 @@ class Shoes
       eb.add tv
 
       tv.buffer.signal_connect "changed" do
-        yield tv.buffer
+        yield @_eb
       end if block_given?
 
       @canvas.put eb, args[:left], args[:top]
       eb.show_now
       args[:real], args[:app], args[:textview] = eb, self, tv
-      EditBox.new args
+      @_eb = EditBox.new args
     end
     
-    def list_box args={}, &blk
+    def list_box args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
+      args[:height] = 28 if args[:height].zero?
       cb = Gtk::ComboBox.new
       args[:items] ||= []
       args[:items].each{|item| cb.append_text item.to_s}
+      cb.set_size_request args[:width], args[:height]
       cb.active = args[:items].index(args[:choose]) if args[:choose]
       cb.signal_connect("changed") do
-        blk.call args[:items][cb.active]
-      end if blk
+        yield @_lb
+      end if block_given?
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      ListBox.new args
+      @_lb = ListBox.new args
     end
 
     def animate n=10, repaint=true, &blk
