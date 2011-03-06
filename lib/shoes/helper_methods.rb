@@ -317,6 +317,7 @@ class Shoes
       if d.finished?
         app.canvas.remove e.real
         img = Gtk::Image.new tmpname
+        e.full_width, e.full_height = img.size_request
         unless args[:width].zero? and args[:height].zero?
           img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
         end

@@ -3239,7 +3239,7 @@ Fills the edit line with the characters of `a string`.
 
 == Image ==
 
-An image is a picture in PNG, JPEG or GIF format. Shoes can resize images or
+An image is a picture in PNG, JPEG or GIF format. Green Shoes can resize images or
 flow them in with text. Images can be loaded from a file or directly off the
 web. !{:margin_left => 100}man-ele-image.png!
 
@@ -3253,7 +3253,7 @@ To create an image, use the `image` method in a slot:
   end
 }}}
 
-When you load any image into Shoes, it is cached in memory. This means that if
+When you load any image into Green Shoes, it is cached in memory. This means that if
 you load up many image elements from the same file, it'll only really load the
 file once.
 
@@ -3271,7 +3271,9 @@ in memory. This prevents a repeat download unless the image has changed. (In
 case you're wondering: Shoes keeps track of modification times and etags just
 like a browser would.)
 
-Shoes also loads remote images in the background using system threads. So,
+'''Note:''' Green Shoes doesn't support the hard drive cache management feature like Red Shoes.
+
+Green Shoes also loads remote images in the background using system threads. So,
 using remote images will not block Ruby or any intense graphical displays you
 may have going on.
 
@@ -3294,9 +3296,13 @@ explanation of why you might use this method rather than [[Common.width]].
 
 The URL or file name of the image.
 
+'''Note:''' Green Shoes doesn't support `path` method.
+
 === path = a string ===
 
 Swaps the image with a different one, loaded from a file or URL.
+
+'''Note:''' Green Shoes doesn't support `path=` method.
 
 == ListBox ==
 

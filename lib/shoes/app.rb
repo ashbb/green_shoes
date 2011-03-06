@@ -134,6 +134,7 @@ class Shoes
 
     def image name, args={}
       args = basic_attributes args
+      args[:full_width] = args[:full_height] = 0
       if name =~ /^(http|https):\/\//
         tmpname = File.join(Dir.tmpdir, "__green_shoes_#{Time.now.to_f}.png")
         d = download name, save: tmpname
@@ -143,10 +144,11 @@ class Shoes
         img = Gtk::Image.new name
         downloading = false
       end
+
       if (!args[:width].zero? or !args[:height].zero?) and !downloading 
-        w, h = imagesize(name)
-        args[:width] = w if args[:width].zero?
-        args[:height] = w if args[:height].zero?
+        args[:full_width], args[:full_height] = imagesize(name)
+        args[:width] = args[:full_width] if args[:width].zero?
+        args[:height] = args[:full_height] if args[:height].zero?
         img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
       end
       @canvas.put img, args[:left], args[:top]
