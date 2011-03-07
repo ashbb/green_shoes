@@ -3382,12 +3382,14 @@ now. If nothing is selected, `nil` will be the reply.
 == Progress ==
 
 Progress bars show you how far along you are in an activity. Usually, a
-progress bar represents a percentage (from 0% to 100%.) Shoes thinks of
+progress bar represents a percentage (from 0% to 100%.) Green Shoes thinks of
 progress in terms of the decimal numbers 0.0 to 1.0. !{:margin_left =>
 100}man-ele-progress.png!
 
-A simple progress bar is 200 pixels wide, but you can use the `:width` style
-(as with all Shoes elements) to lengthen it.
+A simple progress bar is 150 pixels wide, but you can use the `:width` style
+(as with all Green Shoes elements) to lengthen it.
+
+'''Note:''' The minimum size is 150 pixels wide in Green Shoes.
 
 {{{
  Shoes.app do
@@ -3501,6 +3503,8 @@ Clicks are sent for both marking and unmarking the radio.
 Moves focus to the radio. The radio will be highlighted and, if the user hits
 Enter, the radio will be toggled between its marked and unmarked states.
 
+'''Note:''' Green Shoes doesn't support `focus` method.
+
 == Shape ==
 
 A shape is a path outline usually created by drawing methods like `oval` and
@@ -3513,7 +3517,7 @@ See the [[Common]] methods page.  Shapes respond to all of those methods.
 The TextBlock object represents a group of text organized as a single element.
 A paragraph containing bolded text, for example. A caption containing links and
 bolded text. (So, a `caption` is a TextBlock type.  However, `link` and
-`strong` are TextClass types.) !{:margin_left => 100}man-ele-textblock.png!
+`strong` are Text types.) !{:margin_left => 100}man-ele-textblock.png!
 
 All of the various types of TextBlock are found on the [[Element Element
 Creation]] page.
@@ -3529,6 +3533,8 @@ Creation]] page.
 === contents() » an array of elements  ===
 
 Lists all of the strings and styled text objects inside this block.
+
+'''Note:''' Green Shoes doesn't support `contents` method.
 
 === replace(a string) ===
 
@@ -3549,15 +3555,19 @@ Replaces the text of the entire block with the characters of `a string`.
 An alias for [[TextBlock.text]]. Returns a flattened string of all of this
 TextBlock's contents.
 
+'''Note:''' Green Shoes doesn't support `to_s` method.
+
 == Timers ==
 
-Shoes contains three timer classes: the Animation class, the Every class and
-the Timer class. Both Animations and Everies loop over and over after they
-start.  Timers happen once. A one-shot timer.
+Green Shoes contains three timers: the animate, every and
+timer. Both animate and every loop over and over after they
+start.  The timer happens once. A one-shot timer.
 
-Animations and Everies are basically the same thing. The difference is that
-Animations usually happen many, many times per second. And Everies happen only
+The animate and every are basically the same thing. The difference is that
+the animate usually happen many, many times per second. And the every happens only
 once every few seconds or rarely.
+
+The animate and every automatically start themselves.
 
 === start() » self ===
 
@@ -3565,14 +3575,15 @@ Both types of timers automatically start themselves, so there's no need to use
 this normally. But if you [[Timers.stop]] a timer and would like to start it up
 again, then by all means: use this!
 
+'''Note:''' Green Shoes doesn't support `start` method.
+
 === stop() » self ===
 
-Pauses the animation or timer. In the case of a one-shot timer that's already
-happened, it's already stopped and this method will have no effect.
+Stops the animate or every loop.
 
-=== toggle() » self ===
+=== pause() » self ===
 
-If the animation or timer is stopped, it is started. Otherwise, if it is
+Pauses the animate or every loop. If the animate or every loop is stopped, it is started. Otherwise, if it is
 already running, it is stopped.
 
 == Video ==
@@ -3580,7 +3591,9 @@ already running, it is stopped.
 Shoes supports embedding of QuickTime, Flash video (FLV), DivX, Xvid and
 various other popular video formats. This is all thanks to VideoLAN and ffmpeg,
 two sensational open source libraries. Use the `video` method on a slot to
-setup a Shoes::Video object. !{:margin_left => 100}man-ele-video.png!
+setup a Shoes::Video object. 
+
+'''Note:''' Green Shoes doesn't support any video formats. !{:margin_left => 100}man-ele-video.png!
 
 In addition to video formats, some audio formats are also supported, such as
 MP3, WAV and Ogg Vorbis.
@@ -3672,5 +3685,5 @@ Have fun!
 Hope this helps:
 
  * You can join [[http://librelist.com/browser/shoes/ Shoes ML]] and feel free ask your questions. 
- * [[http://github.com/shoes/shoes/ Official Current Source Code]] is on GitHub.
- * [[http://github.com/shoes/shoes/downloads Recent Builds]] for your platform.
+ * [[https://github.com/ashbb/green_shoes/ Current Source Code]] is on GitHub.
+ * Green Shoes Gem is on [[http://rubygems.org/gems/green_shoes RubyGems.org]].
