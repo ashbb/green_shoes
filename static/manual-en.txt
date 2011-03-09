@@ -599,10 +599,7 @@ But these are built-in methods (also called: Kernel methods.) Which means no dot
 A common one is `alert`:
 
 {{{
- #!ruby
- Shoes.app do
-   alert "No dots in sight"
- end
+  alert "No dots in sight"
 }}}
 
 Compare that to the method `reverse`, which isn't a Kernel method and is only
@@ -648,7 +645,7 @@ Pops up a window containing a short message.
 
 {{{
  #!ruby
- Shoes.app{ alert("I'm afraid I must interject!") }
+ alert "I'm afraid I must interject!"
 }}}
 
 Please use alerts sparingly, as they are incredibly annoying!  If you are using
@@ -693,8 +690,8 @@ file.
 
 {{{
  #!ruby
+ filename = ask_open_file
  Shoes.app do
-   filename = ask_open_file
    para File.read(filename)
  end
 }}}
@@ -786,13 +783,11 @@ available to you on this platform.  You can check for a certain font by using
 `include?`.
 
 {{{
- Shoes.app do
-   if Shoes::FONTS.include? "Coolvetica"
-     alert "Coolvetica is available on this system."
-   else
-     alert "You do not have the Coolvetica font."
-   end
-end
+  if Shoes::FONTS.include? "Coolvetica"
+    alert "Coolvetica is available on this system."
+  else
+    alert "You do not have the Coolvetica font."
+  end
 }}}
 
 If you have trouble with fonts showing up, make sure your app loads the font

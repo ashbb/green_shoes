@@ -1,6 +1,5 @@
 class Shoes
   class App
-    include Types
     include Mod2
 
     def initialize args={}

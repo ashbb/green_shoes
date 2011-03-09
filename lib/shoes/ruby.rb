@@ -6,9 +6,10 @@ class Range
 end
 
 class Object
+  include Types
   def alert msg
     dialog = Gtk::MessageDialog.new(
-      app.win,
+      get_win,
       Gtk::Dialog::MODAL,
       Gtk::MessageDialog::INFO,
       Gtk::MessageDialog::BUTTONS_OK,
@@ -22,7 +23,7 @@ class Object
   def ask_open_file
     dialog = Gtk::FileChooserDialog.new(
       "Open File",
-      app.win,
+      get_win,
       Gtk::FileChooser::ACTION_OPEN,
       nil,
       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
@@ -40,6 +41,12 @@ class Object
 
   def to_s
     super.gsub('<', '[').gsub('>', ']')
+  end
+
+  def get_win
+    Gtk::Window.new.tap do |s|
+      s.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
+    end
   end
 end
 

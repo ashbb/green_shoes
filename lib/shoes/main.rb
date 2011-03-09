@@ -1,5 +1,4 @@
 class Shoes
-  include Types
   @apps = []
   $urls = {}
   APPS = []
@@ -20,8 +19,7 @@ class Shoes
 
     app.top_slot = Flow.new app.slot_attributes(app: app, left: 0, top: 0)
 
-    win = Gtk::Window.new
-    win.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
+    win = get_win
     win.title = args[:title]
     win.set_default_size args[:width], args[:height]
 
