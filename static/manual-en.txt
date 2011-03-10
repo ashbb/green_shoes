@@ -659,8 +659,9 @@ their name.
 
 {{{
  #!ruby
- # Not yet available
- name = ask("Please, enter your name:")
+ if name = ask("Please, enter your name:")
+   Shoes.app{para "Welcome, #{name}!"}
+ end
 }}}
 
 When the above script is run, the person at the computer will see a window with
@@ -742,9 +743,8 @@ you'll get back a `true`. If not, you'll get back `false`.
 
 {{{
  #!ruby
- # Not yet available
  if confirm("Draw a circle?")
-  Shoes.app{ oval :top => 0, :left => 0, :radius => 50 }
+  Shoes.app{ oval top: 0, left: 0, radius: 50 }
  end
 }}}
 

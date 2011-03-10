@@ -15,9 +15,42 @@ class Object
       Gtk::MessageDialog::BUTTONS_OK,
       msg
     )
-    dialog.title = "Shoes says:"
+    dialog.title = "Green Shoes says:"
     dialog.run
     dialog.destroy
+  end
+
+  def confirm msg
+    dialog = Gtk::Dialog.new(
+      "Green Shoes asks:", 
+      get_win,
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT],
+      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT]
+    )
+    dialog.vbox.add Gtk::Label.new msg
+    dialog.set_size_request 300, 100
+    dialog.show_all
+    ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? true : false
+    dialog.destroy
+    ret
+  end
+
+  def ask msg
+    dialog = Gtk::Dialog.new(
+      "Green Shoes asks:", 
+      get_win,
+      Gtk::Dialog::MODAL | Gtk::Dialog::DESTROY_WITH_PARENT,
+      [Gtk::Stock::OK, Gtk::Dialog::RESPONSE_ACCEPT],
+      [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_REJECT]
+    )
+    dialog.vbox.add Gtk::Label.new msg
+    dialog.vbox.add(el = Gtk::Entry.new)
+    dialog.set_size_request 300, 100
+    dialog.show_all
+    ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? el.text : nil
+    dialog.destroy
+    ret
   end
   
   def ask_open_file
