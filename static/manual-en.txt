@@ -629,6 +629,8 @@ are trying to sniff out what release of Green Shoes is running.
 
 '''FONTS''' is a complete list of fonts available to the app. 
 
+'''VERSION''' is a Green Shoes version. 
+
 {{{
  Shoes.app do
    para VERSION
@@ -676,10 +678,9 @@ use this color.
 
 {{{
  #!ruby
- # Not yet available
- backcolor = ask_color("Pick a background")
+ backcolor = ask_color "Pick a background"
  Shoes.app do
-  background backcolor
+   background backcolor
  end
 }}}
 
@@ -704,8 +705,10 @@ previously.
 
 {{{
  #!ruby
- # Not yet available
  save_as = ask_save_file
+ Shoes.app do
+   para save_as
+ end
 }}}
 
 === ask_open_folder() » a string ===
@@ -716,7 +719,6 @@ the folder.
 
 {{{
  #!ruby
- # Not yet available
  folder = ask_open_folder
  Shoes.app do
    para Dir.entries(folder)
@@ -726,13 +728,14 @@ the folder.
 === ask_save_folder() » a string ===
 
 Pops up a "Save folder..." window, similiar to `ask_open_folder`, described
-previously. On OS X, this method currently behaves like an alias of
-`ask_open_folder`.
+previously. 
 
 {{{
  #!ruby
- # Not yet available
  save_to = ask_save_folder
+ Shoes.app do
+   para save_to
+ end
 }}}
 
 

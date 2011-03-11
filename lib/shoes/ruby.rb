@@ -54,19 +54,43 @@ class Object
   end
   
   def ask_open_file
+    dialog_chooser "Open File...", Gtk::FileChooser::ACTION_OPEN, Gtk::Stock::OPEN
+  end
+
+  def ask_save_file
+    dialog_chooser "Save File...", Gtk::FileChooser::ACTION_SAVE, Gtk::Stock::SAVE
+  end
+
+  def ask_open_folder
+    dialog_chooser "Open Folder...", Gtk::FileChooser::ACTION_SELECT_FOLDER, Gtk::Stock::OPEN
+  end
+
+  def ask_save_folder
+    dialog_chooser "Save Folder...", Gtk::FileChooser::ACTION_CREATE_FOLDER, Gtk::Stock::SAVE
+  end
+
+  def dialog_chooser title, action, button
     dialog = Gtk::FileChooserDialog.new(
-      "Open File",
+      title,
       get_win,
-      Gtk::FileChooser::ACTION_OPEN,
+      action,
       nil,
       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
-      [Gtk::Stock::OPEN, Gtk::Dialog::RESPONSE_ACCEPT]
+      [button, Gtk::Dialog::RESPONSE_ACCEPT]
     )
     ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? dialog.filename : nil
     dialog.destroy
     ret
   end
-  
+
+  def ask_color title = 'Pick a color...'
+    dialog = Gtk::ColorSelectionDialog.new title
+    dialog.run
+    ret = dialog.colorsel.current_color.to_a.map{|c| c / 65535.0}
+    dialog.destroy
+    ret
+  end
+
   def exit
     Shoes.APPS.length.times {|i| timer(0.01*i){Gtk.main_quit}}
     File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
