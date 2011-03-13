@@ -532,7 +532,19 @@ class Shoes
       @fill = false
     end
     
-    def gradient pat, w, h, angle=0
+    def gradient *attrs
+      case attrs.length
+        when 1, 2
+          pat1, pat2 = attrs
+          pat2 = pat1 unless pat2
+          return tr_color(pat1)..tr_color(pat2)
+        when 3, 4
+          pat, w, h, angle = attrs
+          angle = 0 unless angle
+        else
+        return black..black
+      end
+
       pat = tr_color pat
       color = case pat
         when Range; [tr_color(pat.first), tr_color(pat.last)]

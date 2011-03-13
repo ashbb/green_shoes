@@ -85,6 +85,7 @@ class Object
 
   def ask_color title = 'Pick a color...'
     dialog = Gtk::ColorSelectionDialog.new title
+    dialog.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
     dialog.run
     ret = dialog.colorsel.current_color.to_a.map{|c| c / 65535.0}
     dialog.destroy

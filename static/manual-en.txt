@@ -797,6 +797,19 @@ If you have trouble with fonts showing up, make sure your app loads the font
 before it is used.  Especially on OS X, if fonts are used before they are
 loaded, the font cache will tend to ignore loaded fonts.
 
+=== gradient(color1, color2) » a range of RGB array ===
+
+Builds a linear gradient from two colors. For each color, you may pass in 
+a color/rgb method or a string describing the color. The `gradient(green, red)` is 
+the same as `green..red` for example. Also possible to use different kind of args 
+like this: `gradient(green, '#FA3')`
+
+{{{
+ Shoes.app do
+   oval 100, 100, 100, fill: gradient(green, '#FA3'), angle: 45
+ end
+}}}
+
 === gray(the numbers: darkness, alpha) » Shoes::Color ===
 
 Create a grayscale color from a level of darkness and, optionally, an alpha
