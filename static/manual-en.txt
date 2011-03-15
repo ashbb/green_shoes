@@ -810,17 +810,21 @@ like this: `gradient(green, '#FA3')`
  end
 }}}
 
-=== gray(the numbers: darkness, alpha) » Shoes::Color ===
+=== gray(the numbers: darkness, alpha) » a RGB array ===
 
 Create a grayscale color from a level of darkness and, optionally, an alpha
 level.
 
 {{{
- # Not yet available
- black = gray(0.0)
- white = gray(1.0)
+ Shoes.app do
+  nostroke
+  11.times do |i|
+    y = x = 50 + 10 * i
+    r = 200 - 10 * i
+    oval x, y, r, fill: gray(1-i*0.1)
+  end
+ end
 }}}
-
 
 === rgb(red, green, blue, alpha) » an array of decimal numbers ===
 

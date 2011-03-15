@@ -678,5 +678,10 @@ class Shoes
         top_slot.send m, *args, &blk
       end
     end
+
+    def gray *attrs
+      g, a = attrs
+      g ? rgb(g*255, g*255, g*255, a) : rgb(128, 128, 128)[0..2]
+    end
   end
 end
