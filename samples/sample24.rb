@@ -1,6 +1,7 @@
 require '../lib/green_shoes'
 
 Shoes.app width: 400, height: 400 do
+  cap [:rect, :curve, :project][rand 3]
   background yellow
   rect 0, 0, 100, 100
   rect 100, 100, 100, 100

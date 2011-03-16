@@ -1751,6 +1751,22 @@ method just give you a bit more control than [[oval]], by offering the
 `:angle1` and `:angle2` styles.  (In fact, you can mimick the `oval` method by
 setting `:angle1` to 0 and `:angle2` to `2*Math::PI`.)
 
+{{{
+ Shoes.app do
+   fill yellow..green
+   stroke red..blue
+   strokewidth 10
+   cap :curve
+ 
+   a = animate 12 do |i|
+     @e.remove if @e
+     r = i * (Math::PI * 0.01)
+     @e = arc 100, 50, 180, 360, 0, i * (Math::PI * 0.01)
+     a.stop if r >= 2*Math::PI
+   end
+ end
+}}}
+
 === arrow(left, top, width) » Shoes::Shape ===
 
 Draws an arrow at coordinates (left, top) with a pixel `width`.
@@ -1763,7 +1779,25 @@ Sets the line cap, which is the shape at the end of every line you draw.  If
 set to `:curve`, the end is rounded.  The default is `:rect`, a line which ends
 abruptly flat.  The `:project` cap is also fat, but sticks out a bit longer.
 
-'''Note:''' Green Shoes doesn't support `cap` method.
+{{{
+ Shoes.app do
+   nofill
+   strokewidth 20
+   stroke green
+   cap :curve
+   line 100, 100, 300, 100
+   line 100, 250, 300, 300
+   cap :rect
+   line 100, 150, 300, 150
+   stroke blue
+   cap :project
+   line 100, 200, 300, 200
+   line 200, 100, 200, 300
+   strokewidth 1
+   stroke red
+   rect 100, 100, 200, 200
+ end
+}}}
 
 === fill(pattern) » pattern ===
 

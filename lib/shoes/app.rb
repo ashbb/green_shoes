@@ -336,6 +336,7 @@ class Shoes
       context.set_source gp
       context.set_line_width args[:strokewidth]
       context.arc args[:radius]+mx, args[:radius]-my, args[:radius]-args[:strokewidth]/2.0, args[:angle1], args[:angle2]
+      context.set_line_cap cap
       context.stroke
 
       img = create_tmp_png surface
@@ -400,8 +401,10 @@ class Shoes
       end
       sx, sy, ex, ey = args[:sx], args[:sy], args[:ex], args[:ey]
       sw = args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
-      hsw = sw*0.5
+      cw = hsw = sw*0.5
       args[:width], args[:height] = (sx - ex).abs, (sy - ey).abs
+      args[:width] += cw
+      args[:height] += cw
       
       args = basic_attributes args
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width]+sw, args[:height]+sw
@@ -413,23 +416,23 @@ class Shoes
       context.set_line_width args[:strokewidth]
       
       if ((sx - ex) < 0 and (sy - ey) < 0) or ((sx - ex) > 0 and (sy - ey) > 0)
-        context.move_to hsw, hsw
+        context.move_to cw+hsw, cw+hsw
         context.line_to args[:width]+hsw, args[:height]+hsw
         args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
         args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
       elsif ((sx - ex) < 0 and (sy - ey) > 0) or ((sx - ex) > 0 and (sy - ey) < 0)
-        context.move_to hsw, args[:height] + hsw
-        context.line_to args[:width]+hsw, hsw
+        context.move_to cw+hsw, args[:height]+hsw
+        context.line_to args[:width]+hsw, cw+hsw
         args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
         args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
       elsif !(sx - ex).zero? and (sy - ey).zero?
-        context.move_to 0, hsw
-        context.line_to args[:width], hsw
+        context.move_to cw, cw+hsw
+        context.line_to args[:width], cw+hsw
         args[:left] = (sx - ex) < 0 ? sx : ex
         args[:top] = (sy - ey) < 0 ? sy - hsw : ey - hsw
       elsif (sx - ex).zero? and !(sy - ey).zero?
-        context.move_to hsw, 0
-        context.line_to hsw, args[:height]
+        context.move_to cw+hsw, cw
+        context.line_to cw+hsw, args[:height]
         args[:left] = (sx - ex) < 0 ? sx - hsw : ex - hsw
         args[:top] = (sy - ey) < 0 ? sy : ey
       else
@@ -439,9 +442,10 @@ class Shoes
         args[:top] = sy
       end
       
+      context.set_line_cap cap
       context.stroke
       img = create_tmp_png surface
-      @canvas.put img, args[:left], args[:top]
+      @canvas.put img, (args[:left]-=cw), (args[:top]-=cw)
       img.show_now
       args[:real], args[:app] = img, self
       Line.new args
@@ -688,6 +692,19 @@ class Shoes
     def gray *attrs
       g, a = attrs
       g ? rgb(g*255, g*255, g*255, a) : rgb(128, 128, 128)[0..2]
+    end
+
+    def cap *line_cap
+      @line_cap = case line_cap.first
+        when :curve
+          Cairo::LineCap::ROUND
+        when :rect
+          Cairo::LineCap::BUTT
+        when :project
+          Cairo::LineCap::SQUARE
+        else
+          @line_cap ||= Cairo::LineCap::BUTT
+      end
     end
   end
 end
