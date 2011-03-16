@@ -1,0 +1,1 @@
+puts `git rev-list HEAD`.split.length

@@ -1744,14 +1744,12 @@ allows images and gradients to be used for drawing lines and filling in shapes.
 Shoes also borrows some animation ideas from Processing and will continue to
 closely consult Processing's methods as it expands.
 
-=== arc(left, top, width, height, angle1, angle2) » Shoes::Shape ===
+=== arc(left, top, width, height, angle1, angle2) » Shoes::Oval ===
 
 Draws an arc shape (a section of an oval) at coordinates (left, top).  This
 method just give you a bit more control than [[oval]], by offering the
 `:angle1` and `:angle2` styles.  (In fact, you can mimick the `oval` method by
-setting `:angle1` to 0 and `:angle2` to `Shoes::TWO_PI`.)
-
-'''Note:''' Green Shoes doesn't support `arc` method.
+setting `:angle1` to 0 and `:angle2` to `2*Math::PI`.)
 
 === arrow(left, top, width) » Shoes::Shape ===
 

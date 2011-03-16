@@ -313,6 +313,8 @@ class Shoes
       args[:width].zero? ? (args[:width] = args[:radius] * 2) : (args[:radius] = args[:width]/2.0)
       args[:height] = args[:width] if args[:height].zero?
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
+      args[:angle1] ||= 0
+      args[:angle2] ||= 2*Math::PI
 
       w, h, mx, my = set_rotate_angle(args)
       my *= args[:width]/args[:height].to_f
@@ -325,7 +327,7 @@ class Shoes
       if pat = (args[:fill] or fill)
         gp = gradient pat, args[:width], args[:height], args[:angle]
         context.set_source gp
-        context.arc args[:radius]+mx, args[:radius]-my, args[:radius], 0, 2*Math::PI
+        context.arc args[:radius]+mx, args[:radius]-my, args[:radius], args[:angle1], args[:angle2]
         context.fill
       end
       
@@ -333,7 +335,7 @@ class Shoes
       gp = gradient pat, args[:width], args[:height], args[:angle]
       context.set_source gp
       context.set_line_width args[:strokewidth]
-      context.arc args[:radius]+mx, args[:radius]-my, args[:radius]-args[:strokewidth]/2.0, 0, 2*Math::PI
+      context.arc args[:radius]+mx, args[:radius]-my, args[:radius]-args[:strokewidth]/2.0, args[:angle1], args[:angle2]
       context.stroke
 
       img = create_tmp_png surface
@@ -342,6 +344,10 @@ class Shoes
       img.show_now
       args[:real], args[:app] = img, self
       Oval.new args
+    end
+
+    def arc l, t, w, h, a1, a2
+      oval  l, t, w, h, angle1: a1, angle2: a2
     end
 
     def rect *attrs

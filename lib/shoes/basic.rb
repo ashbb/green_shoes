@@ -52,6 +52,7 @@ class Shoes
 
     def remove
       @app.canvas.remove @real unless @hided
+      @hided = true
     end
 
     def hide
