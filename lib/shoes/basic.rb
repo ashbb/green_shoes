@@ -52,7 +52,7 @@ class Shoes
 
     def remove
       @app.canvas.remove @real unless @hided
-      @hided = true
+      @hided = true if self.is_a?(ShapeBase)
     end
 
     def hide
@@ -235,7 +235,7 @@ class Shoes
     end
     
     def text=(s)
-      @textview.buffer.text = s
+      @textview.buffer.text = s.to_s
     end
 
     def move2 x, y
