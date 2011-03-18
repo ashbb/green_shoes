@@ -520,6 +520,22 @@ class Shoes
       shapebase Star, args
     end
 
+    def arrow *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      w = attrs[2]
+      args.merge!({left: attrs[0], top: attrs[1], width: w, height: w})
+      shape args do
+        move_to 0, w*0.5*0.6
+        line_to w*0.58, w*0.5*0.6
+        line_to w*0.58, w*0.5*0.2
+        line_to w, w*0.5
+        line_to w*0.58, w*(1-0.5*0.2)
+	line_to w*0.58, w*(1-0.5*0.6)
+        line_to 0, w*(1-0.5*0.6)
+        line_to 0, w*0.5*0.6
+      end
+    end
+
     def rotate angle
       @pixbuf_rotate, angle = angle.divmod(90)
       @pixbuf_rotate %= 4

@@ -1771,7 +1771,12 @@ setting `:angle1` to 0 and `:angle2` to `2*Math::PI`.)
 
 Draws an arrow at coordinates (left, top) with a pixel `width`.
 
-'''Note:''' Green Shoes doesn't support `arrow` method.
+{{{
+ Shoes.app do
+   para 'An arrow shape:', left: 20, top: 10
+   arrow 30, 40, 70
+ end
+}}}
 
 === cap(:curve or :rect or :project) » self ===
 
