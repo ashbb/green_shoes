@@ -237,7 +237,7 @@ class Shoes
       end if block_given?
 
       @canvas.put eb, args[:left], args[:top]
-      eb.show_now
+      eb.show_all
       args[:real], args[:app], args[:textview] = eb, self, tv
       @_eb = EditBox.new args
     end
