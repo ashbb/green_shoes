@@ -1002,6 +1002,26 @@ query google's search engine.
 
 '''Note:''' Green Shoes doesn't support the `:method`, `:headers` and `:body` styles.
 
+{{{
+ include Hpricot
+ Shoes.app do
+   status = para "One moment..."
+   download 'http://shoes-tutorial-note.heroku.com/' do |dl|
+     samples = []
+     Hpricot(dl).inner_text.each_line do |line|
+       samples.push($1) if line =~ /(sample.*\.rb)/
+     end
+     status.text = samples.join(', ')
+     flush
+   end
+ end
+}}}
+
+As you can see from the above example, Green Shoes includes the Hpricot
+library for parsing HTML.
+
+'''Note''': Windows platform only so far.
+
 === location() » a string ===
 
 Gets a string containing the URL of the current app.
