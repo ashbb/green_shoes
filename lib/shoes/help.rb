@@ -2,6 +2,8 @@ class Manual < Shoes
   url '/', :index
   url '/manual/(\d+)', :index
 
+  include Hpricot
+
   def index pnum = 0
     font LANG == 'ja' ? 'MS UI Gothic' : 'Arial'
     style Link, underline: false, weight: 'bold'
@@ -13,6 +15,7 @@ class Manual < Shoes
   
   def get_title_and_desc pnum
     chapter, section = PNUMS[pnum]
+    return nil unless chapter
     if section
       [pnum, DOCS[chapter][1][:sections][section][1][:title], 
       DOCS[chapter][1][:sections][section][1][:description], 
@@ -45,6 +48,7 @@ class Manual < Shoes
       stack{para NL * 4}
       flow width: 0.2, margin_left: 10 do
         para *TOC
+        para link(fg 'to_html', darkmagenta){html_manual}
       end
         
       flow width: 0.8, margin: [10, 0, 20, 0] do
@@ -201,6 +205,78 @@ class Manual < Shoes
       end
     end
     pnum
+  end
+
+  def html_manual
+    dir = ask_save_folder
+    return unless dir
+    FileUtils.mkdir_p File.join(dir, 'static')
+    %w[gshoes-icon.png shoes-manual-apps.png manual.css code_highlighter.js code_highlighter_ruby.js].
+      each{|x| FileUtils.cp "#{DIR}/../static/#{x}", "#{dir}/static"}
+    Dir[File.join DIR, '../static/man-*.png'].each{|x| FileUtils.cp x, "#{dir}/static"}
+
+    TOC_LIST.length.times do |n|
+      num, title, desc = get_title_and_desc n
+      open File.join(dir, "#{TOC_LIST[n][0]}.html"), 'w' do |f|
+        f.puts mk_html(title, desc, TOC_LIST[n+1], get_title_and_desc(n+1), mk_sidebar_list(num))
+      end
+    end
+  end
+
+  def mk_html title, desc, next_file, next_title, menu
+    Hpricot do
+      xhtml_transitional do
+        head do
+          meta :"http-equiv" => "Content-Type", "content" => "text/html; charset=utf-8"
+          title "The Green Shoes Manual // #{title}"
+          script type: "text/javascript", src: "static/code_highlighter.js"
+          script type: "text/javascript", src: "static/code_highlighter_ruby.js"
+          style type: "text/css" do
+            text "@import 'static/manual.css';"
+          end
+        end
+        body do
+          div.main! do
+            div.manual! do
+              h2 "The Green Shoes Manual #{VERSION}"
+              h1 title
+
+              p "<h4>test test test</h4>"
+
+              p.next{text "Next: "; a next_title[1], href: "#{next_file[0]}.html"} if next_title
+            end
+            div.sidebar do
+              img src: "static/gshoes-icon.png"
+              ul do
+                li{a.prime "HELP", href: "./"}
+                menu.each do |m|
+                  li do
+                    unless m.is_a?(Array)
+                      a m, href: "#{m}.html"
+                    else
+                      ul.sub do
+                        m.each do |sm|
+                          li{a sm, href: "#{sm}.html"}
+                        end
+		      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end.to_html
+  end
+
+  def mk_sidebar_list num
+    toc = []
+    [0..3, 4..9, 10..16, 17..32, 33..35].each do |r|
+      toc.push TOC_LIST[r.first][0]
+      toc.push(TOC_LIST[r.first+1..r.last].to_a.map &:first) if r.include?(num)
+    end
+    toc
   end
 
   IMAGE_RE = /\!(\{([^}\n]+)\})?([^!\n]+\.\w+)\!/

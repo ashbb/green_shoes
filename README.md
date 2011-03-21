@@ -97,6 +97,7 @@ Copyright (c) 2010-2011 ashbb
 Except:
 
 - hh/static/(all).png (c) 2008 why the lucky stiff
+- lib/ext/hpricot/(all) (c) 2008 why the lucky stiff
 - lib/ext/projector/(all).rb (c) 2010 MIZUTANI Tociyuki
 - samples/akatsukiface.png (c) 2010 MIZUTANI Tociyuki
 - samples/class-book.yaml (c) 2008 why the lucky stiff
@@ -107,6 +108,9 @@ Except:
 - static/Lacuna.ttf (c) 2003 Glashaus, designed by Peter Hoffman
 - static/gshoes-icon.png (c) 2010 Zachary Scott
 - static/gshoes-heading-icon.png (c) 2010 Zachary Scott
+- static/code_highlighter.js (c) 2005 Dan Webb
+- static/code_highlighter_ruby.js (c) 2008 why the lucky stiff
+- static/manual.css (c) 2008 why the lucky stiff
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
