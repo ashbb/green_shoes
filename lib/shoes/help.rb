@@ -211,9 +211,11 @@ class Manual < Shoes
     dir = ask_save_folder
     return unless dir
     FileUtils.mkdir_p File.join(dir, 'static')
+    FileUtils.mkdir_p File.join(dir, 'snapshots')
     %w[gshoes-icon.png shoes-manual-apps.png manual.css code_highlighter.js code_highlighter_ruby.js].
       each{|x| FileUtils.cp "#{DIR}/../static/#{x}", "#{dir}/static"}
     Dir[File.join DIR, '../static/man-*.png'].each{|x| FileUtils.cp x, "#{dir}/static"}
+    ['3-osx', 33, '44-linux', 46].each{|n| FileUtils.cp File.join(DIR, "../snapshots/sample#{n}.png"), "#{dir}/snapshots"}
 
     TOC_LIST.length.times do |n|
       num, title, desc = get_title_and_desc n
@@ -224,6 +226,7 @@ class Manual < Shoes
   end
 
   def mk_html title, desc, next_file, next_title, menu
+    man = self
     Hpricot do
       xhtml_transitional do
         head do
@@ -241,7 +244,30 @@ class Manual < Shoes
               h2 "The Green Shoes Manual #{VERSION}"
               h1 title
 
-              p "<h4>test test test</h4>"
+              paras = man.mk_paras desc
+              div.intro{p man.manual_p(paras.shift)}
+              paras.each do |str|
+                if str =~ CODE_RE
+                  pre{code.rb $1.gsub(/^\s*?\n/, '')}
+                else
+                  cmd, str = case str
+                  when /\A==== (.+) ====/; [:h4, $1]
+                  when /\A=== (.+) ===/; [:h3, $1]
+		  when /\A== (.+) ==/; [:h2, $1]
+                  when /\A= (.+) =/; [:h1, $1]
+                  when /\A\{COLORS\}/; [:p, str]
+                  when /\A\{SAMPLES\}/; [:p, str]
+                  when /\A \* (.+)/m; [nil, $1.split(/^ \* /)]
+                  else
+		    [:p, str]
+		  end
+                  if cmd
+                    send(cmd){self << man.manual_p(str)}
+                  else
+                    ul{str.each{|x| li{self << man.manual_p(x)}}}
+                  end
+		end
+              end
 
               p.next{text "Next: "; a next_title[1], href: "#{next_file[0]}.html"} if next_title
             end
@@ -277,6 +303,28 @@ class Manual < Shoes
       toc.push(TOC_LIST[r.first+1..r.last].to_a.map &:first) if r.include?(num)
     end
     toc
+  end
+
+  def manual_p str
+    str.gsub(/\n+\s*/, " ").
+      gsub(/&/, '&amp;').gsub(/>/, '&gt;').gsub(/>/, '&lt;').gsub(/"/, '&quot;').
+      gsub(/`(.+?)`/m, '<code>\1</code>').gsub(/\[\[BR\]\]/i, "<br />\n").
+      gsub(/\^(.+?)\^/m, '\1').
+      gsub(/'''(.+?)'''/m, '<strong>\1</strong>').gsub(/''(.+?)''/m, '<em>\1</em>').
+      gsub(/\[\[(http:\/\/\S+?)\]\]/m, '<a href="\1" target="_new">\1</a>').
+      gsub(/\[\[(http:\/\/\S+?) (.+?)\]\]/m, '<a href="\1" target="_new">\2</a>').
+      gsub(/\[\[(\S+?)\]\]/m) do
+        ms, mn = $1.split(".", 2)
+        if mn
+          '<a href="' + ms + '.html#' + mn + '">' + mn + '</a>'
+        else
+          '<a href="' + ms + '.html">' + ms + '</a>'
+        end
+      end.
+      gsub(/\[\[(\S+?) (.+?)\]\]/m, '<a href="\1.html">\2</a>').
+      gsub(/\!(\{[^}\n]+\})?([^!\n]+\.\w+)\!/) do
+        '<img src="' + "static/#$2" + '" />'
+      end
   end
 
   IMAGE_RE = /\!(\{([^}\n]+)\})?([^!\n]+\.\w+)\!/
