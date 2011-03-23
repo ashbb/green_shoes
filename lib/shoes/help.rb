@@ -218,14 +218,14 @@ class Manual < Shoes
     ['3-osx', 33, '44-linux', 46].each{|n| FileUtils.cp File.join(DIR, "../snapshots/sample#{n}.png"), "#{dir}/snapshots"}
 
     TOC_LIST.length.times do |n|
-      num, title, desc = get_title_and_desc n
+      num, title, desc, methods = get_title_and_desc n
       open File.join(dir, "#{TOC_LIST[n][0]}.html"), 'w' do |f|
-        f.puts mk_html(title, desc, TOC_LIST[n+1], get_title_and_desc(n+1), mk_sidebar_list(num))
+        f.puts mk_html(title, desc, methods, TOC_LIST[n+1], get_title_and_desc(n+1), mk_sidebar_list(num))
       end
     end
   end
 
-  def mk_html title, desc, next_file, next_title, menu
+  def mk_html title, desc, methods, next_file, next_title, menu
     man = self
     Hpricot do
       xhtml_transitional do
@@ -246,26 +246,46 @@ class Manual < Shoes
 
               paras = man.mk_paras desc
               div.intro{p man.manual_p(paras.shift)}
-              paras.each do |str|
-                if str =~ CODE_RE
-                  pre{code.rb $1.gsub(/^\s*?\n/, '')}
-                else
-                  cmd, str = case str
-                  when /\A==== (.+) ====/; [:h4, $1]
-                  when /\A=== (.+) ===/; [:h3, $1]
-		  when /\A== (.+) ==/; [:h2, $1]
-                  when /\A= (.+) =/; [:h1, $1]
-                  when /\A\{COLORS\}/; [:p, str]
-                  when /\A\{SAMPLES\}/; [:p, str]
-                  when /\A \* (.+)/m; [nil, $1.split(/^ \* /)]
+
+              html_paragraph = proc do 
+                paras.each do |str|
+                  if str =~ CODE_RE
+                    pre{code.rb $1.gsub(/^\s*?\n/, '')}
                   else
-		    [:p, str]
-		  end
-                  if cmd
-                    send(cmd){self << man.manual_p(str)}
-                  else
-                    ul{str.each{|x| li{self << man.manual_p(x)}}}
+                    cmd, str = case str
+                    when /\A==== (.+) ====/; [:h4, $1]
+                    when /\A=== (.+) ===/; [:h3, $1]
+                    when /\A== (.+) ==/; [:h2, $1]
+                    when /\A= (.+) =/; [:h1, $1]
+                    when /\A\{COLORS\}/; [:p, str]
+                    when /\A\{SAMPLES\}/; [:p, str]
+                    when /\A \* (.+)/m; [nil, $1.split(/^ \* /)]
+                    else
+                      [:p, str]
+                    end
+                    if cmd
+                      send(cmd){self << man.manual_p(str)}
+                    else
+                      ul{str.each{|x| li{self << man.manual_p(x)}}}
+                    end
                   end
+                end
+              end
+
+              html_paragraph.call
+
+              methods.each do |m, d|
+                n = m.index("\u00BB")
+                n ? (sig, val = m[0...n-1], m[n-1..-1]) : (sig, val = m, nil)
+                aname = sig[/^[^(=]+=?/].gsub(/\s/, '').downcase
+                a name: aname
+                div.method do
+                  a sig, href: "##{aname}"
+                  text val if val
+                end
+                div.sample do
+                  paras = man.mk_paras d
+                  html_paragraph.call
 		end
               end
 
