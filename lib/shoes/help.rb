@@ -80,11 +80,11 @@ class Manual < Shoes
         text.gsub CODE_RE do |lines|
           lines = lines.split NL
           n = lines[1] =~ /\#\!ruby/ ? 2 : 1
-          code = lines[n...-1].join(NL+'  ')
+          _code = lines[n...-1].join(NL+'  ')
           flow do
             background rgb(190, 190, 190), curve: 5
-            inscription link(fg('Run this', green)){eval mk_executable(code), TOPLEVEL_BINDING}, margin_left: 480
-            para '  ', fg(code, maroon), NL
+            inscription link(fg('Run this', green)){eval mk_executable(_code), TOPLEVEL_BINDING}, margin_left: 480
+            para fg(code('  ' + _code), maroon), NL, margin_left: -10
           end
           para
         end

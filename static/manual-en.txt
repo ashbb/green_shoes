@@ -9,7 +9,7 @@ You see, the trivial Shoes program can be just one line:
 
 {{{
  #!ruby
- Shoes.app { button("Click me!") { alert("Good job.") } }
+ Shoes.app{button("Click me!"){alert("Good job.")}}
 }}}
 
 Shoes programs are written in a language called Ruby.  When Shoes is handed
@@ -354,7 +354,7 @@ can have scrollbars.
 
 {{{
  Shoes.app do
-   stack :width => 200, :height => 200, :scroll => true do
+   stack width: 200, height: 200, scroll: true do
      background "#DFA"
      100.times do |i|
        para "Paragraph No. #{i}"
@@ -488,7 +488,8 @@ UI Gothic'''.
 
 {{{
  Shoes.app do
-   para "てすと (te-su-to)", :font => case RUBY_PLATFORM
+   para "てすと (te-su-to)",
+    font: case RUBY_PLATFORM
     when /mingw/; "MS UI Gothic"
     when /darwin/; "AppleGothic, Arial"
     else "Arial"
@@ -806,7 +807,8 @@ like this: `gradient(green, '#FA3')`
 
 {{{
  Shoes.app do
-   oval 100, 100, 100, fill: gradient(green, '#FA3'), angle: 45
+   oval 100, 100, 100,
+     fill: gradient(green, '#FA3'), angle: 45
  end
 }}}
 
@@ -837,7 +839,8 @@ When passing in a whole number, use values from 0 to 255.
  Shoes.app do
    blueviolet = rgb(138, 43, 226, 0.5)
    darkgreen = rgb(0, 100, 0, 0.5)
-   oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
+   oval 100, 100, 100,
+     fill: [blueviolet, darkgreen].sample(1)
  end
 }}}
 
@@ -847,7 +850,8 @@ Or, use a decimal number from 0.0 to 1.0.
  Shoes.app do
    blueviolet = rgb(0.54, 0.17, 0.89)
    darkgreen = rgb(0, 0.4, 0)
-   oval 100, 100, 100, fill: [blueviolet, darkgreen].sample(1)
+   oval 100, 100, 100,
+     fill: [blueviolet, darkgreen].sample(1)
  end
 }}}
 
@@ -873,10 +877,11 @@ describe how big the window is.  Perhaps also the name of the app.
 
 {{{
  #!ruby
- Shoes.app title: "White Circle", width: 200, height: 200 do
-    background black
-    fill white
-    oval top: 20, left: 20, radius: 160
+ Shoes.app title: "White Circle",
+   width: 200, height: 200 do
+   background black
+   fill white
+   oval top: 20, left: 20, radius: 160
  end
 }}}
 
@@ -918,16 +923,16 @@ entire application, use the built-in method `exit`.
 
 {{{
  Shoes.app do
-   para 'hello'
-   button 'spawn' do
-     Shoes.app do
-       para 'hello'
-       button('close: close this window only'){close}
-       button('exit: quit Green Shoes'){exit}
-     end
+  para 'hello'
+  button 'spawn' do
+   Shoes.app do
+    para 'hello'
+    button('close: close this window only'){close}
+    button('exit: quit Green Shoes'){exit}
    end
-   button('close: close this window only'){close}
-   button('exit: quit Green Shoes'){exit}
+  end
+  button('close: close this window only'){close}
+  button('exit: quit Green Shoes'){exit}
  end
 }}}
 
@@ -947,8 +952,7 @@ If you attach a block to a download, it'll get called as the `finish` event.
      title "Searching Google", size: 16
      @status = para "One moment..."
  
-     # Search Google for 'shoes' and print the HTTP headers
-     download "http://www.google.com/search?q=shoes" do |goog|
+     download "http://is.gd/bXTVY7" do |goog|
        @status.text = "Headers: #{goog.meta}"
      end
    end
@@ -967,7 +971,7 @@ Another simple use of `download` is to save some web data to a file, using the
      title "Downloading Google image", size: 16
      @status = para "One moment..."
  
-     download "http://www.google.com/logos/nasa50th.gif",
+     download "http://is.gd/GVAGF7",
        :save => "nasa50th.gif" do
 	@status.text = "Okay, is downloaded."
 	image "nasa50th.gif", top: 100
@@ -989,7 +993,7 @@ class.)
      title "GET Google", size: 16
      @status = para "One moment..."
  
-     download "http://www.google.com/search?q=shoes", 
+     download "http://is.gd/bXTVY7", 
          :method => "GET" do |dump|
        @status.text = dump.response.body
      end
@@ -1006,7 +1010,7 @@ query google's search engine.
  include Hpricot
  Shoes.app do
    status = para "One moment..."
-   download 'http://shoes-tutorial-note.heroku.com/' do |dl|
+   download 'http://is.gd/BatiRt' do |dl|
      samples = []
      Hpricot(dl).inner_text.each_line do |line|
        samples.push($1) if line =~ /(sample.*\.rb)/
@@ -1092,9 +1096,12 @@ available on every element and slot.
 
 {{{
  Shoes.app title: "A Styling Sample" do
-   choose = lambda{[red, blue, green, yellow].sample}
+   choose = 
+     lambda{[red, blue, green, yellow].sample}
    s = star 100, 50, 30, 200, 180, strokewidth: 5
-   button('change colors'){s.style stroke: choose.call, fill: choose.call}
+   button 'change colors' do
+     s.style stroke: choose.call, fill: choose.call
+   end
  end
 }}}
 
@@ -1106,9 +1113,12 @@ search to find the method.)
 {{{
  # Not yet available
  Shoes.app title: "A Styling Sample" do
-   choose = lambda{[red, blue, green, yellow].sample}
+   choose = 
+     lambda{[red, blue, green, yellow].sample}
    s = star 100, 50, 30, 200, 180, strokewidth: 5
-   button('change colors'){s.stroke = choose.call; s.fill = choose.call}
+   button 'change colors' do
+     s.stroke = choose.call; s.fill = choose.call
+   end
  end
 }}}
 
@@ -1781,7 +1791,7 @@ setting `:angle1` to 0 and `:angle2` to `2*Math::PI`.)
    a = animate 12 do |i|
      @e.remove if @e
      r = i * (Math::PI * 0.01)
-     @e = arc 100, 50, 180, 360, 0, i * (Math::PI * 0.01)
+     @e = arc 100, 50, 180, 360, 0, r
      a.stop if r >= 2*Math::PI
    end
  end
@@ -2128,7 +2138,8 @@ attached here which is called any type the user changes the text in the box.
  Shoes.app do
    edit_box
    edit_box text: "HORRAY EDIT ME"
-   edit_box text: "small one", width: 100, height: 160
+   edit_box text: "small one",
+     width: 100, height: 160
  end
 }}}
 
@@ -2206,13 +2217,13 @@ box becomes selected by the user.
 {{{
  #!ruby
  Shoes.app do
-   stack  margin: 10 do
-     para "Pick a card:"
-     list_box items: ["Jack", "Ace", "Joker"] do |item|
-       @p.text = "#{item} was picked!"
-     end
-     @p = para
+  stack  margin: 10 do
+   para "Pick a card:"
+   list_box items: ["Jac", "Ace", "Jok"] do |item|
+    @p.text = "#{item} was picked!"
    end
+   @p = para
+  end
  end
 }}}
 
@@ -2342,7 +2353,7 @@ away.
      background red
    end
    s.hover do
-       s.clear { background blue }
+     s.clear { background blue }
    end
    s.leave do
      s.clear { background red }
@@ -2460,7 +2471,8 @@ Adds elements to the end of a slot.
    timer 3 do
      @slot.append do
        title "Breaking News"
-       tagline "Astronauts arrested for space shuttle DUI."
+       tagline "Astronauts ",
+         "arrested for space shuttle DUI."
      end
    end
  end
@@ -2566,7 +2578,8 @@ This is commonly used to pad elements on the right, like so:
  # Not yet available
  Shoes.app do
    stack :margin_right => 20 + gutter do
-     para "Insert fat and ratified declaration of independence here..."
+     para "Insert fat and ratified ",
+       "declaration of independence here..."
    end
  end
 }}}
@@ -2765,13 +2778,15 @@ covered as the [[Position.style]] method for slots.)
  #!ruby
  Shoes.app do
    stack do
-     # Background, text and a button: both are elements!
+     # Background, text and a button: 
+     # both are elements!
      @back  = background green
      @text  = banner "A Message for You, Rudy"
      @press = button "Stop your messin about!"
  
      # And so, both can be styled.
-     @text.style size: 12, markup: fg(@text.text, red), margin: 10
+     @text.style size: 12, 
+       markup: fg(@text.text, red), margin: 10
      @press.style width: 400
      @back.style height: 10
    end
@@ -2898,7 +2913,8 @@ original setting (things like "100%" for width or "10px" for top.)
  #!ruby
  Shoes.app do
    # A button which take up the whole page
-   @b = button "All of it", width: width, height: height
+   @b = button "All of it", 
+     width: width, height: height
  
    # When clicked, show the styles
    @b.click { alert(@b.style.inspect) }
@@ -2936,7 +2952,8 @@ a stack which is 120 pixels wide, you'll get back `120`.  And, if you call
    stack width: 120 do
      @b = button "Click me", width: 1.0 do
        alert "button.width = #{@b.width}\n" +
-         "button.style[:width] = #{@b.style[:width]}"
+         "button.style[:width] = " +
+         "#{@b.style[:width]}"
      end
    end
  end
@@ -3097,9 +3114,9 @@ Just to be pedantic, though, here's another way to write that last example.
  #!ruby
  Shoes.app do
    @b1 = button "OK!"
-   @b1.click { para "Well okay then." }
+   @b1.click{para "Well okay then."}
    @b2 = button "Are you sure?"
-   @b2.click { para "Your confidence is inspiring." }
+   @b2.click{para "Your confidence is inspiring."}
  end
 }}}
 
@@ -3139,9 +3156,16 @@ Here's a sample checklist.
  #!ruby
  Shoes.app do
    stack do
-     flow { check; para "Frances Johnson", width: 200 }
-     flow { check; para "Ignatius J. Reilly", width: 200 }
-     flow { check; para "Winston Niles Rumfoord", width: 200 }
+     flow do
+       check; para "Frances Johnson", width: 200
+     end
+     flow do
+       check; para "Ignatius J. Reilly", width: 200
+     end
+     flow do
+       check
+       para "Winston Niles Rumfoord", width: 200
+     end
    end
  end
 }}}
@@ -3165,7 +3189,8 @@ Okay, let's add to the above example.
      end
  
      button "What's been checked?" do
-       selected = @list.map { |c, name| name if c.checked? }.compact
+       selected = 
+         @list.map{|c, n| n if c.checked?}.compact
        alert("You selected: " + selected.join(', '))
      end
    end
@@ -3226,7 +3251,8 @@ every time someone types into or deletes from the box.
  #!ruby
  Shoes.app do
    edit_box do |e|
-     @counter.text = strong("#{e.text.size}") + " characters"
+     @counter.text = 
+       strong("#{e.text.size}") + " characters"
    end
    @counter = para strong("0"), " characters"
  end
@@ -3334,7 +3360,7 @@ You can use web URLs directly as well.
 {{{
  #!ruby
  Shoes.app do
-   image "http://hacketyhack.heroku.com/images/logo.png"
+   image "http://is.gd/c0mBtb"
  end
 }}}
 
@@ -3466,7 +3492,7 @@ A simple progress bar is 150 pixels wide, but you can use the `:width` style
 {{{
  Shoes.app do
    title "Progress example"
-   @p = progress left: 10, top: 100, width: width - 20
+   @p = progress left: 10, top: 100, width: width-20
  
    animate do |i|
      @p.fraction = (i % 100) / 100.0
@@ -3501,9 +3527,15 @@ marked.
  #!ruby
  Shoes.app do
    para "Among these films, which do you prefer?\n"
-   radio; para strong("The Taste of Tea"), " by Katsuhito Ishii\n", width: 570
-   radio; para strong("Kin-Dza-Dza"), " by Georgi Danelia\n", width: 570
-   radio; para strong("Children of Heaven"), " by Majid Majidi\n", width: 570
+   radio
+   para strong("The Taste of Tea"), 
+     " by Katsuhito Ishii\n", width: 570
+   radio
+   para strong("Kin-Dza-Dza"), 
+     " by Georgi Danelia\n", width: 570
+   radio
+   para strong("Children of Heaven"), 
+     " by Majid Majidi\n", width: 570
  end
 }}}
 
@@ -3517,9 +3549,21 @@ If we move them each into their own slot, the example breaks.
  Shoes.app do
    stack do
      para "Among these films, which do you prefer?"
-     flow { radio; para "The Taste of Tea by Katsuhito Ishii", width: 300 }
-     flow { radio; para "Kin-Dza-Dza by Georgi Danelia", width: 300 }
-     flow { radio; para "Children of Heaven by Majid Majidi", width: 300 }
+     flow do
+       radio
+       para "The Taste of Tea by Katsuhito Ishii", 
+         width: 300
+     end
+     flow do
+       radio
+       para "Kin-Dza-Dza by Georgi Danelia",
+         width: 300
+     end
+     flow do
+       radio
+       para "Children of Heaven by Majid Majidi",
+         width: 300
+     end
    end
  end
 }}}
@@ -3536,15 +3580,18 @@ Here, let's group all these radios in the `:films` group.
      para "Among these films, which do you prefer?"
      flow do
        radio :films
-       para "The Taste of Tea by Katsuhito Ishii", width: 300
+       para "The Taste of Tea by Katsuhito Ishii",
+         width: 300
      end
      flow do
        radio :films
-       para "Kin-Dza-Dza by Georgi Danelia", width: 300
+       para "Kin-Dza-Dza by Georgi Danelia",
+         width: 300
      end
      flow do
        radio :films
-       para "Children of Heaven by Majid Majidi", width: 300
+       para "Children of Heaven by Majid Majidi",
+         width: 300
      end
    end
  end
