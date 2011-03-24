@@ -142,7 +142,7 @@ class Manual < Shoes
   end
 
   def color_page
-    Shoes::App::COLORS.each do |color, v|
+    COLORS.each do |color, v|
       r, g, b = v
       c = v.dark? ? white : black
       flow width: 0.33 do
@@ -257,17 +257,18 @@ class Manual < Shoes
                     when /\A=== (.+) ===/; [:h3, $1]
                     when /\A== (.+) ==/; [:h2, $1]
                     when /\A= (.+) =/; [:h1, $1]
-                    when /\A\{COLORS\}/; [:p, str]
+                    when /\A\{COLORS\}/
+		      COLORS.each do |color, v|
+		        f = v.dark? ? "white" : "black"
+		        div.color(style: "background: #{color}; color: #{f}"){h3 color; p("rgb(%d, %d, %d)" % v)}
+		      end
                     when /\A\{SAMPLES\}/; [:p, str]
-                    when /\A \* (.+)/m; [nil, $1.split(/^ \* /)]
+                    when /\A \* (.+)/m
+                      ul{$1.split(/^ \* /).each{|x| li{self << man.manual_p(x)}}}
                     else
                       [:p, str]
                     end
-                    if cmd
-                      send(cmd){self << man.manual_p(str)}
-                    else
-                      ul{str.each{|x| li{self << man.manual_p(x)}}}
-                    end
+                    send(cmd){self << man.manual_p(str)} if cmd.is_a?(Symbol)
                   end
                 end
               end
