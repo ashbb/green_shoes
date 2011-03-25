@@ -155,15 +155,7 @@ class Manual < Shoes
   end
   
   def sample_page
-    names = Dir[File.join(DIR, '../samples/sample*.rb')].map do |file|
-      orig_name = File.basename file
-      dummy_name = orig_name.sub(/sample(.*)\.rb/){
-        first, second = $1.split('-')
-        "%02d%s%s" % [first.to_i, ('-' if second), second]
-      }
-      [dummy_name, orig_name]
-    end
-    names.sort.map(&:last).each do |file|
+    mk_sample_names.each do |file|
       stack width: 80 do
         inscription file[0...-3]
         img = image File.join(DIR, "../snapshots/#{file[0..-3]}png"), width: 50, height: 50
@@ -171,6 +163,17 @@ class Manual < Shoes
         para
       end
     end
+  end
+
+  def mk_sample_names
+    Dir[File.join(DIR, '../samples/sample*.rb')].map do |file|
+      orig_name = File.basename file
+      dummy_name = orig_name.sub(/sample(.*)\.rb/){
+        first, second = $1.split('-')
+        "%02d%s%s" % [first.to_i, ('-' if second), second]
+      }
+      [dummy_name, orig_name]
+    end.sort.map &:last
   end
   
   def find_pnum page
@@ -215,7 +218,7 @@ class Manual < Shoes
     %w[gshoes-icon.png shoes-manual-apps.png manual.css code_highlighter.js code_highlighter_ruby.js].
       each{|x| FileUtils.cp "#{DIR}/../static/#{x}", "#{dir}/static"}
     Dir[File.join DIR, '../static/man-*.png'].each{|x| FileUtils.cp x, "#{dir}/static"}
-    ['3-osx', 33, '44-linux', 46].each{|n| FileUtils.cp File.join(DIR, "../snapshots/sample#{n}.png"), "#{dir}/snapshots"}
+    Dir[File.join DIR, '../snapshots/sample*.png'].each{|x| FileUtils.cp x, "#{dir}/snapshots"}
 
     TOC_LIST.length.times do |n|
       num, title, desc, methods = get_title_and_desc n
@@ -258,11 +261,18 @@ class Manual < Shoes
                     when /\A== (.+) ==/; [:h2, $1]
                     when /\A= (.+) =/; [:h1, $1]
                     when /\A\{COLORS\}/
-		      COLORS.each do |color, v|
-		        f = v.dark? ? "white" : "black"
-		        div.color(style: "background: #{color}; color: #{f}"){h3 color; p("rgb(%d, %d, %d)" % v)}
-		      end
-                    when /\A\{SAMPLES\}/; [:p, str]
+                      COLORS.each do |color, v|
+                        f = v.dark? ? "white" : "black"
+                        div.color(style: "background: #{color}; color: #{f}"){h3 color; p("rgb(%d, %d, %d)" % v)}
+                      end
+                    when /\A\{SAMPLES\}/
+                      man.mk_sample_names.each do |name|
+                        name = name[0...-3]
+                        div.sample do
+                          h3 name
+                          p '<a href="snapshots/%s.png"><img src="snapshots/%s.png" alt="%s" border=0 width=50 height=50></a>' % [name, name, name]
+                        end
+                      end
                     when /\A \* (.+)/m
                       ul{$1.split(/^ \* /).each{|x| li{self << man.manual_p(x)}}}
                     else
@@ -284,10 +294,10 @@ class Manual < Shoes
                   a sig, href: "##{aname}"
                   text val if val
                 end
-                div.sample do
+                div.desc do
                   paras = man.mk_paras d
                   html_paragraph.call
-		end
+                end
               end
 
               p.next{text "Next: "; a next_title[1], href: "#{next_file[0]}.html"} if next_title
@@ -305,7 +315,7 @@ class Manual < Shoes
                         m.each do |sm|
                           li{a sm, href: "#{sm}.html"}
                         end
-		      end
+                      end
                     end
                   end
                 end
@@ -332,8 +342,8 @@ class Manual < Shoes
       gsub(/`(.+?)`/m, '<code>\1</code>').gsub(/\[\[BR\]\]/i, "<br />\n").
       gsub(/\^(.+?)\^/m, '\1').
       gsub(/'''(.+?)'''/m, '<strong>\1</strong>').gsub(/''(.+?)''/m, '<em>\1</em>').
-      gsub(/\[\[(http:\/\/\S+?)\]\]/m, '<a href="\1" target="_new">\1</a>').
-      gsub(/\[\[(http:\/\/\S+?) (.+?)\]\]/m, '<a href="\1" target="_new">\2</a>').
+      gsub(/\[\[((http|https):\/\/\S+?)\]\]/m, '<a href="\1" target="_new">\1</a>').
+      gsub(/\[\[((http|https):\/\/\S+?) (.+?)\]\]/m, '<a href="\1" target="_new">\3</a>').
       gsub(/\[\[(\S+?)\]\]/m) do
         ms, mn = $1.split(".", 2)
         if mn
