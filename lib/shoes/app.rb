@@ -699,7 +699,7 @@ class Shoes
       Shoes.call_back_procs self
     end
 
-    [:append, :prepend, :after, :before].each do |m|
+    [:append, :prepend, :after, :before, :click, :hover, :leave, :release].each do |m|
       define_method m do |*args, &blk|
         top_slot.send m, *args, &blk
       end
