@@ -178,6 +178,19 @@ class Shoes
       self.text = @args[:markup]
       super
     end
+
+    def cursor=(n)
+      if !n
+        @app.textcursors[self][1].clear if @app.textcursors[self][1]
+        @app.textcursors.delete self
+      else
+        @app.textcursors[self] ? (@app.textcursors[self][0] = n) : (@app.textcursors[self] = [n, nil])
+      end
+    end
+
+    def cursor
+      @app.textcursors[self][0]
+    end
   end
   
   class Banner < TextBlock; end

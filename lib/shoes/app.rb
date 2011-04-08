@@ -31,7 +31,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style, :animates, :owner
+    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors
 
     def visit url
       if url =~ /^(http|https):\/\//
@@ -73,9 +73,7 @@ class Shoes
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
       args[:markup] = msg.map(&:to_s).join
-      attr_list, dummy_text = Pango.parse_markup args[:markup].gsub('\u0026', '@')
-      dummy_attr_list, text = Pango.parse_markup args[:markup]
-      text = text.gsub('\u0026', '&')
+      text, attr_list = make_pango_attr args[:markup]
       args[:size] ||= font_size
       args[:font] ||= (@font_family or 'sans')
       args[:align] ||= 'left'
@@ -92,19 +90,8 @@ class Shoes
       
       if args[:create_real] or !layout_control
         args[:width] = 1 if args[:width] <= 0
-        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width], args[:height]
-        context = Cairo::Context.new surface
-        layout = context.create_pango_layout
-        layout.width = args[:width] * Pango::SCALE
-        layout.wrap = Pango::WRAP_WORD
-        layout.spacing = 5  * Pango::SCALE
-        layout.text = text
-        layout.alignment = eval "Pango::ALIGN_#{args[:align].upcase}"
-        fd = Pango::FontDescription.new
-        fd.family = args[:font]
-        fd.size = args[:size] * Pango::SCALE
-        layout.font_description = fd
-        layout.attributes = attr_list
+        layout, context, surface = 
+          make_pango_layout args[:size], args[:width], args[:height], args[:align], args[:font], text, attr_list
         context.show_pango_layout layout
         context.show_page
         
@@ -530,7 +517,7 @@ class Shoes
         line_to w*0.58, w*0.5*0.2
         line_to w, w*0.5
         line_to w*0.58, w*(1-0.5*0.2)
-	line_to w*0.58, w*(1-0.5*0.6)
+        line_to w*0.58, w*(1-0.5*0.6)
         line_to 0, w*(1-0.5*0.6)
         line_to 0, w*0.5*0.6
       end

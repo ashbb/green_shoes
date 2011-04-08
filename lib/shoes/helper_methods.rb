@@ -36,8 +36,8 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups = 
-        [], [], [], [], [], [], [], [], [], [], [], {}
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors = 
+        [], [], [], [], [], [], [], [], [], [], [], {}, {}
       @cmask = nil
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
@@ -81,7 +81,7 @@ class Shoes
       start, links = 0, []
       msg.each do |e|
         len = e.to_s.gsub(/<\/.*?>/, '').gsub(/<.*?>/, '').length
-        (links << e; e.index = [start, start + len - 1]) if e.is_a? Link
+        (links << e; e.index = [start, start + len]) if e.is_a? Link
         start += len
       end
       links
@@ -90,9 +90,42 @@ class Shoes
     def make_link_pos links, layout, line_height
       links.each do |e|
         e.pos = [layout.index_to_pos(e.index[0]).x / Pango::SCALE, layout.index_to_pos(e.index[0]).y / Pango::SCALE]
-        e.pos << (layout.index_to_pos(e.index[1]).x / Pango::SCALE + line_height / 2) << (layout.index_to_pos(e.index[1]).y / Pango::SCALE)
+        e.pos << (layout.index_to_pos(e.index[1]).x / Pango::SCALE) << (layout.index_to_pos(e.index[1]).y / Pango::SCALE)
         e.pos << line_height
       end
+    end
+
+    def make_textcursor_pos tb, n
+      markup, size, width, height, align, font = 
+        %w[@markup @size @width @height @align @font].map{|v| tb.instance_variable_get v}
+      text, attr_list = make_pango_attr markup
+      layout, = make_pango_layout size, width, height, align, font, text, attr_list
+      n = tb.text.length if n == -1
+      return layout.index_to_pos(n).x / Pango::SCALE, layout.index_to_pos(n).y / Pango::SCALE
+    end
+
+    def make_pango_attr markup
+      attr_list, dummy_text = Pango.parse_markup markup.gsub('\u0026', '@')
+      dummy_attr_list, text = Pango.parse_markup markup
+      text = text.gsub('\u0026', '&')
+      return text, attr_list
+    end
+
+    def make_pango_layout size, width, height, align, font, text, attr_list
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, width, height
+      context = Cairo::Context.new surface
+      layout = context.create_pango_layout
+      layout.width = width * Pango::SCALE
+      layout.wrap = Pango::WRAP_WORD
+      layout.spacing = 5  * Pango::SCALE
+      layout.text = text
+      layout.alignment = eval "Pango::ALIGN_#{align.upcase}"
+      fd = Pango::FontDescription.new
+      fd.family = font
+      fd.size = size * Pango::SCALE
+      layout.font_description = fd
+      layout.attributes = attr_list
+      return layout, context, surface
     end
   end
 
@@ -135,6 +168,15 @@ class Shoes
       end
     end
   end
+
+  def self.repaint_textcursors app
+    app.textcursors.each do |tb, v|
+      n, cursor = v
+      x, y = app.make_textcursor_pos(tb, n)
+      x += tb.left; y += tb.top
+      cursor ? cursor.move(x, y) : app.textcursors[tb][1] = app.line(x, y, x, y+tb.size*1.7)
+    end
+  end
   
   def self.call_back_procs app
     init_contents app.cslot.contents
@@ -143,6 +185,7 @@ class Shoes
     repaint_all app.cslot
     mask_control app
     repaint_all_by_order app
+    repaint_textcursors app
     app.canvas.set_size 0, scrollable_height unless app.prjct
     true
   end
