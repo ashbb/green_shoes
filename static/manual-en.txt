@@ -3676,6 +3676,38 @@ TextBlock's contents.
 
 '''Note:''' Green Shoes doesn't support `to_s` method.
 
+=== cursor() » an index ===
+
+Return a text cursor position. That is an index of the text which is a string
+of all of the characters in this text box.
+
+=== cursor = an index or nil ===
+
+Shows or hides the text cursor.
+Using `cursor = 3`, for instance, shows the text cursor at index 3 from the front.
+Using `cursor = -1` shows the text cursor at the end of the text.
+Using `cursor = nil` hides the text cursor.
+
+{{{
+ Shoes.app do
+  msg = para 'hello ' * 20
+  msg.cursor = -1
+  keypress do |k|
+    n = case k
+      when 'Left'; -1
+      when 'Right'; 1
+      else
+        next
+    end
+    n += msg.cursor
+    len = msg.text.length
+    n = len unless n > -1
+    msg.cursor = n % (len+1)
+    flush
+  end
+ end
+}}}
+
 == Timers ==
 
 Green Shoes contains three timers: the animate, every and
