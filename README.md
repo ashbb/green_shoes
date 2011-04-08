@@ -8,7 +8,7 @@ This is **Green Shoes** written in Ruby. One of the colorful [Shoes](http://shoe
 
 Fantastic logo icon was created by [Zachary Scott](https://github.com/zacharyscott). Thanks!
 
-Now, there are 50 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
+Now, there are 51 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
 
 
 Tiny Streaming Flash videos
