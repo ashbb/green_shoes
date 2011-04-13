@@ -33,7 +33,7 @@ Shoes.app height: 260, width: 250 do
     _y = radius_local * Math.cos( time * Math::PI / unit )
     stroke color
     strokewidth sw
-    line(@centerx, @centery, @centerx + _x, @centery - _y)
+    line @centerx, @centery, @centerx + _x, @centery - _y, hidden: true
   end
   
   @radius, @centerx, @centery = 90, 126, 140
@@ -43,9 +43,9 @@ Shoes.app height: 260, width: 250 do
     @msg = para '', margin: 4, align: 'center'
   end
   hour, min, sec = [], [], []
-  12.times{|i| 5.times{|j| hour << clock_hand(i+(j/5.0), 8, 6).hide}}
-  60.times{|i| 4.times{|j| min << clock_hand(i+(j/4.0), 5).hide}}
-  60.times{|i| 8.times{|j| sec << clock_hand(i+(j/8.0), 2, 30, red).hide}}
+  12.times{|i| 5.times{|j| hour << clock_hand(i+(j/5.0), 8, 6)}}
+  60.times{|i| 4.times{|j| min << clock_hand(i+(j/4.0), 5)}}
+  60.times{|i| 8.times{|j| sec << clock_hand(i+(j/8.0), 2, 30, red)}}
 
   animate 8 do |i|
     t = Time.new

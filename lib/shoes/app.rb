@@ -139,6 +139,7 @@ class Shoes
       end
       @canvas.put img, args[:left], args[:top]
       img.show_now
+      @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
       Image.new(args).tap{|s| @dics.push([s, d, tmpname]) if downloading}
     end
@@ -330,6 +331,7 @@ class Shoes
       img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
+      @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
       Oval.new args
     end
@@ -375,6 +377,7 @@ class Shoes
       img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
+      @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
       Rect.new args
     end
@@ -434,6 +437,7 @@ class Shoes
       img = create_tmp_png surface
       @canvas.put img, (args[:left]-=cw), (args[:top]-=cw)
       img.show_now
+      @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
       Line.new args
     end
@@ -472,6 +476,7 @@ class Shoes
       img = Gtk::Image.new img.pixbuf.rotate(ROTATE[@pixbuf_rotate])
       @canvas.put img, args[:left], args[:top]
       img.show_now
+      @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
       klass.new args
     end

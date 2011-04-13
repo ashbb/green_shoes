@@ -25,7 +25,8 @@ class Shoes
       @proc = nil
       [:app, :real].each{|k| args.delete k}
       @args = args
-      @hided, @shows, @hovered = false, true, false
+      @hovered = false
+      @hidden ? (@hided, @shows = true, false) : (@hided, @shows = false, true)
     end
 
     attr_reader :args, :shows, :initials
