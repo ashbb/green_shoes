@@ -67,6 +67,7 @@ class Shoes
       @app.shcs.delete self
       @app.shcs << self
       @shows = true
+      @args.delete :hidden
       self
     end
 
@@ -165,7 +166,7 @@ class Shoes
     end
     
     def text= s
-      style markup: s
+      style markup: s  if !@hided or @args[:hidden]
     end
 
     alias :replace :text=
@@ -178,6 +179,11 @@ class Shoes
     def move2 x, y
       self.text = @args[:markup]
       super
+    end
+
+    def remove
+      flag = @args[:hidden] ? @shows : @hided
+      @app.canvas.remove @real unless flag
     end
 
     def cursor=(n)

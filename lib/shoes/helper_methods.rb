@@ -62,13 +62,13 @@ class Shoes
 
   class App
     def basic_attributes args={}
-      default = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
+      default = BASIC_ATTRIBUTES_DEFAULT
       default.merge!({nocontrol: true}) if @nolayout
       default.merge args
     end
 
     def slot_attributes args={}
-      default = {left: nil, top: nil, width: 1.0, height: 0}
+      default = SLOT_ATTRIBUTES_DEFAULT
       default.merge args
     end
 
@@ -237,6 +237,7 @@ class Shoes
 
   def self.mouse_link_control app
     app.mlcs.each do |tb|
+      next if tb.hided
       link_proc,  = mouse_on_link(tb, app)
       link_proc.call if link_proc
     end
@@ -250,10 +251,11 @@ class Shoes
     end
     
     app.mlcs.each do |tb|
+      return false if tb.hided
       tb.text = tb.text unless tb.real
       tb.real.window.cursor = ARROW if tb.real.window
       if ret = mouse_on_link(tb, app)
-        tb.real.window.cursor = HAND
+        tb.real.window.cursor = HAND  if tb.real.window
         unless tb.links[ret[1]].link_hover
           markup = tb.args[:markup].gsub(app.linkhover_style, app.link_style)
           links = markup.mindex  app.link_style

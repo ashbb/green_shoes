@@ -1335,10 +1335,23 @@ being 100%.)
 
 For: ''all slots and elements''.
 
-Hides or shows this object.  Any object with `:hidden => true` are not
+Hides or shows this object.  Any object with `hidden: true` are not
 displayed on the screen.  Neither are its children.
 
-'''Note:''' Green Shoes doesn't support `:hidden` style.
+{{{
+ Shoes.app do
+   slot = stack hidden: true do
+     title 'hello'
+     flow{image 'loogink.png'}
+     para link('Go go!'){alert 'hi'}
+   end
+   timer(5){slot.show}
+   timer(10){slot.hide}
+ end
+}}}
+
+'''Note:''' Green Shoes supports `:hidden` style for only slots, shapes, textblocks 
+and images so far.
 
 === :inner » a number ===
 
