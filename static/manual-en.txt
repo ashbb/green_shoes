@@ -1342,11 +1342,13 @@ displayed on the screen.  Neither are its children.
  Shoes.app do
    slot = stack hidden: true do
      title 'hello'
-     flow{image 'loogink.png'}
+     flow do
+       image File.join DIR, '../samples/loogink.png'
+     end
      para link('Go go!'){alert 'hi'}
    end
-   timer(5){slot.show}
-   timer(10){slot.hide}
+   timer(2){slot.show}
+   timer(5){slot.hide}
  end
 }}}
 
@@ -3360,7 +3362,8 @@ To create an image, use the `image` method in a slot:
  #!ruby
  Shoes.app do
    para "Nice, nice, very nice.  Busy, busy, busy."
-   image "../static/shoes-manual-apps.png"
+   image File.join DIR,
+     "../static/shoes-manual-apps.png"
   end
 }}}
 
