@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'rake'
+require 'rake/rdoctask'
 begin
   require 'jeweler'
 rescue LoadError
@@ -15,4 +16,13 @@ Jeweler::Tasks.new do |gem|
   gem.authors = ["ashbb"]
   gem.add_dependency 'gtk2'
   gem.files = %w[lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten << 'VERSION'
+end
+
+Rake::RDocTask.new do |t|
+  t.rdoc_dir = 'doc'
+  t.title    = 'Green Shoes'
+  t.options << '--charset' << 'utf-8'
+  t.rdoc_files.include('README.md')
+  t.rdoc_files.include('lib/green_shoes.rb')
+  t.rdoc_files.include('lib/shoes/*.rb')
 end
