@@ -1,6 +1,10 @@
 require 'rubygems'
 require 'rake'
-require 'jeweler'
+begin
+  require 'jeweler'
+rescue LoadError
+  raise LoadError, "!!! Please install the gem: jeweler !!!"
+end
 
 Jeweler::Tasks.new do |gem|
   gem.name = "green_shoes"
