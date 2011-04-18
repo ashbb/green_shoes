@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rake'
 require 'rake/rdoctask'
+require 'rake/clean'
 begin
   require 'jeweler'
 rescue LoadError
@@ -26,3 +27,5 @@ Rake::RDocTask.new do |t|
   t.rdoc_files.include('lib/green_shoes.rb')
   t.rdoc_files.include('lib/shoes/*.rb')
 end
+
+CLEAN.include [ 'pkg', '*.gem', 'doc' ]
