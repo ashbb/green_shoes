@@ -27,6 +27,8 @@ class Shoes
       @args = args
       @hovered = false
       @hidden ? (@hided, @shows = true, false) : (@hided, @shows = false, true)
+      @app.fronts.push self if @front
+      @app.backs.push self if @back
     end
 
     attr_reader :args, :shows, :initials

@@ -36,8 +36,8 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors = 
-        [], [], [], [], [], [], [], [], [], [], [], {}, {}
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @fronts, @backs = 
+        [], [], [], [], [], [], [], [], [], [], [], {}, {}, [], []
       @cmask = nil
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
@@ -161,7 +161,9 @@ class Shoes
   end
 
   def self.repaint_all_by_order app
-    app.order.each do |e|
+    tmp = app.order
+    (app.fronts + app.backs).each{|e| tmp.delete e}
+    (app.backs + tmp + app.fronts).each do |e|
       if e.real and !e.is_a?(Pattern) and !e.hided
         app.canvas.remove e.real
         app.canvas.put e.real, e.left, e.top

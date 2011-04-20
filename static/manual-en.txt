@@ -1168,6 +1168,22 @@ will start without asking the user.
 
 '''Note:''' Green Shoes doesn't support ''video''.
 
+=== :back » true or false ===
+
+For: ''shapes, image, textblocks''.
+
+Comes to the back of the other elements.
+
+{{{
+ Shoes.app do
+   rect 100, 100, 100, 100, fill: green
+   rect 120, 120, 100, 100, fill: yellow
+   para 'hello', left: 150, top: 150, front: true
+   oval 150, 150, 100, 100, fill: red
+   oval 180, 180, 100, 100, fill: gray, back: true
+ end
+}}}
+
 === :bottom » a number ===
 
 For: ''all slots and elements''.
@@ -1307,6 +1323,12 @@ one of style, variant, weight, stretch, or gravity, and SIZE is a decimal
 number (size in points) or optionally followed by the unit modifier "px" for
 absolute size. Any one of the options may be absent. If FAMILY-LIST is absent,
 then the default font family (Arial) will be used.
+
+=== :front » true or false ===
+
+For: ''shapes, image, textblocks''.
+
+Comes to the front of the other elements.
 
 === :group » a string ===
 
