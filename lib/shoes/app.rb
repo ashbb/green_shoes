@@ -82,7 +82,7 @@ class Shoes
       args[:links] = make_link_index(msg) unless args[:links]
 
       if !(args[:left].zero? and args[:top].zero?) and (args[:width].zero? or args[:height].zero?)
-        args[:nocontrol], args[:width], args[:height] = true, self.width, self.height
+        args[:nocontrol], args[:add_mlcs], args[:width], args[:height] = true, true, self.width, self.height
         layout_control = false
       else
         layout_control = true

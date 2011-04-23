@@ -160,7 +160,8 @@ class Shoes
   class TextBlock < Basic
     def initialize args
       super
-      @app.mlcs << self  unless @real
+      @app.mlcs << self  if !@real or @add_mlcs
+      @add_mlcs = false
     end
 
     def text
@@ -168,6 +169,7 @@ class Shoes
     end
     
     def text= s
+      @args[:add_mlcs] = false
       style markup: s  if !@hided or @args[:hidden]
     end
 

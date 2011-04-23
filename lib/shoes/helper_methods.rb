@@ -253,7 +253,7 @@ class Shoes
     end
     
     app.mlcs.each do |tb|
-      return false if tb.hided
+      next if tb.hided
       tb.text = tb.text unless tb.real
       tb.real.window.cursor = ARROW if tb.real.window
       if ret = mouse_on_link(tb, app)
