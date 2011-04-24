@@ -87,7 +87,8 @@ class Shoes
           @app.cslot.contents.delete self
           remove
           @real = nil
-        else @real.clear
+        else 
+          @real.clear  if @real
       end
     end
 

@@ -76,7 +76,7 @@ class Shoes
     
     def clear &blk
       @contents.each &:clear
-      contents.each{|e| @app.mlcs.delete e}
+      @contents.each{|e| @app.mlcs.delete e; @app.mhcs.delete e}
       if blk
         args = {}
         initials.keys.each{|k| args[k] = instance_variable_get "@#{k}"}
