@@ -98,7 +98,7 @@ class Object
   end
 
   def to_s
-    super.gsub('<', '[').gsub('>', ']')
+    super.gsub '<', '&lt;'
   end
 
   def get_win

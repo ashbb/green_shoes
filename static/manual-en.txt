@@ -229,8 +229,6 @@ These instance variables will all end up inside the App object.
  end
 }}}
 
-''Note: para method displays self with [ and ] in Green Shoes.''
-
 ==== Block Redirection ====
 
 The `stack` block is a different story, though.  It doesn't change `self` and
