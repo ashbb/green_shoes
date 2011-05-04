@@ -1,96 +1,60 @@
 Green Shoes
 ===========
 
-![logo icon1](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-heading-icon.png)
-![logo icon2](https://github.com/ashbb/green_shoes/raw/master/static/gshoes-icon.png)
+Green Shoes is a Ruby DSL for beautiful Desktop Applicatons with a simple syntax.
+The Green Shoes project is based on _why-the-lucky-stiff's Shoes, except for the following:
 
-This is **Green Shoes** written in Ruby. One of the colorful [Shoes](http://shoes.heroku.com/).  ;-)
+* Green Shoes's source is in Ruby.
+* Green Shoes's DSL is all Ruby, so you can write Ruby.
+* Green Shoes is green.
 
-Fantastic logo icon was created by [Zachary Scott](https://github.com/zacharyscott). Thanks!
+> Let's have fun with Ruby and Shoes! :-D
+> - *ashbb*
 
-Now, there are 51 [samples](https://github.com/ashbb/green_shoes/tree/master/samples). Each has a [snapshot](https://github.com/ashbb/green_shoes/tree/master/snapshots).
+Examples
+========
 
+Here is a quick example to get the juices flowing:
 
-Tiny Streaming Flash videos
----------------------------
+   require 'green_shoes'
+   
+   Shoes.app width: 250, height: 250 do
+       para "Hello, world!"
+       image 'images/shoes.png'
+   end
 
-- [sample01](http://www.rin-shun.com/shoes/green-shoes-sample1.swf.html) : Bouncing logo
-- [sample04](http://www.rin-shun.com/shoes/green-shoes-sample4.swf.html) : Text in edit_line moving at random
-- [sample07](http://www.rin-shun.com/shoes/green-shoes-sample7.swf.html) : 20 buttons in flow
-- [sample09](http://www.rin-shun.com/shoes/green-shoes-sample9.swf.html) : Complicated stacks and flows
-- [sample11](http://www.rin-shun.com/shoes/green-shoes-sample11.swf.html) : A circle moving with mouse motion
-- [sample12](http://www.rin-shun.com/shoes/green-shoes-sample12.swf.html) : Random color change
-- [sample13](http://www.rin-shun.com/shoes/green-shoes-sample13.swf.html) : Mouse click and release
-- [sample14-1](http://www.rin-shun.com/shoes/green-shoes-sample14-1.swf.html) : Flowers
-- [sample15](http://www.rin-shun.com/shoes/green-shoes-sample15.swf.html) : Text reallocation
-- [sample18](http://www.rin-shun.com/shoes/green-shoes-sample18.swf.html) : Text markup and link
-- [sample19](http://www.rin-shun.com/shoes/green-shoes-sample19.swf.html) : Pong Game
-- [sample20](http://www.rin-shun.com/shoes/green-shoes-sample20.swf.html) : Potacho
-- [sample26](http://www.rin-shun.com/shoes/green-shoes-sample26.swf.html) : Mask
-- [sample28](http://www.rin-shun.com/shoes/green-shoes-sample28.swf.html) : Snake Game
-- [sample32](http://www.rin-shun.com/shoes/green-shoes-sample32.swf.html) : Chipmunk Physics
-- [sample38](http://www.rin-shun.com/shoes/green-shoes-sample38.swf.html) : Rotating rect, oval and star
-- [sample39](http://www.rin-shun.com/shoes/green-shoes-sample39.swf.html) : Hackety Hack opening demo
-- [sample41](http://www.rin-shun.com/shoes/green-shoes-sample41.swf.html) : 3D Texture Mapping
-- [sample43](http://www.rin-shun.com/shoes/green-shoes-sample43.swf.html) : Download and progress bar
-- [sample44](http://www.rin-shun.com/shoes/green-shoes-sample44.swf.html) : Good clock
-
-- [simple boids](http://www.rin-shun.com/shoes/green-shoes-a-very-simple-boids.swf.html) : A very simple boids
-- [parallax scrolling](http://www.rin-shun.com/shoes/green-shoes-parallax-scrolling.swf.html) : Parallax scrolling
-- [search sample](http://www.rin-shun.com/shoes/search_sample_with_green_shoes.swf.html) : Search sample
-
-recorded with [CamStudio](http://camstudio.org/).
-
-Install and run
---------------
-
-For Windows:
-
-1. download and install [rubyinstaller-1.9.2-p136.exe](http://rubyinstaller.org/downloads/)   
-2. gem install green_shoes --no-ri --no-rdoc   
-
-That's it!
-
-Now open your text editor and write your first Green Shoes app like this:
-
-	#my_first_green_shoes_app.rb
-	require 'green_shoes'
-	Shoes.app{ title 'hello world' }
-
-Then run your app on the console window:
-
-	ruby my_first_green_shoes_app.rb
-
-You can see this snapshot:
-
-![snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/helloworld.png)
-
-**NOTE: Use Ruby-GNOME2 0.90.7 or later.**
-
-If you are using Ruby-GNOME2 0.90.6, have to do the following.
-
-- make this file: %{your path of gtk2 gem}\vendor\local\etc\gtk-2.0\gtkrc    
-- store just one line: gtk-theme-name = "MS-Windows"    
-
-Then you can look at good-looking button on Green Shoes.
-(left button of [this snapshot](http://www.rin-shun.com/tmp/ruby-gtk2-buttons.png))
-
-Ruby-GNOME2 developer Kou (Kouhei Sutou) included gtkrc in the [0.90.7](http://ruby-gnome2.sourceforge.jp/?News_20110202_1) distribution. 
-Thanks, Kou. Awesome!
+There are a lot of samples [here in the sample box](https://github.com/ashbb/green_shoes/tree/master/samples).
 
 
-Mini Hackety Hack
-------------------
+Installation
+============
 
-![snapshot](https://github.com/ashbb/green_shoes/raw/master/snapshots/mini-hh.png)
+Installing Green Shoes works like any other Ruby Gem.
+This requires three working dependencies:
 
-[This](http://www.rin-shun.com/shoes/green-shoes-mini-hh.swf.html) is a first try with Green Shoes. ;-)
+1. [Ruby](http://ruby-lang.org) 1.9 or above
+2. [Gems](http://rubygems.org) 1.5 or above
+3. [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/) 0.90.7 or above
 
-[Hackety Hack](http://hacketyhack.heroku.com/): the little coder's starter kit
+Once you have all three requirements, you can simply install the gem via Gems:
+
+    gem install green_shoes
 
 
-LICENSE
---------
+Documentation
+=============
+
+Check the [Github Wiki](http://github.com/ashbb/green_shoes/issues) for extra documentation and details.
+
+
+Bugs & Requests
+===============
+
+See [Github Issues](http://github.com/ashbb/green_shoes/issues) for any bugs or feature requests.
+
+
+License
+=========
 
 Copyright (c) 2010-2011 ashbb
 
@@ -134,12 +98,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 
-Note (old piece of information)
------------------------------
+Credits
+=======
 
-- [Install Ruby/GTK2 and rcairo for Linux](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack030.md).
-- [Install Ruby/GTK2 and rcairo for Windows](https://github.com/ashbb/shoes_hack_note/tree/master/md/hack031.md).
-
-Let's have fun with Ruby and Shoes! :-D
-
-ashbb
+_why-the-lucky-stiff, for coming up with the idea and the original shoes.
+ashbb, for the ... and ...
+zzack, for ... and ...
+krainboltgreen, for being a visionary and glorious leader. Terribly handsome.
