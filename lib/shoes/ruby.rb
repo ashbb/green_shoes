@@ -139,4 +139,12 @@ class Array
     r, g, b = self
     r + g + b > 0xAA * 3
   end
+
+  def clear
+    self.each &:clear
+  end
+end
+
+class NilClass
+  def clear; end
 end
