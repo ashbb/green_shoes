@@ -16,12 +16,12 @@ Examples
 
 Here is a quick example to get the juices flowing:
 
-   require 'green_shoes'
-   
-   Shoes.app width: 250, height: 250 do
-       para "Hello, world!"
-       image 'images/shoes.png'
-   end
+	require 'green_shoes'
+	
+	Shoes.app width: 250, height: 250 do
+	  para "Hello, world!"
+	  image 'images/shoes.png'
+	end
 
 There are a lot of samples [here in the sample box](https://github.com/ashbb/green_shoes/tree/master/samples).
 
@@ -44,7 +44,7 @@ Once you have all three requirements, you can simply install the gem via Gems:
 Documentation
 =============
 
-Check the [Github Wiki](http://github.com/ashbb/green_shoes/issues) for extra documentation and details.
+Check the [Github Wiki](http://github.com/ashbb/green_shoes/wiki) for extra documentation and details.
 
 
 Bugs & Requests
