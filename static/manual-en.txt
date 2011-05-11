@@ -1304,10 +1304,12 @@ name or a comma-separated list of families.
 
 === :fill » a hex code, a rgb array or a range of either ===
 
-For: ''background, border, line, oval, rect, shape, star''.
+For: ''background, banner, border, caption, inscription, para, line, oval, 
+rect, shape, star, subtitle, tagline, title''.
 
 The color of the background pen.  For shapes, this is the fill color, the paint
-inside the shape.  
+inside the shape. For textblock, this color is painted in the background
+(as if marked with a highlighter pen.) 
 
 === :font » a string ===
 
@@ -1598,10 +1600,11 @@ Is this text stricken through?  Two options here:
 
 === :stroke » a hex code, a rgb array or a range of either ===
 
-For: ''background, border, line, oval, rect, shape, star''.
+For: ''background, banner, border, caption, inscription, para, line, oval, 
+rect, shape, star, subtitle, tagline, title''.
 
 The color of the foreground pen.  In the case of shapes, this is the color the
-lines are drawn with. 
+lines are drawn with. For textblock, the letters are printed in this color.
 
 === :strokewidth » a number ===
 

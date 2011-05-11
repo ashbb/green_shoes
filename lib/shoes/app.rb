@@ -73,6 +73,8 @@ class Shoes
       args = msg.last.class == Hash ? msg.pop : {}
       args = basic_attributes args
       args[:markup] = msg.map(&:to_s).join
+      args[:markup] = fg(args[:markup], tr_color(args[:stroke])) if args[:stroke]
+      args[:markup] = bg(args[:markup], tr_color(args[:fill])) if args[:fill]
       text, attr_list = make_pango_attr args[:markup]
       args[:size] ||= font_size
       args[:font] ||= (@font_family or 'sans')
