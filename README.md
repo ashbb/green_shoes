@@ -44,6 +44,8 @@ Once you have all three requirements, you can simply install the gem via Gems:
 Documentation
 =============
 
+Read the [Green Shoes Manual](http://ashbb.github.com/green_shoes/) for all sorts of shoe-like good-ness
+
 Check the [Github Wiki](http://github.com/ashbb/green_shoes/wiki) for extra documentation and details.
 
 
