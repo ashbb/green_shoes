@@ -15,8 +15,8 @@ class Shoes
       end
     end
 
-    def link str, &blk
-      Link.new "#{LINK_DEFAULT}#{str}</span>", &blk
+    def link str, arg = {}, &blk
+      Link.new "#{LINK_DEFAULT}#{str}</span>", arg, &blk
     end
 
     def font name
@@ -32,8 +32,18 @@ class Shoes
   end
 
   class Link < Text
-    def initialize str, &blk
-      @link_proc, @pos, @index, @link_hover = blk, nil, nil, false
+    def initialize str, arg, &blk
+      @link_proc = if blk
+        blk
+      elsif arg[:click].is_a? String
+        proc{Shoes.APPS.first.app.visit arg[:click]}
+      elsif arg[:click].nil?
+        proc{}
+      else
+        arg[:click]
+      end
+
+      @pos, @index, @link_hover = nil, nil, false
       super str
     end
     attr_reader :link_proc
