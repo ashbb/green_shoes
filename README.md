@@ -1,27 +1,29 @@
 Green Shoes
 ===========
 
-Green Shoes is a Ruby DSL for beautiful Desktop Applicatons with a simple syntax.
+> Let's have fun with Ruby and Shoes! :-D
+> 
+> [ashbb](#)
+
+Green Shoes is a Ruby domain specific language for beautiful Desktop Applications.
+The Green Shoes dsl is so simple, even your pointy haired boss can understand it.
 The Green Shoes project is based on _why-the-lucky-stiff's Shoes, except for the following:
 
-* Green Shoes's source is in Ruby.
-* Green Shoes's DSL is all Ruby, so you can write Ruby.
-* Green Shoes is green.
+* Green Shoes source code is all Ruby, so even you can contribute.
+* Green Shoes takes the Ruby DSL block-style approach, so all you have to do is write what you know: Ruby.
 
-> Let's have fun with Ruby and Shoes! :-D
-> - *ashbb*
 
 Examples
 ========
 
 Here is a quick example to get the juices flowing:
 
-	require 'green_shoes'
+    require 'green_shoes'
 	
-	Shoes.app width: 250, height: 250 do
-	  para "Hello, world!"
-	  image 'images/shoes.png'
-	end
+    Shoes.app( :width => 250, :height => 250 ) do
+      para 'Hello, world!'
+      image 'images/shoes.png'
+    end
 
 There are a lot of samples [here in the sample box](https://github.com/ashbb/green_shoes/tree/master/samples).
 
@@ -29,14 +31,13 @@ There are a lot of samples [here in the sample box](https://github.com/ashbb/gre
 Installation
 ============
 
-Installing Green Shoes works like any other Ruby Gem.
-This requires three working dependencies:
+Since Green Shoes is a Ruby Gem, all you need to install are:
 
 1. [Ruby](http://ruby-lang.org) 1.9 or above
 2. [Gems](http://rubygems.org) 1.5 or above
 3. [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/) 0.90.7 or above
 
-Once you have all three requirements, you can simply install the gem via Gems:
+Once you have all three requirements, you can simply install with this command:
 
     gem install green_shoes
 
@@ -44,15 +45,17 @@ Once you have all three requirements, you can simply install the gem via Gems:
 Documentation
 =============
 
-Read the [Green Shoes Manual](http://ashbb.github.com/green_shoes/) for all sorts of shoe-like good-ness
+Read the [Manual](http://ashbb.github.com/green_shoes/) for all sorts of shoe-like good-ness
 
-Check the [Github Wiki](http://github.com/ashbb/green_shoes/wiki) for extra documentation and details.
+Check the [Wiki](http://github.com/ashbb/green_shoes/wiki) for extra documentation and details.
+
+Please contribute to documentation whenever you can.
 
 
 Bugs & Requests
 ===============
 
-See [Github Issues](http://github.com/ashbb/green_shoes/issues) for any bugs or feature requests.
+See [Issues](http://github.com/ashbb/green_shoes/issues) for any bugs or feature requests.
 
 
 License
@@ -103,7 +106,7 @@ SOFTWARE.
 Credits
 =======
 
-_why-the-lucky-stiff, for coming up with the idea and the original shoes.
-ashbb, for the ... and ...
-zzack, for ... and ...
-krainboltgreen, for being a visionary and glorious leader. Terribly handsome.
+* [_why-the-lucky-stiff](#), for coming up with the idea and the original shoes.
+* [ashbb](#), for the ... and ...
+* [zzack](#), for ... and ...
+* [krainboltgreen](http://github.com/krainboltgreene), for being terribly handsome.
