@@ -106,7 +106,7 @@ SOFTWARE.
 Credits
 =======
 
-* [_why-the-lucky-stiff](#), for coming up with the idea and the original shoes.
-* [ashbb](#), for the ... and ...
-* [zzack](#), for ... and ...
-* [krainboltgreen](http://github.com/krainboltgreene), for being terribly handsome.
+* [_why-the-lucky-stiff](https://github.com/shoes/shoes), for coming up with the idea and the original shoes.
+* [ashbb](https://github.com/ashbb), for developing Green Shoes.
+* [zzak](https://github.com/zacharyscott), for creating fantastic logo and [web site](http://gshoes.heroku.com/).
+* [krainboltgreene](https://github.com/krainboltgreene), for being terribly handsome.

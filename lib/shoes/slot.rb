@@ -24,7 +24,7 @@ class Shoes
           BASIC_ATTRIBUTES_DEFAULT.merge! hidden: true
           SLOT_ATTRIBUTES_DEFAULT.merge! hidden: true
           @hidden_flag = true unless @parent.instance_variable_get '@hidden'
-	end
+        end
         yield
         if @hidden_flag
           BASIC_ATTRIBUTES_DEFAULT.delete :hidden
@@ -77,6 +77,7 @@ class Shoes
     def clear &blk
       @contents.each &:clear
       @contents.each{|e| @app.mlcs.delete e; @app.mhcs.delete e}
+      @contents = []
       if blk
         args = {}
         initials.keys.each{|k| args[k] = instance_variable_get "@#{k}"}
