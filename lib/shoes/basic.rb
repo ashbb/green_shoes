@@ -81,7 +81,7 @@ class Shoes
     end
 
     def clear
-      @app.mccs.delete(self); @app.mrcs.delete(self); @app.mmcs.delete(self)
+      @app.delete_mouse_events self
       case self
         when Button, EditLine, EditBox, ListBox
           @app.cslot.contents.delete self

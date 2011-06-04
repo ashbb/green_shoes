@@ -127,6 +127,10 @@ class Shoes
       layout.attributes = attr_list
       return layout, context, surface
     end
+
+    def delete_mouse_events ele
+      [mccs, mrcs, mmcs, mhcs].each{|m| m.delete ele}
+    end
   end
 
   def self.contents_alignment slot

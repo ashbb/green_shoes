@@ -75,6 +75,7 @@ class Shoes
     def fix_size; end
     
     def clear &blk
+      @app.delete_mouse_events self
       @contents.each &:clear
       @contents.each{|e| @app.mlcs.delete e; @app.mhcs.delete e}
       @contents = []
