@@ -129,7 +129,9 @@ class Shoes
     end
 
     def delete_mouse_events ele
-      [mccs, mrcs, mmcs, mhcs].each{|m| m.delete ele}
+      events = [mccs, mrcs, mmcs, mhcs]
+      events.pop if ele.is_a? Basic
+      events.each{|m| m.delete ele}
     end
   end
 

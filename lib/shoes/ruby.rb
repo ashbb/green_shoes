@@ -142,7 +142,6 @@ class Array
 
   def clear
     self.each &:clear
-    self.delete_if{|x| x or !x}
   end
 end
 
