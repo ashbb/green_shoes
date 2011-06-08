@@ -68,6 +68,7 @@ Except:
 - hh/static/(all).png (c) 2008 why the lucky stiff
 - lib/ext/hpricot/(all) (c) 2008 why the lucky stiff
 - lib/ext/projector/(all).rb (c) 2010 MIZUTANI Tociyuki
+- lib/ext/highlighter/(all) (c) 2008 why the lucky stiff and 2011 Steve Klabnik
 - samples/akatsukiface.png (c) 2010 MIZUTANI Tociyuki
 - samples/class-book.yaml (c) 2008 why the lucky stiff
 - samples/splash-hand.png (c) 2008 why the lucky stiff
