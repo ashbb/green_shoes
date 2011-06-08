@@ -3,6 +3,7 @@ class Manual < Shoes
   url '/manual/(\d+)', :index
 
   include Hpricot
+  include HH::Markup
 
   def index pnum = 0
     font LANG == 'ja' ? 'MS UI Gothic' : 'Arial'
@@ -84,7 +85,11 @@ class Manual < Shoes
           flow do
             background rgb(190, 190, 190), curve: 5
             inscription link(fg('Run this', green)){eval mk_executable(_code), TOPLEVEL_BINDING}, margin_left: 480
-            para fg(code('  ' + _code), maroon), NL, margin_left: -10
+            if _code.include? 'te-su-to'
+              para fg(code('  ' + _code), maroon), NL, margin_left: -10
+            else
+              para code(highlight('  ' + _code, nil)), NL, margin_left: -10
+	    end
           end
           para
         end
