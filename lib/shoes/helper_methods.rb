@@ -194,7 +194,7 @@ class Shoes
     mask_control app
     repaint_all_by_order app
     repaint_textcursors app
-    app.canvas.set_size 0, scrollable_height unless app.prjct
+    app.canvas.set_size 0, scrollable_height unless(app.prjct or app.trvw)
     true
   end
 

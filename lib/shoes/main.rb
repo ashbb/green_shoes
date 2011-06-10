@@ -12,7 +12,8 @@ class Shoes
     args[:left] ||= 0
     args[:top] ||= 0
     projector = args[:prjct] = args[:projector]
-    args.delete :projector
+    treeview = args[:trvw] = args[:treeview]
+    [:projector, :treeview].each{|x| args.delete x}
 
     app = App.new args
     @apps.push app
@@ -62,7 +63,11 @@ class Shoes
       mouse_leave_control app
     end
 
-    app.canvas = projector ? Gtk::DrawingArea.new : Gtk::Layout.new
+    app.canvas = if treeview
+      Gtk::TreeView.new
+    else
+      projector ? Gtk::DrawingArea.new : Gtk::Layout.new
+    end
     swin = Gtk::ScrolledWindow.new
     swin.set_policy Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC 
     swin.vadjustment.step_increment = 10  
