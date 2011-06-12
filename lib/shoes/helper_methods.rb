@@ -284,6 +284,7 @@ class Shoes
   def self.mouse_on? e
     if e.is_a? Slot
       mouse_x, mouse_y = e.app.win.pointer
+      mouse_y += e.app.scroll_top
       (e.left..e.left+e.width).include?(mouse_x) and (e.top..e.top+e.height).include?(mouse_y)
     else
       mouse_x, mouse_y = e.real.pointer
