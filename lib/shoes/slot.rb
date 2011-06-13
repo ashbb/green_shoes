@@ -74,9 +74,8 @@ class Shoes
 
     def fix_size; end
     
-    def clear &blk
-      @app.delete_mouse_events self
-      @contents.each &:clear
+    def clear all = false, &blk
+      all ? @contents.each(&:clear_all) : @contents.each(&:clear)
       @contents.each{|e| @app.mlcs.delete e; @app.mhcs.delete e}
       @contents = []
       if blk
@@ -89,6 +88,11 @@ class Shoes
         Shoes.call_back_procs @app
         Shoes.set_cursor_type @app
       end
+    end
+
+    def clear_all &blk
+      @app.delete_mouse_events self
+      clear true, &blk
     end
 
     def append &blk

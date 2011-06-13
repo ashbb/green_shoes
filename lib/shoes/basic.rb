@@ -92,6 +92,8 @@ class Shoes
       end
     end
 
+    alias :clear_all :clear
+
     def positioning x, y, max
       if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
         move3 x + parent.margin_left, max.top + parent.margin_top

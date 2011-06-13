@@ -143,6 +143,10 @@ class Array
   def clear
     self.each &:clear
   end
+
+  def clear_all
+    self.each &:clear_all
+  end
 end
 
 class NilClass
