@@ -334,7 +334,7 @@ class Manual < Shoes
 
   def mk_sidebar_list num
     toc = []
-    [0..3, 4..9, 10..16, 17..32, 33..35].each do |r|
+    [0..3, 4..9, 10..16, 17..32, 33..36].each do |r|
       toc.push TOC_LIST[r.first][0]
       toc.push(TOC_LIST[r.first+1..r.last].to_a.map &:first) if r.include?(num)
     end

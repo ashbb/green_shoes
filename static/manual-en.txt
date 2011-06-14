@@ -3877,3 +3877,34 @@ Hope this helps:
  * You can join [[http://librelist.com/browser/shoes/ Shoes ML]] and feel free ask your questions. 
  * [[https://github.com/ashbb/green_shoes/ Current Source Code]] is on GitHub.
  * Green Shoes Gem is on [[http://rubygems.org/gems/green_shoes RubyGems.org]].
+
+== vs.RedShoes ==
+
+Green Shoes is following Red Shoes, but not fully compatible.
+
+==== TextBlock ====
+
+The following two snippets are same in Red Shoes.
+
+{{{
+ Shoes.app do
+   para 'hello ' * 20
+ end
+}}}
+
+{{{
+ Shoes.app do
+   20.times{para 'hello '}
+ end
+}}}
+
+But in Green Shoes, need to add `:width` size explicitly.
+
+{{{
+ Shoes.app do
+   20.times{para 'hello ', width: 40}
+ end
+}}}
+
+If you don't specify the `:width` size, Green Shoes makes a TextBlock object with 
+the `parent.width`.
