@@ -205,6 +205,11 @@ class Shoes
     def cursor
       @app.textcursors[self][0]
     end
+
+    def hit x, y
+      a, b, c = @app.make_textcursor_index(self, x - left, y - top + @app.scroll_top)
+      a ? b : nil
+    end
   end
   
   class Banner < TextBlock; end

@@ -96,12 +96,21 @@ class Shoes
     end
 
     def make_textcursor_pos tb, n
+      layout = make_textcursor_layout tb
+      n = tb.text.length if n == -1
+      return layout.index_to_pos(n).x / Pango::SCALE, layout.index_to_pos(n).y / Pango::SCALE
+    end
+
+    def make_textcursor_index tb, x, y
+      layout = make_textcursor_layout tb
+      layout.xy_to_index x * Pango::SCALE, y * Pango::SCALE
+    end
+
+    def make_textcursor_layout tb
       markup, size, width, height, align, font = 
         %w[@markup @size @width @height @align @font].map{|v| tb.instance_variable_get v}
       text, attr_list = make_pango_attr markup
-      layout, = make_pango_layout size, width, height, align, font, text, attr_list
-      n = tb.text.length if n == -1
-      return layout.index_to_pos(n).x / Pango::SCALE, layout.index_to_pos(n).y / Pango::SCALE
+      make_pango_layout(size, width, height, align, font, text, attr_list)[0]
     end
 
     def make_pango_attr markup

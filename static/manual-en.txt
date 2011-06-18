@@ -3747,6 +3747,22 @@ Using `cursor = nil` hides the text cursor.
  end
 }}}
 
+=== hit(left, top) » an index or nil ===
+
+Return an index of the text at which the mouse cursor points on. 
+The `left` and `top` are the mouse coordinates. 
+
+{{{
+ Shoes.app do
+   para 'index: ', width: 50
+   index = para '', width: 20
+   msg = title 'hello ' * 5
+   click do |b, x, y|
+     index.text = msg.hit x, y
+   end
+ end
+}}}
+
 == Timers ==
 
 Green Shoes contains three timers: the animate, every and
