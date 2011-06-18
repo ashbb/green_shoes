@@ -182,7 +182,7 @@ class Shoes
       n, cursor = v
       x, y = app.make_textcursor_pos(tb, n)
       x += tb.left; y += tb.top
-      cursor ? cursor.move(x, y) : app.textcursors[tb][1] = app.line(x, y, x, y+tb.size*1.7)
+      cursor ? cursor.move(x, y) : app.textcursors[tb][1] = app.line(x, y, x, y+tb.size*1.7, strokewidth: 1, stroke: app.black)
     end
   end
   
