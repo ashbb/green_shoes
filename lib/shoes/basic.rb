@@ -168,7 +168,7 @@ class Shoes
     end
 
     def text
-      @args[:markup].gsub(/\<.*?>/, '')
+      @args[:markup].gsub(/\<.*?>/, '').gsub('&amp;', '&').gsub('&lt;', '<')
     end
     
     def text= s

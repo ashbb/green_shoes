@@ -17,14 +17,10 @@ Shoes.app width: 200, height: 200 do
     #p k
     msg = case k
       when 'BackSpace'; @line.text[0..-2]
-      when 'Return'; @line.text + "\n"
-      when 'space'; @line.text + ' '
-      when 'exclam'; @line.text + '!'
-      when 'period'; @line.text + '.'
       else
         k.length == 1 ? @line.text + k : nil
     end
-    (@line.text = strong fg msg, white) if msg
+    (@line.text = strong fg msg.gsub('&', '&amp;').gsub('<', '&lt;'), white) if msg
     flush
   end
 end
