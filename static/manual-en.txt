@@ -3694,27 +3694,6 @@ Lists all of the strings and styled text objects inside this block.
 
 '''Note:''' Green Shoes doesn't support `contents` method.
 
-=== replace(a string) ===
-
-Replaces the text of the entire block with the characters of `a string`.
-
-=== text() » a string ===
-
-Return a string of all of the characters in this text box. This will strip off
-any style or text classes and just return the actual characters, as if seen on
-the screen.
-
-=== text = a string ===
-
-Replaces the text of the entire block with the characters of `a string`.
-
-=== to_s() » a string ===
-
-An alias for [[TextBlock.text]]. Returns a flattened string of all of this
-TextBlock's contents.
-
-'''Note:''' Green Shoes doesn't support `to_s` method.
-
 === cursor() » an index ===
 
 Return a text cursor position. That is an index of the text which is a string
@@ -3747,6 +3726,10 @@ Using `cursor = nil` hides the text cursor.
  end
 }}}
 
+=== highlight() » an array ===
+
+Return an array which includes a text marker start position and highlighted length. 
+
 === hit(left, top) » an index or nil ===
 
 Return an index of the text at which the mouse cursor points on. 
@@ -3762,6 +3745,55 @@ The `left` and `top` are the mouse coordinates.
    end
  end
 }}}
+
+=== marker() » an index ===
+
+Return a text marker start position. 
+
+=== marker = an index ===
+
+Highlight a part of text from marker start position to cursor position.
+
+{{{
+ Shoes.app do
+   background gainsboro
+   extend HH::Markup
+   code = 'alert "Hello Green Shoes! " * 5'
+   msg = para highlight code, nil
+   button 'marker' do
+     msg.cursor = 17
+     msg.marker = 14
+     msg.text = highlight msg.markup, nil
+     para msg.highlight
+     flush
+   end
+ end
+}}}
+
+=== markup() » a text ===
+
+Return some marked-up text for Pango. 
+
+=== replace(a string) ===
+
+Replaces the text of the entire block with the characters of `a string`.
+
+=== text() » a string ===
+
+Return a string of all of the characters in this text box. This will strip off
+any style or text classes and just return the actual characters, as if seen on
+the screen.
+
+=== text = a string ===
+
+Replaces the text of the entire block with the characters of `a string`.
+
+=== to_s() » a string ===
+
+An alias for [[TextBlock.text]]. Returns a flattened string of all of this
+TextBlock's contents.
+
+'''Note:''' Green Shoes doesn't support `to_s` method.
 
 == Timers ==
 

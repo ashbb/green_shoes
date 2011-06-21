@@ -203,12 +203,35 @@ class Shoes
     end
 
     def cursor
-      @app.textcursors[self][0]
+      @app.textcursors[self] ? @app.textcursors[self][0] : nil
     end
 
     def hit x, y
       a, b, c = @app.make_textcursor_index(self, x - left, y - top + @app.scroll_top)
       a ? b : nil
+    end
+
+    def marker=(n)
+      if cursor
+        cindex = cursor == -1 ? text.length : cursor
+        len = cindex - n
+        self.text = text[0...n] + @app.bg(text[n, len], @app.yellow) + text[n+len..-1] if len > 1
+      end
+      @app.textmarkers[self] = n
+    end
+    
+    def marker
+      @app.textmarkers[self]
+    end
+    
+    def highlight
+      unless cursor
+        return nil, 0
+      else
+        cindex = cursor == -1 ? text.length : cursor
+        mindex = marker ? marker : cindex
+        return marker, cindex - mindex
+      end
     end
   end
   

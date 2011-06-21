@@ -31,7 +31,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics, :fronts, :backs
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors
+    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors, :textmarkers
 
     def visit url
       if url =~ /^(http|https):\/\//
