@@ -1517,7 +1517,23 @@ scrollbar will appear and disappear as needed.  It will also appear inside the
 width of the slot, meaning the slot's width will never change, regardless of
 whether there is a scrollbar or not.
 
-'''Note:''' Green Shoes doesn't support `:scroll` style.
+'''Note:''' Green Shoes has restrictions. `:scroll` style is just a trial so far.
+
+ * common Slot instance methods, i.e. clear, hide, etc., don't work well
+ * doesn't manage any mouse events 
+ * need to write `flush` explicitly
+
+{{{
+ Shoes.app do
+   s = stack left: 100, top: 50, width: 300, 
+     height: 100, scroll: true do
+     background gold
+     image './loogink.png'
+     10.times{para 'hello'}
+     flush
+   end
+ end
+}}}
 
 === :secret » true or false ===
 

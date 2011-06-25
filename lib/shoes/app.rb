@@ -25,7 +25,7 @@ class Shoes
       @width_pre, @height_pre = @width, @height
       @link_style, @linkhover_style = LINK_DEFAULT, LINKHOVER_DEFAULT
       @context_angle = @pixbuf_rotate = 0
-      Shoes.APPS << self
+      (Shoes.APPS << self) unless @noapp
     end
 
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
@@ -51,13 +51,52 @@ class Shoes
     end
     
     def stack args={}, &blk
-      args[:app] = self
-      Stack.new slot_attributes(args), &blk
+      if args[:scroll]
+        slot_with_scrollbar Stack, args, &blk
+      else
+        args[:app] = self
+        Stack.new slot_attributes(args), &blk
+      end
     end
 
     def flow args={}, &blk
-      args[:app] = self
-      Flow.new slot_attributes(args), &blk
+      if args[:scroll]
+        slot_with_scrollbar Flow, args, &blk
+      else
+        args[:app] = self
+        Flow.new slot_attributes(args), &blk
+      end
+    end
+
+    def slot_with_scrollbar slot, args={}, &blk
+      args[:left] ||= 0
+      args[:top] ||= 0
+      args[:width] ||= 200
+      args[:height] ||= 200
+
+      app = App.new noapp: true
+      app.instance_variable_set :@_w, args[:width]
+      app.instance_variable_set :@_h, args[:height]
+      def app.width; @_w end
+      def app.height; @_h end
+      app.win = win
+
+      swin = Gtk::ScrolledWindow.new
+      swin.set_size_request args[:width], args[:height]
+      swin.set_policy Gtk::POLICY_NEVER, Gtk::POLICY_AUTOMATIC
+      swin.vadjustment.step_increment = 10
+
+      layout = Gtk::Layout.new
+      swin.add layout
+      layout.style = @canvas.style
+
+      app.canvas = layout
+      app.top_slot = slot.new app.slot_attributes(app: app, left: args[:left], top: args[:top], width: args[:width], height: args[:height])
+
+      app.instance_eval &blk
+
+      @canvas.put swin, args[:left], args[:top]
+      app.top_slot
     end
 
     def mask &blk
