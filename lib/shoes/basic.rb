@@ -36,7 +36,7 @@ class Shoes
 
     def move x, y
       @app.cslot.contents -= [self]
-      @app.canvas.move @real, x, y
+      @app.canvas.move @real, x, y unless @hided
       move3 x, y
       self
     end
