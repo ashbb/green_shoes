@@ -1,6 +1,7 @@
 class Manual < Shoes
   url '/', :index
   url '/manual/(\d+)', :index
+  url '/mk_search_page', :mk_search_page
 
   include Hpricot
   include HH::Markup
@@ -38,35 +39,12 @@ class Manual < Shoes
 
   def manual pnum, docs_title, docs_description, docs_methods
     flow do
-      background tr_color("#ddd")..white, angle: 90
-      background black..green, height: 90
-      para fg("The Green Shoes Manual #{VERSION}", gray), left: 120, top: 10
-      title fg(docs_title, white), left: 120, top: 30, font: 'Coolvetica'
-      image File.join(DIR, '../static/gshoes-icon.png'), left: 5, top: -12, width: 110, height: 110, nocontrol: true
-
+      show_header docs_title
+      show_toc
       paras = mk_paras docs_description
-
-      stack{para NL * 4}
-      flow width: 0.2, margin_left: 10 do
-        para *TOC
-        para link(fg 'to_html', darkmagenta){html_manual}
-      end
-        
       flow width: 0.8, margin: [10, 0, 20, 0] do
         show_page paras, true
-        docs_methods.each do |m, d|
-          flow do
-            background rgb(60, 60, 60), curve: 5
-            n = m.index("\u00BB")
-            if n
-              para '  ', fg(strong(m[0...n]), white), fg(strong(m[n..-1]), rgb(160, 160, 160))
-            else
-              para '  ', fg(strong(m), white)
-            end
-          end
-          para
-          show_page mk_paras(d.gsub('&', '\u0026'))
-        end
+        show_methods docs_methods
         para link('top'){visit "/manual/0"}, "  ",
           link('prev'){visit "/manual/#{(pnum-1)%PEND}"}, "  ", 
           link('next'){visit "/manual/#{(pnum+1)%PEND}"}, "  ", 
@@ -75,7 +53,44 @@ class Manual < Shoes
     end
   end
 
-  def show_page paras, intro = false
+  def show_header docs_title
+    background tr_color("#ddd")..white, angle: 90
+    background black..green, height: 90
+    para fg("The Green Shoes Manual #{VERSION}", gray), left: 120, top: 10
+    title fg(docs_title, white), left: 120, top: 30, font: 'Coolvetica'
+    image File.join(DIR, '../static/gshoes-icon.png'), left: 5, top: -12, width: 110, height: 110, nocontrol: true
+  end
+
+  def show_toc
+    stack(height: 120){}
+    flow width: 0.2, margin_left: 10 do
+      flow(margin_right: 20) do
+        background black.push(0.7), curve: 5
+        inscription "Not findng it?\n", 'Try ', link(fg 'Search', white){visit '/mk_search_page'}, '!', align: 'center', stroke: lightgrey
+      end
+      stack(height: 10){}
+      para *TOC
+      para link(fg 'to_html', darkmagenta){html_manual}
+    end
+  end
+
+  def show_methods docs_methods, term = nil
+    docs_methods.each do |m, d|
+      flow do
+        background rgb(60, 60, 60), curve: 5
+        n = m.index("\u00BB")
+        if n
+          para '  ', fg(strong(m[0...n]), white), fg(strong(m[n..-1]), rgb(160, 160, 160))
+        else
+          para '  ', fg(strong(m), white)
+        end
+      end
+      para
+      show_page mk_paras(d.gsub('&', '\u0026')), false, term
+    end
+  end
+
+  def show_page paras, intro = false, term = nil
     paras.each_with_index do |text, i|
       if text.index CODE_RE
         text.gsub CODE_RE do |lines|
@@ -99,28 +114,28 @@ class Manual < Shoes
       if text =~ /\A \* (.+)/m
         $1.split(/^ \* /).each do |txt|
           image File.join(DIR, '../static/gshoes-icon.png'), width: 20, height: 20
-          flow(width: 510){show_paragraph txt, intro, i}
+          flow(width: 510){show_paragraph txt, intro, i, term}
         end
       else
-        show_paragraph text, intro, i
+        show_paragraph text, intro, i, term
       end
     end
   end
   
-  def show_paragraph txt, intro, i, dot = nil
+  def show_paragraph txt, intro, i, term = nil
     txt = txt.gsub("\n", ' ').gsub(/`(.+?)`/m){fg code($1), rgb(255, 30, 0)}.
       gsub(/\^(.+?)\^/m, '\1').gsub(/'''(.+?)'''/m){strong($1)}.gsub(/''(.+?)''/m){em($1)}.
       gsub(/\[\[BR\]\]/i, "\n")
     txts = txt.split(/(\[\[\S+?\]\])/m).map{|s| s.split(/(\[\[\S+? .+?\]\])/m)}.flatten
     case txts[0]
-    when /\A==== (.+) ====/; caption $1, size: 24
-    when /\A=== (.+) ===/; tagline $1, size: 12, weight: 'bold'
-    when /\A== (.+) ==/; subtitle $1
-    when /\A= (.+) =/; title $1
+    when /\A==== (.+) ====/; caption marker($1, term), size: 24
+    when /\A=== (.+) ===/; tagline marker($1, term), size: 12, weight: 'bold'
+    when /\A== (.+) ==/; subtitle marker($1, term)
+    when /\A= (.+) =/; title marker($1, term)
     when /\A\{COLORS\}/; flow{color_page}
     when /\A\{SAMPLES\}/; flow{sample_page}
     else
-      para *mk_links(txts), NL, (intro and i.zero?) ? {size: 16} : ''
+      para *mk_links(txts, term), NL, (intro and i.zero?) ? {size: 16} : ''
       txt.gsub IMAGE_RE do
         image File.join(DIR, "../static/#{$3}"), eval("{#{$2 or "margin_left: 50"}}")
         para
@@ -128,10 +143,11 @@ class Manual < Shoes
     end
   end
 
-  def mk_links txts
+  def mk_links txts, term = nil
     txts.map{|txt| txt.gsub(IMAGE_RE, '')}.
-      map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1.split('.'); link(ins t.last){visit "/manual/#{find_pnum t.first}"}) : txt}.
-      map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins $2){visit url =~ /^http/ ? url : "/manual/#{find_pnum url}"}) : txt}
+      map{|txt| txt =~ /\[\[(\S+?)\]\]/m ? (t = $1.split('.'); link(ins marker(t.last, term)){visit "/manual/#{find_pnum t.first}"}) : txt}.
+      map{|txt| txt =~ /\[\[(\S+?) (.+?)\]\]/m ? (url = $1; link(ins marker($2, term)){visit url =~ /^http/ ? url : "/manual/#{find_pnum url}"}) : 
+      (txt.is_a?(String) ? marker(txt, term) : txt)}
   end
 
   def mk_paras str
@@ -361,6 +377,73 @@ class Manual < Shoes
       gsub(/\!(\{[^}\n]+\})?([^!\n]+\.\w+)\!/) do
         '<img src="' + "static/#$2" + '" />'
       end
+  end
+
+  def mk_search_page
+    flow do
+      show_header 'Search'
+      show_toc
+      pnum, docs_title, docs_description, docs_methods = get_title_and_desc(25)
+      paras = mk_paras docs_description
+
+      flow width: 0.8, margin: [10, 0, 20, 0] do
+        el = edit_line width: 300
+        button 'search' do
+          term = el.text.strip
+	  unless term.empty?
+            descs, methods = search term
+            @f.clear{show_search_result term, descs, methods} 
+          end
+        end
+        stack(height: 20){}
+        @f = flow{}
+      end
+    end
+  end
+
+  def search term
+    descs, methods = [], []
+    PNUMS.each_with_index do |(chapter, section), pnum|
+      pnum, docs_title, docs_description, docs_methods = get_title_and_desc(pnum)
+      paras = mk_paras(docs_description)
+      descs << [chapter, section, docs_title, paras] if paras.map{|txt| txt.gsub(CODE_RE, '').gsub(IMAGE_RE, '')}.join(' ').index(term)
+      docs_methods.each do |docs_method|
+        m, d = docs_method
+        methods << [chapter, section, docs_title, docs_method] if m.index(term) or d.gsub(CODE_RE, '').gsub(IMAGE_RE, '').index(term)
+      end
+    end
+    return descs, methods
+  end
+
+  def show_search_result term, descs, methods
+    return subtitle 'Not Found' if descs.empty? and methods.empty?
+    methods.each do |(chapter, section, docs_title, docs_method)|
+      flow margin: [10, 10, 0, 5] do
+        background rgb(200, 200, 200), curve: 5
+        para "#{DOCS[chapter][0]}: #{docs_title.sub('The', '').split(' ').first}: ", 
+          link(docs_method[0]){@f.clear{title docs_title; show_methods [docs_method], term}}, NL
+      end
+      stack(height: 2){}
+    end
+    descs.each do |(chapter, section, docs_title, paras)|
+      flow margin_left: 10 do
+        if section
+          background gray, curve: 5
+          tagline link(fg(docs_title, white)){@f.clear{title docs_title; show_page paras, true, term}}, width: 320
+          inscription "Sub-Section under #{DOCS[chapter][0]}", stroke: lightgrey, width: 180
+        else
+          background black.push(0.8), curve: 5
+	  subtitle link(fg(docs_title, white)){@f.clear{title docs_title; show_page paras, true, term}}, width: 320
+          inscription 'Section Header', stroke: lightgrey, width: 100
+        end
+      end
+      stack(height: 2){}
+    end
+    para NL*3
+  end
+
+  def marker txt, term
+    term && txt ? txt.gsub(term, bg(term, yellow)) : txt
   end
 
   IMAGE_RE = /\!(\{([^}\n]+)\})?([^!\n]+\.\w+)\!/
