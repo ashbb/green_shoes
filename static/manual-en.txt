@@ -576,8 +576,6 @@ This section covers:
 If you find yourself paging around a lot and not finding something, give the
 [[Search]] page a try. It's the quickest way to get around.
 
-'''Note:''' Green Shoes doesn't support Search page so far.
-
 After this general reference, there are two other more specific sections:
 
  * [[Slots]] - covering [[Element.stack]] and [[Element.flow]], the two types of slots.
@@ -1052,8 +1050,6 @@ Gets the app which launched this app.  In most cases, this will be `nil`.  But
 if this app was launched using the [[Element.window]] method, the owner will be
 the app which called `window`.
 
-'''Note:''' Green Shoes doesn't support owner method so far.
-
 === started?() » true or false ===
 
 Has the window been fully constructed and displayed?  This is useful for
@@ -1243,7 +1239,7 @@ tagline, title''.
 The `click` event handler is stored in this style.  See the [[Events.click]]
 method for a description.
 
-'''Note:''' Green Shoes doesn't support `:click` style.
+'''Note:''' Green Shoes supports `:click` style for only `link` method. 
 
 === :curve » a number ===
 
@@ -1542,8 +1538,6 @@ For: ''ask, edit_line''.
 Used for password fields, this setting keeps any characters typed in from
 becoming visible on the screen.  Instead, a replacement character (such as an
 asterisk) is show for each letter typed.
-
-'''Note:''' Green Shoes doesn't support `:secret` style.
 
 === :size » a number ===
 

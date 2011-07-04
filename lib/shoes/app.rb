@@ -237,6 +237,7 @@ class Shoes
       args[:width] = 200 if args[:width].zero?
       args[:height] = 28 if args[:height].zero?
       el = Gtk::Entry.new
+      el.visibility = false if args[:secret]
       el.text = args[:text].to_s
       el.set_size_request args[:width], args[:height]
       el.signal_connect "changed" do

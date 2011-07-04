@@ -36,7 +36,7 @@ class Object
     ret
   end
 
-  def ask msg
+  def ask msg, args={}
     dialog = Gtk::Dialog.new(
       "Green Shoes asks:", 
       get_win,
@@ -46,6 +46,7 @@ class Object
     )
     dialog.vbox.add Gtk::Label.new msg
     dialog.vbox.add(el = Gtk::Entry.new)
+    el.visibility = false if args[:secret]
     dialog.set_size_request 300, 100
     dialog.show_all
     ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? el.text : nil
