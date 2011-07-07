@@ -3190,8 +3190,6 @@ When a button is clicked, its `click` block is called.  The block is handed
 Moves focus to the button.  The button will be highlighted and, if the user
 hits Enter, the button will be clicked.
 
-'''Note:''' Green Shoes doesn't support `focus` method.
-
 == Check ==
 
 Check boxes are clickable square boxes than can be either checked or unchecked.
@@ -3272,8 +3270,6 @@ Clicks are sent for both checking and unchecking the box.
 Moves focus to the check.  The check will be highlighted and, if the user hits
 Enter, the check will be toggled between its checked and unchecked states.
 
-'''Note:''' Green Shoes doesn't support `focus` method.
-
 == EditBox ==
 
 Edit boxes are wide, rectangular boxes for entering text.  On the web, they
@@ -3323,8 +3319,6 @@ has changed.
 Moves focus to the edit box. The edit box will be highlighted and the user will
 be able to type into the edit box.
 
-'''Note:''' Green Shoes doesn't support `focus` method.
-
 === text() » self ===
 
 Return a string of characters which have been typed into the box.
@@ -3372,8 +3366,6 @@ has changed.
 
 Moves focus to the edit line. The edit line will be highlighted and the user
 will be able to type into the edit line.
-
-'''Note:''' Green Shoes doesn't support `focus` method.
 
 === text() » self ===
 
@@ -3510,8 +3502,6 @@ Selects the option in the list box that matches the string given by `item`.
 
 Moves focus to the list box. The list box will be highlighted and, if the user
 hits the up and down arrow keys, other options in the list will be selected.
-
-'''Note:''' Green Shoes doesn't support `focus` method.
 
 === items() » an array of strings ===
 
@@ -3668,10 +3658,7 @@ Clicks are sent for both marking and unmarking the radio.
 
 === focus() » self ===
 
-Moves focus to the radio. The radio will be highlighted and, if the user hits
-Enter, the radio will be toggled between its marked and unmarked states.
-
-'''Note:''' Green Shoes doesn't support `focus` method.
+Moves focus to the radio. The radio will be highlighted.
 
 == Shape ==
 

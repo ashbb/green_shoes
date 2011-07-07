@@ -36,9 +36,9 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @textmarkers, @fronts, @backs = 
-        [], [], [], [], [], [], [], [], [], [], [], {}, {}, {}, [], []
-      @cmask = nil
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @textmarkers, @fronts, @backs, @focusables = 
+        [], [], [], [], [], [], [], [], [], [], [], {}, {}, {}, [], [], []
+      @cmask, @focus_ele = nil, nil
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
     end
@@ -204,6 +204,8 @@ class Shoes
     repaint_all_by_order app
     repaint_textcursors app
     app.canvas.set_size 0, scrollable_height unless(app.prjct or app.trvw)
+    n = app.focusables.index app.focus_ele
+    app.canvas.focus_chain = (app.focusables[n..-1] + app.focusables[0...n]).map(&:real) if n
     true
   end
 

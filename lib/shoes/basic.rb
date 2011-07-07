@@ -10,6 +10,7 @@ class Shoes
       (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine)
       (@app.cslot.contents << self) unless @nocontrol or @app.cmask
       (@app.cmask.contents << self) if @app.cmask
+      (@app.focusables << self) if self.is_a? Native
       @parent = @app.cslot
       
       Basic.class_eval do
@@ -247,6 +248,10 @@ class Shoes
     def change obj, &blk
       obj.signal_connect "changed", &proc{parent.append{blk[self]}} if blk
     end
+
+    def focus
+      @app.focus_ele = self
+    end
   end
   class Button < Native
     def click &blk
@@ -263,7 +268,12 @@ class Shoes
     end
   end
   class Check < ToggleButton; end
-  class Radio < ToggleButton; end
+  class Radio < ToggleButton
+    def focus
+      self.checked = true
+      super
+    end
+  end
 
   class EditLine < Native
     def text
@@ -330,5 +340,7 @@ class Shoes
     def fraction= n
       real.fraction = n
     end
+
+    undef_method :focus
   end
 end
