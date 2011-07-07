@@ -13,7 +13,7 @@ class Object
       Gtk::Dialog::MODAL,
       Gtk::MessageDialog::INFO,
       Gtk::MessageDialog::BUTTONS_OK,
-      msg
+      msg.to_s
     )
     dialog.title = "Green Shoes says:"
     dialog.run
