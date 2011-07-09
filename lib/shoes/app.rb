@@ -374,7 +374,7 @@ class Shoes
       context.set_source gp
       context.set_line_width args[:strokewidth]
       context.arc args[:radius]+mx, args[:radius]-my, args[:radius]-args[:strokewidth]/2.0, args[:angle1], args[:angle2]
-      context.set_line_cap cap
+      context.set_line_cap(LINECAP[args[:cap]] || cap)
       context.stroke
 
       img = create_tmp_png surface
@@ -386,8 +386,9 @@ class Shoes
       Oval.new args
     end
 
-    def arc l, t, w, h, a1, a2
-      oval  l, t, w, h, angle1: a1, angle2: a2
+    def arc l, t, w, h, a1, a2, args={}
+      args.merge!({angle1: a1, angle2: a2})
+      oval  l, t, w, h, args
     end
 
     def rect *attrs
@@ -482,7 +483,7 @@ class Shoes
         args[:top] = sy
       end
       
-      context.set_line_cap cap
+      context.set_line_cap(LINECAP[args[:cap]] || cap)
       context.stroke
       img = create_tmp_png surface
       @canvas.put img, (args[:left]-=cw), (args[:top]-=cw)
@@ -504,6 +505,7 @@ class Shoes
       context = Cairo::Context.new surface
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
       context.set_line_width args[:strokewidth]
+      context.set_line_cap(LINECAP[args[:cap]] || cap)
 
       context.rotate @context_angle
       
@@ -754,14 +756,10 @@ class Shoes
 
     def cap *line_cap
       @line_cap = case line_cap.first
-        when :curve
-          Cairo::LineCap::ROUND
-        when :rect
-          Cairo::LineCap::BUTT
-        when :project
-          Cairo::LineCap::SQUARE
+        when :curve, :rect, :project
+          LINECAP[line_cap.first]
         else
-          @line_cap ||= Cairo::LineCap::BUTT
+          @line_cap ||= LINECAP[:rect]
       end
     end
   end

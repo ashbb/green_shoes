@@ -25,6 +25,7 @@ module Shoes
     parenleft parenright minus asciicircum backslash equal asciitilde bar grave at braceleft 
     bracketleft braceright bracketright plus asterisk semicolon colon less greater question 
     comma period slash backslash space]
+  LINECAP = {curve: Cairo::LineCap::ROUND, rect: Cairo::LineCap::BUTT, project: Cairo::LineCap::SQUARE}
 end
 
 class Object

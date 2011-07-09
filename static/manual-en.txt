@@ -1188,12 +1188,10 @@ element so that its bottom edge and the bottom edge of its slot touch.
 
 === :cap » :curve or :rect or :project ===
 
-For: ''arc, arrow, border, flow, image, mask, rect, star, shape, stack''.
+For: ''arc, line, shape''.
 
 Sets the shape of the line endpoint, whether curved or square.  See the
 [[Art.cap]] method for more explanation.
-
-'''Note:''' Green Shoes doesn't support `:cap` style.
 
 === :center » true or false ===
 
