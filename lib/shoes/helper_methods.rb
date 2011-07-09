@@ -38,7 +38,7 @@ class Shoes
     def init_app_vars
       @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @textmarkers, @fronts, @backs, @focusables = 
         [], [], [], [], [], [], [], [], [], [], [], {}, {}, {}, [], [], []
-      @cmask, @focus_ele = nil, nil
+      @cmask, @focus_ele, @location = nil, nil, '/'
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
     end

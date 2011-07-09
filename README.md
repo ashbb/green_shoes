@@ -35,7 +35,7 @@ Since Green Shoes is a Ruby Gem, all you need to install are:
 
 1. [Ruby](http://ruby-lang.org) 1.9 or above
 2. [Gems](http://rubygems.org) 1.5 or above
-3. [Ruby-GNOME2](http://ruby-gnome2.sourceforge.jp/) 0.90.7 or above
+3. [ruby-gtk2 package](http://ruby-gnome2.sourceforge.jp/) 0.90.7 or above
 
 Once you have all three requirements, you can simply install with this command:
 

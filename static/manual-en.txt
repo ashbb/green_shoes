@@ -1026,8 +1026,6 @@ library for parsing HTML.
 
 Gets a string containing the URL of the current app.
 
-'''Note:''' Green Shoes doesn't support location method so far.
-
 === mouse() » an array of numbers: button, left, top ===
 
 Identifies the mouse cursor's location, along with which button is being

@@ -31,7 +31,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics, :fronts, :backs, :focusables, :focus_ele
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors, :textmarkers
+    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors, :textmarkers, :location
 
     def visit url
       if url =~ /^(http|https):\/\//
@@ -45,7 +45,7 @@ class Shoes
         end
       else
         timer 0.001 do
-          $urls.each{|k, v| clear{init_app_vars; v.call self, $1} if k =~ url}
+          $urls.each{|k, v| clear{init_app_vars; @location = url; v.call self, $1} if k =~ url}
         end
       end
     end

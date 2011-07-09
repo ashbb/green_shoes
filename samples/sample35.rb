@@ -17,6 +17,7 @@ class PhotoFrame < Shoes
     para fg(strong('She is Loogink.'), white),
       '->', link(strong('Cy')){visit '/cy'},
       margin: 10
+    p app.location
   end
 
   def cy
@@ -25,6 +26,7 @@ class PhotoFrame < Shoes
     para fg(strong('He is Cy.'), gray), '  ->', 
       link(strong('loogink')){visit '/loogink'},
       margin: 10
+    p app.location
   end
 end
 
