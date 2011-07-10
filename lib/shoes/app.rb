@@ -236,6 +236,7 @@ class Shoes
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
       args[:height] = 28 if args[:height].zero?
+      (change_proc = args[:change]; args.delete :change) if args[:change]
       el = Gtk::Entry.new
       el.visibility = false if args[:secret]
       el.text = args[:text].to_s
@@ -246,13 +247,14 @@ class Shoes
       @canvas.put el, args[:left], args[:top]
       el.show_now
       args[:real], args[:app] = el, self
-      @_el = EditLine.new args
+      @_el = EditLine.new(args).tap{|s| s.change &change_proc}
     end
 
     def edit_box args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
       args[:height] = 108 if args[:height].zero?
+      (change_proc = args[:change]; args.delete :change) if args[:change]
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
       tv.buffer.text = args[:text].to_s
@@ -270,13 +272,14 @@ class Shoes
       @canvas.put eb, args[:left], args[:top]
       eb.show_all
       args[:real], args[:app], args[:textview] = eb, self, tv
-      @_eb = EditBox.new args
+      @_eb = EditBox.new(args).tap{|s| s.change &change_proc}
     end
     
     def list_box args={}
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
       args[:height] = 28 if args[:height].zero?
+      (change_proc = args[:change]; args.delete :change) if args[:change]
       cb = Gtk::ComboBox.new
       args[:items] ||= []
       args[:items].each{|item| cb.append_text item.to_s}
@@ -288,7 +291,7 @@ class Shoes
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      @_lb = ListBox.new args
+      @_lb = ListBox.new(args).tap{|s| s.change &change_proc}
     end
 
     def animate n=10, repaint=true, &blk

@@ -1210,8 +1210,6 @@ For: ''edit_box, edit_line, list_box''.
 The `change` event handler is stored in this style.  See the [[EditBox.change]]
 method for the edit_box, as an example.
 
-'''Note:''' Green Shoes doesn't support `:change` style.
-
 === :checked » true or false ===
 
 For: ''check, radio''.
