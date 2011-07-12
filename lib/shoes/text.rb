@@ -22,6 +22,11 @@ class Shoes
     def font name
       @font_family = name
     end
+
+    def span str, args={}
+      form = args.map{|k, v| "#{k}='#{v.is_a?(Integer) ? v*1000 : v}'"}.join(' ')
+      "<span #{form}>#{str}</span>"
+    end
   end
 
   class Text

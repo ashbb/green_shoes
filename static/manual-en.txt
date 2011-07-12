@@ -2292,7 +2292,12 @@ any other radio buttons in the same slot.)
 
 Creates a Span text fragment, unstyled by default.
 
-'''Note:''' Green Shoes doesn't support `span` method.
+{{{
+ Shoes.app do
+   tagline "\n", 'hello ' * 5, 
+     span(em('Green Shoes'), size: 8, rise: 15)
+ end
+}}}
 
 === stack(styles) { ... } » Shoes::Stack ===
 
