@@ -55,7 +55,8 @@ class Shoes
         slot_with_scrollbar Stack, args, &blk
       else
         args[:app] = self
-        Stack.new slot_attributes(args), &blk
+        (click_proc = args[:click]; args.delete :click) if args[:click]
+        Stack.new(slot_attributes(args), &blk).tap{|s| s.click &click_proc if click_proc}
       end
     end
 
@@ -64,7 +65,8 @@ class Shoes
         slot_with_scrollbar Flow, args, &blk
       else
         args[:app] = self
-        Flow.new slot_attributes(args), &blk
+        (click_proc = args[:click]; args.delete :click) if args[:click]
+        Flow.new(slot_attributes(args), &blk).tap{|s| s.click &click_proc if click_proc}
       end
     end
 
@@ -163,6 +165,7 @@ class Shoes
     def image name, args={}
       args = basic_attributes args
       args[:full_width] = args[:full_height] = 0
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       if name =~ /^(http|https):\/\//
         tmpname = File.join(Dir.tmpdir, "__green_shoes_#{Time.now.to_f}.png")
         d = download name, save: tmpname
@@ -183,7 +186,10 @@ class Shoes
       img.show_now
       @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
-      Image.new(args).tap{|s| @dics.push([s, d, tmpname]) if downloading}
+      Image.new(args).tap do |s|
+        @dics.push([s, d, tmpname]) if downloading
+        s.click &click_proc if click_proc
+      end
     end
 
     def imagesize name
@@ -192,6 +198,7 @@ class Shoes
 
     def button name, args={}
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       b = Gtk::Button.new name
       b.set_size_request args[:width], args[:height] if args[:width] > 0 and args[:height] > 0
       b.signal_connect "clicked" do
@@ -200,11 +207,12 @@ class Shoes
       @canvas.put b, args[:left], args[:top]
       b.show_now
       args[:real], args[:text], args[:app] = b, name, self
-      @_b = Button.new args
+      @_b = Button.new(args).tap{|s| s.click &click_proc if click_proc}
     end
 
     def check args={}
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       cb = Gtk::CheckButton.new
       cb.active = true if args[:checked]
       cb.signal_connect "clicked" do
@@ -213,7 +221,7 @@ class Shoes
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      @_cb = Check.new args
+      @_cb = Check.new(args).tap{|s| s.click &click_proc if click_proc}
     end
     
     def radio *attrs
@@ -221,6 +229,7 @@ class Shoes
       group = attrs.first unless attrs.empty?
       group = group ? (@radio_groups[group] ||= Gtk::RadioButton.new) : cslot.radio_group
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       rb = Gtk::RadioButton.new group
       rb.active = true if args[:checked]
       rb.signal_connect "clicked" do
@@ -229,7 +238,7 @@ class Shoes
       @canvas.put rb, args[:left], args[:top]
       rb.show_now
       args[:real], args[:app] = rb, self
-      @_rb = Radio.new args
+      @_rb = Radio.new(args).tap{|s| s.click &click_proc if click_proc}
     end
 
     def edit_line args={}
@@ -351,6 +360,7 @@ class Shoes
         else args[:left], args[:top], args[:width], args[:height] = attrs
       end
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       args[:width].zero? ? (args[:width] = args[:radius] * 2) : (args[:radius] = args[:width]/2.0)
       args[:height] = args[:width] if args[:height].zero?
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
@@ -386,7 +396,7 @@ class Shoes
       img.show_now
       @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
-      Oval.new args
+      Oval.new(args).tap{|s| s.click &click_proc if click_proc}
     end
 
     def arc l, t, w, h, a1, a2, args={}
@@ -408,6 +418,7 @@ class Shoes
       w, h, mx, my = set_rotate_angle(args)
 
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
 
@@ -433,7 +444,7 @@ class Shoes
       img.show_now
       @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
-      Rect.new args
+      Rect.new(args).tap{|s| s.click &click_proc if click_proc}
     end
 
     def line *attrs
@@ -451,6 +462,7 @@ class Shoes
       args[:height] += cw
       
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, args[:width]+sw, args[:height]+sw
       context = Cairo::Context.new surface
       
@@ -493,7 +505,7 @@ class Shoes
       img.show_now
       @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
-      Line.new args
+      Line.new(args).tap{|s| s.click &click_proc if click_proc}
     end
     
     def shapebase klass, args
@@ -504,6 +516,7 @@ class Shoes
       w, h, mx, my = set_rotate_angle(args)
 
       args = basic_attributes args
+      (click_proc = args[:click]; args.delete :click) if args[:click]
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, w, h
       context = Cairo::Context.new surface
       args[:strokewidth] = ( args[:strokewidth] or strokewidth or 1 )
@@ -533,7 +546,7 @@ class Shoes
       img.show_now
       @canvas.remove img if args[:hidden]
       args[:real], args[:app] = img, self
-      klass.new args
+      klass.new(args).tap{|s| s.click &click_proc if click_proc}
     end
 
     def shape args={}, &blk

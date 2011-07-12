@@ -1226,14 +1226,11 @@ Sets the currently chosen item in the list.  More information at
 
 === :click » a proc ===
 
-For: ''arc, arrow, banner, button, caption, check, flow, image, inscription,
-line, link, mask, oval, para, radio, rect, shape, stack, star, subtitle,
-tagline, title''.
+For: ''arc, arrow, button, check, flow, image, 
+line, link, oval, radio, rect, shape, stack, star''.
 
 The `click` event handler is stored in this style.  See the [[Events.click]]
 method for a description.
-
-'''Note:''' Green Shoes supports `:click` style for only `link` method. 
 
 === :curve » a number ===
 
