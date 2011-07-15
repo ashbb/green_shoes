@@ -1266,8 +1266,7 @@ be a bit surprising.
 
 === :emphasis » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Styles the text with an emphasis (commonly italicized.)
 
@@ -1277,17 +1276,12 @@ This style recognizes three possible settings:
  * "oblique" - the font is slanted, but in a roman style.
  * "italic" - the font is slanted in an italic style. 
 
-'''Note:''' Green Shoes doesn't support `:emphasis` style.
-
 === :family » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Styles the text with a given font family.  The string should contain the family
 name or a comma-separated list of families.
-
-'''Note:''' Green Shoes doesn't support `:family` style.
 
 === :fill » a hex code, a rgb array or a range of either ===
 
@@ -1485,14 +1479,11 @@ left of its slot's right edge by twenty pixels.
 
 === :rise » a number ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Lifts or plunges the font baseline for some text.  For example, a
 [[Element.sup]] has a `:rise` of 10 pixels.  Conversely, the [[Element.sub]]
 element has a `:rise` of -10 pixels.
-
-'''Note:''' Green Shoes doesn't support `:rise` style.
 
 === :scroll » true or false ===
 
@@ -1580,24 +1571,18 @@ Possible settings are:
 
 === :strikecolor » a Shoes::Color ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 The color used to paint any lines stricken through this text.
 
-'''Note:''' Green Shoes doesn't support `:strikecolor` style.
-
 === :strikethrough » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Is this text stricken through?  Two options here:
 
  * "none" - no strikethrough
  * "single" - a single-line strikethrough.
-
-'''Note:''' Green Shoes doesn't support `:strikethrough` style.
 
 === :stroke » a hex code, a rgb array or a range of either ===
 
@@ -1632,17 +1617,13 @@ of the slot it contains.
 
 === :undercolor » a Shoes::Color ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 The color used to underline text.
 
-'''Note:''' Green Shoes doesn't support `:undercolor` style.
-
 === :underline » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Dictates the style of underline used in the text.
 
@@ -1653,8 +1634,6 @@ The choices for this setting are:
  * "double" - two continuous parallel underlines.
  * "low" - a lower underline, beneath the font baseline.  (This is generally recommended only for single characters, particularly when showing keyboard accelerators.)
  * "error" - a wavy underline, usually found indicating a misspelling.
-
-'''Note:''' Green Shoes doesn't support `:underline` style.
 
 === :variant » a string ===
 
@@ -1670,8 +1649,7 @@ Vary the font for a group of text.  Two choices:
 
 === :weight » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Set the boldness of the text.  Commonly, this style is set to one of the
 following strings:
@@ -1685,8 +1663,6 @@ following strings:
  * "heavy" - the heavy weight (= 900)
 
 However, you may also pass in the numerical weight directly.
-
-'''Note:''' Green Shoes doesn't support `:weight` style.
 
 === :width » a number ===
 

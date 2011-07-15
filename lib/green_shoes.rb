@@ -26,6 +26,8 @@ module Shoes
     bracketleft braceright bracketright plus asterisk semicolon colon less greater question 
     comma period slash backslash space]
   LINECAP = {curve: Cairo::LineCap::ROUND, rect: Cairo::LineCap::BUTT, project: Cairo::LineCap::SQUARE}
+  SPAN_FORM = {emphasis: :style, family: :font_family, weight: :weight, rise: :rise, 
+    strikethrough: :strikethrough, strikecolor: :strikethrough_color, underline: :underline, undercolor: :underline_color}
 end
 
 class Object

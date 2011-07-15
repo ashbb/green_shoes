@@ -24,7 +24,17 @@ class Shoes
     end
 
     def span str, args={}
-      form = args.map{|k, v| "#{k}='#{v.is_a?(Integer) ? v*1000 : v}'"}.join(' ')
+      tmp = args.map do |k, v|
+        v *= 1000 if v.is_a?(Integer) && k != :weight
+        (v = v == 'single' ? 'yes' : 'no') if k == :strikethrough
+        k = SPAN_FORM[k] if SPAN_FORM[k]
+        if k.to_s.index('_color') and v.is_a?(Array)
+          v = v.map{|x| (x * 255).to_i} if v[0].is_a?(Float)
+          v = ("#%2s%2s%2s" % v.map{|x| x.to_s 16}).gsub(' ', '0')
+        end
+        [k, v]
+      end
+      form = tmp.map{|k, v| "#{k}='#{v}'"}.join(' ')
       "<span #{form}>#{str}</span>"
     end
   end

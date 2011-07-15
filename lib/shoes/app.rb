@@ -116,6 +116,10 @@ class Shoes
       args[:markup] = msg.map(&:to_s).join
       args[:markup] = fg(args[:markup], tr_color(args[:stroke])) if args[:stroke]
       args[:markup] = bg(args[:markup], tr_color(args[:fill])) if args[:fill]
+      form = {}
+      args.each{|k, v| form.merge!({k => v}) if SPAN_FORM[k]}
+      args[:markup] = span(args[:markup], form) unless form.empty?
+      SPAN_FORM.keys.+([:stroke, :fill]).each{|k| args.delete k}
       text, attr_list = make_pango_attr args[:markup]
       args[:size] ||= font_size
       args[:font] ||= (@font_family or 'sans')
