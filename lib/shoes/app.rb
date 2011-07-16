@@ -138,7 +138,7 @@ class Shoes
       if args[:create_real] or !layout_control
         args[:width] = 1 if args[:width] <= 0
         layout, context, surface = 
-          make_pango_layout args[:size], args[:width], args[:height], args[:align], args[:font], text, attr_list
+          make_pango_layout args[:size], args[:width], args[:height], args[:align], args[:font], args[:justify], args[:leading], text, attr_list
         context.show_pango_layout layout
         context.show_page
         

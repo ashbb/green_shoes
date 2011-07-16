@@ -107,10 +107,10 @@ class Shoes
     end
 
     def make_textcursor_layout tb
-      markup, size, width, height, align, font = 
-        %w[@markup @size @width @height @align @font].map{|v| tb.instance_variable_get v}
+      markup, size, width, height, align, font, justify, leading = 
+        %w[@markup @size @width @height @align @font @justify @leading].map{|v| tb.instance_variable_get v}
       text, attr_list = make_pango_attr markup
-      make_pango_layout(size, width, height, align, font, text, attr_list)[0]
+      make_pango_layout(size, width, height, align, font, justify, leading, text, attr_list)[0]
     end
 
     def make_pango_attr markup
@@ -120,14 +120,16 @@ class Shoes
       return text, attr_list
     end
 
-    def make_pango_layout size, width, height, align, font, text, attr_list
+    def make_pango_layout size, width, height, align, font, justify, leading, text, attr_list
+      leading ||= 4
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, width, height
       context = Cairo::Context.new surface
       layout = context.create_pango_layout
       layout.width = width * Pango::SCALE
       layout.wrap = Pango::WRAP_WORD
-      layout.spacing = 5  * Pango::SCALE
+      layout.spacing = leading  * Pango::SCALE
       layout.text = text
+      layout.justify = justify
       layout.alignment = eval "Pango::ALIGN_#{align.upcase}"
       fd = Pango::FontDescription.new
       fd.family = font
