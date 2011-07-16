@@ -1374,12 +1374,9 @@ for an example.
 
 === :justify » true or false ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''
+For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Evenly spaces the text horizontally.
-
-'''Note:''' Green Shoes doesn't support `:justify` style.
 
 === :kerning » a number ===
 
@@ -1395,8 +1392,6 @@ Adds to the natural spacing between letters, in pixels.
 For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Sets the spacing between lines in a text block.  Defaults to 4 pixels.
-
-'''Note:''' Green Shoes doesn't support `:leading` style.
 
 === :left » a number ===
 
