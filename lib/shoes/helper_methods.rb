@@ -107,10 +107,10 @@ class Shoes
     end
 
     def make_textcursor_layout tb
-      markup, size, width, height, align, font, justify, leading = 
-        %w[@markup @size @width @height @align @font @justify @leading].map{|v| tb.instance_variable_get v}
+      markup, size, width, height, align, font, justify, leading, wrap = 
+        %w[@markup @size @width @height @align @font @justify @leading @wrap].map{|v| tb.instance_variable_get v}
       text, attr_list = make_pango_attr markup
-      make_pango_layout(size, width, height, align, font, justify, leading, text, attr_list)[0]
+      make_pango_layout(size, width, height, align, font, justify, leading, wrap, text, attr_list)[0]
     end
 
     def make_pango_attr markup
@@ -120,13 +120,16 @@ class Shoes
       return text, attr_list
     end
 
-    def make_pango_layout size, width, height, align, font, justify, leading, text, attr_list
+    def make_pango_layout size, width, height, align, font, justify, leading, wrap, text, attr_list
       leading ||= 4
+      wrap ||= 'word'
+      wrap == 'trim' ? (wrap, ellipsize = nil, WRAP[wrap.to_sym]) : (wrap, ellipsize = WRAP[wrap.to_sym], nil)
       surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, width, height
       context = Cairo::Context.new surface
       layout = context.create_pango_layout
       layout.width = width * Pango::SCALE
-      layout.wrap = Pango::WRAP_WORD
+      layout.wrap = wrap if wrap
+      layout.ellipsize = ellipsize if ellipsize
       layout.spacing = leading  * Pango::SCALE
       layout.text = text
       layout.justify = justify

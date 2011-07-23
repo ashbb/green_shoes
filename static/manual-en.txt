@@ -1669,16 +1669,13 @@ converted to a percentage (with 0.0 being 0% and 1.0 being 100%.)  A width of
 
 === :wrap » a string ===
 
-For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
-strong, sub, sup, subtitle, tagline, title''
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 How should the text wrap when it fills its width? Possible options are:
 
  * "word" - Break lines at word breaks.
  * "char" - Break lines between characters, thus breaking some words.
  * "trim" - Cut the line off with an ellipsis if it goes too long.
-
-'''Note:''' Green Shoes doesn't support `:wrap` style.
 
 == Classes List ==
 

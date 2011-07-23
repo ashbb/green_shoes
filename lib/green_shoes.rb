@@ -28,6 +28,7 @@ module Shoes
   LINECAP = {curve: Cairo::LineCap::ROUND, rect: Cairo::LineCap::BUTT, project: Cairo::LineCap::SQUARE}
   SPAN_FORM = {emphasis: :style, family: :font_family, weight: :weight, rise: :rise, 
     strikethrough: :strikethrough, strikecolor: :strikethrough_color, underline: :underline, undercolor: :underline_color}
+  WRAP = {word: Pango::WRAP_WORD, char: Pango::WRAP_CHAR, trim: Pango::ELLIPSIZE_END}
 end
 
 class Object
