@@ -51,6 +51,11 @@ require_relative 'shoes/style'
 require_relative 'shoes/projector'
 require_relative 'shoes/download'
 require_relative 'shoes/manual'
+require_relative 'shoes/manual'
+
+require_relative 'plugins/systray'
+require_relative 'plugins/thread'
+require_relative 'plugins/httpd'
 
 autoload :ChipMunk, File.join(Shoes::DIR, 'ext/chipmunk')
 autoload :Bloops, File.join(Shoes::DIR, 'ext/bloops')
