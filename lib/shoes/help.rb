@@ -180,7 +180,7 @@ class Manual < Shoes
       stack width: 80 do
         inscription file[0...-3]
         img = image File.join(DIR, "../snapshots/#{file[0..-3]}png"), width: 50, height: 50
-        img.click{Dir.chdir(File.join DIR, '../samples'){instance_eval IO.read(file)}}
+        img.click{Dir.chdir(File.join DIR, '../samples'){instance_eval(IO.read(file),file,0)}}
         para
       end
     end

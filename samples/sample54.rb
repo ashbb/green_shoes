@@ -9,22 +9,22 @@ $config=[
  ["Codeur"        ,"tcpping","10.177.235.202:80"],
  ["Proxy"         ,"geturl","http://10.153.32.75:80"],
 ]
+ENV.delete('proxy_http')
 
-##__EEND__###################################################################################
+##__EEND__##################################################################################
 require '../lib/green_shoes'
 #require 'green_shoes' 
 
+require 'tmpdir'
 require 'open-uri' 
 
 
-["/tmp","/temp",Dir.pwd].select {|d| File.directory?(d) }.each {|d| DDIR=d; break}
-
 dsrc=File.dirname(__FILE__)
-HAPPY_ICON   ="#{dsrc}/cy.png"
-UNHAPPY_ICON ="#{dsrc}/looking.png"
+HAPPY_ICON   ="#{dsrc}/face-smile-big.png"
+UNHAPPY_ICON ="#{dsrc}/face-crying.png"
  
 
-$CONFIG_FILE="#{DDIR}/surv_config.rb"
+$CONFIG_FILE="#{Dir.tmpdir}/surv_config.rb"
 $toBeFirstEdit=false
 unless File.exist?($CONFIG_FILE) 
  content=File.read(__FILE__).split(/##__EEND__/).first
@@ -39,92 +39,98 @@ end
 $errorDetected=true
 
 ################## Dialog for edit configuration ####################
-
-def edit_conf()
- Shoes.app({:title=> "Config",:width=>400,:height=>400}) do
-    t= File.read($CONFIG_FILE)
-	stack do
-		@edit_box=edit_box( {:width=>1.0,:height=>370, :scroll=> true, :text=>t} )
-		flow :width=> 400 do
-			button "Save",:width => 200 do
-			begin
-			  eval @edit_box.text 
-			  $app.update(true)
-			  File.open($CONFIG_FILE,"w") { |f| f.write(@edit_box.text)}			
-			  alert("Tested and saved!")
-			rescue Exception=> e
-			 alert  "Syntaxe Error : #{$!}"
-			end
-			end
-			button "Quit",:width => 200 do
-			  self.close_dialog
-			end
-		end
-	end
- end
-end
-
-#-----------------  Surveillances  actions --------------------------------
-# do_<ACTIONNAME>() >> raise Exception if NOK
-
-def do_geturl(param)
-	open(param).close
-end
-def do_dir(param)
-	raise "not found" if ! File.directory?(param)
-end
-def do_snmp(param)
-	  raise("ping") unless IPing.tping(param,"echo",0.5)
-end
-def do_tcpping(param)
-	  ip,port=param.split(/:/)
-	  raise("ping") unless tping(ip,port.to_i,0.5)
-end
-
-def tping(host,port, timeout=5)
-   s=nil
-   begin
-		s = TCPSocket.new(host, port.to_s)
-		return(true)
-   rescue Exception => e
-       return false
-   ensure
-		(s.close if s ) rescue nil
-   end
-end
-#--------------------------- Surveillance Engine ---------------------------
-# actions runs in paralleles, result is sorted by config order
-# a queue is used for collect actions results (array are not thread-safe)
-
-def do_surveillance(expand)
-	no0=0
-	lth=[]
-	queue=Queue.new
-	$config.each do |text0,comm0,param0|
-	  lth<<Thread.new(text0,comm0,param0,no0) do |text,comm,param,no|
-		begin
-			send("do_#{comm}",param)
-			queue.push([no,false,text])
-		rescue				
-			queue.push([no,true,text])
-			puts $!.to_s + " " + $!.backtrace.join("\n    ")
-		end
-	  end
-	  no0+=1
-	end
-	lth.map(&:join)
-	r=[]
-	while queue.size>0 && (m=queue.pop)
-		r << m 
-	end
-	return ( r.sort { |a,b| a[0]<=>b[0] } )
-end
-
-
-
-
-class Shoes
+class ::Shoes
 	class App
+		def edit_conf()
+		 ::Shoes.app({:title=> "Config",:width=>600,:height=>650}) do
+			t= File.read($CONFIG_FILE)
+			stack do
+				flow :width=>1.0 do
+				    background "#C0C0C0".."#A0A0A0"
+					para "This application do periodique request on LAN. You can: "
+					para "<b>*</b> specifies in $config the list of request : name,method, parameters."
+					para "<b>*</b> define periode in $periode (warning of memory leaks)"
+					para "This data are saved in file \n '#{$CONFIG_FILE}'."
+					para
+				end
+				@edit_box=edit_box( {:width=>1.0,:height=>370, :scroll=> true, :text=>t, :font => "Courier"} )
+				flow :width=> 400 do
+					button "Save",:width => 200 do
+					begin
+					  eval @edit_box.text 
+					  $app.update(true)
+					  File.open($CONFIG_FILE,"w") { |f| f.write(@edit_box.text)}			
+					  alert("Tested and saved!")
+					rescue Exception=> e
+					 alert  "Syntaxe Error : #{$!}"
+					end
+					end
+					button "Quit",:width => 200 do
+					  self.close_dialog
+					end
+				end
+			end
+		 end
+		end
+		p 2
+		#-----------------  Surveillances  actions --------------------------------
+		# do_<ACTIONNAME>() >> raise Exception if NOK
+
+		def do_geturl(param)
+			open(param).close
+		end
+		def do_dir(param)
+			raise "not found" if ! File.directory?(param)
+		end
+		def do_snmp(param)
+			  raise("not implemnted!")
+		end
+		def do_tcpping(param)
+			  ip,port=param.split(/:/)
+			  raise("ping") unless tping(ip,port.to_i,0.5)
+		end
+
+		def tping(host,port, timeout=5)
+		   s=nil
+		   begin
+				s = TCPSocket.new(host, port.to_s)
+				return(true)
+		   rescue Exception => e
+			   return false
+		   ensure
+				(s.close if s ) rescue nil
+		   end
+		end
+		#--------------------------- Surveillance Engine ---------------------------
+		# actions runs in paralleles, result is sorted by config order
+		# a queue is used for collect actions results (array are not thread-safe)
+		p 3
+		def do_surveillance(expand)
+			no0=0
+			lth=[]
+			queue=Queue.new
+			$config.each do |text0,comm0,param0|
+			  lth<<Thread.new(text0,comm0,param0,no0) do |text,comm,param,no|
+				begin
+					send("do_#{comm}",param)
+					queue.push([no,false,text])
+				rescue				
+					queue.push([no,true,text])
+					puts $!.to_s + " " + $!.backtrace.join("\n    ")
+				end
+			  end
+			  no0+=1
+			end
+			lth.map(&:join)
+			r=[]
+			while queue.size>0 && (m=queue.pop)
+				r << m 
+			end
+			return ( r.sort { |a,b| a[0]<=>b[0] } )
+		end
+
+
+
 		def update(expand) 
 			Thread.new {
 			  now=Time.now.to_f
@@ -180,8 +186,7 @@ $statusIcon=nil
 $win=nil 
 $p={}
 $h=(($config.size+1)*24)
-
-Shoes.app :title=>"Surveillance", :left=>-1, :top=>-1, :width => 200, :height => $h  do
+::Shoes.app :title=>"Surveillance", :left=>-1, :top=>-1, :width => 200, :height => $h  do
   $app=self
   define_async_thread_invoker()
 
@@ -204,7 +209,7 @@ Shoes.app :title=>"Surveillance", :left=>-1, :top=>-1, :width => 200, :height =>
 	syst_add_check "Option"               do |state| alert("Test checkButon: " +state.to_s)  end
 	syst_quit_button true
   end
-  
+
   web_server(9990,{
        "/"        => proc {|app| 	
 					   ret=do_surveillance(true).map { |mess| no,err,text=*mess ; text.split(/\b*:\b*/) }
@@ -216,6 +221,7 @@ Shoes.app :title=>"Surveillance", :left=>-1, :top=>-1, :width => 200, :height =>
 	   :template  => proc { |body| "<html><head></head><body><h2><center>Surveillance @ "+Time.now.to_s+"</center></h2><hr>"+@html_menu+"<hr>"+body + "<hr></body></html>" },
 	   :menu      => { "Status"=> "/" , "Config" => "/config" , "Exit" => "/stop", "Home" => "http://localhost"}
   })
+
   edit_conf if $toBeFirstEdit
   update(true)
 end

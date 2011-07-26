@@ -271,6 +271,9 @@ class Shoes
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
       tv.buffer.text = args[:text].to_s
+	  if args[:font]
+	    tv.modify_font(Pango::FontDescription.new(args[:font]))
+	  end
 
       eb = Gtk::ScrolledWindow.new
       eb.set_size_request args[:width], args[:height]
