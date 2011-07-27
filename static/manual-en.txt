@@ -1518,7 +1518,7 @@ asterisk) is show for each letter typed.
 
 === :size » a number ===
 
-For: ''banner, caption, inscription, para, subtitle, tagline, title''.
+For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Sets the pixel size for the font used inside this text block.
 
@@ -1531,8 +1531,6 @@ Font size may also be augmented, through use of the following strings:
  * "large" - 120% of present size.
  * "x-large" - 143% of present size.
  * "xx-large" - 173% of present size.
-
-'''Note:''' Green Shoes doesn't support as the above string style settings.
 
 === :state » a string ===
 

@@ -29,6 +29,7 @@ module Shoes
   SPAN_FORM = {emphasis: :style, family: :font_family, weight: :weight, rise: :rise, 
     strikethrough: :strikethrough, strikecolor: :strikethrough_color, underline: :underline, undercolor: :underline_color}
   WRAP = {word: Pango::WRAP_WORD, char: Pango::WRAP_CHAR, trim: Pango::ELLIPSIZE_END}
+  FONT_SIZE = {"xx-small" => 0.57, "x-small" => 0.64, "small" => 0.83, "medium" => 1.0, "large" => 1.2, "x-large" => 1.43, "xx-large" => 1.73}
 end
 
 class Object
@@ -50,7 +51,6 @@ require_relative 'shoes/url'
 require_relative 'shoes/style'
 require_relative 'shoes/projector'
 require_relative 'shoes/download'
-require_relative 'shoes/manual'
 require_relative 'shoes/manual'
 
 require_relative 'plugins/systray'

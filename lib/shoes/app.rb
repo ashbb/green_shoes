@@ -122,6 +122,7 @@ class Shoes
       SPAN_FORM.keys.+([:stroke, :fill]).each{|k| args.delete k}
       text, attr_list = make_pango_attr args[:markup]
       args[:size] ||= font_size
+      (args[:size] = font_size * FONT_SIZE[args[:size]]) if FONT_SIZE[args[:size]]
       args[:font] ||= (@font_family or 'sans')
       args[:align] ||= 'left'
       line_height =  args[:size] * 2
@@ -271,9 +272,7 @@ class Shoes
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
       tv.buffer.text = args[:text].to_s
-	  if args[:font]
-	    tv.modify_font(Pango::FontDescription.new(args[:font]))
-	  end
+      tv.modify_font(Pango::FontDescription.new(args[:font])) if args[:font]
 
       eb = Gtk::ScrolledWindow.new
       eb.set_size_request args[:width], args[:height]
