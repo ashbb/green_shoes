@@ -69,11 +69,15 @@ Except:
 - lib/ext/hpricot/(all) (c) 2008 why the lucky stiff
 - lib/ext/projector/(all).rb (c) 2010 MIZUTANI Tociyuki
 - lib/ext/highlighter/(all) (c) 2008 why the lucky stiff and 2011 Steve Klabnik
+- lib/plugins/(all) (c) 2011 Regis d'Aubarede
 - samples/akatsukiface.png (c) 2010 MIZUTANI Tociyuki
 - samples/class-book.yaml (c) 2008 why the lucky stiff
 - samples/splash-hand.png (c) 2008 why the lucky stiff
 - samples/loogink.png (c) 2008 Anita Kuno
 - samples/cy.png (c) 2008 Anita Kuno
+- samples/sample54.rb (c) 2011 Regis d'Aubarede
+- samples/face-crying.png (c) 2011 Regis d'Aubarede
+- samples/face-smile-big.png (c) 2011 Regis d'Aubarede
 - static/Coolvetica.ttf (c) 1999 Ray Larabie
 - static/Lacuna.ttf (c) 2003 Glashaus, designed by Peter Hoffman
 - static/gshoes-icon.png (c) 2010 Zachary Scott
