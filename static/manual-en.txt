@@ -2605,8 +2605,6 @@ slot, you'll need to use `scroll_height()` to get the full size of the slot.
 
 Hides the slot, so that it can't be seen.  See also [[Position.show]] and [[Position.toggle]].
 
-'''Note:''' Green Shoes doesn't support `hide` method.
-
 === left() » a number ===
 
 The left pixel location of the slot.  Also known as the x-axis coordinate.
@@ -2616,7 +2614,7 @@ The left pixel location of the slot.  Also known as the x-axis coordinate.
 Moves the slot to specific coordinates, the (left, top) being the upper left
 hand corner of the slot.
 
-'''Note:''' Green Shoes doesn't support `gutter` method.
+'''Note:''' Green Shoes doesn't support `move` method.
 
 === remove() » self ===
 
@@ -2670,8 +2668,6 @@ Scrolls the slot to a certain coordinate.  This must be between zero and
 Reveals the slot, if it is hidden.  See also [[Position.hide]] and
 [[Position.toggle]].
 
-'''Note:''' Green Shoes doesn't support `show` method.
-
 === style() » styles ===
 
 Calling the `style` method with no arguments returns a hash of the styles
@@ -2710,8 +2706,6 @@ example, there is a `width` method, thus there is also a `width` style.
 === toggle() » self ===
 
 Hides the slot, if it is shown.  Or shows the slot, if it is hidden.
-
-'''Note:''' Green Shoes doesn't support `toggle` method.
 
 === top() » a number ===
 

@@ -19,8 +19,10 @@ class Shoes
       @app.cslot = self
       @contents = []
       (@parent.contents << self) unless @nocontrol
+      @shows = true
       if block_given?
         if args[:hidden]
+          @shows = false
           BASIC_ATTRIBUTES_DEFAULT.merge! hidden: true
           SLOT_ATTRIBUTES_DEFAULT.merge! hidden: true
           @hidden_flag = true unless @parent.instance_variable_get '@hidden'
@@ -120,11 +122,18 @@ class Shoes
 
     def show
       @contents.each &:show
+      @shows = true
       self
     end
 
     def hide
       @contents.each &:hide
+      @shows = false
+      self
+    end
+
+    def toggle
+      @shows ? hide : show
       self
     end
   end
