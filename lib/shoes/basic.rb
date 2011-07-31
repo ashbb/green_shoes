@@ -327,6 +327,7 @@ class Shoes
     end
 
     def items= items
+      @items.length.times{real.remove_text 0}
       @items = items
       items.each{|item| real.append_text item.to_s}
     end
