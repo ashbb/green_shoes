@@ -57,6 +57,16 @@ Bugs & Requests
 
 See [Issues](http://github.com/ashbb/green_shoes/issues) for any bugs or feature requests.
 
+== Note on Patches/Pull Requests
+
+* (create your github account)
+* Fork the project to your github account
+* clone the fork to your home machine : git clone http://youraccount@github.com/youraccount/green_shoes
+* Make your feature addition or bug fix ( additions to lib/plugins or lib/ext, buf fix directly in sources) 
+* Add a  sampleXX.rb in sample dir  (if feature addition) for a demo of your feature(s)
+* Commit to your fork :  git commit -a -m "..." ;  git push origin master
+* Send me a pull request : on your green_shoe fork, click 'pull request'
+
 
 License
 =========
