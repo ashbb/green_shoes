@@ -89,7 +89,7 @@ class Shoes
           remove
           @real = nil
         else 
-          @real.clear  if @real
+          (@real.clear; @real.destroy) if @real
       end
     end
 

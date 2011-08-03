@@ -184,7 +184,7 @@ class Shoes
     tmp = app.order
     (app.fronts + app.backs).each{|e| tmp.delete e}
     (app.backs + tmp + app.fronts).each do |e|
-      if e.real and !e.is_a?(Pattern) and !e.hided
+      if e.real and !e.is_a?(Pattern) and !e.hided and !e.real.destroyed?
         app.canvas.remove e.real
         app.canvas.put e.real, e.left, e.top
       end
