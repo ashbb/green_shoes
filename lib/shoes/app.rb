@@ -232,6 +232,7 @@ class Shoes
     def radio *attrs
       args = attrs.last.class == Hash ? attrs.pop : {}
       group = attrs.first unless attrs.empty?
+      group = args[:group] if args[:group]
       group = group ? (@radio_groups[group] ||= Gtk::RadioButton.new) : cslot.radio_group
       args = basic_attributes args
       (click_proc = args[:click]; args.delete :click) if args[:click]

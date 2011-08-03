@@ -1324,8 +1324,6 @@ at a time.
 By giving this style a string, the radio button will be grouped with other
 radio buttons that have the same group name.
 
-'''Note:''' Green Shoes doesn't support ''radio''.
-
 === :height » a number ===
 
 For: ''all slots and elements''.
