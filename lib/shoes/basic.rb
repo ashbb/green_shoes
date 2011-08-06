@@ -10,7 +10,11 @@ class Shoes
       (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine)
       (@app.cslot.contents << self) unless @nocontrol or @app.cmask
       (@app.cmask.contents << self) if @app.cmask
-      (@app.focusables << self) if self.is_a? Native
+      if self.is_a? Native
+        @app.focusables << self
+        self.state = args[:state] if args[:state]
+        args.delete :state
+      end
       @parent = @app.cslot
       
       Basic.class_eval do
@@ -252,6 +256,33 @@ class Shoes
     def focus
       @app.focus_ele = self
     end
+    
+    attr_reader :state
+    
+    def state=(ctl)
+      real = self.is_a?(EditBox) ? @textview : @real
+      case ctl
+        when "disabled"
+          real.sensitive = false
+        when 'readonly'
+          case self
+            when EditLine, EditBox
+              real.sensitive, real.editable = true, false
+              real.modify_base Gtk::STATE_NORMAL, Gdk::Color.new(56540, 56540, 54227)
+            else
+          end
+        when nil
+          real.sensitive = true
+          case self
+            when EditLine, EditBox
+              real.editable = true
+              real.modify_base Gtk::STATE_NORMAL, Gdk::Color.new(65535, 65535, 65535)
+            else
+          end
+        else
+      end
+      @state = ctl
+    end
   end
   class Button < Native
     def click &blk
@@ -342,6 +373,6 @@ class Shoes
       real.fraction = n
     end
 
-    undef_method :focus
+    undef_method :focus, :state, :state=
   end
 end

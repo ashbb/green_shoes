@@ -1543,8 +1543,6 @@ Here are the possible style settings:
  * "readonly" - the control is active but cannot be edited.
  * "disabled" - the control is not active (grayed out) and cannot be edited.
 
-'''Note:''' Green Shoes doesn't support `:state` style.
-
 === :stretch » a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
