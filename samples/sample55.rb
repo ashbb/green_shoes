@@ -3,7 +3,7 @@
 require '../lib/green_shoes'
 
 Shoes.app width: 570, height: 600 do
-  src = IO.read($PROGRAM_NAME)
+  src = IO.read File.join(DIR, '../samples/sample55.rb')
   background deepskyblue
 
   stack do
