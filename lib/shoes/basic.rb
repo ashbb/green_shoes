@@ -140,7 +140,23 @@ class Shoes
     end
   end
 
-  class Image < Basic; end
+  class Image < Basic
+    def initialize args
+      @path = args[:path]
+      args.delete :path
+      super args      
+    end
+    
+    attr_reader :path
+    
+    def path=(name)
+      @path = name
+      @real.clear
+      args = {width: @width, height: @height}
+      args.merge!({hidden: true}) if @hided
+      @real = @app.image(name, args).move(@left, @top).real
+    end
+  end
 
   class Pattern < Basic
     def move2 x, y

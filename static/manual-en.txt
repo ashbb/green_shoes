@@ -3387,13 +3387,9 @@ explanation of why you might use this method rather than [[Common.width]].
 
 The URL or file name of the image.
 
-'''Note:''' Green Shoes doesn't support `path` method.
-
 === path = a string ===
 
 Swaps the image with a different one, loaded from a file or URL.
-
-'''Note:''' Green Shoes doesn't support `path=` method.
 
 == ListBox ==
 

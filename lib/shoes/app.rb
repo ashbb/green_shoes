@@ -190,7 +190,7 @@ class Shoes
       @canvas.put img, args[:left], args[:top]
       img.show_now
       @canvas.remove img if args[:hidden]
-      args[:real], args[:app] = img, self
+      args[:real], args[:app], args[:path] = img, self, name
       Image.new(args).tap do |s|
         @dics.push([s, d, tmpname]) if downloading
         s.click &click_proc if click_proc
