@@ -92,6 +92,8 @@ class Shoes
           @app.cslot.contents.delete self
           remove
           @real = nil
+        when TextBlock
+          @real.clear if @real
         else 
           (@real.clear; @real.destroy) if @real
       end
