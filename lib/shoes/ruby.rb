@@ -16,8 +16,10 @@ class Object
       msg.to_s
     )
     dialog.title = "Green Shoes says:"
-    dialog.run
-    dialog.destroy
+    dialog.signal_connect "response" do |response|
+      dialog.destroy
+    end
+    dialog.show
   end
 
   def confirm msg
