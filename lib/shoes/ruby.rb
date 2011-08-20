@@ -7,7 +7,7 @@ end
 
 class Object
   include Types
-  def alert msg
+  def alert msg, options={:block => true}
     dialog = Gtk::MessageDialog.new(
       get_win,
       Gtk::Dialog::MODAL,
@@ -16,10 +16,16 @@ class Object
       msg.to_s
     )
     dialog.title = "Green Shoes says:"
-    dialog.signal_connect "response" do |response|
+    pd options
+    if options[:block]
+      pd 'run'
+      dialog.run
       dialog.destroy
+    else
+      pd 'show'
+      dialog.signal_connect("response"){ dialog.destroy }
+      dialog.show
     end
-    dialog.show
   end
 
   def confirm msg
