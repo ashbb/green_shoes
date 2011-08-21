@@ -16,13 +16,10 @@ class Object
       msg.to_s
     )
     dialog.title = "Green Shoes says:"
-    pd options
     if options[:block]
-      pd 'run'
       dialog.run
       dialog.destroy
     else
-      pd 'show'
       dialog.signal_connect("response"){ dialog.destroy }
       dialog.show
     end
