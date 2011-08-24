@@ -1,3 +1,11 @@
+begin
+  require 'hpricot'
+rescue LoadError 
+  require File.join(Shoes::DIR, 'ext/hpricot')
+end
+
+require 'nkf'
+
 class Manual < Shoes
   url '/', :index
   url '/manual/(\d+)', :index
@@ -206,6 +214,7 @@ class Manual < Shoes
 
   def self.load_docs path
     str = IO.read(path).force_encoding("UTF-8")
+    str = NKF.nkf('-wLu', str) unless RUBY_PLATFORM =~ /mingw/
     (str.split(/^= (.+?) =/)[1..-1]/2).map do |k, v|
       sparts = v.split(/^== (.+?) ==/)
       sections = (sparts[1..-1]/2).map do |k2, v2|

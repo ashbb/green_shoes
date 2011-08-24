@@ -61,5 +61,4 @@ require_relative 'plugins/treeview'
 autoload :ChipMunk, File.join(Shoes::DIR, 'ext/chipmunk')
 autoload :Bloops, File.join(Shoes::DIR, 'ext/bloops')
 autoload :Projector, File.join(Shoes::DIR, 'ext/projector')
-autoload :Hpricot, File.join(Shoes::DIR, 'ext/hpricot')
 autoload :HH, File.join(Shoes::DIR, 'ext/highlighter')
