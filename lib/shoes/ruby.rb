@@ -8,6 +8,7 @@ end
 class Object
   include Types
   def alert msg, options={:block => true}
+    $dde = true
     dialog = Gtk::MessageDialog.new(
       get_win,
       Gtk::Dialog::MODAL,
@@ -26,6 +27,7 @@ class Object
   end
 
   def confirm msg
+    $dde = true
     dialog = Gtk::Dialog.new(
       "Green Shoes asks:", 
       get_win,
@@ -42,6 +44,7 @@ class Object
   end
 
   def ask msg, args={}
+    $dde = true
     dialog = Gtk::Dialog.new(
       "Green Shoes asks:", 
       get_win,
@@ -76,6 +79,7 @@ class Object
   end
 
   def dialog_chooser title, action, button
+    $dde = true
     dialog = Gtk::FileChooserDialog.new(
       title,
       get_win,
@@ -90,6 +94,7 @@ class Object
   end
 
   def ask_color title = 'Pick a color...'
+    $dde = true
     dialog = Gtk::ColorSelectionDialog.new title
     dialog.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
     dialog.run

@@ -225,7 +225,7 @@ class Shoes
 
   def self.mouse_click_control app
     app.mccs.each do |e|
-      e.click_proc[*app.mouse] if mouse_on? e
+      e.click_proc[*app.mouse] if mouse_on?(e) && !$dde
     end
   end
   
@@ -263,7 +263,7 @@ class Shoes
     app.mlcs.each do |tb|
       next if tb.hided
       link_proc,  = mouse_on_link(tb, app)
-      link_proc.call if link_proc
+      link_proc.call if link_proc && !$dde
     end
   end
   

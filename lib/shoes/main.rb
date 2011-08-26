@@ -48,6 +48,7 @@ class Shoes
       app.mouse_pos = app.win.pointer
       mouse_click_control app
       mouse_link_control app
+      $dde = false
     end
     
     win.signal_connect "button_release_event" do
