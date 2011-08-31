@@ -2211,6 +2211,11 @@ colors with a #06E (blue) colored stroke.
 
 The default LinkHover style is also single-underlined with a #039 (dark blue) stroke.
 
+=== link(text){ ... } » Shoes::Link ===
+
+Creates a Link text block. You can also write with this style. When user clicks the link text, 
+the block will be launched.
+
 === list_box(:items => [strings, ...]) » Shoes::ListBox ===
 
 Adds a drop-down list box containing entries for everything in the `items`
