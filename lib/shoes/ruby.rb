@@ -158,6 +158,11 @@ class Array
   def clear_all
     self.each &:clear_all
   end
+
+  alias :_to_s :to_s
+  def to_s
+    self.map(&:to_s)._to_s
+  end
 end
 
 class NilClass

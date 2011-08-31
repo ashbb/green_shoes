@@ -10,7 +10,7 @@ class Shoes
       win_title = @owner.instance_variable_get('@title')
       class << @owner; self end.
       class_eval do
-        define_method :to_s do
+        define_method :inspect do
           win_title or 'green shoes'
         end
       end if @owner

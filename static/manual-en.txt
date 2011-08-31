@@ -2335,11 +2335,11 @@ window.  This way the child window can call the parent.
 {{{
  #!ruby
  Shoes.app title: "The Owner" do
-   button "Pop up?" do
-     window do
-       para "Okay, popped up from [#{owner}]."
-     end
+  button "Pop up?" do
+   window do
+    para "Okay, popped up from [#{owner.inspect}]."
    end
+  end
  end
 }}}
 
