@@ -112,6 +112,7 @@ class Shoes
 
     def textblock klass, font_size, *msg
       args = msg.last.class == Hash ? msg.pop : {}
+      args = eval("#{klass.to_s[7..-1].upcase}_DEFAULT").merge args
       args = basic_attributes args
       args[:markup] = msg.map(&:to_s).join
       args[:markup] = fg(args[:markup], tr_color(args[:stroke])) if args[:stroke]
