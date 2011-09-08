@@ -13,7 +13,7 @@ class Shoes
         @linkhover_style.sub!("foreground='#039'", "foreground='#{args[:stroke]}'") if args[:stroke]
         @linkhover_style.sub!('>', " background='#{args[:fill]}'>") if args[:fill]
         @linkhover_style.sub!('normal', "#{args[:weight]}") if args[:weight]
-      elsif klass.superclass == Shoes::TextBlock
+      elsif klass.superclass == Shoes::TextBlock or klass == Shoes::Image
         eval("#{klass.to_s[7..-1].upcase}_DEFAULT").clear.merge! args
       end
     end

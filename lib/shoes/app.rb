@@ -169,6 +169,7 @@ class Shoes
     def inscription *msg; textblock Para, 10, *msg; end
 
     def image name, args={}
+      args = IMAGE_DEFAULT.merge args
       args = basic_attributes args
       args[:full_width] = args[:full_height] = 0
       (click_proc = args[:click]; args.delete :click) if args[:click]

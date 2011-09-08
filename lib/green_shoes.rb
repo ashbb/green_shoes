@@ -17,8 +17,8 @@ module Shoes
   FONTS = Gtk::Invisible.new.pango_context.families.map(&:name).sort
   LINK_DEFAULT = "<span underline='single' underline_color='#06E' foreground='#06E' weight='normal'>"
   LINKHOVER_DEFAULT = "<span underline='single' underline_color='#039' foreground='#039' weight='normal'>"
-  BANNER_DEFAULT, TITLE_DEFAULT, SUBTITLE_DEFAULT, TAGLINE_DEFAULT, CAPTION_DEFAULT, PARA_DEFAULT, INSCRIPTION_DEFAULT = 
-    {}, {}, {}, {}, {}, {}, {}
+  BANNER_DEFAULT, TITLE_DEFAULT, SUBTITLE_DEFAULT, TAGLINE_DEFAULT, CAPTION_DEFAULT, PARA_DEFAULT, INSCRIPTION_DEFAULT, IMAGE_DEFAULT = 
+    {}, {}, {}, {}, {}, {}, {}, {}
   ROTATE = [Gdk::Pixbuf::ROTATE_NONE, Gdk::Pixbuf::ROTATE_CLOCKWISE, Gdk::Pixbuf::ROTATE_UPSIDEDOWN, Gdk::Pixbuf::ROTATE_COUNTERCLOCKWISE]
   VERSION = IO.read(File.join(DIR, '../VERSION')).chomp
   BASIC_ATTRIBUTES_DEFAULT = {left: 0, top: 0, width: 0, height: 0, angle: 0, curve: 0}
