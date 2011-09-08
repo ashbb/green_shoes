@@ -168,6 +168,33 @@ class Shoes
     def para *msg; textblock Para, 12, *msg; end
     def inscription *msg; textblock Para, 10, *msg; end
 
+    # Display an already-loaded image. Note that neither :left nor :top works for image and buffered_image. This appears
+    # to be a green shoes problem.
+    def buffered_image content, args={}
+      args = basic_attributes args
+      args[:full_width] = args[:full_height] = 0
+      (click_proc = args[:click]; args.delete :click) if args[:click]
+
+      img = Gtk::Image.new(begin
+        if content.is_a?(String)
+          RSVG::Handle.new_from_data(content).tap { |s| s.close }
+        elsif content.is_a?(RSVG::Handle)
+          content
+        else
+          raise(ArgumentError, "buffered_image needs an SVG string or an RSVG handle")
+        end
+      end.pixbuf)
+
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      @canvas.remove img if args[:hidden]
+
+      args[:real], args[:app] = img, self
+      Image.new(args).tap do |s|
+        s.click &click_proc if click_proc
+      end
+    end
+
     def image name, args={}
       args = basic_attributes args
       args[:full_width] = args[:full_height] = 0
@@ -290,6 +317,42 @@ class Shoes
       eb.show_all
       args[:real], args[:app], args[:textview] = eb, self, tv
       @_eb = EditBox.new(args).tap{|s| s.change &change_proc}
+    end
+    
+    # Edit box for source code
+    def code_box args={}
+      args = basic_attributes args
+
+      args[:font] ||= "Lucida Sans Typewriter"
+      args[:width]  = 200 if args[:width].zero?
+      args[:height] = 108 if args[:height].zero?
+
+      (change_proc = args[:change]; args.delete :change) if args[:change]
+      sv = Gtk::SourceView.new
+      sv.wrap_mode = Gtk::TextTag::WRAP_NONE
+      sv.insert_spaces_instead_of_tabs = true
+      sv.auto_indent = true
+      sv.smart_home_end = Gtk::SourceView::SMART_HOME_END_ALWAYS
+      sv.tab_width = 2
+      sv.buffer.text = args[:text].to_s
+      sv.buffer.language = Gtk::SourceLanguageManager.new.get_language('ruby')
+      sv.modify_font(Pango::FontDescription.new(args[:font])) if args[:font]
+
+      cb = Gtk::ScrolledWindow.new
+      cb.set_size_request args[:width], args[:height]
+      cb.set_policy Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC
+      cb.set_shadow_type Gtk::SHADOW_IN
+      cb.add sv
+
+      sv.buffer.signal_connect "changed" do
+        yield @_cb
+      end if block_given?
+
+      @canvas.put cb, args[:left], args[:top]
+
+      cb.show_all
+      args[:real], args[:app], args[:textview] = cb, self, sv
+      @_cb = CodeBox.new(args).tap{|s| s.change &change_proc}
     end
     
     def list_box args={}

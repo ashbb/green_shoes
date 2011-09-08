@@ -7,7 +7,7 @@ class Shoes
         instance_variable_set "@#{k}", v
       end
 
-      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(EditLine)
+      (@app.order << self) unless @noorder or self.is_a?(EditBox) or self.is_a?(CodeBox) or self.is_a?(EditLine)
       (@app.cslot.contents << self) unless @nocontrol or @app.cmask
       (@app.cmask.contents << self) if @app.cmask
       if self.is_a? Native
@@ -276,7 +276,7 @@ class Shoes
     attr_reader :state
     
     def state=(ctl)
-      real = self.is_a?(EditBox) ? @textview : @real
+      real = self.is_a?(EditBox) || self.is_a?(CodeBox) ? @textview : @real
       case ctl
         when "disabled"
           real.sensitive = false
@@ -358,6 +358,9 @@ class Shoes
     def change &blk
       super @textview.buffer, &blk
     end
+  end
+  
+  class CodeBox < EditBox
   end
   
   class ListBox < Native

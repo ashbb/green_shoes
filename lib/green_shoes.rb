@@ -4,6 +4,8 @@ require 'cairo'
 require 'pango'
 require 'gdk_pixbuf2'
 require 'gtk2'
+require 'rsvg2'
+require 'gtksourceview2'
 
 STDOUT.sync = true
 
