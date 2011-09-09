@@ -459,7 +459,7 @@ class Manual < Shoes
   CODE_RE = /\{{3}(?:\s*\#![^\n]+)?(.+?)\}{3}/m
   NL = "\n"
   LANG = $lang.downcase[0, 2]
-  DOCS = load_docs File.join(DIR, "../static/manual-#{LANG}.txt")
+  DOCS = load_docs($lang =~ /\.txt$/ ? $lang : File.join(DIR, "../static/manual-#{LANG}.txt"))
   PNUMS = mk_page_numbers DOCS
   PEND = PNUMS.length
   TOC, TOC_LIST = [], []
