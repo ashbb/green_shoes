@@ -16,7 +16,7 @@ class Object
       Gtk::MessageDialog::BUTTONS_OK,
       msg.to_s
     )
-    dialog.title = "Green Shoes says:"
+    dialog.title = options.has_key?(:title) ? options[:title] : "Green Shoes says:"
     if options[:block]
       dialog.run
       dialog.destroy
