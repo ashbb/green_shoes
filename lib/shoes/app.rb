@@ -178,8 +178,16 @@ class Shoes
         d = download name, save: tmpname
         img = Gtk::Image.new File.join(DIR, '../static/downloading.png')
         downloading = true
-      else
+      elsif name =~ /\.(png|jpg|gif)$/
         img = Gtk::Image.new name
+        downloading = false
+      else
+        require 'rsvg2'
+        handle = RSVG::Handle.new_from_data name
+        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, handle.dimensions.width, handle.dimensions.height
+        context = Cairo::Context.new surface
+        context.render_rsvg_handle handle
+        img = create_tmp_png surface
         downloading = false
       end
 
