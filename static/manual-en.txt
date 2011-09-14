@@ -3908,3 +3908,5 @@ But in Green Shoes, need to add `:width` size explicitly.
 
 If you don't specify the `:width` size, Green Shoes makes a TextBlock object with 
 the `parent.width`.
+
+For more information, go to [[http://ashbb.github.com/green_shoes/Red_Shoes_and_Green_Shoes.html Red Shoes and Green Shoes]]. 

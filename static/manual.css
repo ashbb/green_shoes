@@ -30,6 +30,13 @@ a:hover {
   background: #eee;
   margin-bottom: 80px;
 }
+#manual2 {
+  float: right;
+  padding: 20px;
+  border: solid 1px #BBB;
+  background: #eee;
+  margin-bottom: 80px;
+}
 #manual li {
   margin-bottom: 8px;
 }

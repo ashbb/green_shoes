@@ -245,7 +245,7 @@ class Manual < Shoes
     return unless dir
     FileUtils.mkdir_p File.join(dir, 'static')
     FileUtils.mkdir_p File.join(dir, 'snapshots')
-    %w[gshoes-icon.png shoes-manual-apps.png manual.css code_highlighter.js code_highlighter_ruby.js].
+    %w[rshoes-icon.png gshoes-icon.png shoes-manual-apps.png manual.css code_highlighter.js code_highlighter_ruby.js].
       each{|x| FileUtils.cp "#{DIR}/../static/#{x}", "#{dir}/static"}
     Dir[File.join DIR, '../static/man-*.png'].each{|x| FileUtils.cp x, "#{dir}/static"}
     Dir[File.join DIR, '../snapshots/sample*.png'].each{|x| FileUtils.cp x, "#{dir}/snapshots"}
