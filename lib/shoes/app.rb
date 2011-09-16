@@ -183,11 +183,7 @@ class Shoes
         downloading = false
       else
         require 'rsvg2'
-        handle = RSVG::Handle.new_from_data name
-        surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, handle.dimensions.width, handle.dimensions.height
-        context = Cairo::Context.new surface
-        context.render_rsvg_handle handle
-        img = create_tmp_png surface
+        img = Gtk::Image.new RSVG::Handle.new_from_data(name).pixbuf
         downloading = false
       end
 
