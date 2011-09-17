@@ -16,8 +16,6 @@ Jeweler::Tasks.new do |gem|
   gem.homepage = "http://github.com/ashbb/green_shoes"
   gem.authors = ["ashbb"]
   gem.add_dependency 'gtk2'
-  gem.add_dependency 'rsvg2'
-  gem.add_dependency 'gtksourceview2'
   gem.files = %w[lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten << 'VERSION'
 end
 
