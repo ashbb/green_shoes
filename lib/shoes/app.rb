@@ -739,6 +739,11 @@ class Shoes
     def nolayout
       @nolayout = true
     end
+    
+    # Resize the app window.
+    def resize new_width, new_height
+      win.resize new_width, new_height
+    end
 
     def scroll_top
       @swin.vscrollbar.value
