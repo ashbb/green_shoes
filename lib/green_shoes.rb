@@ -59,6 +59,7 @@ require_relative 'plugins/systray'
 require_relative 'plugins/thread'
 require_relative 'plugins/httpd'
 require_relative 'plugins/treeview'
+require_relative 'plugins/code_box'
 
 autoload :ChipMunk, File.join(Shoes::DIR, 'ext/chipmunk')
 autoload :Bloops, File.join(Shoes::DIR, 'ext/bloops')
