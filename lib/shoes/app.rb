@@ -739,10 +739,6 @@ class Shoes
     def resize new_width, new_height
       win.resize new_width, new_height
     end
-    
-    def size; win.size; end
-    def width; size[0]; end
-    def height; size[1]; end
 
     def scroll_top
       @swin.vscrollbar.value
