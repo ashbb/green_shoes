@@ -168,47 +168,38 @@ class Shoes
     def para *msg; textblock Para, 12, *msg; end
     def inscription *msg; textblock Para, 10, *msg; end
 
-    # Helper function for image() [with no name provided]. Currently only understands SVGs. Converts whatever it's given to
-    # the format needed by Gtk::Image.new().
-    #
-    # Arguments:
-    # * :data can be a string (e.g., for an SVG), an RSVG::Handle, a Gdk::Pixbuf, or even a Gtk::Image. If it can't tell which, it'll try
-    #   calling the pixbuf() method on :data, or just returning it as is.
-    # * :format, when it works, will specify the content-type of :data when that is not implicit in the class of :data. For example, if
-    #   :data is a string, :format might be :svg.
-    def image_handle args={}  
-      if args[:data].is_a?(String)
-        raise(NotImplementedError, "Currently only RSVG::Handle is implemented.") if args.has_key?(:format) && args[:format] != :svg
-        RSVG::Handle.new_from_data(args[:data]).tap{|s|s.close}.pixbuf
-      elsif args[:data].is_a?(RSVG::Handle)
-        args[:data].pixbuf
-      elsif args[:data].is_a?(Gdk::Pixbuf) || args[:data].is_a?(Gtk::Image)
-        args[:data]
-      else
-        # Unknown format. Try asking for a pixbuf, otherwise just assume it's already a pixbuf.
-        args[:data].respond_to?(:pixbuf) ? args[:data].pixbuf : args[:data]
+    # Display an already-loaded image. Note that neither :left nor :top works for image and buffered_image. This appears
+    # to be a green shoes problem.
+    def buffered_image content, args={}
+      args = basic_attributes args
+      args[:full_width] = args[:full_height] = 0
+      (click_proc = args[:click]; args.delete :click) if args[:click]
+
+      img = Gtk::Image.new(begin
+        if content.is_a?(String)
+          RSVG::Handle.new_from_data(content).tap { |s| s.close }
+        elsif content.is_a?(RSVG::Handle)
+          content
+        else
+          raise(ArgumentError, "buffered_image needs an SVG string or an RSVG handle")
+        end
+      end.pixbuf)
+
+      @canvas.put img, args[:left], args[:top]
+      img.show_now
+      @canvas.remove img if args[:hidden]
+
+      args[:real], args[:app] = img, self
+      Image.new(args).tap do |s|
+        s.click &click_proc if click_proc
       end
     end
 
     def image name, args={}
-      # Handle case where no name is given -- typically, :data argument will be set.
-      if name.is_a?(Hash)
-        args = name
-        name = nil
-        raise(ArgumentError, ":data must be set if no name given") unless args.has_key?(:data)
-      end
-
       args = basic_attributes args
       args[:full_width] = args[:full_height] = 0
       (click_proc = args[:click]; args.delete :click) if args[:click]
-      
-      if name.nil?
-        img = Gtk::Image.new image_handle(args)
-        
-        args[:full_width], args[:full_height] = img.size_request if (!args[:width].zero? or !args[:height].zero?)
-        downloading = false
-        
-      elsif name =~ /^(http|https):\/\//
+      if name =~ /^(http|https):\/\//
         tmpname = File.join(Dir.tmpdir, "__green_shoes_#{Time.now.to_f}.png")
         d = download name, save: tmpname
         img = Gtk::Image.new File.join(DIR, '../static/downloading.png')
@@ -219,7 +210,7 @@ class Shoes
       end
 
       if (!args[:width].zero? or !args[:height].zero?) and !downloading 
-        args[:full_width], args[:full_height] = imagesize(name) unless name.nil?
+        args[:full_width], args[:full_height] = imagesize(name)
         args[:width] = args[:full_width] if args[:width].zero?
         args[:height] = args[:full_height] if args[:height].zero?
         img = Gtk::Image.new img.pixbuf.scale(args[:width], args[:height])
