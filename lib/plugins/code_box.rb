@@ -24,15 +24,16 @@ class Shoes
       cb.set_shadow_type Gtk::SHADOW_IN
       cb.add sv
 
-      sv.buffer.signal_connect "changed" do
-        yield @_cb
-      end if block_given?
-
       @canvas.put cb, args[:left], args[:top]
 
       cb.show_all
       args[:real], args[:app], args[:textview] = cb, self, sv
-      @_cb = CodeBox.new(args).tap{|s| s.change &change_proc}
+      CodeBox.new(args).tap do |s|
+        s.change &change_proc
+        sv.buffer.signal_connect "changed" do
+          yield s
+        end if block_given?
+      end
     end
   end
 

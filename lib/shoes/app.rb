@@ -212,13 +212,15 @@ class Shoes
       (click_proc = args[:click]; args.delete :click) if args[:click]
       b = Gtk::Button.new name
       b.set_size_request args[:width], args[:height] if args[:width] > 0 and args[:height] > 0
-      b.signal_connect "clicked" do
-        yield @_b
-      end if block_given?
       @canvas.put b, args[:left], args[:top]
       b.show_now
       args[:real], args[:text], args[:app] = b, name, self
-      @_b = Button.new(args).tap{|s| s.click &click_proc if click_proc}
+      Button.new(args).tap do |s|
+        s.click &click_proc if click_proc
+        b.signal_connect "clicked" do
+          yield s
+        end if block_given?
+      end
     end
 
     def check args={}
@@ -226,13 +228,15 @@ class Shoes
       (click_proc = args[:click]; args.delete :click) if args[:click]
       cb = Gtk::CheckButton.new
       cb.active = true if args[:checked]
-      cb.signal_connect "clicked" do
-        yield @_cb
-      end if block_given?
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      @_cb = Check.new(args).tap{|s| s.click &click_proc if click_proc}
+      Check.new(args).tap do |s|
+        s.click &click_proc if click_proc
+        cb.signal_connect "clicked" do
+          yield s
+        end if block_given?
+      end
     end
     
     def radio *attrs
@@ -244,13 +248,15 @@ class Shoes
       (click_proc = args[:click]; args.delete :click) if args[:click]
       rb = Gtk::RadioButton.new group
       rb.active = true if args[:checked]
-      rb.signal_connect "clicked" do
-        yield @_rb
-      end if block_given?
       @canvas.put rb, args[:left], args[:top]
       rb.show_now
       args[:real], args[:app] = rb, self
-      @_rb = Radio.new(args).tap{|s| s.click &click_proc if click_proc}
+      Radio.new(args).tap do |s|
+        s.click &click_proc if click_proc
+        rb.signal_connect "clicked" do
+          yield s
+        end if block_given?
+      end
     end
 
     def edit_line args={}
@@ -262,13 +268,15 @@ class Shoes
       el.visibility = false if args[:secret]
       el.text = args[:text].to_s
       el.set_size_request args[:width], args[:height]
-      el.signal_connect "changed" do
-        yield @_el
-      end if block_given?
       @canvas.put el, args[:left], args[:top]
       el.show_now
       args[:real], args[:app] = el, self
-      @_el = EditLine.new(args).tap{|s| s.change &change_proc}
+      EditLine.new(args).tap do |s|
+        s.change &change_proc
+        el.signal_connect "changed" do
+          yield s
+        end if block_given?
+      end
     end
 
     def edit_box args={}
@@ -287,14 +295,15 @@ class Shoes
       eb.set_shadow_type Gtk::SHADOW_IN
       eb.add tv
 
-      tv.buffer.signal_connect "changed" do
-        yield @_eb
-      end if block_given?
-
       @canvas.put eb, args[:left], args[:top]
       eb.show_all
       args[:real], args[:app], args[:textview] = eb, self, tv
-      @_eb = EditBox.new(args).tap{|s| s.change &change_proc}
+      EditBox.new(args).tap do |s|
+        s.change &change_proc
+        tv.buffer.signal_connect "changed" do
+          yield s
+        end if block_given?
+      end
     end
     
     def list_box args={}
@@ -307,13 +316,15 @@ class Shoes
       args[:items].each{|item| cb.append_text item.to_s}
       cb.set_size_request args[:width], args[:height]
       cb.active = args[:items].index(args[:choose]) if args[:choose]
-      cb.signal_connect("changed") do
-        yield @_lb
-      end if block_given?
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
-      @_lb = ListBox.new(args).tap{|s| s.change &change_proc}
+      ListBox.new(args).tap do |s|
+        s.change &change_proc
+        cb.signal_connect("changed") do
+          yield s
+        end if block_given?
+      end
     end
 
     def animate n=10, repaint=true, &blk

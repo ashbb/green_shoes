@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "green_shoes"
-  s.version = "1.0.300"
+  s.version = "1.0.301"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ashbb"]
-  s.date = "2011-09-17"
+  s.date = "2011-09-18"
   s.description = "Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2."
   s.email = "ashbbb@gmail.com"
   s.extra_rdoc_files = [
