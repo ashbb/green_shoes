@@ -638,7 +638,7 @@ are trying to sniff out what release of Green Shoes is running.
  end
 }}}
 
-=== alert(message: a string, :block => true or false) » nil ===
+=== alert(message: a string, :block => true or false, title: a string) » nil ===
 
 Pops up a window containing a short message.
 
@@ -652,6 +652,7 @@ alerts to show messages to help you debug your program, try checking out the
 standard Ruby method `puts` or `p` methods.
 
 If you want to make alert() thread safe, i.e. unblock main thread, use `:block => false` option.
+If you want to change window title, use `:title => a string` option.
 
 === ask(message: a string) » a string ===
 
