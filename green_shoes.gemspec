@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "green_shoes"
-  s.version = "1.0.303"
+  s.name = %q{green_shoes}
+  s.version = "1.0.304"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ashbb"]
-  s.date = "2011-09-18"
-  s.description = "Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2."
-  s.email = "ashbbb@gmail.com"
+  s.date = %q{2011-09-21}
+  s.description = %q{Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2.}
+  s.email = %q{ashbbb@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
@@ -300,10 +300,10 @@ Gem::Specification.new do |s|
     "static/rshoes-icon.png",
     "static/shoes-manual-apps.png"
   ]
-  s.homepage = "http://github.com/ashbb/green_shoes"
+  s.homepage = %q{http://github.com/ashbb/green_shoes}
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
-  s.summary = "Green Shoes"
+  s.rubygems_version = %q{1.7.2}
+  s.summary = %q{Green Shoes}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
