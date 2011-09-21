@@ -58,10 +58,12 @@ class Shoes
         move3 x + parent.margin_left, max.top + parent.margin_top
         @height = Shoes.contents_alignment self
         max = self if max.height < @height
+        flag = true
       else
         move3 parent.left + parent.margin_left, max.top + max.height + parent.margin_top
         @height = Shoes.contents_alignment self
         max = self
+        flag = false
       end
       case @initials[:height]
       when 0
@@ -71,7 +73,7 @@ class Shoes
         max.height = @height = @initials[:height]
       end
       contents.each &:fix_size
-      max
+      return max, flag
     end
 
     def fix_size; end

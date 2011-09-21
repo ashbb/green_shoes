@@ -365,7 +365,7 @@ These nested windows require more memory.  They tax the application a bit more.
 So if you're experiencing some slowness with hundreds of fixed-height slots,
 try a different approach.
 
-'''Note''': Fixed height magic (the slot becomes a nested window) is not implemented 
+'''Note:''' Fixed height magic (the slot becomes a nested window) is not implemented 
 in Green Shoes so far. Scrollbar will appear automatically but at main window only.
 
 {{{
@@ -441,7 +441,7 @@ The point is: it's easy to group shapes together into image or shape blocks, so
 give it a try if you're looking to gain some speed.  Shape blocks particularly
 will save you some memory and speed.
 
-'''NOTE''': Green Shoes doesn't support this magic (grouping shapes together 
+''Note:'' Green Shoes doesn't support this magic (grouping shapes together 
 into image or shape blocks) so far.
 
 ==== UTF-8 Everywhere ====
@@ -1023,7 +1023,7 @@ query google's search engine.
 As you can see from the above example, Green Shoes includes the Hpricot
 library for parsing HTML.
 
-'''Note''': Windows platform only so far.
+'''Note:''' Windows platform only so far.
 
 === location() » a string ===
 
