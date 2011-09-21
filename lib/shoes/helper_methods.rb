@@ -64,12 +64,22 @@ class Shoes
     def basic_attributes args={}
       default = BASIC_ATTRIBUTES_DEFAULT
       default.merge!({nocontrol: true}) if @nolayout
+      replace_string_to_float args
       default.merge args
     end
 
     def slot_attributes args={}
       default = SLOT_ATTRIBUTES_DEFAULT
+      replace_string_to_float args
       default.merge args
+    end
+
+    def replace_string_to_float args={}
+      [:width, :height, :left, :top].each do |k|
+        if args[k].is_a? String
+          args[k] = args[k].include?('%') ? args[k].to_f / 100 : args[k].to_i
+        end
+      end
     end
 
     def create_tmp_png surface
