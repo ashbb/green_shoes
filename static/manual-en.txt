@@ -347,7 +347,7 @@ differently.  To be sure that the end of the slot is chopped off perfectly, the
 slot becomes a '''nested window'''.  A new layer is created by the operating
 system to keep the slot in a fixed square.
 
-On difference between normal slots and nested window slots is that the latter
+One difference between normal slots and nested window slots is that the latter
 can have scrollbars.
 
 {{{
@@ -2319,9 +2319,7 @@ Creates a Title text block.  Green Shoes styles these elements to 34 pixels high
 
 === video(path or url) » Shoes::Video ===
 
-Embeds a movie in this slot.
-
-'''Note:''' Green Shoes doesn't support `video` method.
+Play some audio files.
 
 === window(styles) { ... } » Shoes::App ===
 
@@ -2804,8 +2802,6 @@ covered as the [[Position.style]] method for slots.)
 For specific commands, see the other links to the left in the Elements section.
 Like if you want to pause or play a video file, check the [[Video]] section,
 since pausing and playing is peculiar to videos.  No sense pausing a button.
-
-'''Note:''' Green Shoes doesn't support `video` method.
 
 === displace(left: a number, top: a number) » self ===
 
@@ -3779,20 +3775,11 @@ already running, it is stopped.
 
 == Video ==
 
-Shoes supports embedding of QuickTime, Flash video (FLV), DivX, Xvid and
-various other popular video formats. This is all thanks to VideoLAN and ffmpeg,
-two sensational open source libraries. Use the `video` method on a slot to
-setup a Shoes::Video object. 
+Green Shoes is trying to support embedding of MP4 video format with Ruby/GStreamer. 
+But for now, not available any video formats. Just available some audio formats, 
+such as MP3 and Ogg Vorbis.
 
-'''Note:''' Green Shoes doesn't support any video formats. !{:margin_left => 100}man-ele-video.png!
-
-In addition to video formats, some audio formats are also supported, such as
-MP3, WAV and Ogg Vorbis.
-
-Video support is optional in Shoes and some builds do not support video. For
-example, video support is unavailable for PowerPC. When you download Shoes, the
-build for your platform will be marked `novideo` in the filename if no video
-support is available.
+'''Note:''' Green Shoes doesn't support any video formats so far. !{:margin_left => 70}man-ele-video.png!
 
 === hide() » self ===
 
@@ -3800,15 +3787,21 @@ Hides the video. If already playing, the video will continue to play. This just
 turns off display of the video. One possible use of this method is to collapse
 the video area when it is playing an audio file, such as an MP3.
 
+'''Note:''' Green Shoes doesn't support hide method so far.
+
 === length() » a number ===
 
 The full length of the video in milliseconds. Returns nil if the video is not
 yet loaded.
 
+'''Note:''' Green Shoes doesn't support length method so far.
+
 === move(left, top) » self ===
 
 Moves the video to specific coordinates, the (left, top) being the upper left
 hand corner of the video.
+
+'''Note:''' Green Shoes doesn't support move method so far.
 
 === pause() » self ===
 
@@ -3830,18 +3823,26 @@ The position of the video as a decimanl number (a Float) between the beginning
 (0.0) and the end (1.0). For instance, a Float value of 0.5 indicates the
 halfway point of the video.
 
+'''Note:''' Green Shoes doesn't support position method so far.
+
 === position = a decimal ===
 
 Sets the position of the video using a Float value. To move the video to its
 25% position: `@video.position = 0.25`.
 
+'''Note:''' Green Shoes doesn't support position= method so far.
+
 === remove() » self ===
 
 Removes the video from its slot. This will stop the video as well.
 
+'''Note:''' Green Shoes doesn't support remove method so far.
+
 === show() » self ===
 
 Reveals the video, if it has been hidden by the `hide()` method.
+
+'''Note:''' Green Shoes doesn't support show method so far.
 
 === stop() » self ===
 
@@ -3860,6 +3861,8 @@ Set the position of the video to a time in milliseconds.
 
 Toggles the visibility of the video. If the video can be seen, then `hide` is
 called. Otherwise, `show` is called.
+
+'''Note:''' Green Shoes doesn't support tobble method so far.
 
 = AndSoForth =
 
