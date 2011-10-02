@@ -60,6 +60,7 @@ require_relative 'plugins/thread'
 require_relative 'plugins/httpd'
 require_relative 'plugins/treeview'
 require_relative 'plugins/code_box'
+require_relative 'plugins/video'
 
 autoload :ChipMunk, File.join(Shoes::DIR, 'ext/chipmunk')
 autoload :Bloops, File.join(Shoes::DIR, 'ext/bloops')
