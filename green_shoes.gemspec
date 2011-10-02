@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "green_shoes"
-  s.version = "1.0.307"
+  s.version = "1.0.308"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ashbb"]
@@ -191,6 +191,7 @@ Gem::Specification.new do |s|
     "samples/sample55.rb",
     "samples/sample56.rb",
     "samples/sample57.rb",
+    "samples/sample58.rb",
     "samples/sample6.rb",
     "samples/sample7.rb",
     "samples/sample8.rb",
@@ -256,6 +257,7 @@ Gem::Specification.new do |s|
     "snapshots/sample55.png",
     "snapshots/sample56.png",
     "snapshots/sample57.png",
+    "snapshots/sample58.png",
     "snapshots/sample6.png",
     "snapshots/sample7.png",
     "snapshots/sample8.png",
