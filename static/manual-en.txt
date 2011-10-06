@@ -3775,11 +3775,24 @@ already running, it is stopped.
 
 == Video ==
 
-Green Shoes is trying to support embedding of MP4 video format with Ruby/GStreamer. 
-But for now, not available any video formats. Just available some audio formats, 
-such as MP3 and Ogg Vorbis.
+Green Shoes supports embedding of MP4, AVI, WMV, QuickTime and various other popular video formats. 
+This is all thanks to Ruby/GStreamer. Use the `video` method to setup a Shoes::Video object. !{:margin_left => 70}man-ele-video.png!
 
-'''Note:''' Green Shoes doesn't support any video formats so far. !{:margin_left => 70}man-ele-video.png!
+{{{
+ Shoes.app width: 400, height: 300 do
+   background gold..cyan, angle: 90
+   space = ' ' * 5
+   v = video 'http://is.gd/xZ6Jih'
+   links = 
+     para link('play'){v.play; links.move(0, 300)}, 
+     space, link('pause'){v.pause}, 
+     space, link('-1sec'){v.time -= 1000},
+     space, link('+1sec'){v.time += 1000}, 
+     top: 250, align: 'center'
+ end
+}}}
+
+In addition to video formats, some audio formats are also supported, such as MP3, WAV and Ogg Vorbis.
 
 === hide() » self ===
 

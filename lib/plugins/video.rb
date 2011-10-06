@@ -35,6 +35,11 @@ class Shoes
         @ready = @playing  = true
         (self.time, @eos = 0, nil) if @eos
       end
+      unless @whdl
+        @whdl = @app.win.window.class.method_defined?(:xid) ? @app.win.window.xid : 
+          Win32API.new('user32', 'GetForegroundWindow', [], 'N').call
+        @real.video_sink.xwindow_id = @whdl
+      end
       @real.play
     end
 
@@ -81,7 +86,9 @@ class Shoes
       args = {}
       uri = File.join('file://', uri.gsub("\\", '/').sub(':', '')) unless uri =~ /^(http|https|file):\/\//
       require 'gst'
+      require 'win32api'
       v = Gst::ElementFactory.make 'playbin2'
+      v.video_sink = Gst::ElementFactory.make('dshowvideosink')
       v.uri = uri
       args[:real], args[:app] = v, self
       Video.new args
