@@ -3781,14 +3781,20 @@ This is all thanks to Ruby/GStreamer. Use the `video` method to setup a Shoes::V
 {{{
  Shoes.app width: 400, height: 300 do
    background gold..cyan, angle: 90
-   space = ' ' * 5
+   space = ' ' * 3
    v = video 'http://is.gd/xZ6Jih'
-   links = 
-     para link('play'){v.play; links.move(0, 300)}, 
+   links = para space, 
+     link('play'){v.play; links.move(0, 300)}, 
      space, link('pause'){v.pause}, 
      space, link('-1sec'){v.time -= 1000},
      space, link('+1sec'){v.time += 1000}, 
-     top: 250, align: 'center'
+     top: 250
+   msg = para left: 250, top: 300
+   every do
+     msg.text = fg("#{(v.position*100).to_i}% " + 
+       "(#{v.time/1000}/#{v.length.to_i/1000}sec)", 
+       darkcyan)
+   end
  end
 }}}
 
@@ -3806,8 +3812,6 @@ the video area when it is playing an audio file, such as an MP3.
 
 The full length of the video in milliseconds. Returns nil if the video is not
 yet loaded.
-
-'''Note:''' Green Shoes doesn't support length method so far.
 
 === move(left, top) » self ===
 
@@ -3836,14 +3840,10 @@ The position of the video as a decimanl number (a Float) between the beginning
 (0.0) and the end (1.0). For instance, a Float value of 0.5 indicates the
 halfway point of the video.
 
-'''Note:''' Green Shoes doesn't support position method so far.
-
 === position = a decimal ===
 
 Sets the position of the video using a Float value. To move the video to its
 25% position: `@video.position = 0.25`.
-
-'''Note:''' Green Shoes doesn't support position= method so far.
 
 === remove() » self ===
 

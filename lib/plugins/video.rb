@@ -14,6 +14,10 @@ class Shoes
             @eos = true; pause
           when Gst::Message::WARNING, Gst::Message::ERROR
             p message.parse
+          when Gst::Message::ELEMENT
+            duration = Gst::QueryDuration.new Gst::Format::TIME
+            @real.query duration
+            @length = duration.parse.last
           else
             #p message.type
         end
@@ -22,7 +26,7 @@ class Shoes
       @app.win.signal_connect('destroy'){@real.stop}
       @stime = 0
     end
-
+    
     def playing?
       @eos ? false : @playing
     end
@@ -54,6 +58,18 @@ class Shoes
     def stop
       @eos = true
       @real.stop
+    end
+    
+    def length
+      @length / 1_000_000 if @length
+    end
+    
+    def position
+      @length ? time.to_f / length : 0.0
+    end
+    
+    def position=(x)
+      self.time = length * x if @length
     end
 
     def time
