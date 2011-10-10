@@ -90,7 +90,7 @@ class Shoes
     def make_link_index msg
       start, links = 0, []
       msg.each do |e|
-        len = e.to_s.gsub(/<\/.*?>/, '').gsub(/<.*?>/, '').length
+        len = e.to_s.gsub(/<\/.*?>/, '').gsub(/<.*?>/, '').bytesize
         (links << e; e.index = [start, start + len]) if e.is_a? Link
         start += len
       end
