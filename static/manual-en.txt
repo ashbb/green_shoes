@@ -670,7 +670,7 @@ When the above script is run, the person at the computer will see a window with
 a blank box for entering their name. The name will then be saved in the `name`
 variable.
 
-=== ask_color(title: a string) » Shoes::Color ===
+=== ask_color(title: a string) » a RGB array ===
 
 Pops up a color picker window. The program will wait for a color to be picked,
 then gives you back a Color object. See the `Color` help for some ways you can
@@ -1561,7 +1561,7 @@ Possible settings are:
 
 '''Note:''' Green Shoes doesn't support `:stretch` style.
 
-=== :strikecolor » a Shoes::Color ===
+=== :strikecolor » a RGB array ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1607,7 +1607,7 @@ placed 40 pixels beneath the top edge of the top slot (window).  If no
 `:top` style is given, the object is automatically placed in the natural flow
 of the slot it contains.
 
-=== :undercolor » a Shoes::Color ===
+=== :undercolor » a RGB array ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
