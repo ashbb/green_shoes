@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "green_shoes"
-  s.version = "1.0.313"
+  s.version = "1.0.314"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["ashbb"]
-  s.date = "2011-10-10"
+  s.date = "2011-10-11"
   s.description = "Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2."
   s.email = "ashbbb@gmail.com"
   s.extra_rdoc_files = [
@@ -270,9 +270,6 @@ Gem::Specification.new do |s|
     "static/downloading.png",
     "static/gshoes-heading-icon.png",
     "static/gshoes-icon.png",
-    "static/man-app.png",
-    "static/man-builds.png",
-    "static/man-builds1.png",
     "static/man-editor-notepad.png",
     "static/man-editor-osx.png",
     "static/man-ele-background.png",
@@ -288,14 +285,6 @@ Gem::Specification.new do |s|
     "static/man-ele-shape.png",
     "static/man-ele-textblock.png",
     "static/man-ele-video.png",
-    "static/man-intro-dmg.png",
-    "static/man-intro-exe.png",
-    "static/man-look-tiger.png",
-    "static/man-look-ubuntu.png",
-    "static/man-look-vista.png",
-    "static/man-run-osx.png",
-    "static/man-run-vista.png",
-    "static/man-run-xp.png",
     "static/man-shot1.png",
     "static/manual-en.txt",
     "static/manual-ja.txt",
