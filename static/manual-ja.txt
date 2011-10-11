@@ -1,71 +1,96 @@
+# -*- encoding: utf-8 -*-
 = Hello! =
 
-Shoesは軽量なグラフィックツールキットです。これは単純で分かりやすいです。Shoesは簡単になるように生まれました。本当に、これは全くの初心者のために作られました。本当に簡単です。
+Shoesは軽量なグラフィックツールキットです。これは単純で分かりやすいです。
+Shoesは簡単になるように生まれました。本当に、これは全くの初心者のために作られました。
+本当に簡単です。
+Green ShoesはカラフルなShoesの一つです。Ruby/GTK2を使ってRubyだけで書かれています。
 
 このたった一行の取るに足りないShoesのプログラムを見てください：
 
 {{{
  #!ruby
- Shoes.app { button("Click me!") { alert("Good job.") } }
+ Shoes.app{button("Click me!"){alert("Good job.")}}
 }}}
 
-ShoesプログラムはRubyと呼ばれる言語で書かれています。ShoesがこのRubyコードの単純な行を渡されたとき、"Click me!"と中に書かれたボタンを持ったウィンドウを表示します。このボタンをクリックすると、メッセージがポップアップします。
+ShoesプログラムはRubyと呼ばれる言語で書かれています。
+ShoesがこのRubyコードの単純な行を渡されたとき、"Click me!"と中に書かれたボタンを持った
+ウィンドウを表示します。このボタンをクリックすると、メッセージがポップアップします。
 
-Linuxでは、このように見えるでしょう: !{:margin_left => 100}man-shot1.png!
+Windows 7では、このように見えるでしょう: !{margin_left: 100}man-shot1.png!
 
-多くのShoesのアプリケーションがグラフィカルなゲームやアートのプログラムである一方、テキストを配置したり編集したりすることも簡単にできます。 !{:margin_left => 40}shoes-manual-apps.gif!
+多くのShoesのアプリケーションがグラフィカルなゲームやアートのプログラムである一方、
+テキストを配置したり編集したりすることも簡単にできます。 !{margin_left: 80}shoes-manual-apps.png!
 
-そして、理想的には、Shoesプログラムは世の中のいくつかの有名なプラットフォームで実行できるでしょう。マイクロソフトWindows、アップルのMac OS X、Linuxや多くの他のプラットフォームで。
+そして、理想的には、Shoesプログラムは世の中のいくつかの有名なプラットフォームで実行できるでしょう。
+マイクロソフトWindows、アップルのMac OS X、Linuxや多くの他のプラットフォームで。
 
-^そして、Shoesのビルトインマニュアルへようこそ。このマニュアルはShoesのプログラムそのものです。^
+^Green Shoesのビルトインマニュアルへようこそ。このマニュアルはGreen Shoesのプログラムそのものです。^
 
-== Introducing Shoes ==
+== Introducing Green Shoes ==
 
-OS XやWindowsではShoesはどのように見えるでしょうか？見栄えはいいですか？全体的に見苦しくて不格好ですか？みんなすぐに身悶えしたに違いないです！それは何をしようとしても、とても質が落ちたものに違いありません。
+Green Shoesは、OS XやLinuxではどうですか？Windowsと同様ですか?
+人々はすぐにもそのように攻め立てます！
+でも大丈夫、全て試していますからね。
 
-それでは、Shoesのインストールや実行について入る前に、何ができるのかの参考に、ちょっといくつかのスクリーンショットを確認します。
+それでは、Green Shoesのインストールや実行について入る前に、何ができるのかの参考に、
+ちょっといくつかのスクリーンショットを確認します。
 
 ==== Mac OS X ====
 
-ShoesはアップルのMac OS X Leopardで、同様にTigerでも動作します。ShoesはPowerPCマシンの同様にサポートしますが、そのプラットフォームではビデオ機能はサポートされません。 !man-look-tiger.png!
+Green ShoesはアップルのMac OSX10.5 PPC via X11で動作します。
+!{margin_left: 100}../snapshots/sample3-osx.png!
 
-これはTigerで実行している`simple-sphere.rb`サンプルです。アプリケーションは通常のOS Xウィンドウの枠の中で実行されていることに注意して下さい。
-
-この球の全体は不鮮明な楕円形と影によって描かれています。Shoesでは、生き生きとした形状を描くことや、それらの形状に効果を適用することができます。
+これはMac OS X上で`sample3.rb`を実行した時のスナップショットです。
+全ての円がランダムに描かれています。
+Green Shoesではさまざまな図形を描いたり動かしたりすることができます。
 
 ==== Windows ====
 
-Shoesはすべてのバージョンの'''Microsoft Windows XP'''、 '''Windows Vista'''、 '''Windows 7'''で実行でき、他にも'''Windows 2000'''で互換性があります。 !man-look-vista.png!
+Green Shoesは'''Microsoft Windows XP'''と'''Windows 7'''で動作を確認しています。
+!{margin_left: 0}../snapshots/sample33.png!
 
-上記はWindows Vistaで`simple-clock.rb`サンプルが動作している図です。この例でも時計を作るために楕円と線が描かれており、これは一秒に何回かそれ自信が再描画するのので生き生きと描かれます。
-
-アプリケーション上部のテキストが、現在の時刻を表示していることに注意してください。Shoesは、いくつかの色、太字、斜字、下線、そしてファイルからフォントをロードして語句を配置する機能を持っています。
+上記はWindows 7で`sample33.rb`サンプルが動作している図です。
+Green Shoesは3つの拡張ライブラリを含んでいます。
+chipmunk physicsとbloopsaphoneと3D texture mappingです。
+最初の2つはバイナリで提供しているため、今のところWindowsでしか動作しません。
 
 ==== Linux ====
 
-これは'''Ubuntu Linux'''上で`simple-downloader.rb`サンプルが動作しているスクリーンショットです。!man-look-ubuntu.png!
+これは'''Ubuntu on VirtualBox for Windows'''上で`sample44.rb`サンプルが動作しているスクリーンショットです。
+!{margin_left: 130}../snapshots/sample44-linux.png!
 
-ボタンとプログレスバーに注意してください。これらの種類のコントロールはOS XとWindowsとは異なるように見えます。しかし、テキストとリンクは同じように見えるでしょう。
+この例では時計を作るために線や円を描いています。
+時計の針の動作は線の表示/非表示を毎秒数回切り替えることにより実現しています。
 
-形状、テキスト、画像や動画はすべてのプラットフォームで同じように見えます。しかしながら、ネイティブコントロール（エディットラインやエディットボックスのような）はウィンドウテーマの見た目に一致します。Shoesはネイティブコントロールを、見た目は変化しますが、指定した大きさの範囲内で維持しようとします。
+アプリケーション上部のテキストが、現在の時刻を表示していることに注意してください。
+Green Shoesは、いくつかの色、太字、斜字、下線、そしてファイルからフォントをロードして語句を配置する
+機能を持っています。
 
-== Installing Shoes ==
+== Installing Green Shoes ==
 
-はい、ではShoesのインストールを行います。あなたは次のような疑問を持っているでしょう:Rubyのインストールは必要ですか？なにも解凍しなくてもいいですか？どんなコマンドをタイプする必要がありますか？
- 
-いや。Rubyを必要としません。WinZipを必要としません。なにもタイプしなくていいです。
+はい、ではGreen Shoesのインストールを行います。あなたは次のような疑問を持っているでしょう:
+Rubyのインストールは必要ですか？なにも解凍しなくてもいいですか？どんなコマンドをタイプする必要がありますか？
 
-Shoesを開始するには、多くのシステムではShoesのアイコンをクリックしてインストーラを実行するだけです。Shoesはすべてを組み込みで備えています。もっとも、まさしくそれに関して明確になるように、私たちはすべてのステップについて話をします。
+はい。RubyやGemをインストールする必要はあります。でも心配しないで下さい。
+以下に必要なステップを全て示しますから。
 
-==== Step 1: Shoesのインストール ====
+==== Step 1: Green Shoesのインストール ====
 
-[[http://shoesrb.com/ the site of Shoes]]へアクセスしてShoesのインストーラをダウンロードします。通常はホームページの上部の角にあるインストーラのひとつを手に入れます。 !man-builds.png!
+まず最初にRubyをインストールします。
+Windowsの場合はこのサイト[[http://rubyinstaller.org/ RubyInstaller for Windows]]
+にアクセスして、最新の'''RubyInstaller 1.9.2'''をインストールして下さい。
 
-ここにインストーラの実行方法があります：
+そして、以下のコマンドを実行してください。
 
- * '''Mac OS X'''では、'''.dmg'''で終わっているファイルを手に入れます。このファイルをダブルクリックすると、'''Shoes'''アイコンと'''Applications'''フォルダと共にウィンドウが表示されます。矢印に従って'''Applications'''フォルダにShoesアイコンをドラッグします。 !man-intro-dmg.png!
-*  '''Windows'''では、'''.exe'''ファイルをダウンロードします。このファイルをダブルクリックして次の指示に従ってください。!man-intro-exe.png!
-* '''Linux'''では、'''.run'''で終わっているファイルをダウンロードします。このファイルをダブルクリックするとShoesが起動します。(シェルスクリプトのようにプロンプトからこのファイルを実行することもできます。実際には、これは小さなシェルスクリプトです。)
+ * gem install green_shoes
+
+これだけです。簡単でしょう?
+
+'''注意:''' green_shoes gemはこのサイト[[http://rubygems.org/gems/green_shoes RubyGems.org]]
+にあります。
+
+もしriやrdocの作成でエラーが発生したら、次のオプション`--no-ri --no-rdoc`を試してみて下さい。
 
 ==== Step 2: 新しいテキストファイルの作成 ====
 
@@ -80,8 +105,8 @@ Shoesプログラムは'''.rb'''の拡張子で終わる、ただの単純なテ
 そして、空のウィンドウに次のようにタイプしてください:
 
 {{{
+ require 'green_shoes'
  Shoes.app do
-   background "#DFA"
    para "Welcome to Shoes"
  end
 }}}
@@ -90,46 +115,59 @@ Shoesプログラムは'''.rb'''の拡張子で終わる、ただの単純なテ
 
 ==== Step 3: それを実行してください！Shoesへ行こう！ ====
 
-プログラムを実行するためには:
+プログラムを実行するためには、コンソールウィンドウを開いて、以下のコマンドを実行します。
 
- * '''Mac OS X'''では、'''Applications'''へ再度行きます。今度は、そのフォルダの'''Shoes'''アイコンをダブルクリックします。そのドックの中に赤い靴のアイコンが現れます。'welcome.rb'をデスクトップから、そのドックアイコンへドラッグしてください。
- * '''Windows'''では、スタートメニューへから'''All Programs'''、'''Shoes'''そして'''Shoes'''へ行きます。ファイルの選択ボックスが表示されます。デスクトップに目を通して'welcome.rb'を選択します。'''OK'''をクリックしたら、後は自分でやってください。!man-run-xp.png! !man-run-vista.png!
- * '''Linux'''では、ほとんど一回の手続きでだけでShoesを実行します。あなたはファイル選択ボックスを見るはずです。デスクトップに目を通して、`welcome.rb`を選択して'''OK'''を押してください。
+ * ruby welcome.rb !man-editor-osx.png!
 
 まだ大したものではないですが、確かにそれはプログラムです！少なくとも、そのコツが分かったでしょう！
 
 ==== Shoesで何を作りますか？ ====
 
-さて、ウィンドウアプリケーションを作成することができます。しかし、Shoesはウェブから影響を受けているので、アプリケーションは多くのウィジェットよりも、画像を使ったりテキストを配置する傾向があります。例えば、Shoesはタブコントロールやツールバーを備えていません。Shoesは''軽量な''ツールきっとだと言うことを覚えていますか？
+さて、ウィンドウアプリケーションを作成することができます。
+しかし、Shoesはウェブから影響を受けているので、アプリケーションは多くのウィジェットよりも、
+画像を使ったりテキストを配置する傾向があります。例えば、Shoesはタブコントロールやツールバーを備えていません。
+Shoesは''軽量な''ツールキットだと言うことを覚えていますか？
 
-それでもShoesはボタンやエディットボックスのようなウィジェットを少しだけ持っています。そして、多くの（タブコントロールまたはツールバーのような）不足している要素は、画像でシミュレーションすることができます。
+それでもShoesはボタンやエディットボックスのようなウィジェットを少しだけ持っています。
+そして、多くの（タブコントロールまたはツールバーのような）不足している要素は、画像でシミュレーションすることが
+できます。
 
-ShoesはCairoと呼ばれるとてもよくできた描画エンジンによって一部書かれており、それは形状や色彩を描くのに利用されています。このように、Shoesは、生き生きとしたグラフィックを描画するためにとてもいい言語である、NodeBoxとProcessingから影響を受けています。
+ShoesはCairoと呼ばれるとてもよくできた描画エンジンによって一部書かれており、
+それは形状や色彩を描くのに利用されています。このように、Shoesは、生き生きとしたグラフィックを描画するために
+とてもいい言語である、NodeBoxとProcessingから影響を受けています。
 
-== The Rules of Shoes ==
+== The Rules of Green Shoes ==
 
-Shoesがどのように動作するのか推測するのはやめましょう。トリッキーな動作で悩むと思います。私はShoesの中心的な規則を要約しまいた。これらは、それにすべての働きをさせるためには知らなくてはならないものです。
+Green Shoesがどのように動作するのか推測するのはやめましょう。トリッキーな動作で悩むと思います。
+私はShoesの中心的な規則を要約しまいた。これらは、それにすべての働きをさせるためには知らなくては
+ならないものです。
 
-これらはShoesの至る所に目にする一般的な規則です。Shoesは単純さと明解さという全体的な理念を持っていますが、いくつか勉強したり覚えたりする必要のあるポイントがあります。
+これらはGreen Shoesの至る所で目にする一般的な規則です。Green Shoesは単純さと明解さという
+全体的な理念を持っていますが、いくつか勉強したり覚えたりする必要のあるポイントがあります。
 
 ==== Shoesのトリッキーなブロック ====
 
-はい、これは極めて重要です。Shoesはブロックによってトリックをします。このトリックはすべてのものを読みやすくします。しかし、これは深い階層でブロックを利用することを難しくもします。
+はい、これは極めて重要です。Green Shoesはブロックによってトリックをします。
+このトリックはすべてのものを読みやすくします。しかし、これは深い階層でブロックを利用することを難しくもします。
 
 '''普通のRubyブロックを試しましょう：'''
 
 {{{
- ary = ['potion', 'swords', 'shields']
- ary.each do |item|
-   puts item
+ Shoes.app do
+   ary = ['potion', 'swords', 'shields']
+   ary.each do |item|
+     puts item
+   end
  end
 }}}
 
-Shoesでは、これらの種類のブロックは同じ働きをします。この上記のブロックは配列をループして各オブジェクトを`item`変数に格納します。この`item`変数はブロックが終わると消滅（スコープから出る）します。
+Green Shoesでは、これらの種類のブロックは同じ働きをします。この上記のブロックは配列をループして
+各オブジェクトを`item`変数に格納します。この`item`変数はブロックが終わると消滅（スコープから出る）します。
 
-考え方を守っているもう一つのことは、普通のRubyブロックの内部と`self`を同じままにしています。`each`の前に呼ばれるどんな`self`でも、それは`each`ブロック内部と同じです。
+考え方を守っているもう一つのことは、普通のRubyブロックの内部と`self`を同じままにしています。
+`each`の前に呼ばれるどんな`self`でも、それは`each`ブロック内部と同じです。
 
-'''これらはどちらも大部分のShoesのブロックで正しいです。'''
+'''これらはどちらも大部分のGreen Shoesのブロックで正しいです。'''
 
 {{{
  Shoes.app do
@@ -145,7 +183,8 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
 
 もう一方のブロックは`stack`ブロックです。このブロックはselfを変更しません。
 
-'''どんな理由があって`app`ブロックはselfを変更するのでしょうか？''' 最後の例を徹底的に詳しく説明することから始めましょう。
+'''どんな理由があって`app`ブロックはselfを変更するのでしょうか？''' 最後の例を徹底的に詳しく説明することから
+始めましょう。
 
 {{{
  Shoes.app do
@@ -157,7 +196,9 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
  end
 }}}
 
-上記の例におけるすべての`self`はアプリケーションオブジェクトです。Shoesは`app`ブロック内部でselfを変更するために、Rubyの`instance_eval`を利用します。そして、そのメソッドは`stack`を呼び出して`para`をアプリケーションへ送ります。
+上記の例におけるすべての`self`はアプリケーションオブジェクトです。Shoesは`app`ブロック内部でselfを
+変更するために、Rubyの`instance_eval`を利用します。そして、そのメソッドは`stack`を呼び出して
+`para`をアプリケーションへ送ります。
 
 '''これはShoesアプリケーション全体でインスタンス変数が利用できる理由でもあります：'''
 
@@ -173,13 +214,13 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
 
 これらのインスタンス変数は、すべてアプリケーションオブジェクト内部で終了します。
 
-'''新しいウィンドウを作成するときはいつでも、`self`も変更されます。'''そして、Shoes.appに加えて、これは[[Element.window]]と[[Element.dialog]]メソッドを意味します。
+'''新しいウィンドウを作成するときはいつでも、`self`も変更されます。'''
 
 {{{
- Shoes.app :title => "MAIN" do
+ Shoes.app title: "MAIN" do
    para self
    button "Spawn" do
-     window :title => "CHILD" do
+     Shoes.app title: "CHILD" do
        para self
      end
    end
@@ -190,9 +231,12 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
 
 もっとも、`stack`ブロックは別の話です。これは`self`を変えませんし、基本的に標準のブロックです。
 
-'''しかしトリックがあります：'''`stack`を配置してブロックを与えたとき、アプリケーションオブジェクトはstackをメモリへ配置します。ブロックが終了するときstackは立ち去ります。そのため、アプリケーションのトップスロットから新しいstackまで、ブロック内部のすべての描画は'''リダイレクト'''されます。
+'''しかしトリックがあります：'''`stack`を配置してブロックを与えたとき、アプリケーションオブジェクトはstackを
+メモリへ配置します。ブロックが終了するときstackは立ち去ります。
+そのため、アプリケーションのトップスロットから新しいstackまで、ブロック内部のすべての描画は'''リダイレクト'''されます。
 
-そのため、まず、たとえ彼らが確かにアプリケーションオブジェクトへ渡したとしても、それらの3つの`para`は`stack`上に描画されます。
+そのため、まず、たとえ彼らが確かにアプリケーションオブジェクトへ渡したとしても、それらの3つの`para`は
+`stack`上に描画されます。
 
 {{{
  Shoes.app do
@@ -206,41 +250,54 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
 
 少しトリッキーですよね？これについて知っていても噛みつかれるかもしれません。
 
-それがあなたをつかまえる一つの方法は、`app`ブロック外のプログラム内のどこか他で、stackを編集しようとすることです。
+それがあなたをつかまえる一つの方法は、`app`ブロック外のプログラム内のどこか他で、stackを編集しようと
+することです。
 
 例えばstackオブジェクトを使いまわすとしましょう。そして、そのオブジェクトを編集するクラスを持ちます。
 
 {{{
  class Messenger
-   def initialize(stack)
-     @stack = stack
+   def initialize slot
+     @slot = slot
    end
-   def add(msg)
-     @stack.append do
-       para msg
-     end
+   def add msg
+     para msg rescue puts $!
    end
+ end
+ 
+ Shoes.app do
+   slot = stack
+   m = Messenger.new slot
+   m.add 'hello'
  end
 }}}
 
-アプリケーションが始まるときに、stackオブジェクトをMessengerクラスへ渡すと仮定します。そして、後で、メッセージが来るとき、`add`メソッドはそのstackにパラグラフを追加するのに用いられます。正しく動作するでしょうか？
+アプリケーションが始まるときに、stackオブジェクトをMessengerクラスへ渡すと仮定します。
+そして、後で、メッセージが来るとき、`add`メソッドはそのstackにパラグラフを追加するのに用いられます。
+正しく動作するでしょうか？
 
-いや、それは動作しません。`para`メソッドが見つかりません。すでにアプリケーションオブジェクトはまわりにありません。そして、それは`para`メソッドによるものです。
+いや、それは動作しません。`para`メソッドが見つかりません。すでにアプリケーションオブジェクトは
+まわりにありません。そして、それは`para`メソッドによるものです。
 
-幸いにも、それぞれのShoesオブジェクトはアプリケーションオブジェクトを再び開かせる`app`メソッドを持っているため、さらなる編集ができます。
+幸いにも、それぞれのShoesオブジェクトはアプリケーションオブジェクトを再び開かせる`app`メソッドを
+持っているため、さらなる編集ができます。
 
 {{{
  class Messenger
-   def initialize(stack)
-     @stack = stack
+   def initialize slot
+     @slot = slot
    end
-   def add(msg)
-     @stack.app do
-       @stack.append do
-         para msg
-       end
+   def add msg
+     @slot.app do
+       para msg rescue puts $!
      end
    end
+ end
+ 
+ Shoes.app do
+   slot = stack
+   m = Messenger.new slot
+   m.add 'hello'
  end
 }}}
 
@@ -248,7 +305,10 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
 
 ルールは次のようになります：
 
-1. '''"app"という名前か新しいウィンドウを作成するメソッドはアプリケーションオブジェクトの`self`を変更します。'''[[BR]]（これは、[[Element.window]] と[[Element.dialog]]同様に、Shoes.appとSlot.appの両方にとって正しいです。）[[BR]]2. '''stackへ加えられるブロックは、フローや（追加などの）どんな操作メソッドでもselfを変更しません。その代わりに、彼らはスロットをアプリケーションの編集stackにポップします。'''
+1. '''"app"という名前か新しいウィンドウを作成するメソッドはアプリケーションオブジェクトの`self`を変更します。
+'''[[BR]]（これは、[[Element.window]] と[[Element.dialog]]同様に、Shoes.appとSlot.appの両方にとって正しいです。）
+[[BR]]2. '''stackへ加えられるブロックは、フローや（追加などの）どんな操作メソッドでもselfを
+変更しません。その代わりに、彼らはスロットをアプリケーションの編集stackにポップします。'''
 
 ==== 固定された高さに注意 ====
 
@@ -258,10 +318,12 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
  Shoes.app do
    flow do
      stack :width => 200 do
+       background lavender
        caption "Column one"
        para "is 200 pixels wide"
      end
      stack :width => -200 do
+       background bisque
        caption "Column two"
        para "is 100% minus 200 pixels wide"
      end
@@ -269,15 +331,18 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
  end
 }}}
 
-スロットの固定された高さは、より一般的ではありません。通常は、テキストや画像がウィンドウの下へできるだけ流れることを望みます。高さは通常は自然に決定します。
+スロットの固定された高さは、より一般的ではありません。通常は、テキストや画像がウィンドウの下へ
+できるだけ流れることを望みます。高さは通常は自然に決定します。
 
-ここで重要なことは、固定された高さが実際はスロットに違うように振る舞わせることです。確かに最後にはスロットは完全に切り離なされて、'''入れ子のウィンドウ'''になります。新しいレイヤーはオペレーティングシステムによってスロットを一定の正方形に保つために作成されます。
+ここで重要なことは、固定された高さが実際はスロットに違うように振る舞わせることです。
+確かに最後にはスロットは完全に切り離なされて、'''入れ子のウィンドウ'''になります。
+新しいレイヤーはオペレーティングシステムによってスロットを一定の正方形に保つために作成されます。
 
 通常のスロットと入れ子ウィンドウのスロットとの違いは、後者はスクロールバーを持てることです。
 
 {{{
  Shoes.app do
-   stack :width => 200, :height => 200, :scroll => true do
+   stack width: 200, height: 200, scroll: true do
      background "#DFA"
      100.times do |i|
        para "Paragraph No. #{i}"
@@ -286,43 +351,63 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
  end
 }}}
 
-これらの入れ子ウィンドウはより多くのメモリを必要とします。彼らはアプリケーションにもう少し負担をかけます。もしあなたが、固定された高さのたくさんのスロットで遅さを経験しているなら、違うアプローチを試してください。
+これらの入れ子ウィンドウはより多くのメモリを必要とします。彼らはアプリケーションにもう少し負担をかけます。
+もしあなたが、固定された高さのたくさんのスロットで遅さを経験しているなら、違うアプローチを試してください。
 
-==== 画像と形状のブロック ====
-
-多くの初心者が形状でウィンドウを散らかし始めます。すべての長方形や楕円形をスロットへ投げ入れるのは確かに簡単です。
-
-'''しかしながら、Shoesはそれらすべての形状のためにオブジェクトを生成することを覚えておいて下さい！。'''
+'''注意:''' 固定された高さのマジック(スロットを入れ子のウィンドウにする)は今のところGreen Shoesでは
+サポートしていません。スクロールバーは自動的に現れますがメインウィンドウに対してのみです。
 
 {{{
  Shoes.app do
-   fill black(0.1)
-   100.times do |i|
-     oval i, i, i * 2
-   end
- end
-}}}
-
-この例では、100個の楕円形オブジェクトが生成されます。これは悪すぎるわけではありません。しかし、一つの形状の中にこれらを作成するのなら、これはより軽量になるでしょう。
-
-{{{
- Shoes.app do
-   fill black(0.1)
-   shape do
+   stack :width => 200 do
+     background "#DFA"
      100.times do |i|
-       oval i, i, i * 2
+       para "Paragraph No. #{i}"
      end
    end
  end
 }}}
 
-ああ、待ってください。この楕円形は今回は満たされません。なぜなら、この形状たちは一つの大きな形状に結合されたからです。そして、このケースではShoesはどこを満たすべきか、分かりません。
+==== 画像と形状のブロック ====
+
+多くの初心者が形状でウィンドウを散らかし始めます。すべての長方形や楕円形をスロットへ投げ入れるのは
+確かに簡単です。
+
+'''しかしながら、Shoesはそれらすべての形状のためにオブジェクトを生成することを覚えておいて下さい！。'''
+
+{{{
+ Shoes.app do
+   fill black.push(0.1)
+   100.times do |i|
+     oval i, i, i * 2 if i > 0
+   end
+ end
+}}}
+
+この例では、100個の楕円形オブジェクトが生成されます。これは悪すぎるわけではありません。
+しかし、一つの形状の中にこれらを作成するのなら、これはより軽量になるでしょう。
+
+{{{
+ # Not yet available
+ Shoes.app do
+   fill black(0.1)
+   shape do
+     100.times do |i|
+       oval i, i, i * 2 if i > 0
+     end
+   end
+ end
+}}}
+
+ああ、待ってください。この楕円形は今回は満たされません。なぜなら、この形状たちは一つの大きな形状に
+結合されたからです。そして、このケースではShoesはどこを満たすべきか、分かりません。
 
 そして、アウトラインを厳密に扱うとき、通常は一つの形状に結合することを望みます。
 
 別のオプションでは、これらすべての楕円形を一つの画像に結合します。
 
 {{{
+ # Not yet available
  Shoes.app do
    fill black(0.1)
    image 300, 300 do
@@ -333,24 +418,34 @@ Shoesでは、これらの種類のブロックは同じ働きをします。こ
  end
 }}}
 
-そうしよう！その楕円形はすべて一つの300 x 300の画像に結合されます。この場合では、その画像をメモリに保管するのは、おそらく100個の楕円形を持つよりはるかに大きくなるかもしれません。しかし、何千もの形状を扱う場合には、イメージブロックはより安っぽくなる可能性があります。
+そうしよう！その楕円形はすべて一つの300 x 300の画像に結合されます。この場合では、その画像を
+メモリに保管するのは、おそらく100個の楕円形を持つよりはるかに大きくなるかもしれません。
+しかし、何千もの形状を扱う場合には、イメージブロックはより安っぽくなる可能性があります。
 
-ポイントは以下の通りです：画像やブロックへ形状をグループ化することは簡単ですので、もし速度を得ようとするのなら、それを試してください。形状ブロックは特にメモリと速度を節約させるでしょう。
+ポイントは以下の通りです：画像やブロックへ形状をグループ化することは簡単ですので、もし速度を
+得ようとするのなら、それを試してください。形状ブロックは特にメモリと速度を節約させるでしょう。
+
+''注意:'' 今のところGreen Shoesではこのマジック(複数の形状をグループにして一つの画像や形状にする)
+はサポートしていません。
 
 ==== どこでもUTF-8 ====
 
-Ruby自体はUnicodeを意識しません。そして、UTF-8は一種のUnicodeです。(UTF-8の完全な説明は[[http://en.wikipedia.org/wiki/UTF-8 Wikipedia]]を見てください。)
+Ruby自体はUnicodeを意識しません。そして、UTF-8は一種のUnicodeです。
+(UTF-8の完全な説明は[[http://en.wikipedia.org/wiki/UTF-8 Wikipedia]]を見てください。)
 
-しかしながら、UTF-8はWEBで一般的です。そして、多くの異なったプラットホームがそれをサポートします。そこで、Shoesがしなくてはならない変換の量を減らすために、Shoesはすべての文字列がUTF-8フォーマットであることを期待します。
+しかしながら、UTF-8はWEBで一般的です。そして、多くの異なったプラットホームがそれをサポートします。
+そこで、Green Shoesがしなくてはならない変換の量を減らすために、Green Shoesはすべての文字列が
+UTF-8フォーマットであることを期待します。
 
-すばらしいことに、ShoesでUTF-8を使えば無数の言語（ロシア語、日本語、スペイン語、英語）を表示ことができます。テキストエディタでUTF-8を使用することだけを確認してください!
+すばらしいことに、Green ShoesでUTF-8を使えば無数の言語（ロシア語、日本語、スペイン語、英語）を
+表示ことができます。テキストエディタでUTF-8を使用することだけを確認してください!
 
 実例を示します：
 
 {{{
  Shoes.app do
    stack :margin => 10 do
-     @edit = edit_box :width => 1.0 do
+     @edit = edit_box do
        @para.text = @edit.text
      end
      @para = para ""
@@ -358,32 +453,42 @@ Ruby自体はUnicodeを意識しません。そして、UTF-8は一種のUnicode
  end
 }}}
 
-このアプリケーションは何でもコピーして編集ボックスに貼り付けて、Shoesパラグラフで表示することができます。外国語（ギリシャ語か日本語のような）のテキストをこのボックスにコピーして、どのように表示されるかを見ることができます。
+このアプリケーションは何でもコピーして編集ボックスに貼り付けて、Green Shoesパラグラフで表示することが
+できます。外国語（ギリシャ語か日本語のような）のテキストをこのボックスにコピーして、どのように表示されるかを
+見ることができます。
 
-これは、その編集ボックスがUTF-8の文字を返すことを確かめるのにいいテストです。そして、そのパラグラフはどんなUTF-8の文字でも設定することができます。
+これは、その編集ボックスがUTF-8の文字を返すことを確かめるのにいいテストです。
+そして、そのパラグラフはどんなUTF-8の文字でも設定することができます。
 
-'''重要事項：'''もしいくつかのUTF-8の文字が表示されないなら、パラグラフのフォントを変更する必要があります。これは特にOS Xで一般的です。
+'''重要事項：'''もしいくつかのUTF-8の文字が表示されないなら、パラグラフのフォントを変更する必要があります。
+これは特にOS Xで一般的です。
 
 そして、OS Xでのおすすめの日本語フォントは'''AppleGothic'''です。Windowsでは'''MS UI Gothic'''です。
 
 {{{
  Shoes.app do
-   para "てすと (te-su-to)", :font => case RUBY_PLATFORM
-   when /mingw/; "MS UI Gothic"
-   when /darwin/; "AppleGothic, Arial"
-   else "Arial"
-   end
+   para "てすと (te-su-to)",
+    font: case RUBY_PLATFORM
+    when /mingw/; "MS UI Gothic"
+    when /darwin/; "AppleGothic, Arial"
+    else "Arial"
+    end
  end
 }}}
 
-さらに、Shoesで文字列を扱う場合もUTF-8の文字列を必要とします。編集ボックス、編集ライン、リストボックス、ウィンドウタイトルやテキストブロックはすべてUTF-8をとります。間違った文字の入った文字列をあたえた場合は、コンソールにエラーが表示されます。
+さらに、Green Shoesで文字列を扱う場合もUTF-8の文字列を必要とします。
+編集ボックス、編集ライン、リストボックス、ウィンドウタイトルやテキストブロックはすべてUTF-8をとります。
+間違った文字の入った文字列をあたえた場合は、コンソールにエラーが表示されます。
 
 ==== メインアプリケーションとRequire ====
 
-'''注意:''' このルールはRaisinsのためのものです。PolicemanではTOPLEVEL_BINDINGを使っているので、最初の例では `main` (Rubyトップレベルオブジェクト)が表示されます。`Shoes.app`ブロックの外側では、`Para`ではなく`Shoes::Para`と記述する必要がありますが。
+'''注意:''' このルールはRaisinsのためのものです。PolicemanとGreen ShoesではTOPLEVEL_BINDINGを
+使っているので、最初の例では `main` (Rubyトップレベルオブジェクト)が表示されます。
+`Shoes.app`ブロックの外側では、`Para`ではなく`Shoes::Para`と記述する必要がありますが。
 
-
-それぞれのShoesアプリケーションは、それ自体を作ることができる小さな部屋を与えられます。クラスを作成したり変数を設定できますが、それらは他のShoesプログラムから見ることはできません。それぞれのプログラムはそれ自身の匿名クラス内で実行されます。
+それぞれのShoesアプリケーションは、それ自体を作ることができる小さな部屋を与えられます。
+クラスを作成したり変数を設定できますが、それらは他のShoesプログラムから見ることはできません。
+それぞれのプログラムはそれ自身の匿名クラス内で実行されます。
 
 {{{
  main = self
@@ -392,7 +497,9 @@ Ruby自体はUnicodeを意識しません。そして、UTF-8は一種のUnicode
  end
 }}}
 
-この匿名クラスは`(shoes)`と呼ばれ、それは空の無名クラスです。`Shoes`モジュールは（`include Shoes`を利用して）このクラスにミックスインされているため、パラグラフクラスを参照しているときに`Para`や`Shoes::Para`を利用することができます。
+この匿名クラスは`(shoes)`と呼ばれ、それは空の無名クラスです。`Shoes`モジュールは
+（`include Shoes`を利用して）このクラスにミックスインされているため、パラグラフクラスを参照しているときに
+`Para`や`Shoes::Para`を利用することができます。
 
 このアプローチの長所は：
 
@@ -405,95 +512,125 @@ Ruby自体はUnicodeを意識しません。そして、UTF-8は一種のUnicode
 
 {{{
  class Storage; end
-
+ 
  Shoes.app do
    para Storage.new
  end
 }}}
 
-アプリケーションが完了すれば`Storage`クラスは消えます。ほかのアプリケーションはStorageクラスを利用できません。そして、それは`require`を利用してロードされるファイルから手に入れることはできません。
+アプリケーションが完了すれば`Storage`クラスは消えます。ほかのアプリケーションはStorageクラスを
+利用できません。そして、それは`require`を利用してロードされるファイルから手に入れることはできません。
 
 もっとも、`require`するときそのコードは近くにいます。それはRubyのトップレベル環境に保持されます。
 
-そして、この規則は：'''アプリケーションのコードに一時的なクラスを保持し、requireに永続的なクラスを保持しなさい'''です。
+そして、この規則は：'''アプリケーションのコードに一時的なクラスを保持し、requireに永続的なクラスを
+保持しなさい'''です。
 
 = Shoes =
 
-Shoesはウィンドウや、それらウィンドウ内部の要素を描くことがすべてです。今はウィンドウ自体に焦点を当てましょう。他のセクションの[[Slots]]や[[Elements]]がウィンドウ内部に関してのすべてを対象としています。
+Green Shoesはウィンドウや、それらウィンドウ内部の要素を描くことがすべてです。
+今はウィンドウ自体に焦点を当てましょう。
+他のセクションの[[Slots]]や[[Elements]]がウィンドウ内部に関してのすべてを対象としています。
 
-ここでは、このマニュアルはより辞書のように読んでください。それぞれのページのほとんどは、利用可能なメソッドの一覧であり、各トピックを対象としています。この考えは、すべてに関してとても詳細かつ明確であることです。
+ここでは、このマニュアルはより辞書のように読んでください。それぞれのページのほとんどは、利用可能なメソッドの
+一覧であり、各トピックを対象としています。この考えは、すべてに関してとても詳細かつ明確であることです。
 
-そして、このマニュアルの難しさにぶつかって、始めることについてまだ分からないなら、おそらくこのマニュアルの[[Hello! beginning]]に戻るべきです。
-または、ウェブ上の初心者のリーフレットである[[https://github.com/downloads/shoes/shoes/nks.pdf Nobody Knows Shoes]]を試してください。
+そして、このマニュアルの難しさにぶつかって、始めることについてまだ分からないなら、おそらくこのマニュアルの
+[[Hello! beginning]]に戻るべきです。
+または、ウェブ上の初心者のリーフレットである
+[[https://github.com/downloads/shoes/shoes/nks.pdf Nobody Knows Shoes]]を試してください。
 
 ==== 方法の見つけ方 ====
 
 このセクションは以下を対象とします：
 
- * [[Built-in Built-in methods]] - Shoesプログラムのどこでも利用できる一般的なメソッド。
- * [[App The App window]] - Shoesのすべてのメインウィンドウに添付されたメソッド。
- * [[Styles The Styles Master List]] - Shoesのすべてのスタイルの完全な一覧。
- * [[Classes The Classes list]] - Shoesのクラスやサブクラスについて表示している表。
+ * [[Built-in Built-in methods]] - Green Shoesプログラムのどこでも利用できる一般的なメソッド。
+ * [[App The App window]] - Green Shoesのすべてのメインウィンドウに添付されたメソッド。
+ * [[Styles The Styles Master List]] - Green Shoesのすべてのスタイルの完全な一覧。
+ * [[Classes The Classes list]] - Green Shoesのクラスやサブクラスについて表示している表。
  * [[Colors The Colors list]] - すべてのビルトインカラーと[[Built-in.rgb]]におけるそれぞれの数の表。
 
-ページをよく見ても見つからないものがあれば、[[Search]]ページを試してください。それは問題をさける手っ取り早い方法です。
+ページをよく見ても見つからないものがあれば、[[Search]]ページを試してください。
+それは問題をさける手っ取り早い方法です。
 
 この一般的なリファレンスのあとに、他の２つの特別なセクションがあります：
 
  * [[Slots]] - [[Element.stack]]と[[Element.flow]]を対象とする、２つの種類のスロット。
  * [[Elements]] - すべてのボタン、形状、画像などのためのドキュメント。
 
-ここに[[Element Element Creation]]ページ（追加できるすべてのエレメントの一覧）と[[Common Common Methods]] ページ（すべてのスロットやエレメントにあるメソッドの一覧）の２つのとても大切なページがあります。
+ここに[[Element Element Creation]]ページ（追加できるすべてのエレメントの一覧）と
+[[Common Common Methods]] ページ（すべてのスロットやエレメントにあるメソッドの一覧）の
+２つのとても大切なページがあります。
 
 == Built-in Methods ==
 
-これらのメソッドはShoesのプログラムを通してどこでも利用できます。
+これらのメソッドはGreen Shoesのプログラムを通してどこでも利用できます。
 
-これらすべてのコマンドは、あなたがドットを彼らに付与しない点が珍しいです。
+これらすべてのコマンドは、あなたがドットをそれらに付与しない点が珍しいです。
 '''このマニュアルのほかのすべてのメソッドはオブジェクトにドットを付与すべきです。'''
 しかし、これらのビルトインメソッド（カーネルメソッドとも呼ばれている）はドットがないことを意味します。
 
 一般的なものとして`alert`があります：
 
 {{{
- #!ruby
- alert "No dots in sight"
+  alert "No dots in sight"
 }}}
 
-これと、カーネルメソッドはなくArrayとStringに対してだけ利用可能な`reverse`メソッドを比較してください：
+これと、ArrayとStringに対してだけ利用可能な、カーネルメソッドではない、
+`reverse`メソッドを比較してください：
 
 {{{
  #!ruby
- "Plaster of Paris".reverse
-  #=> "siraP fo retsalP"
- [:dogs, :cows, :snakes].reverse
-  #=> [:snakes, :cows, :dogs]
+ Shoes.app do
+   para "Plaster of Paris".reverse
+   #=> "siraP fo retsalP"
+   para [:dogs, :cows, :snakes].reverse
+   #=> [:snakes, :cows, :dogs]
+ end
 }}}
 
-描画やボタンを作成したりするための多くのShoesメソッドはスロットへ付与されます。より詳しい情報については[[Slots]]のセクションを見てください。
+描画やボタンを作成したりするための多くのGreen Shoesメソッドはスロットへ付与されます。
+より詳しい情報については[[Slots]]のセクションを見てください。
 
 ==== ビルトイン定数 ====
 
-Shoesにはいくつかのビルトイン定数があり、それはどんなバージョンのShoesが実行されているかを判別することを証明するのに利用できるかもしれません
+Green Shoesにはいくつかのビルトイン定数があり、それはどんなバージョンのGreen Shoesが
+実行されているかを判別することを証明するのに利用できるかもしれません
 
-'''Shoes::RELEASE_NAME''' Shoesリリース名の文字列定数です。Curiousから始まって、すべてのShoesリリースは名付けられます。
+'''DIR''' は、`green_shoes/lib`のフルパスです。
 
-'''Shoes::RELEASE_ID''' Shoesリリース表す数字を含みます。そして、例えばCuriousはナンバー1であり、それは初めての公式リリースです。
+'''COLORS''' は、アプリケーションで利用できる色の完全な一覧です。
 
-'''Shoes::REVISION''' は、そのビルドのSubversionのリビジョン番号です。
+'''FONTS''' は、アプリケーションで利用できるフォントの完全な一覧です。
 
-'''Shoes::FONTS''' は、アプリケーションで利用できるフォントの完全な一覧です。この一覧は[[Built-in.font]]メソッドによってロードされたすべてのフォントを含みます。
+'''VERSION''' は、Green Shoesのバージョンです。
 
-=== alert(message: a string) » nil ===
+{{{
+ Shoes.app do
+   para VERSION
+   para fg(DIR, red)
+   image File.join(DIR, '../static/gshoes-icon.png')
+   para fg(FONTS.join(', '), green)
+   para COLORS.map{|k, v| [k, v]}
+ end
+}}}
+
+=== alert(message: a string, :block => true or false, title: a string) » nil ===
 
 短いメッセージを含むウィンドウをポップアップします。
 
 {{{
  #!ruby
- alert("I'm afraid I must interject!")
+ alert "I'm afraid I must interject!"
 }}}
 
-alertは信じられないほど煩わしいので控えめに利用してください！プログラムをデバッグする手助けのメッセージを表示するためにalertを利用するなら、[[Built-in.debug]]または[[Built-in.info]]メソッドを調べてみてください。
+alertは信じられないほど煩わしいので控えめに利用してください！
+プログラムをデバッグする手助けのメッセージを表示するためにalertを利用するなら、
+Rubyの標準メソッド`puts`や`p`を試してみて下さい。
+
+もしalert()メソッドをスレッドセーフにしたい場合、すなわちメインスレッドをブロックしたくない場合は、
+`:block => false`オプションを使ってください。またウィンドウのタイトルを変更したい場合は、
+`:title => a string`オプションを使ってください。
 
 === ask(message: a string) » a string ===
 
@@ -501,26 +638,31 @@ alertは信じられないほど煩わしいので控えめに利用してくだ
 
 {{{
  #!ruby
- name = ask("Please, enter your name:")
+ if name = ask("Please, enter your name:")
+   Shoes.app{para "Welcome, #{name}!"}
+ end
 }}}
 
-上記のスクリプトを実行するとき、コンピュータを利用している人は、名前を入力するための空のボックスを持つウィンドウを見るでしょう。そして、その名前は`name`変数に保存されます。
+上記のスクリプトを実行するとき、コンピュータを利用している人は、名前を入力するための空のボックスを
+持つウィンドウを見るでしょう。そして、その名前は`name`変数に保存されます。
 
-=== ask_color(title: a string) » Shoes::Color ===
+=== ask_color(title: a string) » RGB array ===
 
-カラーピッカーウィンドウをポップアップします。このプログラムは色が選ばれるのを待ち、そしてあなたに色オブジェクトを与えます。いくつかの方法でこの色を利用するために`Color`ヘルプを見てください。
+カラーピッカーウィンドウをポップアップします。このプログラムは色が選ばれるのを待ち、そしてあなたに
+色オブジェクトを与えます。いくつかの方法でこの色を利用するために`Color`ヘルプを見てください。
 
 {{{
  #!ruby
- backcolor = ask_color("Pick a background")
+ backcolor = ask_color "Pick a background"
  Shoes.app do
-  background backcolor
+   background backcolor
  end
 }}}
 
 === ask_open_file() » a string ===
 
-"ファイルを開く。。。"ウィンドウをポップアップします。これは標準のウィンドウであり、すべてのフォルダを表示して開くファイルを選択させます。そしてファイルの名前を返します。
+"ファイルを開く。。。"ウィンドウをポップアップします。これは標準のウィンドウであり、すべてのフォルダを表示して
+開くファイルを選択させます。そしてファイルの名前を返します。
 
 {{{
  #!ruby
@@ -537,11 +679,15 @@ alertは信じられないほど煩わしいので控えめに利用してくだ
 {{{
  #!ruby
  save_as = ask_save_file
+ Shoes.app do
+   para save_as
+ end
 }}}
 
 === ask_open_folder() » a string ===
 
-"フォルダを開く。。。"ウィンドウをポップアップします。これは、すべてのフォルダを表示し、開くフォルダを選択させる標準のウィンドウです。これはあなたにフォルダの名前を渡します。
+"フォルダを開く。。。"ウィンドウをポップアップします。これは、すべてのフォルダを表示し、開くフォルダを
+選択させる標準のウィンドウです。これはあなたにフォルダの名前を渡します。
 
 {{{
  #!ruby
@@ -553,50 +699,42 @@ alertは信じられないほど煩わしいので控えめに利用してくだ
 
 === ask_save_folder() » a string ===
 
-これは先ほど述べた`ask_open_folder`と似ており、"フォルダを保存する。。。"ウィンドウをポップアップします。OS X上では、現在このメソッドは`ask_open_folder`のエイリアスのようになっています。
+これは先ほど述べた`ask_open_folder`と似ており、"フォルダを保存する。。。"ウィンドウをポップアップします。
 
 {{{
  #!ruby
  save_to = ask_save_folder
+ Shoes.app do
+   para save_to
+ end
 }}}
-
 
 === confirm(question: a string) » true or false ===
 
-yes-または-noの質問をポップアップします。コンピュータの前の人が'''yes'''をクリックするなら、返される`true`を受け取ります。そうでは無いなら、返される`false`を受け取ります。
+yes-または-noの質問をポップアップします。コンピュータの前の人が'''yes'''をクリックするなら、
+返される`true`を受け取ります。そうでは無いなら、返される`false`を受け取ります。
 
 {{{
  #!ruby
  if confirm("Draw a circle?")
-  Shoes.app{ oval :top => 0, :left => 0, :radius => 50 }
+  Shoes.app{ oval top: 0, left: 0, radius: 50 }
  end
 }}}
-
-=== debug(message: a string) » nil ===
-
-Shoesコンソールへデバッグメッセージを送ります。
-どんなShoesウィンドウ上でも、`Alt-/`（または、OS X上では`⌘-/`）を押すことによって、Shoesコンソールを立ち上げることができます。
-
-{{{
- #!ruby
- debug("Running Shoes on " + RUBY_PLATFORM)
-}}}
-
-[[Built-in.error]]、[[Built-in.warn]]と[[Built-in.info]]メソッドも確認してください。
-
-=== error(message: a string) » nil ===
-
-Shoesコンソールへエラーメッセージ送ります。このメソッドはエラーをログするためだけに利用すべきです。自分ためのメッセージをログするには[[Built-in.debug]]メソッドを試してください。
-
-おお、そして、文字列よりも、直接このメソッドに例外を手渡すべきです。そしてそれは適切にフォーマットされるでしょう。
 
 === exit() ===
 
 プログラムを止めます。突然に終了したいときはいつでも、これを呼んでください。
 
+'''注意:''' Ruby自身の標準`exit`メソッドを使う必要がある場合は (フォークされたRubyプロセス内で等)
+`Kernel.exit`を呼び出して下さい。
+
 === font(message: a string) » an array of font family names ===
 
-ファイルからTrueType（または他の種類のフォント）をロードします。TrueTypeはすべてのプラットフォームでサポートされるとはいえ、あなたのプラットフォームは他の種類のフォントをサポートするかもしれません。Shoesはこの動作に、それぞれのオペレーティングシステムのビルトインフォントシステムを利用します。
+ファイルからTrueType（または他の種類のフォント）をロードします。TrueTypeはすべてのプラットフォームで
+サポートされるとはいえ、あなたのプラットフォームは他の種類のフォントをサポートするかもしれません。
+Shoesはこの動作に、それぞれのオペレーティングシステムのビルトインフォントシステムを利用します。
+
+'''注意:''' 今のところGreen Shoesでは、fontメソッドをサポートしていません。
 
 ここにどのプラットフォームで何のフォントが動作するかの目安があります。
 
@@ -610,104 +748,123 @@ Shoesコンソールへエラーメッセージ送ります。このメソッド
  * TrueType font (.ttf) - Mac OS X, Linux, Windows
  * TrueType collection (.ttc) - Mac OS X, Linux, Windows
 
-フォントが適切にロードされたなら、ファイルに見つかったフォントの名前の配列を取り戻すでしょう。そうではなく、ファイルにはフォントが見つからないなら`nil`が返されます。
+フォントが適切にロードされたなら、ファイルに見つかったフォントの名前の配列を取り戻すでしょう。
+そうではなく、ファイルにはフォントが見つからないなら`nil`が返されます。
 
-また興味深いことに:`Shoes::FONTS`定数はこのプラットフォームで利用可能なフォントの完全な一覧です。`include?`を利用していくつかのフォントをチェックできます。
+また興味深いことに:`Shoes::FONTS`定数はこのプラットフォームで利用可能なフォントの完全な一覧です。
+`include?`を利用していくつかのフォントをチェックできます。
 
 {{{
- if Shoes::FONTS.include? "Helvetica"
-   alert "Helvetica is available on this system."
- else
-   alert "You do not have the Helvetica font."
+  if Shoes::FONTS.include? "Coolvetica"
+    alert "Coolvetica is available on this system."
+  else
+    alert "You do not have the Coolvetica font."
+  end
+}}}
+
+もしフォントを表示することに問題があるなら、それを利用する前に、アプリケーションがフォントを
+ロードすることを確認してください。特にOS Xでは、もしフォントがロードされる前に利用されたなら、
+フォントキャッシュはロードされたフォントを無視する傾向があります。
+
+=== gradient(color1, color2) » a range of RGB array ===
+
+二つの色から直線勾配を作ります。それぞれの色に、色を描画するためにRGB arrayか文字列を渡します。
+例えば、`gradient(green, red)`は、`green..red`と同じです。
+また`gradient(green, '#FA3')`のように記述することもできます。
+
+{{{
+ Shoes.app do
+   oval 100, 100, 100,
+     fill: gradient(green, '#FA3'), angle: 45
  end
 }}}
 
-もしフォントを表示することに問題があるなら、それを利用する前に、アプリケーションがフォントをロードすることを確認してください。特にOS Xでは、もしフォントがロードされる前に利用されたなら、フォントキャッシュはロードされたフォントを無視する傾向があります。
-
-=== gradient(color1, color2) » Shoes::Pattern ===
-
-二つの色から直線勾配を作ります。それぞれの色に、色を描画するためにShoes::Colorオブジェクトか文字列を渡します。
-
-=== gray(the numbers: darkness, alpha) » Shoes::Color ===
+=== gray(the numbers: darkness, alpha) » RGB array ===
 
 暗さのレベルや、任意的にはアルファレベルからグレースケールカラーを作成します。
 
 {{{
- black = gray(0.0)
- white = gray(1.0)
+ Shoes.app do
+  nostroke
+  11.times do |i|
+    y = x = 50 + 10 * i
+    r = 200 - 10 * i
+    oval x, y, r, fill: gray(1-i*0.1)
+  end
+ end
 }}}
 
-=== info(message: a string) » nil ===
-
-Shoesコンソールでユーザへの情報を含むメッセージを記録します。そして、そのデバッグメッセージはプログラムで何が発生したのか見つけることを助けるようにデザインされており、`info`メッセージはプログラムについてユーザに追加の情報を教えます。
-
-{{{
- #!ruby
-
- info("You just ran the info example on Shoes #{Shoes::RELEASE_NAME}.")
-}}}
-
-例えば、Shyファイルをロードすればいつでも、ShoesはコンソールにShyの著者とバージョンの情報を含むメッセージを印字します。
-
-=== rgb(a series of numbers: red, green, blue, alpha) » Shoes::Color ===
+=== rgb(red, green, blue, alpha) » an array of decimal numbers ===
 
 赤、緑、青の構成要素から色を作成します。アルファレベル（透明度を示す）は任意に加えることができます。
 
 整数を渡すときは、0から255までの値を利用してください。
 
 {{{
- blueviolet = rgb(138, 43, 226)
- darkgreen = rgb(0, 100, 0)
+ Shoes.app do
+   blueviolet = rgb(138, 43, 226, 0.5)
+   darkgreen = rgb(0, 100, 0, 0.5)
+   oval 100, 100, 100,
+     fill: [blueviolet, darkgreen].sample(1)
+ end
 }}}
 
 または、0.0から1.0までの10進数を利用してください。
 
 {{{
- blueviolet = rgb(0.54, 0.17, 0.89)
- darkgreen = rgb(0, 0.4, 0)
+ Shoes.app do
+   blueviolet = rgb(0.54, 0.17, 0.89)
+   darkgreen = rgb(0, 0.4, 0)
+   oval 100, 100, 100,
+     fill: [blueviolet, darkgreen].sample(1)
+ end
 }}}
-
-このメソッドは`Shoes.rgb`と呼ばれるかもしれません。
-
-=== warn(message: a string) » nil ===
-
-ユーザのために警告を記録します。警告は壊滅的なエラー（それは[[Built-in.error]]を見てください。）ではありません。これは、プログラムが将来変化したり、プログラムの一部が信頼できなくなるなどの通知です。
-
-警告やエラーを見るためには、`Alt-/`(OS Xの場合は`⌘-/`)によりShoesコンソールを開いてください。
 
 == The App Object ==
 
-アプリケーションはURLでコードを実行する一つのウィンドウです。URLを切り替えるとき、新しいアプリケーションオブジェクトが作成され、スタック、フローや他の要素で満たされます。
+アプリケーションはURLでコードを実行する一つのウィンドウです。URLを切り替えるとき、新しい
+アプリケーションオブジェクトが作成され、スタック、フローや他の要素で満たされます。
 
-アプリケーションはウィンドウ自体です。それは閉じられるか、クリアされるか、新しい要素で満たされるかもしれません。!{:margin_left => 100}man-app.png!
+アプリケーションはウィンドウ自体です。それは閉じられるか、クリアされるか、新しい要素で満たされる
+かもしれません。!{:margin_left => 100}../snapshots/sample46.png!
 
-スロット／ボックスの用語では、アプリケーション自体がフローです。詳しくは''Slots''セクションを見てください、しかし、これはどんな要素も直接フローのトップレベルに置かれることを単に意味します。
+スロット／ボックスの用語では、アプリケーション自体がフローです。詳しくは''Slots''セクションを
+見てください、しかし、これはどんな要素も直接フローのトップレベルに置かれることを単に意味します。
 
 === Shoes.app(styles) { ... } » Shoes::App ===
 
-Shoesのアプリケーションウィンドウを開始します。これはShoesプログラムを作るための出発地点です。ブロックの内部では、ウィンドウを様々なShoesの要素（ボタン、アートワーク、その他）で満たし、そしてブロックの外では、ウィンドウがどれぐらい大きいのかを説明するために`styles`を利用します。おそらくアプリケーションの名前や、それがリサイズ可能かどうかについてもです。
+Green Shoesのアプリケーションウィンドウを開始します。これはGreen Shoesプログラムを作るための
+出発地点です。ブロックの内部では、ウィンドウを様々なGreen Shoesの要素（ボタン、アートワーク、
+その他）で満たし、そしてブロックの外では、ウィンドウがどれぐらい大きいのかを説明するために
+`styles`を利用します。おそらくアプリケーションの名前についてもです。
 
 {{{
  #!ruby
- Shoes.app(:title => "White Circle",
-   :width => 200, :height => 200, :resizable => false) {
-     background black
-     fill white
-     oval :top => 20, :left => 20, :radius => 160
- }
+ Shoes.app title: "White Circle",
+   width: 200, height: 200 do
+   background black
+   fill white
+   oval top: 20, left: 20, radius: 160
+ end
 }}}
 
-上記のケースでは、小さなウィンドウを作成します。200×200ピクセルです。それはリサイズ不可能です。そして、そのウィンドウには黒い背景と白い輪の2つの要素があります。
+上記のケースでは、小さなウィンドウを作成します。200×200ピクセルです。
+そして、そのウィンドウには黒い背景と白い輪の2つの要素があります。
 
-いったんアプリケーションが作成されれば、それは[[App.Shoes.APPS]]の一覧に追加されます。もしあなたがより多くのウィンドウを生成したいなら、[[Element.window]]メソッドや[[Element.dialog]]メソッドを見てください。
+いったんアプリケーションが作成されれば、それは[[App.Shoes.APPS]]の一覧に追加されます。
+もしあなたがより多くのウィンドウを生成したいなら、[[Element.window]]メソッドや
+[[Element.dialog]]メソッドを見てください。
 
 === Shoes.APPS() » An array of Shoes::App objects ===
 
-現在開いているすべてのShoesアプリケーションの完全な一覧を作成します。いったんアプリケーションが閉じられると、その一覧から取り除かれます。そう、Shoesでは一度に多くの実行できます。それはとても元気付けられます。
+現在開いているすべてのGreen Shoesアプリケーションの完全な一覧を作成します。
+いったんアプリケーションが閉じられると、その一覧から取り除かれます。
+そう、Green Shoesでは一度に多くの実行できます。それはとても元気付けられます。
 
 === clipboard() » a string ===
 
-システムのクリップボードのすべてのテキストを含む文字列を返します。これはコンピュータ上のどのプログラムからでもカットアンドペーストできるグローバルクリップボードです。
+システムのクリップボードのすべてのテキストを含む文字列を返します。
+これはコンピュータ上のどのプログラムからでもカットアンドペーストできるグローバルクリップボードです。
 
 === clipboard = a string ===
 
@@ -715,72 +872,112 @@ Shoesのアプリケーションウィンドウを開始します。これはSho
 
 === close() ===
 
-アプリケーションのウィンドウを閉じます。複数のウィンドウを開いていて、すべてのアプリケーションを閉じたいなら、ビルトインメソッドの`exit`を利用してください。
+アプリケーションのウィンドウを閉じます。
+複数のウィンドウを開いていて、すべてのアプリケーションを閉じたいなら、ビルトインメソッドの
+`exit`を利用してください。
+
+{{{
+ Shoes.app do
+  para 'hello'
+  button 'spawn' do
+   Shoes.app do
+    para 'hello'
+    button('close: close this window only'){close}
+    button('exit: quit Green Shoes'){exit}
+   end
+  end
+  button('close: close this window only'){close}
+  button('exit: quit Green Shoes'){exit}
+ end
+}}}
 
 === download(url: a string, styles) ===
 
-ダウンロードのスレッド（あなたがJavaScriptに詳しいのなら、およそXMLHttpRequestのようなものです）を開始します。このメソッドは、すぐに戻り値を返してバックグラウンドでダウンロードを開始します。また、それぞれのダウンロードスレッドが`start`、`progress`や`finish`イベントを開始します。
+ダウンロードのスレッド（あなたがJavaScriptに詳しいのなら、およそXMLHttpRequestのようなものです）
+を開始します。このメソッドは、すぐに戻り値を返してバックグラウンドでダウンロードを開始します。
+また、それぞれのダウンロードスレッドが`start`、`progress`や`finish`イベントを開始します。
 downloadにファイルを送ることや、（`finish`イベントの中で）文字列を取り戻すことができます。
 
 downloadにブロックを付けると、それは`finish`イベントとして呼ばれます。
 
-download
-
 {{{
- #!ruby
  Shoes.app do
    stack do
-     title "Searching Google", :size => 16
+     title "Searching Google", size: 16
      @status = para "One moment..."
-
-     # Search Google for 'shoes' and print the HTTP headers
-     download "http://www.google.com/search?q=shoes" do |goog|
-       @status.text = "Headers: " + goog.response.headers.inspect
+ 
+     download "http://is.gd/bXTVY7" do |goog|
+       @status.text = "Headers: #{goog.meta}"
      end
    end
  end
 }}}
 
-そして、ダウンロードしたデータを利用したいなら`goog.response.body`を利用することにより行います。この例は本当に`download`の最も簡単な形です：いくつかのウェブデータをメモリに取ってきて、それを一度ハンドリングしています。
+この例は本当に`download`の最も簡単な形です：いくつかのウェブデータをメモリにダウンロードして、
+ダウンロードが完了するとそのデータを操作しています。
 
-`download`のもう一つのサンプルはいくつかのウェブデータを、`:save`スタイルを利用してファイルに保存します。
+`download`のもう一つのサンプルはいくつかのウェブデータを、`:save`スタイルを利用してファイルに
+保存します。
 
 {{{
- #!ruby
  Shoes.app do
    stack do
-     title "Downloading Google image", :size => 16
+     title "Downloading Google image", size: 16
      @status = para "One moment..."
-
-     download "http://www.google.com/logos/nasa50th.gif",
+ 
+     download "http://is.gd/GVAGF7",
        :save => "nasa50th.gif" do
-         @status.text = "Okay, is downloaded."
+      @status.text = "Okay, is downloaded."
+      image "nasa50th.gif", top: 100
      end
    end
  end
 }}}
 
-このケースでも、ダウンロードファイルのヘッダを取得することができますが、メモリにそのデータが保存されていないため`response.body`は`nil`になります。ダウンロードしたものを得るためにはそのファイルを開く必要があります。
-
-特定のヘッダかアクションをウェブサーバへ送る必要があるのならば、HTTPリクエストをカスタマイズするために`:method`、`:headers`や`:body`スタイルを利用することができます。（そして、それら以上の変更の必要があるのなら、いつでもRubyのOpenURIクラスを破壊することができます。）
+もしも特定のヘッダかアクションをウェブサーバへ送る必要があるのならば、HTTPリクエストを
+カスタマイズするために`:method`、`:headers`や`:body`スタイルを利用することができます。
+（そして、それら以上のスタイルが必要なら、いつでもRubyのOpenURIクラスを準備することができます。）
 
 {{{
  #!ruby
+ # Not yet available
  Shoes.app do
    stack do
-     title "POSTing to Google", :size => 16
+     title "GET Google", size: 16
      @status = para "One moment..."
-
-     download "http://www.stevex.net/dump.php",
-              :method => "POST", :body => "v=1.0&q=shoes" do |dump|
-       require 'hpricot'
-       @status.text = Hpricot(dump.response.body).inner_text
+ 
+     download "http://is.gd/bXTVY7", 
+         :method => "GET" do |dump|
+       @status.text = dump.response.body
      end
    end
  end
 }}}
 
-上記の例から、ShoesはHTMLを解析するHpricotなライブラリを含んでいることが分かります。
+上記の例から、Shoesは、Googleのサーチエンジンへ質問するために"GET"メソッドを
+利用することが分かります。
+
+'''注意:''' Green Shoesは、`:method`, `:headers`, `:body`スタイルをサポートしていません。
+
+{{{
+ include Hpricot
+ Shoes.app do
+   status = para "One moment..."
+   download 'http://is.gd/BatiRt' do |dl|
+     samples = []
+     Hpricot(dl).inner_text.each_line do |line|
+       samples.push($1) if line =~ /(sample.*\.rb)/
+     end
+     status.text = samples.join(', ')
+     flush
+   end
+ end
+}}}
+
+上記の例から、Green ShoesはHTML解析のためにHpricotライブラリを組み込んでいることが
+わかります。
+
+'''注意:''' 今のところWindowsプラットフォームのみです。
 
 === location() » a string ===
 
@@ -803,57 +1000,82 @@ download
 
 === owner() » Shoes::App ===
 
-このアプリケーションを開始したアプリケーションを取得します。多くの場合、これは`nil`でしょう。しかし[[Element.window]]メソッドを利用してアプリケーションが開始されたなら、その所有者は`window`と呼ばれるアプリケーションでしょう。
+このアプリケーションを開始したアプリケーションを取得します。多くの場合、これは`nil`でしょう。
+しかし[[Element.window]]メソッドを利用してアプリケーションが開始されたなら、
+その所有者は`window`と呼ばれるアプリケーションでしょう。
 
 === started?() » true or false ===
 
-ウィンドウはすべて構築され、表示されましたか？これは完全に構築される前に、ウィンドウを利用しようとするスレッド化されたコードのために役に立ちます。
+ウィンドウはすべて構築され、表示されましたか？これは完全に構築される前に、
+ウィンドウを利用しようとするスレッド化されたコードのために役に立ちます。
 （また、ウィンドウが開くときに実行される`start`イベントも見てください。）
+
+''注意:''' 今のところGreen Shoesではstarted?メソッドをサポートしていません。
 
 === visit(url: a string) ===
 
 異なるShoesのURLを見るために、ロケーションを変更します。
 
-（http://google.comのような）絶対パスのURLは悪くないですが、ShoesはShoesアプリケーションがそのアドレスに存在することを期待するでしょう。（そのため、google.comはHTMLアプリケーションとしては動作しません。）
+（http://google.comのような）絶対パスのURLは悪くないですが、Green ShoesはGreen Shoes
+アプリケーションがそのアドレスに存在することを期待するでしょう。
+（そのため、google.comはHTMLアプリケーションとしては動作しません。）
 
 == The Styles Master List ==
 
-外観を変更したいですか？Shoesにおいてはスタイルが要素の表示方法を変更するために利用されます。場合によっては、要素のすべてのクラスのスタイルでさえ設定できます。（すべての段落に特定のフォントを与えるように）
+外観を変更したいですか？
+Green Shoesにおいてはスタイルが要素の表示方法を変更するために利用されます。
+場合によっては、要素のすべてのクラスのスタイルでさえ設定できます。
+（すべての段落に特定のフォントを与えるように）
 
 スタイルは簡単にspotできます。通常は要素が生成されるときに現れます。
 
 {{{
- Shoes.app :title => "A Styling Sample" do
-   para "Red with an underline", :stroke => red, :underline => "single"
+ Shoes.app title: "A Styling Sample" do
+   para 'Green Shoes', align: 'center', size: 50
  end
 }}}
 
-このappには`:title`スタイルが設定されています。そしてこのappの内部の段落には、赤い`:stroke`スタイルと`:underline`スタイルが設定されます。
+このappには`:title`スタイルが設定されています。そしてこのappの内部の段落には、
+中央揃えの`:align`スタイルとフォントサイズ50の`:size`スタイルが設定されます。
 
 このスタイルのハッシュは、どんな要素やスロットも利用できる[[Common.style]]メソッドを利用して変更できます。
 
+'''注意:''' 今のところGreen Shoesでは、styleメソッドで変更できる要素は形状のみです。
+
 {{{
- Shoes.app :title => "A Styling Sample" do
-   @text = para "Red with an underline"
-   @text.style(:stroke => red, :underline => "single")
+ Shoes.app title: "A Styling Sample" do
+   choose = 
+     lambda{[red, blue, green, yellow].sample}
+   s = star 100, 50, 30, 200, 180, strokewidth: 5
+   button 'change colors' do
+     s.style stroke: choose.call, fill: choose.call
+   end
  end
 }}}
 
-多くのスタイルもメソッドとして呼び出すことで設定することができます。（メソッドを見つけるために手動での検索を行うでしょう。）
+多くのスタイルもメソッドとして呼び出すことで設定することができます。
+（メソッドを見つけるために手動での検索を行うでしょう。）
+
+'''注意:''' Green Shoesではメソッドとしてはそれらをサポートしていません。
 
 {{{
- Shoes.app :title => "A Styling Sample" do
-   @text = para "Red with an underline"
-   @text.stroke = red
-   @text.underline = "single"
+ # Not yet available
+ Shoes.app title: "A Styling Sample" do
+   choose = 
+     lambda{[red, blue, green, yellow].sample}
+   s = star 100, 50, 30, 200, 180, strokewidth: 5
+   button 'change colors' do
+     s.stroke = choose.call; s.fill = choose.call
+   end
  end
 }}}
 
-どんなスタイルでも分かるようにすべてのマニュアルを苦労して読ませるよりも、この役に立つページはShoesのあらゆるスタイルを急いで駆け抜けて、どこでスタイルが利用されるかについて示唆します。
+どんなスタイルでも分かるようにすべてのマニュアルを苦労して読ませるよりも、この役に立つページは
+Green Shoesのあらゆるスタイルを急いで駆け抜けて、どこでスタイルが利用されるかについて示唆します。
 
 === :align » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, subtitle, tagline, title''で利用できます。
 
 テキストの整列です。これは次のどれかです：
 
@@ -863,54 +1085,88 @@ download
 
 === :angle » a number ===
 
-''background, border, gradient''で利用できます。
+''background, border, line, oval, rect, shape, star''で利用できます。
 
-グラデーションに摘要する角度です。通常はグラデーションの色の効果は上から下です。`:angle`を90に設定するなら反時計回りに90度回転し、グラデーションは左から右になるでしょう。
+グラデーションに適用する角度です。通常はグラデーションの色の効果は上から下です。
+`:angle`を90に設定するなら反時計回りに90度回転し、グラデーションは左から右になるでしょう。
 
 === :attach » a slot or element ===
 
 ''flow, stack''で利用できます。
 
-他のスロットや要素と比較してスロットをピンで止めます。ウィンドウの左上の角からスロットを配置するために`:attach => Window`と書く人もいるかもしれません。
-これについてもう少し取り上げると、`:top => 10, :left => 10, :attach => Window`のスタイルはスロットをウインドウの座標の(10, 10)に配置します。
+他のスロットや要素と比較してスロットをピンで止めます。ウィンドウの左上の角からスロットを配置する
+ために`:attach => Window`と書く人もいるかもしれません。
+これについてもう少し取り上げると、`:top => 10, :left => 10, :attach => Window`のスタイルは
+スロットをウインドウの座標の(10, 10)に配置します。
 
-動く要素にスロットがアタッチされた場合は、そのスロットはそれとともに動きます。アタッチメントが`nil`にリセットされるなら、通常はそのスロットはそれを取り囲む他のオブジェクトとともに流れます。
+動く要素にスロットがアタッチされた場合は、そのスロットはそれとともに動きます。
+アタッチメントが`nil`にリセットされるなら、通常はそのスロットはそれを取り囲む他のオブジェクトとともに流れます。
+
+'''注意:''' Green Shoesは`:attach`スタイルをサポートしていません。
 
 === :autoplay » true or false ===
 
 ''video''で利用できます。
 
-ビデオは現れた後で再生を開始すべきですか？`true`を設定すると、ビデオはユーザに尋ねること無く開始するでしょう。
+ビデオは現れた後で再生を開始すべきですか？`true`を設定すると、ビデオはユーザに尋ねること無く
+開始するでしょう。
+
+'''注意:''' Green Shoesは`:autoplay`スタイルをサポートしていません。
+
+=== :back » true or false ===
+
+''shapes, image, textblocks''で利用できます。
+
+他の要素の後ろに配置されます。
+
+{{{
+ Shoes.app do
+   rect 100, 100, 100, 100, fill: green
+   rect 120, 120, 100, 100, fill: yellow
+   para 'hello', left: 150, top: 150, front: true
+   oval 150, 150, 100, 100, fill: red
+   oval 180, 180, 100, 100, fill: gray, back: true
+ end
+}}}
 
 === :bottom » a number ===
 
 ''すべてのスロットと要素''で利用できます。
 
-要素の下の端の座標にピクセルを設定します。その端はコンテナの下の端に対して配置されます。そのため、`:bottom => 0`は、スロットの下の端とその下の端が接するように要素を配置するでしょう。
+要素の下の端の座標にピクセルを設定します。その端はコンテナの下の端に対して配置されます。
+そのため、`:bottom => 0`は、スロットの下の端とその下の端が接するように要素を配置するでしょう。
+
+'''注意:''' Green Shoesは`:bottom`スタイルをサポートしていません。
 
 === :cap » :curve or :rect or :project ===
 
-''arc, arrow, border, flow, image, mask, rect, star, shape, stack''で利用できます。
+''arc, line, shape''で利用できます。
 
-線の終点の形状を曲がったもの（curved）か角張ったもの（square）に設定します。追加の説明は[[Art.cap]]メソッドを見てください。
+線の終点の形状を曲がったもの（curved）か角張ったもの（square）に設定します。
+追加の説明は[[Art.cap]]メソッドを見てください。
 
 === :center » true or false ===
 
 ''arc, image, oval, rect, shape''で利用できます。
 
-`:top`と`:left`の座標が形状の中心を意味するかどうか示します。`true`を設定すると、[[Art.transform]]メソッドに`:center`を設定したのと似ています。
+`:top`と`:left`の座標が形状の中心を意味するかどうか示します。
+`true`を設定すると、[[Art.transform]]メソッドに`:center`を設定したのと似ています。
+
+'''注意:''' Green Shoesは`:center`スタイルをサポートしていません。
 
 === :change » a proc ===
 
 ''edit_box, edit_line, list_box''で利用できます。
 
-`change`イベントハンドラはスタイルに保存されます。例として、edit_boxの[[EditBox.change]]メソッドを見てください。
+`change`イベントハンドラはスタイルに保存されます。例として、edit_boxの
+[[EditBox.change]]メソッドを見てください。
 
 === :checked » true or false ===
 
 ''check, radio''で利用できます。
 
-チェックボックスまたはラジオボタンがクリックされましたか？`true`が設定されるなら、そのボックスはチェックされます。[[Check.checked=]]メソッドも見てください。
+チェックボックスまたはラジオボタンがクリックされましたか？
+`true`が設定されるなら、そのボックスはチェックされます。[[Check.checked=]]メソッドも見てください。
 
 === :choose » a string ===
 
@@ -920,7 +1176,7 @@ download
 
 === :click » a proc ===
 
-''arc, arrow, banner, button, caption, check, flow, image, inscription, line, link, mask, oval, para, radio, rect, shape, stack, star, subtitle, tagline, title''で利用できます。
+''arc, arrow, button, check, flow, image, line, link, oval, radio, rect, shape, stack, star''で利用できます。
 
 `click`イベントハンドラはスタイルに保存されます。解説は[[Events.click]]メソッドを見てください。
 
@@ -928,23 +1184,35 @@ download
 
 ''background, border, rect''で利用できます。
 
-長方形の要素のそれぞれの曲がった角の半径です。例として、6を設定した場合、長方形の角は6ピクセルの半径のカーブを与えられます。
+長方形の要素のそれぞれの曲がった角の半径です。例として、6を設定した場合、長方形の角は
+6ピクセルの半径のカーブを与えられます。
 
 === :displace_left » a number ===
 
 ''すべてのスロットと要素''で利用できます。
 
-形状、テキストブロックまたはその他のどんな種類のオブジェクトでも左か右に置き換えます。正数は与えられた数のピクセルによって右へ置き換え、負数は左へ置き換えます。オブジェクトを置き換えることはページの実際のレイアウトに影響を与えません。この振る舞いに少し驚くかもしれないので、このスタイルを利用する前に、[[Position.displace]]のドキュメントを読むようにしてください。
+形状、テキストブロックまたはその他のどんな種類のオブジェクトでも左か右に置き換えます。
+正数は与えられた数のピクセルによって右へ置き換え、負数は左へ置き換えます。
+オブジェクトを置き換えることはページの実際のレイアウトに影響を与えません。
+この振る舞いに少し驚くかもしれないので、このスタイルを利用する前に、[[Position.displace]]の
+ドキュメントを読むようにしてください。
+
+'''注意:''' Green Shoesは`:displace_left`スタイルをサポートしていません。
 
 === :displace_top » a number ===
 
 ''すべてのスロットと要素''で利用できます。
 
-形状、テキストブロックまたはその他のどんな種類のオブジェクトでも上か下に置き換えます。正数は与えられた数のピクセルによって下へ置き換え、負数は上へ置き換えます。オブジェクトを置き換えることはページの実際のレイアウトやオブジェクトの本当の座標に影響を与えません。この振る舞いに少し驚くかもしれないので、[[Position.displace]]のドキュメントを読んでください。
+形状、テキストブロックまたはその他のどんな種類のオブジェクトでも上か下に置き換えます。
+正数は与えられた数のピクセルによって下へ置き換え、負数は上へ置き換えます。
+オブジェクトを置き換えることはページの実際のレイアウトやオブジェクトの本当の座標に影響を与えません。
+この振る舞いに少し驚くかもしれないので、[[Position.displace]]のドキュメントを読んでください。
+
+'''注意:''' Green Shoesは`:displace_top`スタイルをサポートしていません。
 
 === :emphasis » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 強調によってテキストを整えます。（一般的にはイタリック体にされます。）
 
@@ -956,27 +1224,45 @@ download
 
 === :family » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
-与えられたフォントファミリーでテキストを整えます。文字列はフォントファミリー名かカンマで区切られたフォントファミリーの一覧を含むべきです。
+与えられたフォントファミリーでテキストを整えます。文字列はフォントファミリー名かカンマで区切られた
+フォントファミリーの一覧を含むべきです。
 
-=== :fill » a hex code, a Shoes::Color or a range of either ===
+=== :fill » a hex code, a RGB array or a range of either ===
 
-''arc, arrow, background, banner, caption, code, del, em, flow, image, ins, inscription, line, link, mask, oval, para, rect, shape, span, stack, star, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''background, banner, border, caption, inscription, para, line, oval, 
+rect, shape, star, subtitle, tagline, title''で利用できます。
 
-背景のペンの色です。形状では、これは形状の内側を塗りつぶすペンキの色です。テキストなどでは、この色で背景が塗られます。（まるで蛍光ペンでマークされたように）
+背景のペンの色です。形状では、これは形状の内側を塗りつぶすペンキの色です。
+テキストなどでは、この色で背景が塗られます。（まるで蛍光ペンでマークされたように）
 
 === :font » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, subtitle, tagline, title''で利用できます。
 
-フォントの種類でテキストを整えます。この文字列は非常に柔軟ですが、"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"の形である必要があり、FAMILY-LISTの部分は任意にカンマで終わりカンマで区切られたフォントファミリーの一覧、STYLE_OPTIONSはvariant、weight、stretch、またはgravityなどの空白で区切られたスタイルを表現する単語の一覧、そしてSIZEは（ポイントのサイズの）10進数または絶対的なサイズのために単位修飾子"px"を任意に続けます。オプションのどれかは設定されないかもしれません。FAMILY-LISTが設定されない場合は、デフォルトフォントファミリー（Arial）が利用されます。
+フォントの種類でテキストを整えます。この文字列は非常に柔軟ですが、
+"[FAMILY-LIST] [STYLE-OPTIONS] [SIZE]"の形である必要があり、
+FAMILY-LISTの部分は任意にカンマで終わりカンマで区切られたフォントファミリーの一覧、
+STYLE_OPTIONSはvariant、weight、stretch、またはgravityなどの空白で区切られた
+スタイルを表現する単語の一覧、そしてSIZEは（ポイントのサイズの）10進数または絶対的な
+サイズのために単位修飾子"px"を任意に続けます。オプションのどれかは設定されないかもしれません。
+FAMILY-LISTが設定されない場合は、デフォルトフォントファミリー（Arial）が利用されます。
+
+=== :front » true or false ===
+
+''shapes, image, textblocks''で利用できます。
+
+他の要素の前に配置されます。
 
 === :group » a string ===
 
 ''radio''で利用できます。
 
-どのグループにラジオボタンが所属するかを示します。この設定がない場合は、ラジオボタンは周辺のスロットのラジオボタンとグループ化されます。ラジオボタンを"グループ化"することはスクリーン上でお互いに隣接してグループ化されることを意味するのではありません。それは、一度にグループから一つだけのラジオボタンだけを選択できることを意味します。
+どのグループにラジオボタンが所属するかを示します。この設定がない場合は、ラジオボタンは
+周辺のスロットのラジオボタンとグループ化されます。ラジオボタンを"グループ化"することはスクリーン上で
+お互いに隣接してグループ化されることを意味するのではありません。
+それは、一度にグループから一つだけのラジオボタンだけを選択できることを意味します。
 
 文字列にスタイルを与えることによって、ラジオボタンは同じグループ名を持つ他のラジオボタンとグループ化されます。
 
@@ -984,19 +1270,38 @@ download
 
 ''すべてのスロットと要素''で利用できます。
 
-オブジェクトの高さをピクセルで設定します。数値が10進数なら、その高さは親の高さのパーセンテージになります。（0.0は0%に、1.0は100%になります。）
+オブジェクトの高さをピクセルで設定します。数値が10進数なら、その高さは親の高さの
+パーセンテージになります。（0.0は0%に、1.0は100%になります。）
 
 === :hidden » true or false ===
 
 ''すべてのスロットと要素''で利用できます。
 
-オブジェクトの表示または非表示です。すべてのオブジェクトにとって`:hidden => true`は画面上での非表示になります。その子供のスロットと要素でも同様です。
+オブジェクトの表示または非表示です。すべてのオブジェクトにとって`:hidden => true`は
+画面上での非表示になります。その子供のスロットと要素でも同様です。
+
+{{{
+ Shoes.app do
+   slot = stack hidden: true do
+     title 'hello'
+     flow do
+       image File.join DIR, '../samples/loogink.png'
+     end
+     para link('Go go!'){alert 'hi'}
+   end
+   timer(2){slot.show}
+   timer(5){slot.hide}
+ end
+}}}
+
+'''注意:''' 今のところGreen Shoesで`:hidden`スタイルをサポートしている要素は、
+slots, shapes, textblocks, imagesのみです。
 
 === :inner » a number ===
 
 ''star''で利用できます。
 
-内側の半径のサイズ（ピクセル）です。その内側の半径は点が別れ始める星の中に中空でない円を描きます
+内側の半径のサイズ（ピクセル）です。その内側の半径は点が別れ始める星の中に中空でない円を描きます。
 
 === :items » an array ===
 
@@ -1006,15 +1311,18 @@ download
 
 === :justify » true or false ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, subtitle, tagline, title''で利用できます。
 
 均一に水平にテキストの間隔を開けます。
 
 === :kerning » a number ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, code, del, em, ins, inscription, link, para, span,
+strong, sub, sup, subtitle, tagline, title''で利用できます。
 
 文字の間に自然な空白をピクセルで追加します。
+
+'''注意:''' Green Shoesは`:kerning`スタイルをサポートしていません。
 
 === :leading » a number ===
 
@@ -1026,13 +1334,20 @@ download
 
 ''すべてのスロットと要素''で利用できます。
 
-オブジェクトの左の座標を特定のピクセルに設定します。`:left => 10`の設定はそのオブジェクトを含むスロットの左の端からオブジェクトの左の端が10ピクセル離れた位置に配置します。このleftのスタイルが設定されていない（または`nil`が設定される）なら、そのオブジェクトはそれを囲んでいる他のオブジェクトとともに動くでしょう。
+オブジェクトの左の座標を特定のピクセルに設定します。
+`:left => 10`の設定はそのオブジェクトを含むスロットの左の端からオブジェクトの左の端が10ピクセル
+離れた位置に配置します。このleftのスタイルが設定されていない（または`nil`が設定される）なら、
+そのオブジェクトはそれを囲んでいる他のオブジェクトとともに動くでしょう。
 
 === :margin » a number or an array of four numbers ===
 
 ''すべてのスロットと要素''で利用できます。
 
-マージンは要素の周囲に間隔をあけます。それぞれの要素はleft、top、right、そしてbottomのマージンを持っています。`:margin`スタイルに一つの数が設定されると、要素の周囲の間隔は均一にその数にとなります。言い換えると、`:margin => 8`を設定すると、その要素の周囲のすべてのマージンは8ピクセルの長さに設定されます。
+マージンは要素の周囲に間隔をあけます。
+それぞれの要素はleft、top、right、そしてbottomのマージンを持っています。
+`:margin`スタイルに一つの数が設定されると、要素の周囲の間隔は均一にその数にとなります。
+言い換えると、`:margin => 8`を設定すると、その要素の周囲のすべてのマージンは8ピクセルの
+長さに設定されます。
 
 このスタイルは4つの数を`[left, top, right, bottom]`の形の配列で与えることもできます。
 
@@ -1074,39 +1389,69 @@ download
 
 === :radius » a number ===
 
-''arc, arrow, background, border, gradient, oval, rect, shape''で利用できます。
+''oval''で利用できます。
 
-それらの要素に半径（直径または全幅の半分）を設定します。これを設定することは、この数値の2倍の`:width`と`:height`を設定することと同等です。
+それらの要素に半径（直径または全幅の半分）を設定します。
+これを設定することは、この数値の2倍の`:width`と`:height`を設定することと同等です。
 
 === :right » a number ===
 
 ''すべてのスロットと要素''で利用できます。
 
-要素の右端の座標をピクセルで設定します。その端はコンテナの右端に対して配置されます。そのため、`:right => 0`は、スロットの右端とその右端が接するように要素を配置するでしょう。一方`:right => 20`は要素の右端をそのスロットの右端から左側に向けて20ピクセル離れたところに配置します。
+要素の右端の座標をピクセルで設定します。その端はコンテナの右端に対して配置されます。
+そのため、`:right => 0`は、スロットの右端とその右端が接するように要素を配置するでしょう。
+一方`:right => 20`は要素の右端をそのスロットの右端から左側に向けて20ピクセル
+離れたところに配置します。
+
+'''注意:''' Green Shoesは`:right`スタイルをサポートしていません。
 
 === :rise » a number ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
-テキストのフォントを基準から上げたり下げたりします。例えば、[[Element.sup]]は10ピクセルの`:rise`を行います。逆に、[[Element.sub]]の要素は-10ピクセルの`:rise`となります。
+テキストのフォントを基準から上げたり下げたりします。
+例えば、[[Element.sup]]は10ピクセルの`:rise`を行います。
+逆に、[[Element.sub]]の要素は-10ピクセルの`:rise`となります。
 
 === :scroll » true or false ===
 
 ''flow, stack''で利用できます。
 
-スロットをスクロールするスロットとします。`:scroll => true`が設定され、そのコンテンツがスロットの高さ以上の場合はスクロールバーがスロットに表示されます。スクロールバーは必要に応じて表示したり非表示になります。それはスロットの幅の内側で表示されるので、スクロールバーのあるなしに関わらず、スロットの幅は決して変わらないことを意味します。
+スロットをスクロールするスロットとします。
+`:scroll => true`が設定され、そのコンテンツがスロットの高さ以上の場合はスクロールバーが
+スロットに表示されます。スクロールバーは必要に応じて表示したり非表示になります。
+それはスロットの幅の内側で表示されるので、スクロールバーのあるなしに関わらず、スロットの幅は
+決して変わらないことを意味します。
+
+'''注意:''' Green Shoesでは制約があります。今のところ`:scroll`スタイルはお試し版です。
+
+ * スロットのインスタンスメソッド(clear, hide, etc.)が期待通り動きません。
+ * マウスイベントをハンドリングできません。
+ * `flush`メソッドを明示的に記述する必要があります。
+
+{{{
+ Shoes.app do
+   s = stack left: 100, top: 50, width: 300, 
+     height: 100, scroll: true do
+     background gold
+     image './loogink.png'
+     10.times{para 'hello'}
+     flush
+   end
+ end
+}}}
 
 === :secret » true or false ===
 
 ''ask, edit_line''で利用できます。
 
-Used for password fields, this setting keeps any characters typed in from becoming visible on the screen.  Instead, a replacement character (such as an asterisk) is show for each letter typed.
-
-パスワードフィールドのために利用され、この設定は入力された文字を画面上で表示されないようにします。そのかわり、置き換えられた文字（たとえばアスタリスク）をそれぞれの文字が入力されるごとに表示します。
+パスワードフィールドのために利用され、この設定は入力された文字を画面上で表示されない
+ようにします。そのかわり、置き換えられた文字（たとえばアスタリスク）をそれぞれの文字が
+入力されるごとに表示します。
 
 === :size » a number ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 このテキストブロックまたはテキストの一部の内部で利用されたフォントのサイズをピクセルで設定します。
 
@@ -1134,7 +1479,8 @@ Used for password fields, this setting keeps any characters typed in from becomi
 
 === :stretch » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, code, del, em, ins, inscription, link, para, span,
+strong, sub, sup, subtitle, tagline, title''で利用できます。
 
 テキストオブジェクトに伸縮したフォントを設定します。
 
@@ -1143,55 +1489,63 @@ Used for password fields, this setting keeps any characters typed in from becomi
  * "condensed" - 狭い幅の文字
  * "normal" - 標準の幅の文字
  * "expanded" - 広い幅の文字
+ 
+ '''注意:''' Green Shoesは`:stretch`スタイルをサポートしていません。
 
-=== :strikecolor » a Shoes::Color ===
+=== :strikecolor » a RGB array ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 テキストに棒線を引いて削除するときの線の色です。
 
 === :strikethrough » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 このテキストに棒線を引いて削除しますか？2つのオプションがあります：
 
  * "none" - 棒線を引いて削除しません。
  * "single" - 1本の棒線を引いて削除します。
 
-=== :stroke » a hex code, a Shoes::Color or a range of either ===
+=== :stroke » a hex code, a rgb array or a range of either ===
 
-''arc, arrow, banner, border, caption, code, del, em, flow, image, ins, inscription, line, link, mask, oval, para, rect, shape, span, stack, star, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''background, banner, border, caption, inscription, para, line, oval, 
+rect, shape, star, subtitle, tagline, title''で利用できます。
 
-フォアグラウンドのペンの色です。形状の場合は描かれる線の色です。段落や他のテキストでは、この色で文字が表示されます。
+フォアグラウンドのペンの色です。形状の場合は描かれる線の色です。
+段落や他のテキストでは、この色で文字が表示されます。
 
 === :strokewidth » a number ===
 
-''arc, arrow, border, flow, image, line, mask, oval, rect, shape, star, stack''で利用できます。
+''background, border, line, oval, rect, shape, star''で利用できます。
 
-描かれる線のピクセルでの太さで、形状の線を特徴付けます。例えば、数値の2が設定されればstrokewidthは2ピクセルになります。
+描かれる線のピクセルでの太さで、形状の線を特徴付けます。
+例えば、数値の2が設定されればstrokewidthは2ピクセルになります。
 
 === :text » a string ===
 
-''button, edit_box, edit_line''で利用できます。
+''edit_box, edit_line''で利用できます。
 
-edit_boxやedit_lineのコンテンツ、またはボタンコントロールに表示されるメッセージを設定します。
+edit_boxやedit_lineのコンテンツに表示されるメッセージを設定します。
 
 === :top » a number ===
 
 ''すべてのスロットと要素''で利用できます。
 
-オブジェクトの上側の座標を、その親のスロットに対して設定します。オブジェクトに`:top => 40`が設定されたなら、オブジェクトの上端はそのオブジェクトを含むスロットの上端から40ピクセル下に配置されることを意味します。`:top`スタイルが与えられないなら、そのスロットの自然な流れでオブジェクトは自動的に配置されます。
+オブジェクトの上側の座標を、その親のスロットに対して設定します。
+オブジェクトに`:top => 40`が設定されたなら、オブジェクトの上端はそのオブジェクトを含む
+スロットの上端から40ピクセル下に配置されることを意味します。`:top`スタイルが与えられないなら、
+そのスロットの自然な流れでオブジェクトは自動的に配置されます。
 
-=== :undercolor » a Shoes::Color ===
+=== :undercolor » a RGB array ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 テキストの下線に利用される色です。
 
 === :underline » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
 テキストに下線のスタイルを指示します。
 
@@ -1205,18 +1559,20 @@ edit_boxやedit_lineのコンテンツ、またはボタンコントロールに
 
 === :variant » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, code, del, em, ins, inscription, link, para, span,
+strong, sub, sup, subtitle, tagline, title''で利用できます。
 
 テキストのグループのためにフォントを変化させます。2つの選択肢：
 
  * "normal" - 通常のフォント。
  * "smallcaps" - 大文字が小さく変化することによって置き換えられた小文字のフォント。
 
+'''注意:''' Green Shoesは`:variant`スタイルをサポートしていません。
+
 === :weight » a string ===
 
-''banner, caption, code, del, em, ins, inscription, link, para, span, strong, sub, sup, subtitle, tagline, title''で利用できます。
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
 
-Set the boldness of the text.  Commonly, this style is set to one of the following strings:
 テキストを太文字に設定します。一般的には、このスタイルは次の文字列の内の1つを設定します：
 
  * "ultralight" - 超軽量の太さ (= 200)
@@ -1233,49 +1589,79 @@ Set the boldness of the text.  Commonly, this style is set to one of the followi
 
 ''すべてのスロットと要素''で利用できます。
 
-要素の幅をピクセルで設定します。数値が10進数なら、その幅はパーセンテージに変換されます。（0.0は0%に、1.0は100%になります。）100%の幅は親のスロットを埋め尽くすことを意味します。
+要素の幅をピクセルで設定します。数値が10進数なら、その幅はパーセンテージに変換されます。
+（0.0は0%に、1.0は100%になります。）100%の幅は親のスロットを埋め尽くすことを意味します。
+
+=== :wrap » a number ===
+
+''banner, caption, inscription, para, span, subtitle, tagline, title''で利用できます。
+
+どこで改行するか? 選択可能のオプションは以下の通りです。
+
+ * "word" - 単語の区切りで改行します。
+ * "char" - 文字の区切りで改行します。そのため単語が分割される場合があります。
+ * "trim" - はみ出した部分は省略します。
 
 == Classes List ==
 
-Shoesで紹介するすべてのクラスの完全な一覧です。この表はどのようにしてクラスがお互いに継承しているかに従ってレイアウトされています。サブクラスは親クラスの下に、1レベル右にインデントされています。
+Green Shoesで紹介するすべてのクラスの完全な一覧です。
 
-{INDEX}
+こちら([[http://rdoc.info/github/ashbb/green_shoes/master/frames/file/README.md Green Shoes RDoc]])
+を参照下さい。
 
 == Colors List ==
 
-以下はShoes全体で利用可能な色の一覧です。背景色または枠線の色として。描かれる線や塗りつぶされる色として。これらの色の大部分はX11やHTMLのパレットから来ています。
+以下はGreen Shoes全体で利用可能な色の一覧です。背景色または枠線の色として。
+描かれる線や塗りつぶされる色として。これらの色の大部分はX11やHTMLのパレットから来ています。
 
-これらの色はすべて名前によって利用できます。（そのため、どんなスロットの内部からでも`tomato`メソッドを呼ぶことで、すてきな赤みがかった色が手に入るでしょう。）それぞれの色の下には、[[Built-in.rgb]]メソッドで利用できる正確な数値を見つけることもできます。
+これらの色はすべて名前によって利用できます。（そのため、どんなスロットの内部からでも
+`tomato`メソッドを呼ぶことで、すてきな赤みがかった色が手に入るでしょう。）
+それぞれの色の下には、[[Built-in.rgb]]メソッドで利用できる正確な数値を見つけることもできます。
 
 {COLORS}
 
 = Slots =
 
-スロットは画像やテキストなどのレイアウトに使われる箱です。2つの最も一般的なスロットは`スタック（stack）`と`フロー（flow）`です。スロットはShoesの専門用語で"箱"または"キャンバス"とも言えます
+スロットは画像やテキストなどのレイアウトに使われる箱です。2つの最も一般的なスロットは
+`スタック（stack）`と`フロー（flow）`です。スロットはGreen Shoesの専門用語で"箱"または
+"キャンバス"とも言えます
 
-マウスホイールやページアップやページダウンはあらゆるプラットフォームで普及しているため、縦のスクロールだけが溢れて問題になりました。そのためShoesでは、まさにWEBのように通常は幅が固定です。一方で高さは際限なく続いて行きます。
+マウスホイールやページアップやページダウンはあらゆるプラットフォームで普及しているため、
+縦のスクロールだけが溢れて問題になりました。そのためGreen Shoesでは、まさにWEBのように
+通常は幅が固定です。一方で高さは際限なく続いて行きます。
 
-さて、そうしたいなら、どんなものでも幅や高さを指定することもできます。それはいくらかの数学を用いるでしょうが、完璧かもしれません。
+さて、そうしたいなら、どんなものでも幅や高さを指定することもできます。それはいくらかの数学を
+用いるでしょうが、完璧かもしれません。
 
-一般的には、スタックとフローを使うことを提案するでしょう。ここでの目的は、あなたがいくらかの幅を何かで満たして、幅を満たしながら、ページの下に進みたいということです。これらを、HTMLの"ブロック"と"インライン"のスタイルと類似しているのように考えることができます。
+一般的には、スタックとフローを使うことを提案するでしょう。ここでの目的は、あなたがいくらかの
+幅を何かで満たして、幅を満たしながら、ページの下に進みたいということです。
+これらを、HTMLの"ブロック"と"インライン"のスタイルと類似しているのように考えることができます。
 
 ==== Stacks ====
 
-スタックは単純に要素の垂直なスタックです。スタック内のそれぞれの要素は、その上位の要素の直下に配置されます。
+スタックは単純に要素の垂直なスタックです。スタック内のそれぞれの要素は、その上位の要素の
+直下に配置されます。
 
-また、スタックは箱のように形作られます。そのため、スタックが250の幅を与えられたら、そのスタックはそれ自身が250ピクセルの幅の要素となります。
+また、スタックは箱のように形作られます。そのため、スタックが250の幅を与えられたら、
+そのスタックはそれ自身が250ピクセルの幅の要素となります。
 
-新しいスタックを作成するには[[Element.stack]]メソッドを利用し、それはすべてのスロットの内部で利用できます。そのためスタックは他のスタックやフローを含むことができます。
+新しいスタックを作成するには[[Element.stack]]メソッドを利用し、それはすべてのスロットの
+内部で利用できます。そのためスタックは他のスタックやフローを含むことができます。
 
 ==== Flows ====
 
-フローは要素をできるだけしっかりと詰め込みます。幅は満たされ、それらの下の要素を包みます。互いに隣接して配置されたテキストの要素は一つのパラグラフとして表示されます。画像とウィジェットは同じシリーズとして実行されます。
+フローは要素をできるだけしっかりと詰め込みます。幅は満たされ、それらの下の要素を包みます。
+互いに隣接して配置されたテキストの要素は一つのパラグラフとして表示されます。
+画像とウィジェットは同じシリーズとして実行されます。
 
-スタックのように、フローは箱です。そのためスタックとフローは安全に埋め込むことができ、それらのコンテンツに気を使うことなく、同質です。スタックとフローはそれらのコンテンツだけを異なって扱います。
+スタックのように、フローは箱です。そのためスタックとフローは安全に埋め込むことができ、
+それらのコンテンツに気を使うことなく、同質です。スタックとフローはそれらのコンテンツだけを
+異なって扱います。
 
-フローを作成するには[[Element.flow]]を呼びます。フローは他のフローやスタックを含むかもしれません。
+フローを作成するには[[Element.flow]]を呼びます。
+フローは他のフローやスタックを含むかもしれません。
 
-最後に：Shoesのウィンドウはそれ自身がフローです。
+最後に：Green Shoesのウィンドウはそれ自身がフローです。
 
 == Art for Slots ==
 
