@@ -2,13 +2,13 @@ class Shoes
   class App
     def style klass, args={}
       if klass == Shoes::Link
-        @link_style = LINK_DEFAULT
+        @link_style = LINK_DEFAULT.dup
         @link_style.sub!('single', 'none') if args[:underline] == false
         @link_style.sub!("foreground='#06E'", "foreground='#{args[:stroke]}'") if args[:stroke]
         @link_style.sub!('>', " background='#{args[:fill]}'>") if args[:fill]
         @link_style.sub!('normal', "#{args[:weight]}") if args[:weight]
       elsif klass == Shoes::LinkHover
-        @linkhover_style = LINKHOVER_DEFAULT
+        @linkhover_style = LINKHOVER_DEFAULT.dup
         @linkhover_style.sub!('single', 'none') if args[:underline] == false
         @linkhover_style.sub!("foreground='#039'", "foreground='#{args[:stroke]}'") if args[:stroke]
         @linkhover_style.sub!('>', " background='#{args[:fill]}'>") if args[:fill]

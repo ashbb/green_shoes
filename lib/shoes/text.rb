@@ -16,7 +16,7 @@ class Shoes
     end
 
     def link str, arg = {}, &blk
-      Link.new "#{LINK_DEFAULT}#{str}</span>", arg, &blk
+      Link.new "#{@link_style}#{str}</span>", arg, &blk
     end
 
     def font name
