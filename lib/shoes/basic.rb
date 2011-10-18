@@ -270,6 +270,7 @@ class Shoes
     end
 
     def focus
+      real.grab_focus
       @app.focus_ele = self
     end
     
@@ -357,6 +358,15 @@ class Shoes
 
     def change &blk
       super @textview.buffer, &blk
+    end
+
+    def focus
+      textview.grab_focus
+      @app.focus_ele = self
+    end
+
+    def accepts_tab=(t)
+      textview.accepts_tab = t
     end
   end
   

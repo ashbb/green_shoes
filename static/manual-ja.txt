@@ -2061,12 +2061,16 @@ Green Shoesは14ピクセルの大きさにこのテキストを整形します�
 
 '''注意:''' Green Shoesは`dialog`メソッドをサポートしていません。
 
-=== edit_box(text) » Shoes::EditBox ===
+=== edit_box(text, :accepts_tab => true or false) » Shoes::EditBox ===
 
 スロットに大きなマルチラインのテキストエリアを追加します。
 この`text`はオプションでこの箱の開始時に与えられる文字列です。
 オプションのブロックをここに取り付けることができ、これはボックスのテキストに対するどんな種類の
 ユーザの変更でも呼び出されます。
+
+`accepts_tab`にtrueを設定するとタブが挿入できます。
+`accepts_tab`にfalseを設定するとタブによるフォーカス移動ができます。
+デフォルトはfalseです。
 
 {{{
  #!ruby

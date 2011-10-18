@@ -2131,11 +2131,15 @@ window is given a dialog box look.
 
 '''Note:''' Green Shoes doesn't support `dialog` method.
 
-=== edit_box(text) » Shoes::EditBox ===
+=== edit_box(text, :accepts_tab => true or false) » Shoes::EditBox ===
 
 Adds a large, multi-line textarea to this slot.  The `text` is optional and
 should be a string that will start out the box.  An optional block can be
 attached here which is called any type the user changes the text in the box.
+
+If `accepts_tab` is true a tab character is inserted. 
+If `accepts_tab` is false the keyboard focus is moved to the next element 
+in the focus chain. This accepts_tab defaults to false.
 
 {{{
  #!ruby
