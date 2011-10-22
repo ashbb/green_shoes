@@ -154,6 +154,28 @@ class Shoes
       args.merge!({hidden: true}) if @hided
       @real = @app.image(name, args).move(@left, @top).real
     end
+
+    def rotate angle
+      (@real_orig, @first_time = @real, true) unless @real_orig
+      len = Math.sqrt @width**2 + @height**2
+      surface = Cairo::ImageSurface.new Cairo::FORMAT_ARGB32, len, len
+      context = Cairo::Context.new surface
+      hlen, dleft, dtop = len/2.0, (len-width)/2.0, (len-height)/2.0
+      context.save do
+        pixbuf = @real_orig.pixbuf
+        context.translate hlen, hlen
+        context.rotate angle * Math::PI / 180
+        context.translate -hlen, -hlen
+        context.set_source_pixbuf pixbuf, dleft, dtop
+        context.paint
+      end
+      remove
+      @real = app.create_tmp_png surface
+      app.canvas.put @real, 0, 0
+      @real.show_now
+      (@left -= dleft; @top -= dtop; @first_time = false) if @first_time
+      move @left, @top
+    end
   end
 
   class Pattern < Basic

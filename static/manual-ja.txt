@@ -3313,6 +3313,20 @@ Green Shoesはバックグラウンドでシステムのスレッドを使って
 
 ファイルまたはURLからロードして、画像を他のものに入れ替えます。
 
+=== rotate(degrees: a number) » self ===
+
+画像を`degrees`度回転させます。
+
+{{{
+ Shoes.app do
+   img = image File.join(DIR, '../samples/cy.png')
+   img.move 200, 200
+   animate do |i|
+     img.rotate i*10
+   end
+ end
+}}}
+
 == ListBox ==
 
 リストボックス（List box）（環境によって"コンボボックス（combo box）"または

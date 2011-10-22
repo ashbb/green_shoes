@@ -3399,6 +3399,20 @@ The URL or file name of the image.
 
 Swaps the image with a different one, loaded from a file or URL.
 
+=== rotate(degrees: a number) » self ===
+
+Rotates the Image element by a certain number of `degrees`.
+
+{{{
+ Shoes.app do
+   img = image File.join(DIR, '../samples/cy.png')
+   img.move 200, 200
+   animate do |i|
+     img.rotate i*10
+   end
+ end
+}}}
+
 == ListBox ==
 
 List boxes (also called "combo boxes" or "drop-down boxes" or "select boxes" in
