@@ -360,8 +360,9 @@ class Shoes
     end
 
     def keypress &blk
+      win.signal_handler_disconnect @key_press_handler if @key_press_handler
       win.set_events Gdk::Event::BUTTON_PRESS_MASK | Gdk::Event::BUTTON_RELEASE_MASK | Gdk::Event::POINTER_MOTION_MASK | Gdk::Event::KEY_PRESS_MASK
-      win.signal_connect("key_press_event") do |w, e|
+      @key_press_handler = win.signal_connect("key_press_event") do |w, e|
         k = Gdk::Keyval.to_name e.keyval
         k = case
           when Shoes::KEY_NAMES.include?(k); e.keyval.chr
