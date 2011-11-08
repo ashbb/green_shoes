@@ -6,7 +6,7 @@ class Answer < Shoes::Widget
   attr_reader :mark
   def initialize word
     flow do
-      flow(width: 70){para word}
+      para word, width: 70
       @mark = image('./loogink.png', width: 20, height: 20).hide
     end
   end
