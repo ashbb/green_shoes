@@ -222,7 +222,7 @@ class Shoes
     repaint_textcursors app
     app.canvas.set_size 0, scrollable_height unless(app.prjct or app.trvw)
     n = app.focus_ele ? app.focusables.index(app.focus_ele) : 0
-    app.canvas.focus_chain = (app.focusables[n..-1] + app.focusables[0...n]).map(&:real) if n
+    app.canvas.focus_chain = (app.focusables[n..-1] + app.focusables[0...n]).map(&:real) if n and !app.canvas.is_a?(Gtk::DrawingArea)
     true
   end
 
