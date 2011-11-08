@@ -259,14 +259,16 @@ class Shoes
       end
     end
 
-    def edit_line args={}
+    def edit_line *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      txt = attrs.first unless attrs.empty?
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
       args[:height] = 28 if args[:height].zero?
       (change_proc = args[:change]; args.delete :change) if args[:change]
       el = Gtk::Entry.new
       el.visibility = false if args[:secret]
-      el.text = args[:text].to_s
+      el.text = txt || args[:text].to_s
       el.set_size_request args[:width], args[:height]
       @canvas.put el, args[:left], args[:top]
       el.show_now
@@ -279,14 +281,16 @@ class Shoes
       end
     end
 
-    def edit_box args={}
+    def edit_box *attrs
+      args = attrs.last.class == Hash ? attrs.pop : {}
+      txt = attrs.first unless attrs.empty?
       args = basic_attributes args
       args[:width] = 200 if args[:width].zero?
       args[:height] = 108 if args[:height].zero?
       (change_proc = args[:change]; args.delete :change) if args[:change]
       tv = Gtk::TextView.new
       tv.wrap_mode = Gtk::TextTag::WRAP_WORD
-      tv.buffer.text = args[:text].to_s
+      tv.buffer.text = txt || args[:text].to_s
       tv.modify_font(Pango::FontDescription.new(args[:font])) if args[:font]
       tv.accepts_tab = args[:accepts_tab]
       args.delete :accepts_tab
