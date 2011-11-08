@@ -51,9 +51,9 @@ class Shoes
     end
 
     def positioning x, y, max
-      @width = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
-      @width = (parent.width + @initials[:width]) if @initials[:width] < 0
-      @width -= (margin_left + margin_right)
+      w = (parent.width * @initials[:width]).to_i if @initials[:width].is_a? Float
+      w = (parent.width + @initials[:width]) if @initials[:width] < 0
+      @width = w - (margin_left + margin_right) if w
       if parent.is_a?(Flow) and x + @width <= parent.left + parent.width
         move3 x + parent.margin_left, max.top + parent.margin_top
         @height = Shoes.contents_alignment self
