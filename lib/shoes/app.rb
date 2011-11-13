@@ -93,7 +93,7 @@ class Shoes
       layout.style = @canvas.style
 
       app.canvas = layout
-      app.top_slot = slot.new app.slot_attributes(app: app, left: args[:left], top: args[:top], width: args[:width], height: args[:height])
+      app.top_slot = slot.new app.slot_attributes(app: app, left: args[:left], top: args[:top], width: args[:width], height: args[:height], swin: swin)
 
       app.instance_eval &blk
 
