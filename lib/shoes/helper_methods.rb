@@ -178,7 +178,7 @@ class Shoes
       max, flag = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height
       unless max == tmp
-        slot_height = flag ? [slot_height, y].max : slot_height + max.height
+        slot_height = flag && !slot_height.zero? ? y : slot_height + max.height
       end
     end
     slot_height
