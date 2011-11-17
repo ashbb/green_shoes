@@ -47,7 +47,7 @@ class Shoes
       args[:font] ||= @args[:font]
       args[:align] ||= @args[:align]
       
-      clear if @real
+      clear false if @real
       @width = (@left + parent.width <= @app.width) ? parent.width : @app.width - @left
       @width = initials[:width] unless initials[:width].zero?
       @height = 20 if @height.zero?

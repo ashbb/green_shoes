@@ -31,12 +31,13 @@ class Shoes
       [:app, :real].each{|k| args.delete k}
       @args = args
       @hovered = false
+      @cleared = false
       @hidden ? (@hided, @shows = true, false) : (@hided, @shows = false, true)
       @app.fronts.push self if @front
       @app.backs.push self if @back
     end
 
-    attr_reader :args, :shows, :initials
+    attr_reader :args, :shows, :initials, :cleared
     attr_accessor :parent, :hided
 
     def move x, y
@@ -85,14 +86,16 @@ class Shoes
       self
     end
 
-    def clear
+    def clear flag = true
       @app.delete_mouse_events self
+      @cleared = true if flag
       case self
         when Button, EditLine, EditBox, ListBox
           @app.cslot.contents.delete self
+          @app.focusables.delete self
           remove
           @real = nil
-        else 
+        else
           @real.clear if @real
       end
     end

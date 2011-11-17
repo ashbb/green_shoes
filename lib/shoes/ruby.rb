@@ -151,8 +151,10 @@ class Array
     r + g + b > 0xAA * 3
   end
 
+  alias :_clear :clear
   def clear
-    self.each &:clear
+    self.each{|e| e.clear if e.class.method_defined? :clear}
+    _clear
   end
 
   def clear_all
