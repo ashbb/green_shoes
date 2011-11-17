@@ -771,6 +771,10 @@ class Shoes
       @swin.vscrollbar.value = n
     end
 
+    def gutter
+      @swin.vscrollbar.size_request.first
+    end
+
     def clipboard
       Gtk::Clipboard.get(Gdk::Selection::CLIPBOARD).wait_for_text
     end
