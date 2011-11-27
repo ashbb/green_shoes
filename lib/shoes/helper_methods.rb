@@ -396,9 +396,11 @@ class Shoes
   end
 
   def self.download_images_control app
+    flag = false
     app.dics.each do |e, d, tmpname|
       args = e.args
       if d.finished?
+	flag = true
         app.canvas.remove e.real
         img = Gtk::Image.new tmpname
         e.full_width, e.full_height = img.size_request
@@ -413,5 +415,6 @@ class Shoes
         File.delete tmpname
       end
     end
+    flag
   end
 end
