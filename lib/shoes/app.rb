@@ -458,7 +458,7 @@ class Shoes
       if pat = (args[:fill] or fill)
         gp = gradient pat, args[:width], args[:height], args[:angle]
         context.set_source gp
-        context.rounded_rectangle mx, -my, args[:width], args[:height], args[:curve]
+        context.rounded_rectangle sw/2.0+mx, sw/2.0-my, args[:width]-sw, args[:height]-sw, args[:curve]
         context.fill
       end
       
