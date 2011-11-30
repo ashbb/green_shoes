@@ -32,6 +32,7 @@ module Shoes
     strikethrough: :strikethrough, strikecolor: :strikethrough_color, underline: :underline, undercolor: :underline_color}
   WRAP = {word: Pango::WRAP_WORD, char: Pango::WRAP_CHAR, trim: Pango::ELLIPSIZE_END}
   FONT_SIZE = {"xx-small" => 0.57, "x-small" => 0.64, "small" => 0.83, "medium" => 1.0, "large" => 1.2, "x-large" => 1.43, "xx-large" => 1.73}
+  COLORS = {}
 end
 
 class Object

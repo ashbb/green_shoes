@@ -463,7 +463,7 @@ class Manual < Shoes
   PNUMS = mk_page_numbers DOCS
   PEND = PNUMS.length
   TOC, TOC_LIST = [], []
-  COLORS = Shoes::App::COLORS
+  COLORS = Shoes::COLORS
 end
 
 Shoes.app title: 'The Green Shoes Manual', width: 720, height: 640
