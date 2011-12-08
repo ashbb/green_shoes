@@ -690,6 +690,7 @@ class Shoes
     end
 
     def background pat, args={}
+      pat = eval(pat) if pat.is_a? String
       args[:pattern] = pat
       args = basic_attributes args
 
