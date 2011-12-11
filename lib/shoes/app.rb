@@ -786,9 +786,7 @@ class Shoes
 
     def close
       win.destroy
-      Gtk.main_quit
       Shoes.APPS.delete app
-      exit if Shoes.APPS.empty?
     end
 
     def window args={}, &blk

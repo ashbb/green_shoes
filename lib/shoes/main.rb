@@ -1,5 +1,4 @@
 class Shoes
-  @apps = []
   $urls = {}
   APPS = []
 
@@ -16,7 +15,7 @@ class Shoes
     [:projector, :treeview].each{|x| args.delete x}
 
     app = App.new args
-    @apps.push app
+    @main_app ||= app
 
     app.top_slot = Flow.new app.slot_attributes(app: app, left: 0, top: 0)
 
@@ -40,8 +39,12 @@ class Shoes
     end
 
     win.signal_connect "destroy" do
-      app.close
-    end if @apps.size == 1
+      if @main_app == app
+        APPS.length > 1 ? (APPS.delete app; @main_app = APPS.first) : exit
+      else
+        APPS.delete app
+      end
+    end
 
     win.signal_connect "button_press_event" do |w, e|
       app.mouse_button = e.button
@@ -101,8 +104,8 @@ class Shoes
     call_back_procs app
     
     win.show_all
-    @apps.pop
-    Gtk.main if @apps.empty?
+
+    Gtk.main if @main_app == app
     app
   end
 end
