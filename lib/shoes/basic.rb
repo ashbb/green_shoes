@@ -153,9 +153,9 @@ class Shoes
     def path=(name)
       @path = name
       @real.clear
-      args = {width: @width, height: @height}
+      args = {width: @width, height: @height, noorder: true}
       args.merge!({hidden: true}) if @hided
-      @real = @app.image(name, args).move(@left, @top).real
+      @real = @app.image(name, args).move(@left, @top).real.tap{@app.flush}
     end
 
     def rotate angle
