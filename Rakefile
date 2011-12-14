@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/clean'
 begin
   require 'jeweler'
@@ -13,10 +13,11 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Green Shoes}
   gem.description = %Q{Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2.}
   gem.email = "ashbbb@gmail.com"
+  gem.executables = ["greenshoes"]
   gem.homepage = "http://github.com/ashbb/green_shoes"
   gem.authors = ["ashbb"]
   gem.add_dependency 'gtk2'
-  gem.files = %w[lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten << 'VERSION'
+  gem.files = %w[bin lib static samples snapshots].map{|dir| FileList[dir + '/**/*']}.flatten << 'VERSION'
 end
 
 Rake::RDocTask.new do |t|
