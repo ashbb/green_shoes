@@ -55,6 +55,8 @@ require_relative 'shoes/style'
 require_relative 'shoes/projector'
 require_relative 'shoes/download'
 require_relative 'shoes/manual'
+require_relative 'shoes/minitar'
+require_relative 'shoes/shy'
 
 require_relative 'plugins/systray'
 require_relative 'plugins/thread'
