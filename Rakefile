@@ -13,7 +13,7 @@ Jeweler::Tasks.new do |gem|
   gem.summary = %Q{Green Shoes}
   gem.description = %Q{Green Shoes is one of colorful Shoes, written in pure Ruby with Ruby/GTK2.}
   gem.email = "ashbbb@gmail.com"
-  gem.executables = ["greenshoes"]
+  gem.executables = ["gshoes"]
   gem.homepage = "http://github.com/ashbb/green_shoes"
   gem.authors = ["ashbb"]
   gem.add_dependency 'gtk2'

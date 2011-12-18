@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + '/../lib/green_shoes'
+
+arg = ARGV[0]
+path = File.expand_path(arg.gsub(/\\/, "/")) if arg
+ARGV[0] = path
+
+case arg
+when '-m', '-men'
+  Shoes.show_manual
+when '-mjp'
+  Shoes.show_manual 'Japanese'
+when '-h', nil
+  puts "Usage: gshoes (options or app.rb or app.gsy)
+  -m, -men     Open the built-in English manual.
+  -mjp         Open the built-in Japanese manual.
+  -p           Package a Green Shoes app as a .gsy file.
+  -v           Display the version info.
+  -h           Show this message."
+when '-v'
+  puts IO.read File.join(DIR, '../VERSION')
+when '-p'
+  launch_script = ask_open_file
+  Shoes.app do
+    top_dir = File.dirname(launch_script)
+    launch_script = File.basename(launch_script)
+    shy_name = "#{top_dir}.gsy" 
+    para "Almost ready to make #{shy_name}"
+    fields = {}
+    [["Project Name", "name"], ["Version", "version"], ["Your Name", "creator"]].each do |label, name| 
+      flow do
+        para "#{label}: ", width: 200
+        fields[name] = edit_line
+      end
+    end
+    button "Build .gsy" do
+      shy_desc = Shy.new
+      fields.keys.each do |name|
+        shy_desc.send("#{name}=", fields[name].text)
+      end
+      shy_desc.launch = launch_script
+      Shy.c(shy_name, shy_desc, top_dir)
+      clear{para "Built #{shy_name}"}
+    end
+  end if launch_script
+else
+  if path =~ /\.gsy$/
+    base = File.basename(path, ".gsy")
+    tmpdir = "%s/shoes-%s.%d" % [Dir.tmpdir, base, $$]
+    shy = Shy.x(path, tmpdir)
+    Dir.chdir(tmpdir)
+    puts "Loaded GSY: #{shy.name} #{shy.version} by #{shy.creator}"
+    load File.join(tmpdir, shy.launch)
+  else
+    load path
+  end
+end
