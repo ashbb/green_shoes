@@ -78,7 +78,7 @@ We'll talk through all the steps.
 
 At first, install Ruby. On '''Windows''', 
 visit the site of [[http://rubyinstaller.org/ RubyInstaller for Windows]] to 
-download the latest '''RubyInstaller 1.9.2'''.
+download the latest '''RubyInstaller 1.9.2 or 1.9.3'''.
 
 Then just do the following one line.
 
