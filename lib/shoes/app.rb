@@ -690,7 +690,7 @@ class Shoes
     end
 
     def background pat, args={}
-      pat = eval(pat) if pat.is_a? String
+      pat = eval(pat) if pat.is_a?(String) and !((File.extname(pat).downcase) =~ /\.[png|jpg|gif]/)
       args[:pattern] = pat
       args = basic_attributes args
 
