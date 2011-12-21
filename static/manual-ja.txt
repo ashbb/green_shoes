@@ -79,7 +79,7 @@ Rubyのインストールは必要ですか？なにも解凍しなくてもい�
 
 まず最初にRubyをインストールします。
 Windowsの場合はこのサイト[[http://rubyinstaller.org/ RubyInstaller for Windows]]
-にアクセスして、最新の'''RubyInstaller 1.9.2'''をインストールして下さい。
+にアクセスして、最新の'''RubyInstaller 1.9.2 or 1.9.3'''をインストールして下さい。
 
 そして、以下のコマンドを実行してください。
 
@@ -3855,3 +3855,27 @@ Green ShoesはRed Shoesに従っていますが、完全互換ではありませ
 
 詳細は、[[http://ashbb.github.com/green_shoes/Red_Shoes_and_Green_Shoes.html Red Shoes and Green Shoes]]を
 参照下さい。
+
+== gshoes ==
+
+'''gshoes''' は、実行可能なgem コマンドです。いつくかのオプションを持っています。コンソールウィンドウを開いて `gshoes (options or app.rb or app.gsy)` と実行します。
+
+=== -m, -men ===
+
+英語マニュアルを表示します。
+
+=== -mjp ===
+
+日本語マニュアルを表示します。
+
+=== -p ===
+
+あなたのGreen Shoesアプリケーションを .gsy ファイルにします。GSYはGreen Shoes YAMLの略です。
+
+=== -v ===
+
+バージョンを表示します。
+
+=== -h ===
+
+ヘルプメッセージを表示します。

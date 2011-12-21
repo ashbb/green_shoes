@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 = Hello! =
 
 Shoes is a tiny graphics toolkit. It's simple and straightforward. Shoes was
@@ -3941,3 +3942,27 @@ If you don't specify the `:width` size, Green Shoes makes a TextBlock object wit
 the `parent.width`.
 
 For more information, go to [[http://ashbb.github.com/green_shoes/Red_Shoes_and_Green_Shoes.html Red Shoes and Green Shoes]]. 
+
+== gshoes ==
+
+'''gshoes''' is a gem executable command which has some options. Just open console window and try to run `gshoes (options or app.rb or app.gsy)`. 
+
+=== -m, -men ===
+
+Open the built-in English manual.
+
+=== -mjp ===
+
+Open the built-in Japanese manual.
+
+=== -p ===
+
+Package a Green Shoes app as a .gsy file. GSY, which stands for Green Shoes YAML.
+
+=== -v ===
+
+Display the version info.
+
+=== -h ===
+
+Show the help message.
