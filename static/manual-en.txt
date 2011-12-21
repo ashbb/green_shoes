@@ -77,7 +77,7 @@ We'll talk through all the steps.
 
 At first, install Ruby. On '''Windows''', 
 visit the site of [[http://rubyinstaller.org/ RubyInstaller for Windows]] to 
-download the latest '''RubyInstaller 1.9.2'''.
+download the latest '''RubyInstaller 1.9.2 or 1.9.3'''.
 
 Then just do the following one line.
 
@@ -638,7 +638,7 @@ are trying to sniff out what release of Green Shoes is running.
  end
 }}}
 
-=== alert(message: a string, :block => true or false, title: a string) » nil ===
+=== alert(message: a string, :block => true or false, title: a string)  nil ===
 
 Pops up a window containing a short message.
 
@@ -654,7 +654,7 @@ standard Ruby method `puts` or `p` methods.
 If you want to make alert() thread safe, i.e. unblock main thread, use `:block => false` option.
 If you want to change window title, use `:title => a string` option.
 
-=== ask(message: a string) » a string ===
+=== ask(message: a string)  a string ===
 
 Pops up a window and asks a question. For example, you may want to ask someone
 their name.
@@ -670,7 +670,7 @@ When the above script is run, the person at the computer will see a window with
 a blank box for entering their name. The name will then be saved in the `name`
 variable.
 
-=== ask_color(title: a string) » a RGB array ===
+=== ask_color(title: a string)  a RGB array ===
 
 Pops up a color picker window. The program will wait for a color to be picked,
 then gives you back a Color object. See the `Color` help for some ways you can
@@ -684,7 +684,7 @@ use this color.
  end
 }}}
 
-=== ask_open_file() » a string ===
+=== ask_open_file()  a string ===
 
 Pops up an "Open file..." window. It's the standard window which shows all of
 your folders and lets you select a file to open. Hands you back the name of the
@@ -698,7 +698,7 @@ file.
  end
 }}}
 
-=== ask_save_file() » a string ===
+=== ask_save_file()  a string ===
 
 Pops up a "Save file..." window, similiar to `ask_open_file`, described
 previously.
@@ -711,7 +711,7 @@ previously.
  end
 }}}
 
-=== ask_open_folder() » a string ===
+=== ask_open_folder()  a string ===
 
 Pops up an "Open folder..." window. It's the standard window which shows all of
 your folders and lets you select a folder to open. Hands you back the name of
@@ -725,7 +725,7 @@ the folder.
  end
 }}}
 
-=== ask_save_folder() » a string ===
+=== ask_save_folder()  a string ===
 
 Pops up a "Save folder..." window, similiar to `ask_open_folder`, described
 previously. 
@@ -739,7 +739,7 @@ previously.
 }}}
 
 
-=== confirm(question: a string) » true or false ===
+=== confirm(question: a string)  true or false ===
 
 Pops up a yes-or-no question. If the person at the computer, clicks '''yes''',
 you'll get back a `true`. If not, you'll get back `false`.
@@ -758,7 +758,7 @@ Stops your program. Call this anytime you want to suddenly call it quits.
 '''PLEASE NOTE:''' If you need to use Ruby's own `exit` method (like in a
 forked Ruby process,) call `Kernel.exit`.
 
-=== font(message: a string) » an array of font family names ===
+=== font(message: a string)  an array of font family names ===
 
 Loads a TrueType (or other type of font) from a file.  While TrueType is
 supported by all platforms, your platform may support other types of fonts.
@@ -797,7 +797,7 @@ If you have trouble with fonts showing up, make sure your app loads the font
 before it is used.  Especially on OS X, if fonts are used before they are
 loaded, the font cache will tend to ignore loaded fonts.
 
-=== gradient(color1, color2) » a range of RGB array ===
+=== gradient(color1, color2)  a range of RGB array ===
 
 Builds a linear gradient from two colors. For each color, you may pass in 
 a color/rgb method or a string describing the color. The `gradient(green, red)` is 
@@ -811,7 +811,7 @@ like this: `gradient(green, '#FA3')`
  end
 }}}
 
-=== gray(the numbers: darkness, alpha) » a RGB array ===
+=== gray(the numbers: darkness, alpha)  a RGB array ===
 
 Create a grayscale color from a level of darkness and, optionally, an alpha
 level.
@@ -827,7 +827,7 @@ level.
  end
 }}}
 
-=== rgb(red, green, blue, alpha) » an array of decimal numbers ===
+=== rgb(red, green, blue, alpha)  an array of decimal numbers ===
 
 Create a color from red, green and blue components.  An alpha level (indicating
 transparency) can also be added, optionally.
@@ -867,7 +867,7 @@ The App itself, in slot/box terminology, is a flow.  See the ''Slots'' section
 for more, but this just means that any elements placed directly at the
 top-level will flow.
 
-=== Shoes.app(styles) { ... } » Shoes::App ===
+=== Shoes.app(styles) { ... }  Shoes::App ===
 
 Starts up a Green Shoes app window.  This is the starting place for making a Green 
 Shoes program.  Inside the block, you fill the window with various Green Shoes 
@@ -892,7 +892,7 @@ Once an app is created, it is added to the [[App.Shoes.APPS]] list.  If you
 want an app to spawn more windows, see the [[Element.window]] method and the
 [[Element.dialog]] method.
 
-=== Shoes.APPS() » An array of Shoes::App objects ===
+=== Shoes.APPS()  An array of Shoes::App objects ===
 
 Builds a complete list of all the Green Shoes apps that are open right now.  Once an
 app is closed, it is removed from the list.  Yes, you can run many apps at once
@@ -905,7 +905,7 @@ in Green Shoes.  It's completely encouraged.
  end
 }}}
 
-=== clipboard() » a string ===
+=== clipboard()  a string ===
 
 Returns a string containing all of the text that's on the system clipboard.
 This is the global clipboard that every program on the computer cuts and pastes
@@ -1025,11 +1025,11 @@ library for parsing HTML.
 
 '''Note:''' Windows platform only so far.
 
-=== location() » a string ===
+=== location()  a string ===
 
 Gets a string containing the URL of the current app.
 
-=== mouse() » an array of numbers: button, left, top ===
+=== mouse()  an array of numbers: button, left, top ===
 
 Identifies the mouse cursor's location, along with which button is being
 pressed.
@@ -1045,13 +1045,13 @@ pressed.
  end
 }}}
 
-=== owner() » Shoes::App ===
+=== owner()  Shoes::App ===
 
 Gets the app which launched this app.  In most cases, this will be `nil`.  But
 if this app was launched using the [[Element.window]] method, the owner will be
 the app which called `window`.
 
-=== started?() » true or false ===
+=== started?()  true or false ===
 
 Has the window been fully constructed and displayed?  This is useful for
 threaded code which may try to use the window before it is completely built.
@@ -1121,7 +1121,7 @@ Rather than making you plow through the whole manual to figure out what styles
 go where, this helpful page speeds through every style in Green Shoes and suggests
 where that style is used.
 
-=== :align » a string ===
+=== :align  a string ===
 
 For: ''banner, caption, inscription, para, subtitle, tagline, title''
 
@@ -1131,7 +1131,7 @@ The alignment of the text. It is either:
  * "center" - Align the text in the center.
  * "right" - Align the text to the right.
 
-=== :angle » a number ===
+=== :angle  a number ===
 
 For: ''background, border, line, oval, rect, shape, star''.
 
@@ -1139,7 +1139,7 @@ The angle at which to apply a gradient.  Normally, gradient colors range from
 top to bottom.  If the `:angle` is set to 90, the gradient will rotate 90
 degrees counter-clockwise and the gradient will go from left to right.
 
-=== :attach » a slot or element ===
+=== :attach  a slot or element ===
 
 For: ''flow, stack''.
 
@@ -1154,7 +1154,7 @@ that surround, as normal.
 
 '''Note:''' Green Shoes doesn't support `:attach` style.
 
-=== :autoplay » true or false ===
+=== :autoplay  true or false ===
 
 For: ''video''.
 
@@ -1163,7 +1163,7 @@ will start without asking the user.
 
 '''Note:''' Green Shoes doesn't support ''video''.
 
-=== :back » true or false ===
+=== :back  true or false ===
 
 For: ''shapes, image, textblocks''.
 
@@ -1179,7 +1179,7 @@ Comes to the back of the other elements.
  end
 }}}
 
-=== :bottom » a number ===
+=== :bottom  a number ===
 
 For: ''all slots and elements''.
 
@@ -1189,14 +1189,14 @@ element so that its bottom edge and the bottom edge of its slot touch.
 
 '''Note:''' Green Shoes doesn't support `:bottom` style.
 
-=== :cap » :curve or :rect or :project ===
+=== :cap  :curve or :rect or :project ===
 
 For: ''arc, line, shape''.
 
 Sets the shape of the line endpoint, whether curved or square.  See the
 [[Art.cap]] method for more explanation.
 
-=== :center » true or false ===
+=== :center  true or false ===
 
 For: ''arc, image, oval, rect, shape''.
 
@@ -1206,28 +1206,28 @@ shape or not.  If set to `true`, this is similar to setting the
 
 '''Note:''' Green Shoes doesn't support `:center` style.
 
-=== :change » a proc ===
+=== :change  a proc ===
 
 For: ''edit_box, edit_line, list_box''.
 
 The `change` event handler is stored in this style.  See the [[EditBox.change]]
 method for the edit_box, as an example.
 
-=== :checked » true or false ===
+=== :checked  true or false ===
 
 For: ''check, radio''.
 
 Is this checkbox or radio button checked?  If set to `true`, the box is
 checked.  Also see the [[Check.checked=]] method.
 
-=== :choose » a string ===
+=== :choose  a string ===
 
 For: ''list_box''.
 
 Sets the currently chosen item in the list.  More information at
 [[ListBox.choose]].
 
-=== :click » a proc ===
+=== :click  a proc ===
 
 For: ''arc, arrow, button, check, flow, image, 
 line, link, oval, radio, rect, shape, stack, star''.
@@ -1235,7 +1235,7 @@ line, link, oval, radio, rect, shape, stack, star''.
 The `click` event handler is stored in this style.  See the [[Events.click]]
 method for a description.
 
-=== :curve » a number ===
+=== :curve  a number ===
 
 For: ''background, border, rect''.
 
@@ -1243,7 +1243,7 @@ The radius of curved corners on each of these rectangular elements.  As an
 example, if this is set to 6, the corners of the rectangle are given a curve
 with a 6-pixel radius.
 
-=== :displace_left » a number ===
+=== :displace_left  a number ===
 
 For: ''all slots and elements''.
 
@@ -1255,7 +1255,7 @@ actual layout of the page.  Before using this style, be sure to read the
 
 '''Note:''' Green Shoes doesn't support `:displace_left` style.
 
-=== :displace_top » a number ===
+=== :displace_top  a number ===
 
 For: ''all slots and elements''.
 
@@ -1267,7 +1267,7 @@ be a bit surprising.
 
 '''Note:''' Green Shoes doesn't support `:displace_top` style.
 
-=== :emphasis » a string ===
+=== :emphasis  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1279,14 +1279,14 @@ This style recognizes three possible settings:
  * "oblique" - the font is slanted, but in a roman style.
  * "italic" - the font is slanted in an italic style. 
 
-=== :family » a string ===
+=== :family  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 Styles the text with a given font family.  The string should contain the family
 name or a comma-separated list of families.
 
-=== :fill » a hex code, a rgb array or a range of either ===
+=== :fill  a hex code, a rgb array or a range of either ===
 
 For: ''background, banner, border, caption, inscription, para, line, oval, 
 rect, shape, star, subtitle, tagline, title''.
@@ -1295,7 +1295,7 @@ The color of the background pen.  For shapes, this is the fill color, the paint
 inside the shape. For textblock, this color is painted in the background
 (as if marked with a highlighter pen.) 
 
-=== :font » a string ===
+=== :font  a string ===
 
 For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
@@ -1308,13 +1308,13 @@ number (size in points) or optionally followed by the unit modifier "px" for
 absolute size. Any one of the options may be absent. If FAMILY-LIST is absent,
 then the default font family (Arial) will be used.
 
-=== :front » true or false ===
+=== :front  true or false ===
 
 For: ''shapes, image, textblocks''.
 
 Comes to the front of the other elements.
 
-=== :group » a string ===
+=== :group  a string ===
 
 For: ''radio''.
 
@@ -1327,7 +1327,7 @@ at a time.
 By giving this style a string, the radio button will be grouped with other
 radio buttons that have the same group name.
 
-=== :height » a number ===
+=== :height  a number ===
 
 For: ''all slots and elements''.
 
@@ -1335,7 +1335,7 @@ Sets the pixel height of this object.  If the number is a decimal number, the
 height becomes a percentage of its parent's height (with 0.0 being 0% and 1.0
 being 100%.)
 
-=== :hidden » true or false ===
+=== :hidden  true or false ===
 
 For: ''all slots and elements''.
 
@@ -1359,27 +1359,27 @@ displayed on the screen.  Neither are its children.
 '''Note:''' Green Shoes supports `:hidden` style for only slots, shapes, textblocks 
 and images so far.
 
-=== :inner » a number ===
+=== :inner  a number ===
 
 For: ''star''.
 
 The size of the inner radius (in pixels.)  The inner radius describes the solid
 circle within the star where the points begin to separate.
 
-=== :items » an array ===
+=== :items  an array ===
 
 For: ''list_box''.
 
 The list of selections in the list box.  See the [[Element.list_box]] method
 for an example.
 
-=== :justify » true or false ===
+=== :justify  true or false ===
 
 For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Evenly spaces the text horizontally.
 
-=== :kerning » a number ===
+=== :kerning  a number ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
 strong, sub, sup, subtitle, tagline, title''.
@@ -1388,13 +1388,13 @@ Adds to the natural spacing between letters, in pixels.
 
 '''Note:''' Green Shoes doesn't support `:kerning` style.
 
-=== :leading » a number ===
+=== :leading  a number ===
 
 For: ''banner, caption, inscription, para, subtitle, tagline, title''.
 
 Sets the spacing between lines in a text block.  Defaults to 4 pixels.
 
-=== :left » a number ===
+=== :left  a number ===
 
 For: ''all slots and elements''.
 
@@ -1403,7 +1403,7 @@ places the object's left edge ten pixels away from the left edge of the
 slot containing it.  If this style is left unset (or set to `nil`,) the object
 will flow in with the other objects surrounding it.
 
-=== :margin » a number or an array of four numbers ===
+=== :margin  a number or an array of four numbers ===
 
 For: ''all slots and elements''.
 
@@ -1416,44 +1416,44 @@ eight pixels in length.
 This style can also be given an array of four numbers in the form `[left, top,
 right, bottom]`.
 
-=== :margin_bottom » a number ===
+=== :margin_bottom  a number ===
 
 For: ''all slots and elements''.
 
 Sets the bottom margin of the element to a specific pixel size.
 
-=== :margin_left » a number ===
+=== :margin_left  a number ===
 
 For: ''all slots and elements''.
 
 Sets the left margin of the element to a specific pixel size.
 
-=== :margin_right » a number ===
+=== :margin_right  a number ===
 
 For: ''all slots and elements''.
 
 Sets the right margin of the element to a specific pixel size.
 
-=== :margin_top » a number ===
+=== :margin_top  a number ===
 
 For: ''all slots and elements''.
 
 Sets the top margin of the element to a specific pixel size.
 
-=== :outer » a number ===
+=== :outer  a number ===
 
 For: ''star''.
 
 Sets the outer radius (half of the ''total'' width) of the star, in pixels.
 
-=== :points » a number ===
+=== :points  a number ===
 
 For: ''star''.
 
 How many points does this star have?  A style of `points: 5` creates a
 five-pointed star.
 
-=== :radius » a number ===
+=== :radius  a number ===
 
 For: ''oval''.
 
@@ -1461,7 +1461,7 @@ Sets the radius (half of the diameter or total width) for each of these
 elements.  Setting this is equivalent to setting both `:width` and `:height` to
 double this number.
 
-=== :right » a number ===
+=== :right  a number ===
 
 For: ''all slots and elements''.
 
@@ -1473,7 +1473,7 @@ left of its slot's right edge by twenty pixels.
 
 '''Note:''' Green Shoes doesn't support `:right` style.
 
-=== :rise » a number ===
+=== :rise  a number ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1481,7 +1481,7 @@ Lifts or plunges the font baseline for some text.  For example, a
 [[Element.sup]] has a `:rise` of 10 pixels.  Conversely, the [[Element.sub]]
 element has a `:rise` of -10 pixels.
 
-=== :scroll » true or false ===
+=== :scroll  true or false ===
 
 For: ''flow, stack''.
 
@@ -1509,7 +1509,7 @@ whether there is a scrollbar or not.
  end
 }}}
 
-=== :secret » true or false ===
+=== :secret  true or false ===
 
 For: ''ask, edit_line''.
 
@@ -1517,7 +1517,7 @@ Used for password fields, this setting keeps any characters typed in from
 becoming visible on the screen.  Instead, a replacement character (such as an
 asterisk) is show for each letter typed.
 
-=== :size » a number ===
+=== :size  a number ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1533,7 +1533,7 @@ Font size may also be augmented, through use of the following strings:
  * "x-large" - 143% of present size.
  * "xx-large" - 173% of present size.
 
-=== :state » a string ===
+=== :state  a string ===
 
 For: ''button, check, edit_box, edit_line, list_box, radio''.
 
@@ -1546,7 +1546,7 @@ Here are the possible style settings:
  * "readonly" - the control is active but cannot be edited.
  * "disabled" - the control is not active (grayed out) and cannot be edited.
 
-=== :stretch » a string ===
+=== :stretch  a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
 strong, sub, sup, subtitle, tagline, title''.
@@ -1561,13 +1561,13 @@ Possible settings are:
 
 '''Note:''' Green Shoes doesn't support `:stretch` style.
 
-=== :strikecolor » a RGB array ===
+=== :strikecolor  a RGB array ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 The color used to paint any lines stricken through this text.
 
-=== :strikethrough » a string ===
+=== :strikethrough  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1576,7 +1576,7 @@ Is this text stricken through?  Two options here:
  * "none" - no strikethrough
  * "single" - a single-line strikethrough.
 
-=== :stroke » a hex code, a rgb array or a range of either ===
+=== :stroke  a hex code, a rgb array or a range of either ===
 
 For: ''background, banner, border, caption, inscription, para, line, oval, 
 rect, shape, star, subtitle, tagline, title''.
@@ -1584,20 +1584,20 @@ rect, shape, star, subtitle, tagline, title''.
 The color of the foreground pen.  In the case of shapes, this is the color the
 lines are drawn with. For textblock, the letters are printed in this color.
 
-=== :strokewidth » a number ===
+=== :strokewidth  a number ===
 
 For: ''background, border, line, oval, rect, shape, star''.
 
 The thickness of the stroke, in pixels, of the line defining each of these
 shapes.  For example, the number two would set the strokewidth to 2 pixels.
 
-=== :text » a string ===
+=== :text  a string ===
 
 For: ''edit_box, edit_line''.
 
 Sets the message displayed on the contents of edit_box or edit_line.
 
-=== :top » a number ===
+=== :top  a number ===
 
 For: ''all slots and elements''.
 
@@ -1607,13 +1607,13 @@ placed 40 pixels beneath the top edge of the top slot (window).  If no
 `:top` style is given, the object is automatically placed in the natural flow
 of the slot it contains.
 
-=== :undercolor » a RGB array ===
+=== :undercolor  a RGB array ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
 The color used to underline text.
 
-=== :underline » a string ===
+=== :underline  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1627,7 +1627,7 @@ The choices for this setting are:
  * "low" - a lower underline, beneath the font baseline.  (This is generally recommended only for single characters, particularly when showing keyboard accelerators.)
  * "error" - a wavy underline, usually found indicating a misspelling.
 
-=== :variant » a string ===
+=== :variant  a string ===
 
 For: ''banner, caption, code, del, em, ins, inscription, link, para, span,
 strong, sub, sup, subtitle, tagline, title''.
@@ -1639,7 +1639,7 @@ Vary the font for a group of text.  Two choices:
 
 '''Note:''' Green Shoes doesn't support `:variant` style.
 
-=== :weight » a string ===
+=== :weight  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1656,7 +1656,7 @@ following strings:
 
 However, you may also pass in the numerical weight directly.
 
-=== :width » a number ===
+=== :width  a number ===
 
 For: ''all slots and elements''.
 
@@ -1664,7 +1664,7 @@ Sets the pixel width for the element.  If the number is a decimal, the width is
 converted to a percentage (with 0.0 being 0% and 1.0 being 100%.)  A width of
 100% means the object fills its parent slot.
 
-=== :wrap » a string ===
+=== :wrap  a string ===
 
 For: ''banner, caption, inscription, para, span, subtitle, tagline, title''.
 
@@ -1778,7 +1778,7 @@ allows images and gradients to be used for drawing lines and filling in shapes.
 Shoes also borrows some animation ideas from Processing and will continue to
 closely consult Processing's methods as it expands.
 
-=== arc(left, top, width, height, angle1, angle2) » Shoes::Oval ===
+=== arc(left, top, width, height, angle1, angle2)  Shoes::Oval ===
 
 Draws an arc shape (a section of an oval) at coordinates (left, top).  This
 method just give you a bit more control than [[oval]], by offering the
@@ -1801,7 +1801,7 @@ setting `:angle1` to 0 and `:angle2` to `2*Math::PI`.)
  end
 }}}
 
-=== arrow(left, top, width) » Shoes::Shape ===
+=== arrow(left, top, width)  Shoes::Shape ===
 
 Draws an arrow at coordinates (left, top) with a pixel `width`.
 
@@ -1812,7 +1812,7 @@ Draws an arrow at coordinates (left, top) with a pixel `width`.
  end
 }}}
 
-=== cap(:curve or :rect or :project) » self ===
+=== cap(:curve or :rect or :project)  self ===
 
 Sets the line cap, which is the shape at the end of every line you draw.  If
 set to `:curve`, the end is rounded.  The default is `:rect`, a line which ends
@@ -1838,7 +1838,7 @@ abruptly flat.  The `:project` cap is also fat, but sticks out a bit longer.
  end
 }}}
 
-=== fill(pattern) » pattern ===
+=== fill(pattern)  pattern ===
 
 Sets the fill bucket to a specific color (or pattern.)  Patterns can be colors,
 gradients or images.  So, once the fill bucket is set, you can draw shapes and
@@ -1857,22 +1857,22 @@ To draw a star with an image pattern:
 To clear the fill bucket, use `nofill`.  And to set the line color (the border
 of the star,) use the `stroke` method.
 
-=== nofill() » self ===
+=== nofill()  self ===
 
 Blanks the fill color, so that any shapes drawn will not be filled in.
 Instead, shapes will have only a lining, leaving the middle transparent.
 
-=== nostroke() » self ===
+=== nostroke()  self ===
 
 Empties the line color.  Shapes drawn will have no outer line.  If `nofill` is
 also set, shapes drawn will not be visible.
 
-=== line(left, top, x2, y2) » Shoes::Line ===
+=== line(left, top, x2, y2)  Shoes::Line ===
 
 Draws a line using the current line color (aka "stroke") starting at
 coordinates (left, top) and ending at coordinates (x2, y2).
 
-=== oval(left, top, radius) » Shoes::Oval ===
+=== oval(left, top, radius)  Shoes::Oval ===
 
 Draws a circular form at pixel coordinates (left, top) with a width and height
 of `radius` pixels.  The line and fill colors are used to draw the shape.  By
@@ -1892,7 +1892,7 @@ style on the next method below.
 
 To draw an oval of varied proportions, you may also use the syntax: `oval(left, top, width, height)`.
 
-=== oval(styles) » Shoes::Oval ===
+=== oval(styles)  Shoes::Oval ===
 
 Draw circular form using a style hash.  The following styles are supported:
 
@@ -1907,7 +1907,7 @@ These styles may also be altered using the `style` method on the Shape object.
 
 '''Note:''' Green Shoes doesn't support `center` style.
 
-=== rect(top, left, width, height) » Shoes::Rect ===
+=== rect(top, left, width, height)  Shoes::Rect ===
 
 Draws a rectangle starting from coordinates (top, left) with dimensions of
 width x height. 
@@ -1927,7 +1927,7 @@ The above sample draws a rectangle which fills the area of its parent box,
 leaving a margin of 10 pixels around the edge.  Also see the `background`
 method for a rectangle which defaults to filling its parent box.
 
-=== rect(styles) » Shoes::Rect ===
+=== rect(styles)  Shoes::Rect ===
 
 Draw a rectangle using a style hash.  The following styles are supported:
 
@@ -1942,7 +1942,7 @@ These styles may also be altered using the `style` method on the Shape object.
 
 '''Note:''' Green Shoes doesn't support `center` style.
 
-=== rotate(degrees: a number) » self ===
+=== rotate(degrees: a number)  self ===
 
 Rotates the pen used for drawing by a certain number of `degrees`, so that any
 shapes will be drawn at that angle.
@@ -1958,7 +1958,7 @@ In this example below, the rectangle drawn at (30, 30) will be rotated 45 degree
  end
 }}}
 
-=== shape(left, top) { ... } » Shoes::Shape ===
+=== shape(left, top) { ... }  Shoes::Shape ===
 
 Describes an arbitrary shape to draw, beginning at coordinates (left, top) and
 continued by calls to `line_to`, `move_to`, `curve_to` and `arc_to` inside the
@@ -1987,14 +1987,14 @@ one.
 Green Shoes uses them directly inside the block. So, Green Shoes doesn't support `arc_to`.
 Also Green Shoes shape can not contain other shapes.
 
-=== star(left, top, points = 10, outer = 100.0, inner = 50.0) » Shoes::Star ===
+=== star(left, top, points = 10, outer = 100.0, inner = 50.0)  Shoes::Star ===
 
 Draws a star using the stroke and fill colors.  The star is positioned with its
 center point at coordinates (left, top) with a certain number of `points`.  The
 `outer` width defines the full radius of the star; the `inner` width specifies
 the radius of the star's middle, where points stem from.
 
-=== stroke(pattern) » pattern ===
+=== stroke(pattern)  pattern ===
 
 Set the active line color for this slot.  The `pattern` may be a color, a
 gradient or an image, all of which are categorized as "patterns."  The line
@@ -2013,20 +2013,20 @@ So, to draw a star with a red line around it:
 
 To clear the line color, use the `nostroke` method.
 
-=== strokewidth(a number) » self ===
+=== strokewidth(a number)  self ===
 
 Sets the line size for all drawing within this slot.  Whereas the `stroke`
 method alters the line color, the `strokewidth` method alters the line size in
 pixels.  Calling `strokewidth(4)` will cause lines to be drawn 4 pixels wide.
 
-=== transform(:center or :corner) » self ===
+=== transform(:center or :corner)  self ===
 
 Should transformations (such as `skew` and `rotate`) be performed around the
 center of the shape?  Or the corner of the shape?  Shoes defaults to `:corner`.
 
 '''Note:''' Green Shoes doesn't support `transform` method.
 
-=== translate(left, top) » self ===
+=== translate(left, top)  self ===
 
 Moves the starting point of the drawing pen for this slot.  Normally, the pen
 starts at (0, 0) in the top-left corner, so that all shapes are drawn from that
@@ -2043,7 +2043,7 @@ describes how to create these elements in a slot.  See the Elements section of
 the manual for more on how to modify and use these elements after they have
 been placed.
 
-=== animate(fps) { |frame| ... } » Shoes::Anim ===
+=== animate(fps) { |frame| ... }  Shoes::Anim ===
 
 Starts an animation timer, which runs parallel to the rest of the app.  The
 `fps` is a number, the frames per seconds.  This number dictates how many times
@@ -2065,7 +2065,7 @@ tells the block how many frames of the animation have been shown.
 The above animation is shown 24 times per second.  If no number is given, the
 `fps` defaults to 10.
 
-=== background(pattern) » Shoes::Background ===
+=== background(pattern)  Shoes::Background ===
 
 Draws a Background element with a specific color (or pattern.)  Patterns can be
 colors, gradients or images.  Colors and images will tile across the
@@ -2087,11 +2087,11 @@ The above example paints two backgrounds.  First, a black background is painted
 over the entire app's surface area.  Then a 50 pixel white stripe is painted
 along the left side.
 
-=== banner(text) » Shoes::Banner ===
+=== banner(text)  Shoes::Banner ===
 
 Creates a Banner text block.  Green Shoes automatically styles this text to 48 pixels high.
 
-=== border(text, :strokewidth => a number) » Shoes::Border ===
+=== border(text, :strokewidth => a number)  Shoes::Border ===
 
 Draws a Border element using a specific color (or pattern.)  Patterns can be
 colors, gradients or images.  Colors and images will tile across the border.
@@ -2102,36 +2102,36 @@ HTML treats backgrounds and borders like styles.  Which means every box can
 only have one borders.  Green Shoes layers border and background elements, along with
 text blocks, images, and everything else.
 
-=== button(text) { ... } » Shoes::Button ===
+=== button(text) { ... }  Shoes::Button ===
 
 Adds a push button with the message `text` written across its surface.  An
 optional block can be attached, which is called if the button is pressed.
 
-=== caption(text) » Shoes::Caption ===
+=== caption(text)  Shoes::Caption ===
 
 Creates a Caption text block.  Green Shoes styles this text to 14 pixels high.
 
-=== check() » Shoes::Check ===
+=== check()  Shoes::Check ===
 
 Adds a check box.
 
-=== code(text) » String ===
+=== code(text)  String ===
 
 Create a Code text fragment.  This text defaults to a monospaced font.
 
-=== del(text) » String ===
+=== del(text)  String ===
 
 Creates a Del text fragment (short for "deleted") which defaults to text with a
 single strikethrough in its middle.
 
-=== dialog(styles) { ... } » Shoes::App ===
+=== dialog(styles) { ... }  Shoes::App ===
 
 Opens a new app window (just like the [[Element.window]] method does,) but the
 window is given a dialog box look.
 
 '''Note:''' Green Shoes doesn't support `dialog` method.
 
-=== edit_box(text, :accepts_tab => true or false) » Shoes::EditBox ===
+=== edit_box(text, :accepts_tab => true or false)  Shoes::EditBox ===
 
 Adds a large, multi-line textarea to this slot.  The `text` is optional and
 should be a string that will start out the box.  An optional block can be
@@ -2151,25 +2151,25 @@ in the focus chain. This accepts_tab defaults to false.
  end
 }}}
 
-=== edit_line(text) » Shoes::EditLine ===
+=== edit_line(text)  Shoes::EditLine ===
 
 Adds a single-line text box to this slot.  The `text` is optional and should be
 a string that will start out the box.  An optional block can be attached here
 which is called any type the user changes the text in the box.
 
-=== em(text) » String ===
+=== em(text)  String ===
 
 Creates an Em text fragment (short for "emphasized") which, by default, is
 styled with italics.
 
-=== every(seconds) { |count| ... } » Shoes::Anim ===
+=== every(seconds) { |count| ... }  Shoes::Anim ===
 
 A timer similar to the `animate` method, but much slower.  This timer fires a
 given number of seconds, running the block attached.  So, for example, if you
 need to check a web site every five minutes, you'd call `every(300)` with a
 block containing the code to actually ping the web site.
 
-=== flow(styles) { ... } » Shoes::Flow ===
+=== flow(styles) { ... }  Shoes::Flow ===
 
 A flow is an invisible box (or "slot") in which you place Green Shoes elements.  Both
 flows and stacks are explained in great detail on the main [[Slots]] page.
@@ -2179,7 +2179,7 @@ to keep things stacked vertically, a flow places its contents end-to-end across
 the page.  Once the end of the page is reached, the flow starts a new line of
 elements.
 
-=== image(path) » Shoes::Image ===
+=== image(path)  Shoes::Image ===
 
 Creates an [[Image]] element for displaying a picture.  PNG, JPEG and GIF
 formats are allowed.
@@ -2192,7 +2192,7 @@ are loaded.
 
 '''Note:''' Green Shoes doesn't support the above personal Shoes directory.
 
-=== imagesize(path) » [width, height] ===
+=== imagesize(path)  [width, height] ===
 
 Quickly grab the width and height of an image.  The image won't be loaded into
 the cache or displayed.
@@ -2200,28 +2200,28 @@ the cache or displayed.
 URGENT NOTE: This method cannot be used with remote images (loaded from HTTP,
 rather than the hard drive.)
 
-=== ins(text) » String ===
+=== ins(text)  String ===
 
 Creates an Ins text fragment (short for "inserted") which Green Shoes styles with a
 single underline.
 
-=== inscription(text) » Shoes::Inscription ===
+=== inscription(text)  Shoes::Inscription ===
 
 Creates an Inscription text block.  Green Shoes styles this text at 10 pixels high.
 
-=== link(text, :click => proc or string) » Shoes::Link ===
+=== link(text, :click => proc or string)  Shoes::Link ===
 
 Creates a Link text block, which Green Shoes styles with a single underline and
 colors with a #06E (blue) colored stroke.
 
 The default LinkHover style is also single-underlined with a #039 (dark blue) stroke.
 
-=== link(text){ ... } » Shoes::Link ===
+=== link(text){ ... }  Shoes::Link ===
 
 Creates a Link text block. You can also write with this style. When user clicks the link text, 
 the block will be launched.
 
-=== list_box(:items => [strings, ...]) » Shoes::ListBox ===
+=== list_box(:items => [strings, ...])  Shoes::ListBox ===
 
 Adds a drop-down list box containing entries for everything in the `items`
 array.  An optional block may be attached, which is called if anything in the
@@ -2243,23 +2243,23 @@ box becomes selected by the user.
 Call `ListBox#text` to get the selected string.  See the `ListBox` section
 under `Native` controls for more help.
 
-=== progress() » Shoes::Progress ===
+=== progress()  Shoes::Progress ===
 
 Adds a progress bar.
 
-=== para(text) » Shoes::Para ===
+=== para(text)  Shoes::Para ===
 
 Create a Para text block (short for "paragraph") which Green Shoes styles at 12
 pixels high.
 
-=== radio(group name: a string or symbol) » Shoes::Radio ===
+=== radio(group name: a string or symbol)  Shoes::Radio ===
 
 Adds a radio button.  If a `group name` is given, the radio button is
 considered part of a group.  Among radio buttons in the same group, only one
 may be checked.  (If no group name is given, the radio button is grouped with
 any other radio buttons in the same slot.)
 
-=== span(text) » Shoes::Span ===
+=== span(text)  Shoes::Span ===
 
 Creates a Span text fragment, unstyled by default.
 
@@ -2270,7 +2270,7 @@ Creates a Span text fragment, unstyled by default.
  end
 }}}
 
-=== stack(styles) { ... } » Shoes::Stack ===
+=== stack(styles) { ... }  Shoes::Stack ===
 
 Creates a new stack.  A stack is a type of slot.  (See the main [[Slots]] page
 for a full explanation of both stacks and flows.)
@@ -2279,29 +2279,29 @@ In short, stacks are an invisible box (a "slot") for placing stuff.  As you add
 things to the stack, such as buttons or images, those things pile up
 vertically.  Yes, they stack up!
 
-=== strong(text) » String ===
+=== strong(text)  String ===
 
 Creates a Strong text fragment, styled in bold by default.
 
-=== sub(text) » String ===
+=== sub(text)  String ===
 
 Creates a Sub text fragment (short for "subscript") which defaults to lowering
 the text by 10 pixels and styling it in an x-small font.
 
-=== subtitle(text) » String ===
+=== subtitle(text)  String ===
 
 Creates a Subtitle text block.  Green Shoes styles this text to 26 pixels high.
 
-=== sup(text) » String ===
+=== sup(text)  String ===
 
 Creates a Sup text fragment (short for "superscript") which defaults to raising
 the text by 10 pixels and styling it in an x-small font.
 
-=== tagline(text) » Shoes::Tagline ===
+=== tagline(text)  Shoes::Tagline ===
 
 Creates a Tagline text block.  Green Shoes styles this text to 18 pixels high.
 
-=== timer(seconds) { ... } » Fixnum ===
+=== timer(seconds) { ... }  Fixnum ===
 
 A one-shot timer.  If you want to schedule to run some code in a few seconds
 (or minutes, hours) you can attach the code as a block here.
@@ -2317,15 +2317,15 @@ To display an alert box five seconds from now:
  end
 }}}
 
-=== title(text) » Shoes::Title ===
+=== title(text)  Shoes::Title ===
 
 Creates a Title text block.  Green Shoes styles these elements to 34 pixels high.
 
-=== video(path or url) » Shoes::Video ===
+=== video(path or url)  Shoes::Video ===
 
 Play some audio files.
 
-=== window(styles) { ... } » Shoes::App ===
+=== window(styles) { ... }  Shoes::App ===
 
 Opens a new app window.  This method is almost identical to the
 [[App.Shoes.app]] method used to start an app in the first place.  The
@@ -2377,7 +2377,7 @@ away.
  end
 }}}
 
-=== click { |button, left, top| ... } » self ===
+=== click { |button, left, top| ... }  self ===
 
 The click block is called when a mouse button is clicked.  The `button` is the
 number of the mouse button which has been pressed.  The `left` and `top` are
@@ -2385,21 +2385,21 @@ the mouse coordinates at which the click happened.
 
 To catch the moment when the mouse is unclicked, see the [[Events.release]] event.
 
-=== finish { |self| ... } » self ===
+=== finish { |self| ... }  self ===
 
 When a slot is removed, it's finish event occurs.  The finish block is
 immediately handed `self`, the slot object which has been removed.
 
 '''Note:''' Green Shoes doesn't support `finish` method.
 
-=== hover { |self| ... } » self ===
+=== hover { |self| ... }  self ===
 
 The hover event happens when the mouse enters the slot.  The block gets `self`,
 meaning the object which was hovered over.
 
 To catch the mouse exiting the slot, check out the [[Events.leave]] event.
 
-=== keypress { |key| ... } » self ===
+=== keypress { |key| ... }  self ===
 
 Whenever a key (or combination of keys) is pressed, the block gets called.  The
 block is sent a `key` which is a string representing the character (such as the
@@ -2429,7 +2429,7 @@ get the strings: `"Shift_L"`, `"Alt_L"` and `"ampersand"`.
 }}}
 
 
-=== leave { |self| ... } » self ===
+=== leave { |self| ... }  self ===
 
 The leave event takes place when the mouse cursor exits a slot.  The moment it
 no longer is inside the slot's edges.  When that takes place, the block is
@@ -2437,7 +2437,7 @@ called with `self`, the slot object which is being left.
 
 Also see [[Events.hover]] if you'd like to detect the mouse entering a slot.
 
-=== motion { |left, top| ... } » self ===
+=== motion { |left, top| ... }  self ===
 
 The motion block gets called every time the mouse moves around inside the slot.
 The block is handed the cursor's `left` and `top` coordinates.
@@ -2455,7 +2455,7 @@ The block is handed the cursor's `left` and `top` coordinates.
  end
 }}}
 
-=== release { |button, left, top| ... } » self ===
+=== release { |button, left, top| ... }  self ===
 
 The release block runs whenever the mouse is unclicked (on mouse up).  When the
 finger is lifted.  The `button` is the number of the button that was depressed.
@@ -2464,7 +2464,7 @@ was released.
 
 To catch the actual mouse click, use the [[Events.click]] event.
 
-=== start { |self| ... } » self ===
+=== start { |self| ... }  self ===
 
 The first time the slot is drawn, the start event fires.  The block is handed
 `self`, the slot object which has just been drawn.
@@ -2476,7 +2476,7 @@ The first time the slot is drawn, the start event fires.  The block is handed
 The manipulation methods below make quick work of shifting around slots and
 inserting new elements.
 
-=== append() { ... } » self ===
+=== append() { ... }  self ===
 
 Adds elements to the end of a slot.
 
@@ -2496,23 +2496,23 @@ Adds elements to the end of a slot.
 
 The `title` and `tagline` elements will be added to the end of the `@slot`.
 
-=== after(element) { ... } » self ===
+=== after(element) { ... }  self ===
 
 Adds elements to a specific place in a slot, just after the `element` which is
 a child of the slot.
 
-=== before(element) { ... } » self ===
+=== before(element) { ... }  self ===
 
 Adds elements to a specific place in a slot, just before the `element` which is
 a child of the slot.
 
-=== clear() » self ===
+=== clear()  self ===
 
 Empties the slot of any elements, timers and nested slots.  This is effectively
 identical to looping through the contents of the slot and calling each
 element's `remove` method.
 
-=== clear() { ... } » self ===
+=== clear() { ... }  self ===
 
 The clear method also takes an optional block.  The block will be used to
 replace the contents of the slot.
@@ -2530,7 +2530,7 @@ replace the contents of the slot.
 In this example, the "Old text" paragraph will be cleared out, replaced by the
 "Brand new text" paragraph.
 
-=== prepend() { ... } » self ===
+=== prepend() { ... }  self ===
 
 Adds elements to the beginning of a slot.
 
@@ -2566,7 +2566,7 @@ Each style setting also has a method, which can be used to grab that particular
 setting.  (So, like, the `width` method returns the width of the slot in
 pixels.)
 
-=== displace(left: a number, top: a number) » self ===
+=== displace(left: a number, top: a number)  self ===
 
 A shortcut method for setting the :displace_left and :displace_top styles.
 Displacing is a handy way of moving a slot without altering the layout.  In
@@ -2580,7 +2580,7 @@ numbers.
 
 '''Note:''' Green Shoes doesn't support `displace` method.
 
-=== gutter() » a number ===
+=== gutter()  a number ===
 
 The size of the scrollbar area.  When Green Shoes needs to show a scrollbar, the
 scrollbar may end up covering up some elements that touch the edge of the
@@ -2598,47 +2598,47 @@ This is commonly used to pad elements on the right, like so:
  end
 }}}
 
-=== height() » a number ===
+=== height()  a number ===
 
 The vertical size of the viewable slot in pixels.  So, if this is a scrolling
 slot, you'll need to use `scroll_height()` to get the full size of the slot.
 
-=== hide() » self ===
+=== hide()  self ===
 
 Hides the slot, so that it can't be seen.  See also [[Position.show]] and [[Position.toggle]].
 
-=== left() » a number ===
+=== left()  a number ===
 
 The left pixel location of the slot.  Also known as the x-axis coordinate.
 
-=== move(left, top) » self ===
+=== move(left, top)  self ===
 
 Moves the slot to specific coordinates, the (left, top) being the upper left
 hand corner of the slot.
 
 '''Note:''' Green Shoes doesn't support `move` method.
 
-=== remove() » self ===
+=== remove()  self ===
 
 Removes the slot. It will no longer be displayed and will not be listed in its
 parent's contents. It's gone.
 
 '''Note:''' Green Shoes doesn't support `remove` method. Use `clear` method.
 
-=== scroll() » true or false ===
+=== scroll()  true or false ===
 
 Is this slot allowed to show a scrollbar? True or false. The scrollbar will
 only appear if the height of the slot is also fixed.
 
 '''Note:''' Green Shoes doesn't support `scroll` method.
 
-=== scroll_height() » a number ===
+=== scroll_height()  a number ===
 
 The vertical size of the full slot, including any of it which is hidden by scrolling.
 
 '''Note:''' Green Shoes doesn't support `scroll_height` method.
 
-=== scroll_max() » a number ===
+=== scroll_max()  a number ===
 
 The top coordinate which this slot can be scrolled down to.  The top coordinate
 of a scroll bar is always zero.  The bottom coordinate is the full height of
@@ -2651,7 +2651,7 @@ To scroll to the bottom of a slot, use `slot.scroll_top = slot.scroll_max`.
 
 '''Note:''' Green Shoes doesn't support `scroll_max` method.
 
-=== scroll_top() » a number ===
+=== scroll_top()  a number ===
 
 The top coordinate which this slot is scrolled down to.  So, if the slot is
 scrolled down twenty pixels, this method will return `20`.
@@ -2665,12 +2665,12 @@ Scrolls the slot to a certain coordinate.  This must be between zero and
 
 '''Note:''' Green Shoes doesn't support `scroll_top=` method.
 
-=== show() » self ===
+=== show()  self ===
 
 Reveals the slot, if it is hidden.  See also [[Position.hide]] and
 [[Position.toggle]].
 
-=== style() » styles ===
+=== style()  styles ===
 
 Calling the `style` method with no arguments returns a hash of the styles
 presently applied to this slot.
@@ -2691,7 +2691,7 @@ originally requested.
 In this example, the paragraph under the stack will display "1.0". 
 After click the button, will show you "600" pixels.
 
-=== style(styles) » styles ===
+=== style(styles)  styles ===
 
 Alter the slot using a hash of style settings.  Any of the methods on this page
 (aside from this method, of course) can be used as a style setting.  So, for
@@ -2705,15 +2705,15 @@ example, there is a `width` method, thus there is also a `width` style.
  end
 }}}
 
-=== toggle() » self ===
+=== toggle()  self ===
 
 Hides the slot, if it is shown.  Or shows the slot, if it is hidden.
 
-=== top() » a number ===
+=== top()  a number ===
 
 The top pixel location of the slot.  Also known as the y-axis coordinate.
 
-=== width() » a number ===
+=== width()  a number ===
 
 The horizontal size of the slot in pixels.
 
@@ -2727,11 +2727,11 @@ On any element, you may call the `parent` method to get the slot directly above
 it. And on slots, you can call the `contents` method to get all of the
 children. (Some elements, such as shapes, are not included in any slots.)
 
-=== contents() » an array of elements ===
+=== contents()  an array of elements ===
 
 Lists all elements in a slot.
 
-=== parent() » a Shoes::Stack or Shoes::Flow ===
+=== parent()  a Shoes::Stack or Shoes::Flow ===
 
 Gets the object for this element's container.
 
@@ -2803,7 +2803,7 @@ For specific commands, see the other links to the left in the Elements section.
 Like if you want to pause or play a video file, check the [[Video]] section,
 since pausing and playing is peculiar to videos.  No sense pausing a button.
 
-=== displace(left: a number, top: a number) » self ===
+=== displace(left: a number, top: a number)  self ===
 
 Displacing an element moves it.  But without changing the layout around it.
 This is great for subtle animations, especially if you want to reserve a place
@@ -2845,7 +2845,7 @@ quick animations!
 
 '''Note:''' Green Shoes doesn't support `displace` method.
 
-=== height() » a number ===
+=== height()  a number ===
 
 The vertical screen size of the element in pixels. In the case of images, this
 is not the full size of the image. This is the height of the element as it is
@@ -2856,16 +2856,16 @@ method will return 50.
 
 Also see the [[Common.width]] method for an example and some other comments.
 
-=== hide() » self ===
+=== hide()  self ===
 
 Hides the element, so that it can't be seen.  See also [[Common.show]] and
 [[Common.toggle]].
 
-=== left() » a number ===
+=== left()  a number ===
 
 Gets you the pixel position of the left edge of the element.
 
-=== move(left: a number, top: a number) » self  ===
+=== move(left: a number, top: a number)  self  ===
 
 Moves the element to a specific pixel position.  The element is no longer
 inside the slot.  So, it will not be stacked or flowed in with the
@@ -2891,22 +2891,22 @@ The second button is moved to a specific place, allowing the third button to
 slide over into its place.  But it will not happen until you resize the window.
 If you want to slide the third button without resizing the window, add `flush` method.
 
-=== parent() » a Shoes::Stack or Shoes::Flow ===
+=== parent()  a Shoes::Stack or Shoes::Flow ===
 
 Gets the object for this element's container.  Also see the slot's
 [[Traversing.contents]] to do the opposite: get a container's elements.
 
-=== remove() » self ===
+=== remove()  self ===
 
 Removes the element from its slot.  (In other words: throws it in the garbage.)
 The element will no longer be displayed.
 
-=== show() » self ===
+=== show()  self ===
 
 Reveals the element, if it is hidden.  See also [[Common.hide]] and
 [[Common.toggle]].
 
-=== style() » styles ===
+=== style()  styles ===
 
 Gives you the full set of styles applied to this element, in the form of a
 Hash.  While methods like `width` and `height` and `top` give you back specific
@@ -2925,21 +2925,21 @@ original setting (things like "100%" for width or "10px" for top.)
  end
 }}}
 
-=== style(styles) » styles ===
+=== style(styles)  styles ===
 
 Changes the style of an element.  This could include the `:width` and `:height`
 of an element, the font `:size` of some text, the `:stroke` and `:fill` of a
 shape.  Or any other number of style settings.
 
-=== toggle() » self ===
+=== toggle()  self ===
 
 Hides an element if it is shown.  Or shows the element, if it is hidden.
 
-=== top() » a number ===
+=== top()  a number ===
 
 Gets the pixel position of the top edge of the element.
 
-=== width() » a number ===
+=== width()  a number ===
 
 Gets the pixel width for the full size of the element.  This method always
 returns an exact pixel size.  In the case of images, this is not the full width
@@ -3013,7 +3013,7 @@ Or, to paint a fifty pixel column on the left-side of the window:
 Since Backgrounds are normal elements as well, see also the start of the
 [[Elements]] section for all of its other methods.
 
-=== to_pattern() » a Shoes::Pattern ===
+=== to_pattern()  a Shoes::Pattern ===
 
 Yanks out the color, gradient or image used to paint this background and places
 it in a normal Shoes::Pattern object.  You can then pass that object to other
@@ -3070,7 +3070,7 @@ stays fifty pixels wide regardless of its borders or margins or anything else.
 
 Please also check out the [[Elements]] section for other methods used on borders.
 
-=== to_pattern() » a Shoes::Pattern ===
+=== to_pattern()  a Shoes::Pattern ===
 
 Creates a basic pattern object based on the color, gradient or image used to
 paint this border.  The pattern may then be re-used in new borders and
@@ -3136,12 +3136,12 @@ can just call `para` directly.  (This isn't the case with the `prepend`,
 Beside the methods below, buttons also inherit all of the methods that are
 [[Common]].
 
-=== click() { |self| ... } » self ===
+=== click() { |self| ... }  self ===
 
 When a button is clicked, its `click` block is called.  The block is handed
 `self`.  Meaning: the button which was clicked.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the button.  The button will be highlighted and, if the user
 hits Enter, the button will be clicked.
@@ -3205,7 +3205,7 @@ using the `checked?` method.
 Button methods are listed below, but also see the list of [[Common]] methods,
 which all elements respond to.
 
-=== checked?() » true or false ===
+=== checked?()  true or false ===
 
 Returns whether the box is checked or not.  So, `true` means "yes, the box is checked!"
 
@@ -3214,14 +3214,14 @@ Returns whether the box is checked or not.  So, `true` means "yes, the box is ch
 Marks or unmarks the check box.  Using `checked = false`, for instance,
 unchecks the box.
 
-=== click() { |self| ... } » self ===
+=== click() { |self| ... }  self ===
 
 When the check is clicked, its `click` block is called.  The block is handed
 `self`, which is the check object which was clicked.
 
 Clicks are sent for both checking and unchecking the box.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the check.  The check will be highlighted and, if the user hits
 Enter, the check will be toggled between its checked and unchecked states.
@@ -3264,18 +3264,18 @@ That method gives you a string of all the characters typed into the box.
 More edit box methods are listed below, but also see the list of [[Common]]
 methods, which all elements respond to.
 
-=== change() { |self| ... } » self ===
+=== change() { |self| ... }  self ===
 
 Each time a character is added to or removed from the edit box, its `change`
 block is called. The block is given `self`, which is the edit box object which
 has changed.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the edit box. The edit box will be highlighted and the user will
 be able to type into the edit box.
 
-=== text() » self ===
+=== text()  self ===
 
 Return a string of characters which have been typed into the box.
 
@@ -3312,18 +3312,18 @@ If a block is given to an edit line, it receives `change` events. Check out the
 has all the same methods as an edit line. Also see the list of [[Common]]
 methods, which all elements respond to.
 
-=== change() { |self| ... } » self ===
+=== change() { |self| ... }  self ===
 
 Each time a character is added to or removed from the edit line, its `change`
 block is called. The block is given `self`, which is the edit line object which
 has changed.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the edit line. The edit line will be highlighted and the user
 will be able to type into the edit line.
 
-=== text() » self ===
+=== text()  self ===
 
 Return a string of characters which have been typed into the box.
 
@@ -3372,7 +3372,7 @@ Green Shoes also loads remote images in the background using system threads. So,
 using remote images will not block Ruby or any intense graphical displays you
 may have going on.
 
-=== full_height() » a number ===
+=== full_height()  a number ===
 
 The full pixel height of the image. Normally, you can just use the
 [[Common.height]] method to figure out how many pixels high the image is. But
@@ -3382,12 +3382,12 @@ if you've resized the image or styled it to be larger or something, then
 The `full_height` method gives you the height of image (in pixels) as it was
 stored in the original file.
 
-=== full_width() » a number ===
+=== full_width()  a number ===
 
 The full pixel width of the image. See the [[Image.full_height]] method for an
 explanation of why you might use this method rather than [[Common.width]].
 
-=== path() » a string ===
+=== path()  a string ===
 
 The URL or file name of the image.
 
@@ -3395,7 +3395,7 @@ The URL or file name of the image.
 
 Swaps the image with a different one, loaded from a file or URL.
 
-=== rotate(degrees: a number) » self ===
+=== rotate(degrees: a number)  self ===
 
 Rotates the Image element by a certain number of `degrees`.
 
@@ -3454,22 +3454,22 @@ The block is called each time someone changes the selected item.
 Those are the basics. Might you also be persuaded to look at the [[Common]]
 methods page, a complete list of the methods that all elements have?
 
-=== change() { |self| ... } » self ===
+=== change() { |self| ... }  self ===
 
 Whenever someone highlights a new option in the list box (by clicking on an
 item, for instance,) its `change` block is called. The block is given `self`,
 which is the list box object which has changed.
 
-=== choose(item: a string) » self ===
+=== choose(item: a string)  self ===
 
 Selects the option in the list box that matches the string given by `item`.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the list box. The list box will be highlighted and, if the user
 hits the up and down arrow keys, other options in the list will be selected.
 
-=== items() » an array of strings ===
+=== items()  an array of strings ===
 
 Returns the complete list of strings that the list box presently shows as its options.
 
@@ -3477,7 +3477,7 @@ Returns the complete list of strings that the list box presently shows as its op
 
 Replaces the list box's options with a new list of strings.
 
-=== text() » a string ===
+=== text()  a string ===
 
 A string containing whatever text is shown highlighted in the list box right
 now. If nothing is selected, `nil` will be the reply.
@@ -3508,7 +3508,7 @@ A simple progress bar is 150 pixels wide, but you can use the `:width` style
 Take a look at the [[Common]] methods page for a list of methods found an all
 elements, including progress bars.
 
-=== fraction() » a decimal number ===
+=== fraction()  a decimal number ===
 
 Returns a decimal number from 0.0 to 1.0, indicating how far along the progress bar is.
 
@@ -3605,7 +3605,7 @@ Here, let's group all these radios in the `:films` group.
 For more methods beyond those listed below, also look into the [[Common]]
 methods page. Because you get those methods on every radio as well.
 
-=== checked?() » true or false ===
+=== checked?()  true or false ===
 
 Returns whether the radio button is checked or not. So, `true` means "yes, it
 is checked!"
@@ -3615,14 +3615,14 @@ is checked!"
 Marks or unmarks the radio button. Using `checked = false`, for instance,
 clears the radio.
 
-=== click() { |self| ... } » self ===
+=== click() { |self| ... }  self ===
 
 When the radio button is clicked, its `click` block is called. The block is
 handed `self`, which is an object representing the radio which was clicked.
 
 Clicks are sent for both marking and unmarking the radio.
 
-=== focus() » self ===
+=== focus()  self ===
 
 Moves focus to the radio. The radio will be highlighted.
 
@@ -3651,13 +3651,13 @@ Creation]] page.
  * [[Element.para]], a 12 pixel font.
  * [[Element.inscription]], a 10 pixel font.
 
-=== contents() » an array of elements  ===
+=== contents()  an array of elements  ===
 
 Lists all of the strings and styled text objects inside this block.
 
 '''Note:''' Green Shoes doesn't support `contents` method.
 
-=== cursor() » an index ===
+=== cursor()  an index ===
 
 Return a text cursor position. That is an index of the text which is a string
 of all of the characters in this text box.
@@ -3689,11 +3689,11 @@ Using `cursor = nil` hides the text cursor.
  end
 }}}
 
-=== highlight() » an array ===
+=== highlight()  an array ===
 
 Return an array which includes a text marker start position and highlighted length. 
 
-=== hit(left, top) » an index or nil ===
+=== hit(left, top)  an index or nil ===
 
 Return an index of the text at which the mouse cursor points on. 
 The `left` and `top` are the mouse coordinates. 
@@ -3709,7 +3709,7 @@ The `left` and `top` are the mouse coordinates.
  end
 }}}
 
-=== marker() » an index ===
+=== marker()  an index ===
 
 Return a text marker start position. 
 
@@ -3733,7 +3733,7 @@ Highlight a part of text from marker start position to cursor position.
  end
 }}}
 
-=== markup() » a text ===
+=== markup()  a text ===
 
 Return some marked-up text for Pango. 
 
@@ -3741,7 +3741,7 @@ Return some marked-up text for Pango.
 
 Replaces the text of the entire block with the characters of `a string`.
 
-=== text() » a string ===
+=== text()  a string ===
 
 Return a string of all of the characters in this text box. This will strip off
 any style or text classes and just return the actual characters, as if seen on
@@ -3751,7 +3751,7 @@ the screen.
 
 Replaces the text of the entire block with the characters of `a string`.
 
-=== to_s() » a string ===
+=== to_s()  a string ===
 
 An alias for [[TextBlock.text]]. Returns a flattened string of all of this
 TextBlock's contents.
@@ -3770,7 +3770,7 @@ once every few seconds or rarely.
 
 The animate and every automatically start themselves.
 
-=== start() » self ===
+=== start()  self ===
 
 Both types of timers automatically start themselves, so there's no need to use
 this normally. But if you [[Timers.stop]] a timer and would like to start it up
@@ -3778,11 +3778,11 @@ again, then by all means: use this!
 
 '''Note:''' Green Shoes doesn't support `start` method.
 
-=== stop() » self ===
+=== stop()  self ===
 
 Stops the animate or every loop.
 
-=== pause() » self ===
+=== pause()  self ===
 
 Pauses the animate or every loop. If the animate or every loop is stopped, it is started. Otherwise, if it is
 already running, it is stopped.
@@ -3814,7 +3814,7 @@ This is all thanks to Ruby/GStreamer. Use the `video` method to setup a Shoes::V
 
 In addition to video formats, some audio formats are also supported, such as MP3, WAV and Ogg Vorbis.
 
-=== hide() » self ===
+=== hide()  self ===
 
 Hides the video. If already playing, the video will continue to play. This just
 turns off display of the video. One possible use of this method is to collapse
@@ -3822,33 +3822,33 @@ the video area when it is playing an audio file, such as an MP3.
 
 '''Note:''' Green Shoes doesn't support hide method so far.
 
-=== length() » a number ===
+=== length()  a number ===
 
 The full length of the video in milliseconds. Returns nil if the video is not
 yet loaded.
 
-=== move(left, top) » self ===
+=== move(left, top)  self ===
 
 Moves the video to specific coordinates, the (left, top) being the upper left
 hand corner of the video.
 
 '''Note:''' Green Shoes doesn't support move method so far.
 
-=== pause() » self ===
+=== pause()  self ===
 
 Pauses the video, if it is playing.
 
-=== playing?() » true of false ===
+=== playing?()  true of false ===
 
 Returns true if the video is currently playing. Or, false if the video is
 paused or stopped.
 
-=== play() » self ===
+=== play()  self ===
 
 Starts playing the video, if it isn't already playing. If already playing, the
 video is restarted from the beginning.
 
-=== position() » a decimal ===
+=== position()  a decimal ===
 
 The position of the video as a decimanl number (a Float) between the beginning
 (0.0) and the end (1.0). For instance, a Float value of 0.5 indicates the
@@ -3859,23 +3859,23 @@ halfway point of the video.
 Sets the position of the video using a Float value. To move the video to its
 25% position: `@video.position = 0.25`.
 
-=== remove() » self ===
+=== remove()  self ===
 
 Removes the video from its slot. This will stop the video as well.
 
 '''Note:''' Green Shoes doesn't support remove method so far.
 
-=== show() » self ===
+=== show()  self ===
 
 Reveals the video, if it has been hidden by the `hide()` method.
 
 '''Note:''' Green Shoes doesn't support show method so far.
 
-=== stop() » self ===
+=== stop()  self ===
 
 Stops the video, if it is playing.
 
-=== time() » a number ===
+=== time()  a number ===
 
 The time position of the video in milliseconds. So, if the video is 10 seconds
 into play, this method would return the number 10000.
@@ -3884,7 +3884,7 @@ into play, this method would return the number 10000.
 
 Set the position of the video to a time in milliseconds.
 
-=== toggle() » self ===
+=== toggle()  self ===
 
 Toggles the visibility of the video. If the video can be seen, then `hide` is
 called. Otherwise, `show` is called.
@@ -3941,3 +3941,27 @@ If you don't specify the `:width` size, Green Shoes makes a TextBlock object wit
 the `parent.width`.
 
 For more information, go to [[http://ashbb.github.com/green_shoes/Red_Shoes_and_Green_Shoes.html Red Shoes and Green Shoes]]. 
+
+== gshoes ==
+
+'''gshoes''' is a gem executable command which has some options. Just open console window and try to run `gshoes (options or app.rb or app.gsy)`. 
+
+=== -m, -men ===
+
+Open the built-in English manual.
+
+=== -mjp ===
+
+Open the built-in Japanese manual.
+
+=== -p ===
+
+Package a Green Shoes app as a .gsy file. GSY, which stands for Green Shoes YAML.
+
+=== -v ===
+
+Display the version info.
+
+=== -h ===
+
+Show the help message.
