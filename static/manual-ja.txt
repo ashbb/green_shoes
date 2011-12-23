@@ -1434,7 +1434,7 @@ strong, sub, sup, subtitle, tagline, title''で利用できます。
    s = stack left: 100, top: 50, width: 300, 
      height: 100, scroll: true do
      background gold
-     image './loogink.png'
+     image File.join(DIR, '../samples/loogink.png')
      10.times{para 'hello'}
      flush
    end
