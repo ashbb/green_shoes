@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app width: 400, height: 400 do
   cap [:rect, :curve, :project][rand 3]
@@ -8,7 +8,7 @@ Shoes.app width: 400, height: 400 do
   rect 200, 200, 100, 100
   rect 0, 200, 100, 100
   rect 200, 0, 100, 100
-  stroke '../static/gshoes-icon.png'
+  stroke File.join(DIR, '../static/gshoes-icon.png')
   strokewidth 10
   line 355, 180, 5, 111, strokewidth: 20
   stroke red

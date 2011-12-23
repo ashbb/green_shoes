@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app height: 200 do
   stack margin_left: 10 do

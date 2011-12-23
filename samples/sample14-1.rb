@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app width: 520, height: 520 do
   def mk_ovals degree, color, size, mx, my, n, n1, n2, n3

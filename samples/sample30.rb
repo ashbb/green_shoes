@@ -1,13 +1,13 @@
 # Almost same code as sample22.rb : http://shoes-tutorial-note.heroku.com/html/00508_The_Widget_class.html
 
-require '../lib/green_shoes'
+require 'green_shoes'
 
 class Answer < Shoes::Widget
   attr_reader :mark
   def initialize word
     flow do
       para word, width: 70
-      @mark = image('./loogink.png', width: 20, height: 20).hide
+      @mark = image(File.join(DIR, '../samples/loogink.png'), width: 20, height: 20).hide
     end
   end
 end

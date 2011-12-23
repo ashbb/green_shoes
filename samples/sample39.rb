@@ -1,6 +1,6 @@
 # An imitation of Hackety Hack opening demo.
 
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app width: 420, height: 420 do
   nostroke
@@ -9,7 +9,7 @@ Shoes.app width: 420, height: 420 do
 
   stack do
     @m = mask{star -284, -174, 130, 500, 90}
-    image "./splash-hand.png" , top: 204, left: 84
+    image File.join(DIR, "../samples/splash-hand.png") , top: 204, left: 84
   end
 
   animate 2 do |i|

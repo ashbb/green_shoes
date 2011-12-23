@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 TEXT =<<EOS
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, \

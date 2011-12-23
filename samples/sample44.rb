@@ -4,7 +4,7 @@
 # Original code for Red Shoes is: https://github.com/shoes/shoes/blob/master/samples/good-clock.rb
 # The following is a little bit modified snippet for Green Shoes, using show and hide instead of clear.
 #
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app height: 260, width: 250 do
   def draw_background

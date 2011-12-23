@@ -12,7 +12,7 @@ $config=[
 ENV.delete('proxy_http')
 
 ##__EEND__##################################################################################
-require '../lib/green_shoes'
+require 'green_shoes'
 #require 'green_shoes' 
 
 require 'tmpdir'

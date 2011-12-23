@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app width: 300, height: 100, title: 'Teeny-weeny MP3 player' do
   space = ' '
@@ -16,7 +16,7 @@ Shoes.app width: 300, height: 100, title: 'Teeny-weeny MP3 player' do
     end
   }, space, link('play'){v.play}, space, link('pause'){v.pause}, space, link('stop'){v.stop}
   
-  img = image Dir.pwd + '/loogink.png'
+  img = image File.join(DIR, '../samples/loogink.png')
   n = 0
   animate 5 do
     img.move (n+=1) % 300 , 40 - rand(10) if file && v.playing?

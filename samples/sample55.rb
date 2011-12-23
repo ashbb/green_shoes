@@ -1,6 +1,6 @@
 # Almost same snippet as 
 # http://shoes-tutorial-note.heroku.com/html/00526_The__state_style.html
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app width: 570, height: 600 do
   src = IO.read File.join(DIR, '../samples/sample55.rb')

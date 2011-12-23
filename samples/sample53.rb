@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 titles = ['True or False', 'Count', 'bla bla bla']
 tables = [[[true, 4, 'Cleaning Supplies'], [true, 1, 'Paper Towels'], [true, 3, 'Toilet Paper']],

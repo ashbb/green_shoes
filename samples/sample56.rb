@@ -1,6 +1,6 @@
 # The original code is https://github.com/clbustos/rubyvis/blob/master/examples/5_pv_hierarchies/bubble_charts.rb
 # Just only edited a little bit for Green Shoes
-require '../lib/green_shoes'
+require 'green_shoes'
 require 'rubyvis'
 
 def get_files(path)

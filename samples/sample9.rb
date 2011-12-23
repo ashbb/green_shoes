@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app do
   flow(width: 300){3.times{|i| button "hello#{i}"}}
@@ -7,6 +7,6 @@ Shoes.app do
   flow(width: 0.5){2.times{|i| flow(width: 0.5){2.times{|j| button "Yayyyy#{j}"}}}}
   flow(width: 0.3){button 'go go go go go'}
   stack(width: 0.3){edit_line; 3.times{para 'hello'}}
-  flow(width: 0.3){image '../static/gshoes-icon.png'}
+  flow(width: 0.3){image File.join(DIR, '../static/gshoes-icon.png')}
   button 'bye bye2'
 end

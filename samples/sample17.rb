@@ -1,6 +1,6 @@
 # Add new method bg and fg to sample17
 
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app :width => 240, :height => 95 do
   para 'Testing, test, test. ',

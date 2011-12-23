@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app do
   lb = list_box items: COLORS.keys.map(&:to_s), choose: 'red' do |s|

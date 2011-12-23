@@ -1,4 +1,4 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 xspeed, yspeed = 10, 6
 xdir, ydir = 1, 1
@@ -10,7 +10,7 @@ Shoes.app width: 300, height: 300 do
   button('stop'){a.stop}
   button('move'){p.move 200, 30}
   button('remove'){p.clear}
-  img = image '../static/gshoes-icon.png'
+  img = image File.join(DIR, '../static/gshoes-icon.png')
   img.click{alert "You're soooo quick!"}
 
   x, y = 150, 150

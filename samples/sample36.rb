@@ -1,5 +1,5 @@
 # original code is Red Shoes class-book.rb by _why
-require '../lib/green_shoes'
+require 'green_shoes'
 require 'yaml'
 
 class Book < Shoes
@@ -10,7 +10,7 @@ class Book < Shoes
     incident 0
   end
 
-  INCIDENTS = YAML.load_file('./class-book.yaml')
+  INCIDENTS = YAML.load_file File.join(DIR, '../samples/class-book.yaml')
 
   def table_of_contents
     toc = []

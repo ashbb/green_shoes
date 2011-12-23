@@ -1,10 +1,10 @@
-require "../lib/green_shoes"
+require "green_shoes"
 
 Shoes.app width: 700, height: 600 do
   title "Shoes is a ", link("tiny"){alert "Cool!"}, " graphics toolkit. "
 
   flow width: 0.4 do
-    img = image '../static/gshoes-icon.png'
+    img = image File.join(DIR, '../static/gshoes-icon.png')
     img.click{alert "You're soooo quick!"}
   end
 

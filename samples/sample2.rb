@@ -1,13 +1,14 @@
-require '../lib/green_shoes'
+require 'green_shoes'
 
 Shoes.app title: 'Green Shoes New Logo Icon!', width: 300, height: 420 do
   stack do
-    image '../static/gshoes-icon.png'
+    path = File.join(DIR, '../static/gshoes-icon.png')
+    image path
     flow do
-      image '../static/gshoes-icon.png'
-      image '../static/gshoes-icon.png'
+      image path
+      image path
     end
-    image '../static/gshoes-icon.png'
+    image path
     para ' ' * 30, 'Created by Zak'
   end
 end
