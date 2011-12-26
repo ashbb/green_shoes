@@ -634,7 +634,7 @@ class Shoes
     end
 
     def rgb r, g, b, l=1.0
-      (r < 1 and g < 1 and b < 1) ? [r, g, b, l] : [r/255.0, g/255.0, b/255.0, l]
+      (r <= 1 and g <= 1 and b <= 1) ? [r, g, b, l] : [r/255.0, g/255.0, b/255.0, l]
     end
 
     %w[fill stroke strokewidth].each do |name|

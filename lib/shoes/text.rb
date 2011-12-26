@@ -10,7 +10,7 @@ class Shoes
       define_method m do |*str|
         color = str.pop
         str = str.join
-        rgb = color[0, 3].map{|e| (e*255.0).to_i}.map{|i| sprintf("%#02X", i)[-2,2]}.join
+        rgb = color[0, 3].map{|e| (e*255.0).to_i}.map{|i| sprintf("%02X", i)[-2,2]}.join
         "<span #{tag}='##{rgb}'>#{str}</span>"
       end
     end
