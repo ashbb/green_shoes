@@ -31,7 +31,7 @@ class Shoes
     attr_accessor :cslot, :cmask, :top_slot, :contents, :canvas, :app, :mccs, :mrcs, :mmcs, 
       :mhcs, :mlcs, :shcs, :mcs, :win, :swin, :width_pre, :height_pre, :order, :dics, :fronts, :backs, :focusables, :focus_ele
     attr_writer :mouse_button, :mouse_pos
-    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors, :textmarkers, :location
+    attr_reader :link_style, :linkhover_style, :animates, :owner, :textcursors, :textmarkers, :location, :pinning_elements
 
     def visit url
       if url =~ /^(http|https):\/\//
@@ -770,6 +770,24 @@ class Shoes
 
     def scroll_top=(n)
       @swin.vscrollbar.value = n
+    end
+
+    def scrolled?
+      @_scroll_top ||= 0
+      d = scroll_top - @_scroll_top
+      @_scroll_top = scroll_top
+      d.zero? ? false : d
+    end
+
+    def scrolled=(n)
+      @_scroll_top = n
+    end
+
+    def pinning *eles
+      eles.each do |ele|
+        ele.is_a?(Basic) ? (@pinning_elements << ele) : ele.contents.each{|e| (@pinning_elements << e) if e.is_a? Basic}
+      end
+      @pinning_elements.uniq!
     end
 
     def gutter

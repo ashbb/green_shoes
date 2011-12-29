@@ -36,8 +36,8 @@ class Shoes
   
   module Mod2
     def init_app_vars
-      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @textmarkers, @fronts, @backs, @focusables = 
-        [], [], [], [], [], [], [], [], [], [], [], {}, {}, {}, [], [], []
+      @contents, @mccs, @mrcs, @mmcs, @mhcs, @mlcs, @shcs, @mcs, @order, @dics, @animates, @radio_groups, @textcursors, @textmarkers, @fronts, @backs, @focusables, @pinning_elements = 
+        [], [], [], [], [], [], [], [], [], [], [], {}, {}, {}, [], [], [], []
       @cmask, @focus_ele, @location = nil, nil, '/'
       @mouse_button, @mouse_pos = 0, [0, 0]
       @fill, @stroke = black, black
@@ -400,7 +400,7 @@ class Shoes
     app.dics.each do |e, d, tmpname|
       args = e.args
       if d.finished?
-	flag = true
+        flag = true
         app.canvas.remove e.real
         img = Gtk::Image.new tmpname
         e.full_width, e.full_height = img.size_request
@@ -416,5 +416,11 @@ class Shoes
       end
     end
     flag
+  end
+
+  def self.pinning_control app
+    if d = app.scrolled?
+      app.pinning_elements.each{|e| e.move e.left, e.top + d}
+    end
   end
 end

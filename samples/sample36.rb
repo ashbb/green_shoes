@@ -24,6 +24,7 @@ class Book < Shoes
 
   def incident num
     self.scroll_top = 0
+    self.scrolled = 0
     num = num.to_i
     stack  margin_left: 190 do
       banner "Incident"
@@ -32,7 +33,7 @@ class Book < Shoes
 
     flow do
       flow width: 180, margin_left: 10 do
-        para *table_of_contents, size: 8
+        pinning para( *table_of_contents, size: 8 )
       end
 
       stack width: -180, margin_left: 10 do
