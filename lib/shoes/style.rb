@@ -21,6 +21,7 @@ class Shoes
 
   class ShapeBase
     def style args
+      args.each{|k, v| send("#{k}=", v) if self.class.method_defined? "#{k}="}
       real.clear
       @args[:nocontrol] = @args[:noorder] = true
       m = self.class.to_s.downcase[7..-1]
