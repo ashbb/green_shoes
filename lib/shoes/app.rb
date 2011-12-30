@@ -178,7 +178,7 @@ class Shoes
         d = download name, save: tmpname
         img = Gtk::Image.new File.join(DIR, '../static/downloading.png')
         downloading = true
-      elsif name =~ /\.(png|jpg|gif)$/
+      elsif name =~ /\.(png|jpg|gif|PNG|JPG|GIF)$/
         img = Gtk::Image.new name
         downloading = false
       else
@@ -690,7 +690,7 @@ class Shoes
     end
 
     def background pat, args={}
-      pat = eval(pat) if pat.is_a?(String) and !((File.extname(pat).downcase) =~ /\.[png|jpg|gif]/)
+      pat = eval(pat) if pat.is_a?(String) and !((File.extname(pat).downcase) =~ /\.[png|jpg|gif|PNG|JPG|GIF]/)
       args[:pattern] = pat
       args = basic_attributes args
 
