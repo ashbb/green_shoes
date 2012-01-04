@@ -1,4 +1,8 @@
-require_relative 'chipmunk/chipmunk'
+begin
+  require 'chipmunk'
+rescue LoadError 
+  require_relative 'chipmunk/chipmunk'
+end
 
 module ChipMunk
   def cp_space
