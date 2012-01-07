@@ -105,6 +105,7 @@ class Shoes
       require 'win32api'
       v = Gst::ElementFactory.make 'playbin2'
       v.video_sink = Gst::ElementFactory.make('dshowvideosink')
+      v.video_sink = Gst::ElementFactory.make('directdrawsink') unless v.video_sink
       v.uri = uri
       args[:real], args[:app] = v, self
       Video.new args

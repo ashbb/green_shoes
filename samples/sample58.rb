@@ -1,10 +1,10 @@
 require 'green_shoes'
 
-Shoes.app width: 300, height: 100, title: 'Teeny-weeny MP3 player' do
+Shoes.app width: 300, height: 100, title: 'Teeny-weeny Audio player' do
   space = ' '
   background gold..cyan, angle: 30
-  song = para 'song.mp3', stroke: firebrick, left: 0, top: 70
-  file = 'https://github.com/ashbb/teeny-weeny_mp3_player/raw/master/samples/song.mp3'
+  song = para 'song.ogg', stroke: firebrick, left: 0, top: 70
+  file = 'http://www.rin-shun.com/shoes/song.ogg'
   v = video file
 
   para link('select'){
