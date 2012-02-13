@@ -358,6 +358,7 @@ can have scrollbars.
      100.times do |i|
        para "Paragraph No. #{i}"
      end
+     flush
    end
  end
 }}}
@@ -366,8 +367,8 @@ These nested windows require more memory.  They tax the application a bit more.
 So if you're experiencing some slowness with hundreds of fixed-height slots,
 try a different approach.
 
-'''Note:''' Fixed height magic (the slot becomes a nested window) is not implemented 
-in Green Shoes so far. Scrollbar will appear automatically but at main window only.
+'''Note:''' Fixed height magic (the slot becomes a nested window) is implemented 
+in Green Shoes as a trial so far. Need to add `flush` method.
 
 {{{
  Shoes.app do
