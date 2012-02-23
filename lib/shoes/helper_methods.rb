@@ -163,7 +163,7 @@ class Shoes
     x, y = slot.left.to_i, slot.top.to_i
     max = Struct.new(:top, :height).new
     max.top, max.height = y, 0
-    slot_height = 0
+    slot_height, slot_top = 0, y
 
     slot.contents.each do |ele|
       next if ele.is_a?(Basic) && ele.cleared && !ele.is_a?(Pattern)
@@ -179,7 +179,7 @@ class Shoes
       max, flag = ele.positioning x, y, max
       x, y = ele.left + ele.width, ele.top + ele.height
       unless max == tmp
-        slot_height = flag && !slot_height.zero? ? y : slot_height + max.height
+        slot_height = max.top + max.height - slot_top
       end
     end
     slot_height

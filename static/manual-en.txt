@@ -2325,7 +2325,7 @@ Creates a Title text block.  Green Shoes styles these elements to 34 pixels high
 
 === video(path or url) » Shoes::Video ===
 
-Play some audio files.
+Embeds a movie or plays an audio.
 
 === window(styles) { ... } » Shoes::App ===
 

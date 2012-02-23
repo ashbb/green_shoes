@@ -2254,7 +2254,7 @@ Sup（"superscript"の省略形）テキストの一部を作成します。
 
 === video(path or url) » Shoes::Video ===
 
-動画を埋め込みます。
+動画を埋め込みます。音声を再生します。 
 
 === window(styles) { ... } » Shoes::App ===
 
