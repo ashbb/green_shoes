@@ -285,7 +285,7 @@ class Shoes
     app.mccs.each do |e|
       next if e.is_a? Slot
       e.real.window.cursor = ARROW if e.real.window
-      (e.real.window.cursor = HAND; return) if mouse_on? e
+      (e.real.window.cursor = HAND; return) if mouse_on? e and e.real.window
     end
     
     app.mlcs.each do |tb|
