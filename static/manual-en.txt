@@ -954,7 +954,8 @@ If you attach a block to a download, it'll get called as the `finish` event.
      @status = para "One moment..."
  
      download "http://is.gd/bXTVY7" do |goog|
-       @status.text = "Headers: #{goog.meta}"
+       @status.text = 
+         "Headers: #{goog.meta["date"]}"
      end
    end
  end
