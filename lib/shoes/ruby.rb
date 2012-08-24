@@ -62,23 +62,23 @@ class Object
     ret
   end
   
-  def ask_open_file
-    dialog_chooser "Open File...", Gtk::FileChooser::ACTION_OPEN, Gtk::Stock::OPEN
+  def ask_open_file path = nil
+    dialog_chooser "Open File...", Gtk::FileChooser::ACTION_OPEN, Gtk::Stock::OPEN, path
   end
 
-  def ask_save_file
-    dialog_chooser "Save File...", Gtk::FileChooser::ACTION_SAVE, Gtk::Stock::SAVE
+  def ask_save_file path = nil
+    dialog_chooser "Save File...", Gtk::FileChooser::ACTION_SAVE, Gtk::Stock::SAVE, path
   end
 
-  def ask_open_folder
-    dialog_chooser "Open Folder...", Gtk::FileChooser::ACTION_SELECT_FOLDER, Gtk::Stock::OPEN
+  def ask_open_folder path = nil
+    dialog_chooser "Open Folder...", Gtk::FileChooser::ACTION_SELECT_FOLDER, Gtk::Stock::OPEN, path
   end
 
-  def ask_save_folder
-    dialog_chooser "Save Folder...", Gtk::FileChooser::ACTION_CREATE_FOLDER, Gtk::Stock::SAVE
+  def ask_save_folder path = nil
+    dialog_chooser "Save Folder...", Gtk::FileChooser::ACTION_CREATE_FOLDER, Gtk::Stock::SAVE, path
   end
 
-  def dialog_chooser title, action, button
+  def dialog_chooser title, action, button, path
     $dde = true
     dialog = Gtk::FileChooserDialog.new(
       title,
@@ -88,6 +88,7 @@ class Object
       [Gtk::Stock::CANCEL, Gtk::Dialog::RESPONSE_CANCEL],
       [button, Gtk::Dialog::RESPONSE_ACCEPT]
     )
+    dialog.current_folder = path if path
     ret = dialog.run == Gtk::Dialog::RESPONSE_ACCEPT ? dialog.filename : nil
     dialog.destroy
     ret
