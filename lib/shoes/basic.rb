@@ -397,7 +397,7 @@ class Shoes
   
   class ListBox < Native
     def text
-      @items[@real.active]
+      @entry ? @real.active_text : @items[@real.active]
     end
 
     def choose item

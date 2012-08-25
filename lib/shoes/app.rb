@@ -317,7 +317,7 @@ class Shoes
       args[:width] = 200 if args[:width].zero?
       args[:height] = 28 if args[:height].zero?
       (change_proc = args[:change]; args.delete :change) if args[:change]
-      cb = Gtk::ComboBox.new
+      cb = args[:entry] ? Gtk::ComboBoxEntry.new : Gtk::ComboBox.new
       args[:items] ||= []
       args[:items].each{|item| cb.append_text item.to_s}
       cb.set_size_request args[:width], args[:height]
