@@ -401,7 +401,11 @@ class Shoes
     end
 
     def choose item
-      @real.active = @items.index item
+      unless @entry
+        @real.active = @items.index item
+      else
+        @real.child.text = item.to_s
+      end
     end
 
     def change &blk

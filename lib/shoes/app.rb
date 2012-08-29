@@ -321,7 +321,13 @@ class Shoes
       args[:items] ||= []
       args[:items].each{|item| cb.append_text item.to_s}
       cb.set_size_request args[:width], args[:height]
-      cb.active = args[:items].index(args[:choose]) if args[:choose]
+      if args[:choose]
+        unless args[:entry]
+          cb.active = args[:items].index(args[:choose])
+        else
+          cb.child.text = args[:choose].to_s
+        end
+      end
       @canvas.put cb, args[:left], args[:top]
       cb.show_now
       args[:real], args[:app] = cb, self
