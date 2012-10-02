@@ -20,8 +20,13 @@ class Shoes
     app.top_slot = Flow.new app.slot_attributes(app: app, left: 0, top: 0)
 
     win = get_win
-    win.title = args[:title]
-    win.set_default_size args[:width], args[:height]
+    if args[:fullscreen]
+      win.decorated = false
+      win.maximize
+    else
+      win.title = args[:title]
+      win.set_default_size args[:width], args[:height]
+    end
 
     style = win.style
     style.set_bg Gtk::STATE_NORMAL, 65535, 65535, 65535
