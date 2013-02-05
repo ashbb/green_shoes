@@ -73,6 +73,14 @@ class Shoes
       mouse_hover_control app
     end
 
+    class << app; self end.class_eval do
+      define_method(:resized) do |&blk|
+        win.signal_connect "configure_event" do
+          app.instance_eval(&blk)
+        end
+      end
+    end
+
     app.canvas = if treeview
       Gtk::TreeView.new
     else
