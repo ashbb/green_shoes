@@ -104,11 +104,6 @@ class Object
     ret
   end
 
-  def exit
-    Gtk.main_quit
-    File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
-  end
-
   def to_s
     super.gsub '<', '&lt;'
   end
@@ -118,6 +113,12 @@ class Object
       s.icon = Gdk::Pixbuf.new File.join(DIR, '../static/gshoes-icon.png')
     end
   end
+end
+
+# Define exit handler, close Gtk win and delete temporary Shoes image
+at_exit do
+  Gtk.main_quit
+  File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
 end
 
 class String
