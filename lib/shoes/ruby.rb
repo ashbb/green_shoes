@@ -5,6 +5,16 @@ class Range
   end 
 end
 
+# GLib produces stack trace for all exceptions.
+# Don't spit this out if system exit is called - just exit.
+module GLib
+  module_function
+  def exit_application(exception, status)
+    raise exception if exception.class.name == "SystemExit"
+    super(exception, status)
+  end
+end
+
 class Object
   include Types
   def alert msg, options={:block => true}
