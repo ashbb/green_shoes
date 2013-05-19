@@ -46,7 +46,7 @@ class Shoes
 
     win.signal_connect "destroy" do
       if @main_app == app
-        APPS.length > 1 ? (APPS.delete app; @main_app = APPS.first) : exit
+        APPS.length > 1 ? (APPS.delete app; @main_app = APPS.first) : Gtk.main_quit
       else
         APPS.delete app
       end

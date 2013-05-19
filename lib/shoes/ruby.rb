@@ -127,7 +127,6 @@ end
 
 # Define exit handler, close Gtk win and delete temporary Shoes image
 at_exit do
-  Gtk.main_quit
   File.delete Shoes::TMP_PNG_FILE if File.exist? Shoes::TMP_PNG_FILE
 end
 
